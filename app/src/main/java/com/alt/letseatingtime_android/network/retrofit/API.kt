@@ -22,6 +22,7 @@ interface API {
         @Body body: SignupRequest
     ): Call<SignupResponse>
 
+    //바인트
     @GET("meal")
     fun meal(
         @Query("year") year: String,
