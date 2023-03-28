@@ -4,7 +4,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 object RetrofitClient{
     private const val MealURL = "http://172.67.191.173:443"
-    private const val url = "http://10.80.161.155:8080"
+    private const val url = "http://10.80.163.218:8080"
 
 
     //이찬혁 서버
