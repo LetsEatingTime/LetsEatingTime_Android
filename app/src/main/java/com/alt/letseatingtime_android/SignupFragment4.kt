@@ -27,4 +27,12 @@ class SignupFragment4 : Fragment() {
         Log.d(TAG, "Sign4 - onCreateView() called")
         return binding.root
     }
+
+    private fun replaceFragment(fragment: Fragment) {
+        // 현 Activity 에 연결된 Fragment 관리하는 supportFragmentManager 를 통해 Fragment 전환
+        activity?.supportFragmentManager?.beginTransaction()?.apply {
+            replace(R.id.fragmentContainer, fragment)
+            commit()
+        }
+    }
 }

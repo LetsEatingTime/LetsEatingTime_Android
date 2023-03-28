@@ -1,8 +1,8 @@
 package com.alt.letseatingtime_android
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.renderscript.ScriptGroup.Binding
 import android.util.Log
 import com.alt.letseatingtime_android.databinding.ActivityMainBinding
 import com.alt.letseatingtime_android.network.retrofit.RetrofitClient
@@ -10,8 +10,7 @@ import com.alt.letseatingtime_android.network.retrofit.response.MealResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.text.SimpleDateFormat
-import java.time.LocalDateTime
+import kotlin.math.sign
 
 class MainActivity : AppCompatActivity() {
     private val binding: ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
@@ -32,6 +31,12 @@ class MainActivity : AppCompatActivity() {
                 Log.d("상태",t.message.toString())
             }
         })
+
+        val loginIntent = Intent(this, LoginActivity::class.java)
+        val signupIntent = Intent(this, SignupActivity::class.java)
+
+        binding.btnLoginSubmit.setOnClickListener { startActivity(loginIntent) }
+        binding.btnSignupSubmit.setOnClickListener { startActivity(signupIntent) }
     }
 
     override fun onStart() {
