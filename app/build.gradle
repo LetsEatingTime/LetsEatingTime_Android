@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace 'com.alt.letseatingtime_android'
+    namespace 'com.example.letseatingtime'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.alt.letseatingtime_android"
+        applicationId "com.example.letseatingtime"
         minSdk 26
         targetSdk 33
         versionCode 1
@@ -30,16 +30,9 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    viewBinding{
-        enabled = true
-    }
 }
 
 dependencies {
-
-    //retrofit
-    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
