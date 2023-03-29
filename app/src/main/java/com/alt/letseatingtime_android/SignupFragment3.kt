@@ -1,14 +1,18 @@
 package com.alt.letseatingtime_android
 
 import androidx.fragment.app.Fragment
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.alt.letseatingtime_android.databinding.Signup1Binding
 import com.alt.letseatingtime_android.databinding.Signup3Binding
+import com.alt.letseatingtime_android.network.retrofit.RetrofitClient
+import com.example.login.network.retrofit.request.SignupRequest
+import com.example.login.network.retrofit.response.SignupResponse
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class SignupFragment3 : Fragment() {
     companion object {
@@ -24,12 +28,31 @@ class SignupFragment3 : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val binding = Signup3Binding.inflate(inflater, container, false)
-        val signupFragment4 = SignupFragment4()
 
         Log.d(TAG, "Sign3 - onCreateView() called")
 
-        binding.btnSubmit.setOnClickListener{ replaceFragment(signupFragment4) }
+        binding.btnSubmit.setOnClickListener {
+            MyApplication.prefs.userName = binding.etName.text.toString()
+            RetrofitClient.api.signup(SignupRequest(MyApplication.prefs.userName!!, MyApplication.prefs.userPassword!!,"2318","00:00:00","Y",'S')).enqueue(object :
+                Callback<SignupResponse> {
+                override fun onResponse(
+                    call: Call<SignupResponse>,
+                    response: Response<SignupResponse>
+                ) {
+                    if(response.code() != 200){
+                        Log.d("상태",response.code().toString())
+                    } else {
+                        Log.d("상태",response.code().toString())
+                    }
+                }
 
+                override fun onFailure(call: Call<SignupResponse>, t: Throwable) {
+                    Log.d("상태",t.message.toString())
+                }
+
+            })
+            Log.d(TAG, "${MyApplication.prefs.userSchoolNumber.toString()} ${MyApplication.prefs.userPassword.toString()} ${MyApplication.prefs.userName.toString()}")
+        }
         return binding.root
     }
 

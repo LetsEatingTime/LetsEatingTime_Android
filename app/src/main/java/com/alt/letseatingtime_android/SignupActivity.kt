@@ -19,16 +19,14 @@ class SignupActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-//        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
 
-        // 툴바 설정
+        // 처음에 프레그먼트1로 이동
         signupFragment1 = SignupFragment1.newInstance()
         supportFragmentManager.beginTransaction().replace(R.id.fragmentContainer, signupFragment1).commit()
 
-//        setSupportActionBar(binding.toolBar)
-
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = ""
+
         RetrofitClient.api.signup(SignupRequest("돈카스","돈카스","2318","00:00:00","Y",'S')).enqueue(object :Callback<SignupResponse>{
             override fun onResponse(
                 call: Call<SignupResponse>,

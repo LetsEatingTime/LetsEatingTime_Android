@@ -28,7 +28,10 @@ class SignupFragment2 : Fragment() {
         val signupFragment3 = SignupFragment3()
         Log.d(TAG, "Sign2 - onCreateView() called")
 
-        binding.btnSubmit.setOnClickListener{ replaceFragment(signupFragment3) }
+        binding.btnSubmit.setOnClickListener{
+            replaceFragment(signupFragment3)
+            MyApplication.prefs.userPassword = binding.etPw.text.toString()
+        }
 
         return binding.root
     }

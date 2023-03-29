@@ -28,7 +28,10 @@ class SignupFragment1 : Fragment() {
 
         Log.d(TAG, "Sign1 - onCreateView() called")
 
-        binding.btnSubmit.setOnClickListener{ replaceFragment(signupFragment2) }
+        binding.btnSubmit.setOnClickListener{
+            replaceFragment(signupFragment2)
+            MyApplication.prefs.userSchoolNumber = binding.etId.text.toString()
+        }
 
         return binding.root
     }
