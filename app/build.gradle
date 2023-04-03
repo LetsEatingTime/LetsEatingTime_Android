@@ -30,9 +30,15 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+
 }
 
 dependencies {
+
+    // 학생 이미지 불러오기
+    implementation("io.coil-kt:coil:2.0.0-rc03")
+
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
