@@ -159,25 +159,14 @@
 
 
             <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="329dp"
+                android:layout_height="196dp"
                 android:orientation="vertical"
                 android:layout_marginTop="20dp"
                 android:layout_gravity="center"
                 android:background="@drawable/cardview"
                 android:elevation="8dp">
 
-                <!-- Frame 3 -->
-                <RelativeLayout
-                    xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:id="@+id/frame_3"
-                    android:layout_width="329dp"
-                    android:layout_height="196dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_gravity="center"
-                    android:layout_alignParentTop="true"
-                    android:background="@drawable/frame_3"
-                    />
 
                 <!-- 나의 급식 현황 -->
                 <TextView
@@ -194,14 +183,38 @@
                     />
             </RelativeLayout>
             
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/profile_edit"
+                android:text="정보 수정"
+                android:textColor="@color/white"
                 android:layout_width="331dp"
-                android:layout_height="35dp"
+                android:layout_height="48dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"/>
-<!--                android:background="@drawable/rectangle_2"-->
+                android:layout_alignParentTop="true"
+                android:background="@drawable/button1"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/logout"
+                android:layout_width="331dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/button2"
+                android:text="로그아웃"
+                android:textColor="@color/white" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/delete_this_account"
+                android:text="회원 탈퇴"
+                android:textColor="@color/white"
+                android:layout_width="331dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="30dp"
+                android:background="@drawable/button2"/>
 
         </LinearLayout>
     </ScrollView>
