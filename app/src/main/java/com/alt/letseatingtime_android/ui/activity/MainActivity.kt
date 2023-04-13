@@ -1,4 +1,4 @@
-package com.alt.letseatingtime_android
+package com.alt.letseatingtime_android.ui.activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -10,7 +10,6 @@ import com.alt.letseatingtime_android.network.retrofit.response.MealResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import kotlin.math.sign
 
 class MainActivity : AppCompatActivity() {
     private val binding: ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }

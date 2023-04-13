@@ -1,9 +1,11 @@
-package com.alt.letseatingtime_android
+package com.alt.letseatingtime_android.ui.activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import com.alt.letseatingtime_android.MyApplication
+import com.alt.letseatingtime_android.R
 import com.alt.letseatingtime_android.databinding.ActivityLoginBinding
 import com.alt.letseatingtime_android.network.retrofit.RetrofitClient
 import com.example.login.network.retrofit.request.LoginRequest
@@ -16,11 +18,8 @@ class LoginActivity : AppCompatActivity() {
     private val binding: ActivityLoginBinding by lazy { ActivityLoginBinding.inflate(layoutInflater) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+//        setContentView(R.layout.activity_main)
         setContentView(binding.root)
-
-//        val login_id =
-//        val login_pw =
-//        Log.d("상태",)
 
         binding.btnLoginSubmit.setOnClickListener {
             RetrofitClient.api.login(LoginRequest(binding.etId.text.toString(), binding.etPw.text.toString())).enqueue(object : Callback<LoginResponse>{
@@ -32,7 +31,7 @@ class LoginActivity : AppCompatActivity() {
 
                     val result = response.body()
                     if (response.code() == 200) {
-                        val mainIntent = Intent(this@LoginActivity, Main2::class.java)
+                        val mainIntent = Intent(this@LoginActivity, MainActivity2::class.java)
 
                         finishAffinity()
                         startActivity(mainIntent)

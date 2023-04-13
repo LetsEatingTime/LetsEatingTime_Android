@@ -13,16 +13,12 @@ object RetrofitClient{
         .build()
     var api: API = server.create(API::class.java)
 
-
-
     //바인드 서버
     var serverMeal: Retrofit = Retrofit.Builder()
         .baseUrl(MealURL)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
     var apiMeal: API = serverMeal.create(API::class.java)
-
-
 }
 
 

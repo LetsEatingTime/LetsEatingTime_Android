@@ -22,6 +22,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_pw"
         android:hint="비밀번호를 입력해주세요"
+        android:inputType="textPassword"
         style="@style/tv_signup_inp"/>
     <ImageView
         android:id="@+id/iv_eating_food"

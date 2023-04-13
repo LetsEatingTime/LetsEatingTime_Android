@@ -22,6 +22,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_id"
         android:hint="아이디를 입력해주세요"
+        android:inputType="text"
         style="@style/tv_signup_inp"/>
 
     <ImageView

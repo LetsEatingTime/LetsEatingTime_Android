@@ -1,4 +1,4 @@
-package com.alt.letseatingtime_android
+package com.alt.letseatingtime_android.ui.fragment
 
 import androidx.fragment.app.Fragment
 import android.os.Bundle
@@ -6,6 +6,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.alt.letseatingtime_android.MyApplication
+import com.alt.letseatingtime_android.R
 import com.alt.letseatingtime_android.databinding.Signup3Binding
 import com.alt.letseatingtime_android.network.retrofit.RetrofitClient
 import com.example.login.network.retrofit.request.SignupRequest

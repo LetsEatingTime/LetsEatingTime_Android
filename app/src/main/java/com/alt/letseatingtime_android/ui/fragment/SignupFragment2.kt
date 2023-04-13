@@ -1,20 +1,20 @@
-package com.alt.letseatingtime_android
+package com.alt.letseatingtime_android.ui.fragment
 
 import androidx.fragment.app.Fragment
-import android.content.Context
 import android.os.Bundle
-import android.text.TextUtils.replace
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.alt.letseatingtime_android.databinding.Signup1Binding
+import com.alt.letseatingtime_android.MyApplication
+import com.alt.letseatingtime_android.R
+import com.alt.letseatingtime_android.databinding.Signup2Binding
 
-class SignupFragment1 : Fragment() {
+class SignupFragment2 : Fragment() {
     companion object {
         const val TAG: String = "로그"
-        fun newInstance(): SignupFragment1 {
-            return SignupFragment1()
+        fun newInstance(): SignupFragment2 {
+            return SignupFragment2()
         }
     }
 
@@ -23,14 +23,13 @@ class SignupFragment1 : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = Signup1Binding.inflate(inflater, container, false)
-        val signupFragment2 = SignupFragment2()
-
-        Log.d(TAG, "Sign1 - onCreateView() called")
+        val binding = Signup2Binding.inflate(inflater, container, false)
+        val signupFragment3 = SignupFragment3()
+        Log.d(TAG, "Sign2 - onCreateView() called")
 
         binding.btnSubmit.setOnClickListener{
-            replaceFragment(signupFragment2)
-            MyApplication.prefs.userSchoolNumber = binding.etId.text.toString()
+            replaceFragment(signupFragment3)
+            MyApplication.prefs.userPassword = binding.etPw.text.toString()
         }
 
         return binding.root
