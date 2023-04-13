@@ -1,8 +1,8 @@
-package com.alt.letseatingtime_android
+package com.alt.letseatingtime_android.ui.activity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.renderscript.ScriptGroup.Binding
 import android.util.Log
 import com.alt.letseatingtime_android.databinding.ActivityMainBinding
 import com.alt.letseatingtime_android.network.retrofit.RetrofitClient
@@ -10,16 +10,12 @@ import com.alt.letseatingtime_android.network.retrofit.response.MealResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.text.SimpleDateFormat
-import java.time.LocalDateTime
 
 class MainActivity : AppCompatActivity() {
-    private var mbinding: ActivityMainBinding ?= null
-    private val binding get() = mbinding!!
+    private val binding: ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d("상태","onCreate()")
-        mbinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         RetrofitClient.apiMeal.meal("2023","3","21").enqueue(object : Callback<MealResponse>{
             override fun onResponse(call: Call<MealResponse>, response: Response<MealResponse>) {
@@ -33,8 +29,13 @@ class MainActivity : AppCompatActivity() {
             override fun onFailure(call: Call<MealResponse>, t: Throwable) {
                 Log.d("상태",t.message.toString())
             }
-
         })
+
+        val loginIntent = Intent(this, LoginActivity::class.java)
+        val signupIntent = Intent(this, SignupActivity::class.java)
+
+        binding.btnLoginSubmit.setOnClickListener { startActivity(loginIntent) }
+        binding.btnSignupSubmit.setOnClickListener { startActivity(signupIntent) }
     }
 
     override fun onStart() {
@@ -56,6 +57,5 @@ class MainActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         Log.d("상태","onDestroy()")
-        mbinding = null
     }
 }
