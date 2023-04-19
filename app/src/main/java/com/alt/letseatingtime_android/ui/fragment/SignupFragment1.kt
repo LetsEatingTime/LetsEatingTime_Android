@@ -6,9 +6,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.alt.letseatingtime_android.MyApplication
 import com.alt.letseatingtime_android.R
 import com.alt.letseatingtime_android.databinding.Signup1Binding
+import com.alt.letseatingtime_android.util.LoginPattern
+import java.util.regex.Pattern
 
 class SignupFragment1 : Fragment() {
     companion object {
@@ -25,12 +28,22 @@ class SignupFragment1 : Fragment() {
     ): View {
         val binding = Signup1Binding.inflate(inflater, container, false)
         val signupFragment2 = SignupFragment2()
+        val pattern = Pattern.compile(LoginPattern.id)
 
         Log.d(TAG, "Sign1 - onCreateView() called")
 
         binding.btnSubmit.setOnClickListener{
-            replaceFragment(signupFragment2)
-            MyApplication.prefs.userSchoolNumber = binding.etId.text.toString()
+            val id = binding.etId.text.toString()
+            if (pattern.matcher(id).find()) {
+                if (id != "") {
+                    replaceFragment(signupFragment2)
+                    MyApplication.prefs.userSchoolNumber = id
+                } else {
+                    Toast.makeText(activity, "아이디를 입력해주세요", Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                Toast.makeText(activity, "영문으로 입력해주세요", Toast.LENGTH_SHORT).show()
+            }
         }
         return binding.root
     }

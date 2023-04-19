@@ -1,10 +1,10 @@
 package com.alt.letseatingtime_android.network.retrofit
 
 import com.alt.letseatingtime_android.network.retrofit.response.MealResponse
-import com.example.login.network.retrofit.request.LoginRequest
-import com.example.login.network.retrofit.request.SignupRequest
-import com.example.login.network.retrofit.response.LoginResponse
-import com.example.login.network.retrofit.response.SignupResponse
+import com.alt.letseatingtime_android.network.retrofit.request.LoginRequest
+import com.alt.letseatingtime_android.network.retrofit.request.SignupRequest
+import com.alt.letseatingtime_android.network.retrofit.response.LoginResponse
+import com.alt.letseatingtime_android.network.retrofit.response.SignupResponse
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
