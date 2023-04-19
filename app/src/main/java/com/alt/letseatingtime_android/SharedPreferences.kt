@@ -29,5 +29,4 @@ class SharedPreferences (context: Context) {
     var userName: String?
         get() = sharedPreferences.getString("userName", "")
         set(value) = sharedPreferences.edit().putString("userName", value).apply()
-
 }

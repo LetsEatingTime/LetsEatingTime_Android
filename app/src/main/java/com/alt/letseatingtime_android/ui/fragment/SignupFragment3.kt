@@ -6,17 +6,21 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.alt.letseatingtime_android.MyApplication
 import com.alt.letseatingtime_android.R
 import com.alt.letseatingtime_android.databinding.Signup3Binding
 import com.alt.letseatingtime_android.network.retrofit.RetrofitClient
-import com.example.login.network.retrofit.request.SignupRequest
-import com.example.login.network.retrofit.response.SignupResponse
+import com.alt.letseatingtime_android.network.retrofit.request.SignupRequest
+import com.alt.letseatingtime_android.network.retrofit.response.SignupResponse
+import com.alt.letseatingtime_android.util.LoginPattern
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.regex.Pattern
 
 class SignupFragment3 : Fragment() {
+    private lateinit var binding: Signup3Binding
     companion object {
         const val TAG: String = "로그"
         fun newInstance(): SignupFragment3 {
@@ -28,34 +32,51 @@ class SignupFragment3 : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val binding = Signup3Binding.inflate(inflater, container, false)
+    ): View {
+        binding = Signup3Binding.inflate(inflater, container, false)
+        val pattern = Pattern.compile(LoginPattern.name)
 
         Log.d(TAG, "Sign3 - onCreateView() called")
 
         binding.btnSubmit.setOnClickListener {
-            MyApplication.prefs.userName = binding.etName.text.toString()
-            RetrofitClient.api.signup(SignupRequest(MyApplication.prefs.userName!!, MyApplication.prefs.userPassword!!,"2318","00:00:00","Y",'S')).enqueue(object :
-                Callback<SignupResponse> {
-                override fun onResponse(
-                    call: Call<SignupResponse>,
-                    response: Response<SignupResponse>
-                ) {
-                    if(response.code() != 200){
-                        Log.d("상태",response.code().toString())
-                    } else {
-                        Log.d("상태",response.code().toString())
-                    }
+            Log.d(TAG, "${binding.etName.text} - onCreateView() called")
+            val name = binding.etName.text.toString()
+            if (pattern.matcher(name).find()) {
+                if (name != "") {
+                    signup()
+                    MyApplication.prefs.userPassword = binding.etName.text.toString()
+                } else {
+                    Toast.makeText(activity, "이름을 입력해주세요", Toast.LENGTH_SHORT).show()
                 }
-
-                override fun onFailure(call: Call<SignupResponse>, t: Throwable) {
-                    Log.d("상태",t.message.toString())
-                }
-
-            })
-            Log.d(TAG, "${MyApplication.prefs.userSchoolNumber.toString()} ${MyApplication.prefs.userPassword.toString()} ${MyApplication.prefs.userName.toString()}")
+            } else {
+                Toast.makeText(activity, "한글로 입력해주세요", Toast.LENGTH_SHORT).show()
+            }
         }
         return binding.root
+    }
+
+    private fun signup() {
+        MyApplication.prefs.userName = binding.etName.text.toString()
+        RetrofitClient.api.signup(SignupRequest(MyApplication.prefs.userName!!, MyApplication.prefs.userPassword!!,"2318","00:00:00","Y",'S')).enqueue(object :
+            Callback<SignupResponse> {
+            override fun onResponse(
+                call: Call<SignupResponse>,
+                response: Response<SignupResponse>
+            ) {
+                if(response.code() != 200){
+                    Log.d("상태",response.code().toString())
+                } else {
+                    Log.d("상태",response.code().toString())
+                }
+            }
+
+            override fun onFailure(call: Call<SignupResponse>, t: Throwable) {
+                Log.d("상태",t.message.toString())
+            }
+
+        })
+        Log.d(TAG, "${MyApplication.prefs.userSchoolNumber.toString()} ${MyApplication.prefs.userPassword.toString()} ${MyApplication.prefs.userName.toString()}")
+
     }
 
     private fun replaceFragment(fragment: Fragment) {

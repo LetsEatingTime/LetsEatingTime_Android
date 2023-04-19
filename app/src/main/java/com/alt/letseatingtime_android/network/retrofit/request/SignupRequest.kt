@@ -1,4 +1,4 @@
-package com.example.login.network.retrofit.request
+package com.alt.letseatingtime_android.network.retrofit.request
 
 import com.google.gson.annotations.SerializedName
 
