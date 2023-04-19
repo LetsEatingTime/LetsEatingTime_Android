@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">LetsEatingTime_Android</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="app_name">LetsEatingTime</string>
+
+    <!-- strings.xml -->
+    <string name="some_id">
+        \u00ED\u0095\u0099
+        \u00EC\u0083\u009D
+        \u00EC\u00A6\u009D
+</string>
+
+
 </resources>
+
