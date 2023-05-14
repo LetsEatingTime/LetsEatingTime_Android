@@ -6,11 +6,11 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import com.alt.letseatingtime_android.MyApplication
-import com.alt.letseatingtime_android.databinding.ActivityLoginBinding
 import com.alt.letseatingtime_android.network.retrofit.RetrofitClient
 import com.alt.letseatingtime_android.network.retrofit.request.LoginRequest
 import com.alt.letseatingtime_android.network.retrofit.response.LoginResponse
 import com.alt.letseatingtime_android.util.LoginPattern
+import com.example.letseatingtime.databinding.ActivityLoginBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -51,7 +51,7 @@ class LoginActivity : AppCompatActivity() {
 
                 val result = response.body()
                 if (response.code() == 200) {
-                    val mainIntent = Intent(this@LoginActivity, MainActivity2::class.java)
+                    val mainIntent = Intent(this@LoginActivity, MainActivity::class.java)
 
                     finishAffinity()
                     startActivity(mainIntent)
@@ -67,8 +67,7 @@ class LoginActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-//                    val mainIntent: Intent = Intent(this@LoginActivity, Main2::class.java)
-//                    startActivity(mainIntent)
+
             }
         })
     }

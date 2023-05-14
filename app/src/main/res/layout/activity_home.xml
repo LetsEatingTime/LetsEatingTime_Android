@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.alt.letseatingtime_android.ui.activity.HomeActivity">
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:focusable="true"
+            android:focusableInTouchMode="true">
+            <RelativeLayout
+                android:id="@+id/studentcard"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="329dp"
+                android:layout_height="488dp"
+                android:layout_marginTop="59dp"
+                android:background="@drawable/cardview"
+                android:elevation="8dp"
+                >
+
+                <!-- 학 생 증 -->
+                <TextView
+                    android:id="@+id/stutent"
+                    android:layout_width="125dp"
+                    android:layout_height="45dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="102dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="10dp"
+                    android:text="학생증"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/some_id2"
+                    android:gravity="center_horizontal"
+                    />
+                <!--
+                Font family: Basic
+                Line height: 45sp
+                -->
+
+                <TextView
+                    android:id="@+id/student2"
+                    android:layout_width="125dp"
+                    android:layout_height="15dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="102dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="55dp"
+                    android:text="student id card"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/some_id3"
+                    android:gravity="center"
+                    />
+
+                <ImageView
+                    android:id="@+id/student_image"
+                    android:layout_width="150dp"
+                    android:layout_height="200dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="89dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="76dp"
+                    android:background="@color/black"
+                    />
+
+
+                <TextView
+                    android:id="@+id/some_id"
+                    android:layout_width="89dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="114dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="289dp"
+                    android:text="이찬혁"
+                    android:textAppearance="@style/some_id"
+                    android:gravity="center_horizontal"
+                    />
+
+                <!-- 2학년 3반 11번 -->
+                <TextView
+                    android:id="@+id/trash_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="31dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="330dp"
+                    android:text="2학년 3반 11번"
+                    android:textAppearance="@style/trash_id"
+                    android:gravity="center_horizontal"
+                    />
+
+
+                <!-- 위 학생을 본교 학생으로 인정합니다 -->
+                <TextView
+                    android:id="@+id/trash_id2"
+                    android:layout_width="match_parent"
+                    android:layout_height="14dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="372dp"
+                    android:text="위 학생 본교 학생으로 인정합니다"
+                    android:textAppearance="@style/trash_id2"
+                    android:gravity="center_horizontal"
+                    />
+
+                <!-- 대소고_로고 1 -->
+                <View
+                    android:id="@+id/dgsw"
+                    android:layout_width="136dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="21dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="436dp"
+                    android:background="@drawable/dgsw"
+                    />
+
+                <!-- 대구소프트웨어고등학교 -->
+                <TextView
+                    android:id="@+id/trash_id3"
+                    android:layout_width="132dp"
+                    android:layout_height="16dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="165dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="453dp"
+                    android:text="대구소프트웨어고등학교"
+                    android:textAppearance="@style/trash_id3"
+                    android:gravity="top"
+                    />
+
+            </RelativeLayout>
+
+            <!-- Rectangle 22 -->
+            <View
+                android:id="@+id/rectangle_2"
+                android:layout_width="329dp"
+                android:layout_height="64dp"
+                android:layout_alignParentLeft="true"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:layout_alignParentTop="true"
+                android:background="@color/black"
+                android:elevation="20dp"
+                />
+
+
+
+            <RelativeLayout
+                android:layout_width="329dp"
+                android:layout_height="196dp"
+                android:orientation="vertical"
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center"
+                android:background="@drawable/cardview"
+                android:elevation="8dp">
+
+
+                <!-- 나의 급식 현황 -->
+                <TextView
+                    android:id="@+id/my_cafeteria_id"
+                    android:layout_width="98dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="116dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="7dp"
+                    android:text="나의 급식 현황"
+                    android:textAppearance="@style/mycafe_id"
+                    android:gravity="top"
+                    />
+            </RelativeLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/profile_edit"
+                android:text="정보 수정"
+                android:textColor="@color/white"
+                android:layout_width="331dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:background="@drawable/button1"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/logout"
+                android:layout_width="331dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/button2"
+                android:text="로그아웃"
+                android:textColor="@color/white" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/delete_this_account"
+                android:text="회원 탈퇴"
+                android:textColor="@color/white"
+                android:layout_width="331dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="30dp"
+                android:background="@drawable/button2"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,9 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.alt.letseatingtime_android.MyApplication
-import com.alt.letseatingtime_android.R
-import com.alt.letseatingtime_android.databinding.Signup1Binding
 import com.alt.letseatingtime_android.util.LoginPattern
+import com.example.letseatingtime.R
+import com.example.letseatingtime.databinding.Signup1Binding
 import java.util.regex.Pattern
 
 class SignupFragment1 : Fragment() {

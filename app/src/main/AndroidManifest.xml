@@ -2,33 +2,28 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.NFC" /> <!-- NFC 하드웨어가 있는 기기에서만 애플리케이션이 Google Play에 표시되도록 하는 -->
     <uses-feature
         android:name="android.hardware.nfc"
         android:required="true" />
 
-
-
-
     <application
-        android:name=".MyApplication"
+        android:name="com.alt.letseatingtime_android.MyApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.LetsEatingTime_Android"
+        android:theme="@style/Theme.LetsEatingTime"
         android:usesCleartextTraffic="true"
-
         tools:targetApi="31">
         <activity
-            android:name=".ui.activity.MainActivity2"
+            android:name="com.alt.letseatingtime_android.ui.activity.HomeActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.MainActivity"
+            android:name="com.alt.letseatingtime_android.ui.activity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,11 +32,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activity.SignupActivity"
-            android:exported="false"></activity>
+            android:name="com.alt.letseatingtime_android.ui.activity.SignupActivity"
+            android:exported="false" />
         <activity
-            android:name=".ui.activity.LoginActivity"
-            android:exported="false"></activity>
+            android:name="com.alt.letseatingtime_android.ui.activity.LoginActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

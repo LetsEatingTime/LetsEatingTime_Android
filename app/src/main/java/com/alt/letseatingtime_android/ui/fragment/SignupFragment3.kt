@@ -8,12 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.alt.letseatingtime_android.MyApplication
-import com.alt.letseatingtime_android.R
-import com.alt.letseatingtime_android.databinding.Signup3Binding
 import com.alt.letseatingtime_android.network.retrofit.RetrofitClient
 import com.alt.letseatingtime_android.network.retrofit.request.SignupRequest
 import com.alt.letseatingtime_android.network.retrofit.response.SignupResponse
 import com.alt.letseatingtime_android.util.LoginPattern
+import com.example.letseatingtime.R
+import com.example.letseatingtime.databinding.Signup3Binding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
