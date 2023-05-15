@@ -3,12 +3,12 @@ package com.alt.letseatingtime_android.network.retrofit
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 object RetrofitClient{
-    private const val MealURL = "http://172.67.191.173:443"
-    private const val url = "http://10.80.162.246:8080"
+    private const val MealURL = "http://10.80.163.81:8080"
+    private const val URL = "http://10.80.163.81:8080"
 
     //이찬혁 서버
     var server: Retrofit = Retrofit.Builder()
-        .baseUrl(url)
+        .baseUrl(URL)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
     var api: API = server.create(API::class.java)

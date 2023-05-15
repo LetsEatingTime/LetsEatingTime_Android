@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         Log.d("상태","onCreate()")
         setContentView(binding.root)
-        RetrofitClient.apiMeal.meal("2023","3","21").enqueue(object : Callback<MealResponse>{
+        RetrofitClient.apiMeal.meal("20230515").enqueue(object : Callback<MealResponse>{
             override fun onResponse(call: Call<MealResponse>, response: retrofit2.Response<MealResponse>) {
                 if(response.code() == 200){
                     Log.d("상태","${response.body()}")

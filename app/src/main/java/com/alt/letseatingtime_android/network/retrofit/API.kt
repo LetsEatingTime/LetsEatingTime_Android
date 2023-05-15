@@ -25,8 +25,6 @@ interface API {
     //바인트
     @GET("meal")
     fun meal(
-        @Query("year") year: String,
-        @Query("month") month: String,
-        @Query("day") day: String,
+        @Query("date") date: String
     ): Call<MealResponse>
 }
