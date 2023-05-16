@@ -20,7 +20,7 @@ class SharedPreferences (context: Context) {
         get() = sharedPreferences.getString("refrashToken", "")
         set(value) = sharedPreferences.edit().putString("refrashToken", value).apply()
 
-    var userSchoolNumber: String?
+    var userID: String?
         get() = sharedPreferences.getString("userSchoolNumber", "")
         set(value) = sharedPreferences.edit().putString("userSchoolNumber", value).apply()
     var userPassword: String?
