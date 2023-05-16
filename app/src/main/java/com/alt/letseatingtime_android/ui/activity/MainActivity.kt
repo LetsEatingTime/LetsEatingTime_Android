@@ -48,13 +48,6 @@ class MainActivity : AppCompatActivity() {
         val signupIntent = Intent(this, SignupActivity::class.java)
         val homeIntent = Intent(this, HomeActivity::class.java)
 
-        // 생성된 Toast 메시지에 콜백(callback)을 추가합니다. 이 콜백은 Toast 메시지가 화면에서 보여지거나 숨겨지는 시점 등의 이벤트가 발생할 때 호출됩니다.
-        Toast.makeText(this, "euya", Toast.LENGTH_SHORT).show()
-
-//        DatePickerDialog(this,
-//            { p0, p1, p2, p3 -> Log.d(TAG, "year: $p1, month: ${p2 + 1}, day: $p3") }, 2023, 4, 5).show()
-//        TimePickerDialog(this,
-//            { p0, p1, p2 -> Log.d(TAG, "h: $p1 m: $p2") }, 2023, 4, true).show()
         AlertDialog.Builder(this).run {
             setTitle("title")
             setIcon(R.drawable.btn_submit)
