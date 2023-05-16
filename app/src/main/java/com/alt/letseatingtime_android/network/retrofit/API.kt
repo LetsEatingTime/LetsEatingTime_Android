@@ -1,6 +1,6 @@
 package com.alt.letseatingtime_android.network.retrofit
 
-import com.alt.letseatingtime_android.network.retrofit.response.MealResponse
+import com.alt.letseatingtime_android.network.retrofit.response.meal.MealResponse
 import com.alt.letseatingtime_android.network.retrofit.request.LoginRequest
 import com.alt.letseatingtime_android.network.retrofit.request.SignupRequest
 import com.alt.letseatingtime_android.network.retrofit.response.LoginResponse
@@ -23,7 +23,7 @@ interface API {
     ): Call<SignupResponse>
 
     //바인트
-    @GET("meal")
+    @GET("openapi/meal")
     fun meal(
         @Query("date") date: String
     ): Call<MealResponse>

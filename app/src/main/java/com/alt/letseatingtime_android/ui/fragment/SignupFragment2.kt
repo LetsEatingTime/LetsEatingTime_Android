@@ -30,9 +30,7 @@ class SignupFragment2 : Fragment() {
         binding = Signup2Binding.inflate(inflater, container, false)
         val signupFragment3 = SignupFragment3()
         val pattern = Pattern.compile(LoginPattern.pw)
-
         Log.d(TAG, "Sign2 - onCreateView() called")
-
         binding.btnSubmit.setOnClickListener{
             val pw = binding.etPw.text.toString()
             if (pattern.matcher(pw).find()) {

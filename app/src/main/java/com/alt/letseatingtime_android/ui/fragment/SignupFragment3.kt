@@ -24,13 +24,13 @@ import java.util.regex.Pattern
 
 class SignupFragment3 : Fragment() {
     private lateinit var binding: Signup3Binding
+
     companion object {
         const val TAG: String = "로그"
         fun newInstance(): SignupFragment3 {
             return SignupFragment3()
         }
     }
-
 
 
     override fun onCreateView(
@@ -40,12 +40,9 @@ class SignupFragment3 : Fragment() {
     ): View {
         binding = Signup3Binding.inflate(inflater, container, false)
         val pattern = Pattern.compile(LoginPattern.name)
-
         Log.d(TAG, "Sign3 - onCreateView() called")
-
         binding.btnSubmit.setOnClickListener {
             Log.d(TAG, "${binding.etName.text} - onCreateView() called")
-
             val name = binding.etName.text.toString()
             if (pattern.matcher(name).find()) {
                 if (name != "") {
@@ -67,32 +64,36 @@ class SignupFragment3 : Fragment() {
     }
 
     private fun signup() {
-        activity?.let{
+        activity?.let {
             val home = Intent(context, LoginActivity::class.java)
             startActivity(home)
         }
         MyApplication.prefs.userName = binding.etName.text.toString()
-        RetrofitClient.api.signup(SignupRequest(MyApplication.prefs.userName!!, MyApplication.prefs.userPassword!!,"2318","00:00:00","Y",'S')).enqueue(object :
+        RetrofitClient.api.signup(
+            SignupRequest(
+                MyApplication.prefs.userID!!,
+                MyApplication.prefs.userName!!,
+                MyApplication.prefs.userPassword!!,
+                'S',
+                2,
+                3,
+                18
+            )
+        ).enqueue(object :
             Callback<SignupResponse> {
             override fun onResponse(
                 call: Call<SignupResponse>,
                 response: Response<SignupResponse>
 
             ) {
-                if(response.code() != 200){
-                    Log.d("상태",response.code().toString())
-                } else {
-                    Log.d("상태",response.code().toString())
-                }
+                Log.d("회원가입", response.code().toString())
             }
 
             override fun onFailure(call: Call<SignupResponse>, t: Throwable) {
-                Log.d("상태",t.message.toString())
+                Log.d("상태", t.message.toString())
             }
 
         })
-        Log.d(TAG, "${MyApplication.prefs.userSchoolNumber.toString()} ${MyApplication.prefs.userPassword.toString()} ${MyApplication.prefs.userName.toString()}")
-
     }
 
     private fun replaceFragment(fragment: Fragment) {

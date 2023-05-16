@@ -6,10 +6,9 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import com.alt.letseatingtime_android.network.retrofit.RetrofitClient
-import com.alt.letseatingtime_android.network.retrofit.response.MealResponse
+import com.alt.letseatingtime_android.network.retrofit.response.meal.MealResponse
 import com.example.letseatingtime.R
 import com.example.letseatingtime.databinding.ActivityMainBinding
 import retrofit2.Call
@@ -26,21 +25,21 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         val current = LocalDateTime.now()
         val formatter = DateTimeFormatter.ofPattern("yyyyMMdd")
-        RetrofitClient.apiMeal.meal(current.format(formatter))
+        RetrofitClient.api.meal(current.format(formatter))
             .enqueue(object : Callback<MealResponse> {
                 override fun onResponse(
                     call: Call<MealResponse>,
                     response: retrofit2.Response<MealResponse>
                 ) {
                     if (response.code() == 200) {
-                        Log.d("상태", "${response.body()}")
+                        Log.d("밥", "${response.body()}")
                     } else {
-                        Log.d("상태", "${response.code()}")
+                        Log.d("밥", "${response.code()}")
                     }
                 }
 
                 override fun onFailure(call: Call<MealResponse>, t: Throwable) {
-                    Log.d("상태", t.message.toString())
+                    Log.d("밥", t.message.toString())
                 }
             })
 
@@ -48,13 +47,6 @@ class MainActivity : AppCompatActivity() {
         val signupIntent = Intent(this, SignupActivity::class.java)
         val homeIntent = Intent(this, HomeActivity::class.java)
 
-        // 생성된 Toast 메시지에 콜백(callback)을 추가합니다. 이 콜백은 Toast 메시지가 화면에서 보여지거나 숨겨지는 시점 등의 이벤트가 발생할 때 호출됩니다.
-        Toast.makeText(this, "euya", Toast.LENGTH_SHORT).show()
-
-//        DatePickerDialog(this,
-//            { p0, p1, p2, p3 -> Log.d(TAG, "year: $p1, month: ${p2 + 1}, day: $p3") }, 2023, 4, 5).show()
-//        TimePickerDialog(this,
-//            { p0, p1, p2 -> Log.d(TAG, "h: $p1 m: $p2") }, 2023, 4, true).show()
         AlertDialog.Builder(this).run {
             setTitle("title")
             setIcon(R.drawable.btn_submit)

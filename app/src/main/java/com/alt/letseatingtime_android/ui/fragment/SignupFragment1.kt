@@ -37,7 +37,7 @@ class SignupFragment1 : Fragment() {
             if (pattern.matcher(id).find()) {
                 if (id != "") {
                     replaceFragment(signupFragment2)
-                    MyApplication.prefs.userSchoolNumber = id
+                    MyApplication.prefs.userID = id
                 } else {
                     Toast.makeText(activity, "아이디를 입력해주세요", Toast.LENGTH_SHORT).show()
                 }
