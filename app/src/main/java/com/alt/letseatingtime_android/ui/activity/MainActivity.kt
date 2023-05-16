@@ -35,6 +35,7 @@ class MainActivity : AppCompatActivity() {
 
         val loginIntent = Intent(this, LoginActivity::class.java)
         val signupIntent = Intent(this, SignupActivity::class.java)
+        val homeIntent = Intent(this, HomeActivity::class.java)
 
         // 생성된 Toast 메시지에 콜백(callback)을 추가합니다. 이 콜백은 Toast 메시지가 화면에서 보여지거나 숨겨지는 시점 등의 이벤트가 발생할 때 호출됩니다.
         Toast.makeText(this,"euya",Toast.LENGTH_SHORT).show()

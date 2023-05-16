@@ -1,5 +1,6 @@
 package com.alt.letseatingtime_android.ui.fragment
 
+import android.content.Intent
 import androidx.fragment.app.Fragment
 import android.os.Bundle
 import android.util.Log
@@ -11,6 +12,8 @@ import com.alt.letseatingtime_android.MyApplication
 import com.alt.letseatingtime_android.network.retrofit.RetrofitClient
 import com.alt.letseatingtime_android.network.retrofit.request.SignupRequest
 import com.alt.letseatingtime_android.network.retrofit.response.SignupResponse
+import com.alt.letseatingtime_android.ui.activity.HomeActivity
+import com.alt.letseatingtime_android.ui.activity.LoginActivity
 import com.alt.letseatingtime_android.util.LoginPattern
 import com.example.letseatingtime.R
 import com.example.letseatingtime.databinding.Signup3Binding
@@ -28,6 +31,8 @@ class SignupFragment3 : Fragment() {
         }
     }
 
+
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -40,6 +45,7 @@ class SignupFragment3 : Fragment() {
 
         binding.btnSubmit.setOnClickListener {
             Log.d(TAG, "${binding.etName.text} - onCreateView() called")
+
             val name = binding.etName.text.toString()
             if (pattern.matcher(name).find()) {
                 if (name != "") {
@@ -51,17 +57,27 @@ class SignupFragment3 : Fragment() {
             } else {
                 Toast.makeText(activity, "한글로 입력해주세요", Toast.LENGTH_SHORT).show()
             }
+//            activity?.let{
+//                val home = Intent(context, HomeActivity::class.java)
+//                startActivity(home)
+//            }
         }
+
         return binding.root
     }
 
     private fun signup() {
+        activity?.let{
+            val home = Intent(context, LoginActivity::class.java)
+            startActivity(home)
+        }
         MyApplication.prefs.userName = binding.etName.text.toString()
         RetrofitClient.api.signup(SignupRequest(MyApplication.prefs.userName!!, MyApplication.prefs.userPassword!!,"2318","00:00:00","Y",'S')).enqueue(object :
             Callback<SignupResponse> {
             override fun onResponse(
                 call: Call<SignupResponse>,
                 response: Response<SignupResponse>
+
             ) {
                 if(response.code() != 200){
                     Log.d("상태",response.code().toString())
