@@ -47,7 +47,6 @@ class LoginActivity : AppCompatActivity() {
                 call: Call<LoginResponse>,
                 response: Response<LoginResponse>
             ) {
-                Log.d("상태", "$id $pw")
 
                 val result = response.body()
                 if (response.code() == 200) {
@@ -55,14 +54,14 @@ class LoginActivity : AppCompatActivity() {
 
                     finishAffinity()
                     startActivity(mainIntent)
-                    Log.d("상태", "${result?.accessToken}, ${result?.refreshToken}")
+                    Log.d("Login", "${result?.accessToken}, ${result?.refreshToken}")
 
                     MyApplication.prefs.accessToken = result?.accessToken
                     MyApplication.prefs.refrashToken = result?.refreshToken
-                    Log.d("상태", "${MyApplication.prefs.accessToken}, ${MyApplication.prefs.refrashToken}")
+                    Log.d("Login", "${MyApplication.prefs.accessToken}, ${MyApplication.prefs.refrashToken}")
                 }
                 else{
-                    Log.d("상태", "${response.code()}")
+                    Log.d("Login", "${response.code()}")
                 }
             }
 
