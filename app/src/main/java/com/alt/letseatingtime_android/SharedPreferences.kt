@@ -15,10 +15,9 @@ class SharedPreferences (context: Context) {
     var accessToken: String?
         get() = sharedPreferences.getString("accessToken", "")
         set(value) = sharedPreferences.edit().putString("accessToken", value).apply()
-
-    var refrashToken: String?
-        get() = sharedPreferences.getString("refrashToken", "")
-        set(value) = sharedPreferences.edit().putString("refrashToken", value).apply()
+    var refreshToken: String?
+        get() = sharedPreferences.getString("refreshToken", "")
+        set(value) = sharedPreferences.edit().putString("refreshToken", value).apply()
 
     var userSchoolNumber: String?
         get() = sharedPreferences.getString("userSchoolNumber", "")

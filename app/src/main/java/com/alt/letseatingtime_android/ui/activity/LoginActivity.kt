@@ -58,8 +58,8 @@ class LoginActivity : AppCompatActivity() {
                     Log.d("상태", "${result?.accessToken}, ${result?.refreshToken}")
 
                     MyApplication.prefs.accessToken = result?.accessToken
-                    MyApplication.prefs.refrashToken = result?.refreshToken
-                    Log.d("상태", "${MyApplication.prefs.accessToken}, ${MyApplication.prefs.refrashToken}")
+                    MyApplication.prefs.refreshToken = result?.refreshToken
+                    Log.d("상태", "${MyApplication.prefs.accessToken}, ${MyApplication.prefs.refreshToken}")
                 }
                 else{
                     Log.d("상태", "${response.code()}")
