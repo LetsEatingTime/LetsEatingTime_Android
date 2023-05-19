@@ -64,6 +64,7 @@
 
                 <ImageView
                     android:id="@+id/student_image"
+                    android:clickable="true"
                     android:layout_width="150dp"
                     android:layout_height="200dp"
                     android:layout_alignParentLeft="true"

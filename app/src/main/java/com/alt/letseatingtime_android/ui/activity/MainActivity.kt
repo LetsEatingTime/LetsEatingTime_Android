@@ -1,11 +1,7 @@
 package com.alt.letseatingtime_android.ui.activity
 
 import android.app.AlertDialog
-import android.app.PendingIntent
 import android.content.Intent
-import android.nfc.NfcAdapter
-import android.nfc.Tag
-import android.nfc.tech.NfcA
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
