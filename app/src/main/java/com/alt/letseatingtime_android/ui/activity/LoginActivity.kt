@@ -52,8 +52,6 @@ class LoginActivity : AppCompatActivity() {
                 call: Call<LoginResponse>,
                 response: Response<LoginResponse>
             ) {
-                Log.d("상태", "$id $pw")
-
                 val result = response.body()
                 if (response.code() == 200) {
                     val mainIntent = Intent(this@LoginActivity, MainActivity::class.java)
