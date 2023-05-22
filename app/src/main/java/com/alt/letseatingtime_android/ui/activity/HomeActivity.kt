@@ -11,6 +11,8 @@ import android.util.Log
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import com.alt.letseatingtime_android.network.retrofit.RetrofitClient
+import com.alt.letseatingtime_android.network.retrofit.response.meal.MealResponse
 import com.example.letseatingtime.R
 import com.example.letseatingtime.databinding.ActivityHomeBinding
 import com.example.letseatingtime.databinding.ActivityMainBinding
