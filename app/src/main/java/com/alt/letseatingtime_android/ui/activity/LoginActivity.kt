@@ -39,6 +39,11 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this, "아이다나 비밀번호를 다시 입력해주세요", Toast.LENGTH_SHORT).show()
             }
         }
+
+        binding.tvSignup.setOnClickListener {
+            val intent: Intent = Intent(this,SignupActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     fun login(id: String, pw: String) {
