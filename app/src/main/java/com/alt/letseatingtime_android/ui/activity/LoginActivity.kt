@@ -8,7 +8,7 @@ import android.widget.Toast
 import com.alt.letseatingtime_android.MyApplication
 import com.alt.letseatingtime_android.network.retrofit.RetrofitClient
 import com.alt.letseatingtime_android.network.retrofit.request.LoginRequest
-import com.alt.letseatingtime_android.network.retrofit.response.LoginResponse
+import com.alt.letseatingtime_android.network.retrofit.response.login.LoginResponse
 import com.alt.letseatingtime_android.util.LoginPattern
 import com.example.letseatingtime.databinding.ActivityLoginBinding
 import retrofit2.Call
@@ -27,7 +27,7 @@ class LoginActivity : AppCompatActivity() {
             val pw = binding.etPw.text.toString()
 
             val patternId = Pattern.compile(LoginPattern.id)
-            val patternPw = Pattern.compile(LoginPattern.id)
+            val patternPw = Pattern.compile(LoginPattern.pw)
 
             if (patternId.matcher(id).find() && patternPw.matcher(pw).find()) {
                 if (id != "" && pw != "") {
