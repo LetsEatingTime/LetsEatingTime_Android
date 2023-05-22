@@ -36,7 +36,7 @@ class LoginActivity : AppCompatActivity() {
                     Toast.makeText(this, "아이디나 비밀번호를 입력해주세요", Toast.LENGTH_SHORT).show()
                 }
             } else {
-                Toast.makeText(this, "아이다나 비밀번호를 제대로 입력해주세요", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "아이다나 비밀번호를 다시 입력해주세요", Toast.LENGTH_SHORT).show()
             }
         }
     }
