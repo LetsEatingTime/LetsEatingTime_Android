@@ -9,9 +9,7 @@ class MyApplication: Application() {
     }
 
     override fun onCreate() {
-        Log.d("상태", "MyApplication - onCreate() called")
         prefs = SharedPreferences(applicationContext)
         super.onCreate()
-
     }
 }
