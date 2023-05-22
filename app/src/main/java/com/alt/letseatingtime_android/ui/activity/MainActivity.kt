@@ -25,25 +25,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-        val current = LocalDateTime.now()
-        val formatter = DateTimeFormatter.ofPattern("yyyyMMdd")
-        RetrofitClient.api.meal(current.format(formatter))
-            .enqueue(object : Callback<MealResponse> {
-                override fun onResponse(
-                    call: Call<MealResponse>,
-                    response: retrofit2.Response<MealResponse>
-                ) {
-                    if (response.code() == 200) {
-                        Log.d("밥", "${response.body()}")
-                    } else {
-                        Log.d("밥", "${response.code()}")
-                    }
-                }
 
-                override fun onFailure(call: Call<MealResponse>, t: Throwable) {
-                    Log.d("밥", t.message.toString())
-                }
-            })
 
         val loginIntent = Intent(this, LoginActivity::class.java)
         val signupIntent = Intent(this, SignupActivity::class.java)
