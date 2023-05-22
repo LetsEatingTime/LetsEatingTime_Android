@@ -3,7 +3,7 @@ package com.alt.letseatingtime_android.network.retrofit
 import com.alt.letseatingtime_android.network.retrofit.response.meal.MealResponse
 import com.alt.letseatingtime_android.network.retrofit.request.LoginRequest
 import com.alt.letseatingtime_android.network.retrofit.request.SignupRequest
-import com.alt.letseatingtime_android.network.retrofit.response.LoginResponse
+import com.alt.letseatingtime_android.network.retrofit.response.login.LoginResponse
 import com.alt.letseatingtime_android.network.retrofit.response.SignupResponse
 import retrofit2.Call
 import retrofit2.http.Body
