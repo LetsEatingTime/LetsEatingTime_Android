@@ -54,18 +54,11 @@ class LoginActivity : AppCompatActivity() {
             ) {
                 val result = response.body()
                 if (response.code() == 200) {
-                    val mainIntent = Intent(this@LoginActivity, MainActivity::class.java)
-
-                    finishAffinity()
-                    startActivity(mainIntent)
-                    Log.d("상태", "${result?.accessToken}, ${result?.refreshToken}")
-
-                    MyApplication.prefs.accessToken = result?.accessToken
-                    MyApplication.prefs.refreshToken = result?.refreshToken
-                    Log.d("상태", "${MyApplication.prefs.accessToken}, ${MyApplication.prefs.refreshToken}")
-                }
-                else{
-                    Log.d("상태", "${response.code()}")
+                    val Intent = Intent(this@LoginActivity, HomeActivity::class.java)
+                    MyApplication.prefs.accessToken = result?.data?.accessToken
+                    MyApplication.prefs.refreshToken = result?.data?.refreshToken
+                    startActivity(Intent)
+                    finish()
                 }
             }
 
