@@ -105,7 +105,7 @@
                     android:layout_height="14dp"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentTop="true"
-                    android:layout_marginTop="372dp"
+                    android:layout_marginTop="370dp"
                     android:gravity="center_horizontal"
                     android:text="위 학생 본교 학생으로 인정합니다"
                     android:textAppearance="@style/trash_id2" />
@@ -113,7 +113,7 @@
                 <!-- 대소고_로고 1 -->
                 <View
                     android:id="@+id/dgsw"
-                    android:layout_width="136dp"
+                    android:layout_width="140dp"
                     android:layout_height="30dp"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentTop="true"
