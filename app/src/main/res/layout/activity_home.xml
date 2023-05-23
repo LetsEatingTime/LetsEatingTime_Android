@@ -82,7 +82,6 @@
                     android:layout_marginLeft="114dp"
                     android:layout_marginTop="289dp"
                     android:gravity="center_horizontal"
-                    android:text="이찬혁"
                     android:textAppearance="@style/some_id" />
 
                 <!-- 2학년 3반 11번 -->
@@ -94,7 +93,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginTop="330dp"
                     android:gravity="center_horizontal"
-                    android:text="2학년 3반 11번"
+                    android:text="학년 반 번"
                     android:textAppearance="@style/trash_id" />
 
 
@@ -194,18 +193,6 @@
                 android:background="@drawable/button2"
                 android:text="로그아웃"
                 android:textColor="@color/white" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/delete_this_account"
-                android:layout_width="331dp"
-                android:layout_height="48dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="30dp"
-                android:background="@drawable/button2"
-                android:text="회원 탈퇴"
-                android:textColor="@color/white" />
-
         </LinearLayout>
     </ScrollView>
 
