@@ -12,9 +12,9 @@ data class SignupRequest(
     @SerializedName("userType")
     val userType: Char,
     @SerializedName("grade")
-    val grade: Int,
+    val grade: String,
     @SerializedName("className")
-    val className: Int,
+    val className: String,
     @SerializedName("classNo")
-    val classNo: Int
+    val classNo: String
 )

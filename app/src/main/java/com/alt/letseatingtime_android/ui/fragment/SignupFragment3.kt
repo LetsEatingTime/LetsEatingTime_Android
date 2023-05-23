@@ -12,7 +12,6 @@ import com.alt.letseatingtime_android.MyApplication
 import com.alt.letseatingtime_android.network.retrofit.RetrofitClient
 import com.alt.letseatingtime_android.network.retrofit.request.SignupRequest
 import com.alt.letseatingtime_android.network.retrofit.response.SignupResponse
-import com.alt.letseatingtime_android.ui.activity.HomeActivity
 import com.alt.letseatingtime_android.ui.activity.LoginActivity
 import com.alt.letseatingtime_android.util.LoginPattern
 import com.example.letseatingtime.R
@@ -39,6 +38,7 @@ class SignupFragment3 : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = Signup3Binding.inflate(inflater, container, false)
+        val signupFragment4 = SignupFragment4()
         val pattern = Pattern.compile(LoginPattern.name)
         Log.d(TAG, "Sign3 - onCreateView() called")
         binding.btnSubmit.setOnClickListener {
@@ -46,7 +46,7 @@ class SignupFragment3 : Fragment() {
             val name = binding.etName.text.toString()
             if (pattern.matcher(name).find()) {
                 if (name != "") {
-                    signup()
+                    replaceFragment(signupFragment4)
                     MyApplication.prefs.userPassword = binding.etName.text.toString()
                 } else {
                     Toast.makeText(activity, "이름을 입력해주세요", Toast.LENGTH_SHORT).show()
@@ -63,38 +63,6 @@ class SignupFragment3 : Fragment() {
         return binding.root
     }
 
-    private fun signup() {
-        activity?.let {
-            val home = Intent(context, LoginActivity::class.java)
-            startActivity(home)
-        }
-        MyApplication.prefs.userName = binding.etName.text.toString()
-        RetrofitClient.api.signup(
-            SignupRequest(
-                MyApplication.prefs.userID!!,
-                MyApplication.prefs.userName!!,
-                MyApplication.prefs.userPassword!!,
-                'S',
-                2,
-                3,
-                18
-            )
-        ).enqueue(object :
-            Callback<SignupResponse> {
-            override fun onResponse(
-                call: Call<SignupResponse>,
-                response: Response<SignupResponse>
-
-            ) {
-                Log.d("회원가입", response.code().toString())
-            }
-
-            override fun onFailure(call: Call<SignupResponse>, t: Throwable) {
-                Log.d("상태", t.message.toString())
-            }
-
-        })
-    }
 
     private fun replaceFragment(fragment: Fragment) {
         // 현 Activity 에 연결된 Fragment 관리하는 supportFragmentManager 를 통해 Fragment 전환

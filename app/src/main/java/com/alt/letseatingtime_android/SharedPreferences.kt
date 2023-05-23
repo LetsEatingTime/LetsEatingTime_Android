@@ -21,6 +21,19 @@ class SharedPreferences(context: Context) {
     var userID: String?
         get() = prefs.getString("userSchoolNumber", "")
         set(value) = prefs.edit().putString("userSchoolNumber", value).apply()
+
+    var userGrade: String?
+        get() = prefs.getString("userGrade", "")
+        set(value) = prefs.edit().putString("userGrade", value).apply()
+
+    var userClassName: String?
+        get() = prefs.getString("userClassName", "")
+        set(value) = prefs.edit().putString("userClassName", value).apply()
+
+    var userClassNo: String?
+        get() = prefs.getString("userClassNo", "")
+        set(value) = prefs.edit().putString("userClassNo", value).apply()
+
     var userPassword: String?
         get() = prefs.getString("userPassword", "")
         set(value) = prefs.edit().putString("userPassword", value).apply()
