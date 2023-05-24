@@ -70,8 +70,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginLeft="89dp"
                     android:layout_marginTop="76dp"
-                    android:background="@color/black"
-                   />
+                    android:background="@color/black" />
 
 
                 <TextView
@@ -94,7 +93,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginTop="330dp"
                     android:gravity="center_horizontal"
-                    android:text="학년 반 번"
+                    android:text="학년 반 번호"
                     android:textAppearance="@style/trash_id" />
 
 

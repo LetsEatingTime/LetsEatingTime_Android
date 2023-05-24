@@ -78,8 +78,8 @@ class SignupFragment4 : Fragment() {
         RetrofitClient.api.signup(
             SignupRequest(
                 MyApplication.prefs.userID!!,
-                MyApplication.prefs.userName!!,
                 MyApplication.prefs.userPassword!!,
+                MyApplication.prefs.userName!!,
                 'S',
                 MyApplication.prefs.userGrade!!,
                 MyApplication.prefs.userClassName!!,
