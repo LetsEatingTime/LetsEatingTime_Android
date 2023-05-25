@@ -26,6 +26,10 @@ class SharedPreferences(context: Context) {
         get() = prefs.getString("userGrade", "")
         set(value) = prefs.edit().putString("userGrade", value).apply()
 
+    var userPassword: String?
+        get() = prefs.getString("userPassword", "")
+        set(value) = prefs.edit().putString("userPassword", value).apply()
+
     var userClassName: String?
         get() = prefs.getString("userClassName", "")
         set(value) = prefs.edit().putString("userClassName", value).apply()
@@ -34,10 +38,10 @@ class SharedPreferences(context: Context) {
         get() = prefs.getString("userClassNo", "")
         set(value) = prefs.edit().putString("userClassNo", value).apply()
 
-    var userPassword: String?
-        get() = prefs.getString("userPassword", "")
-        set(value) = prefs.edit().putString("userPassword", value).apply()
+
     var userName: String?
         get() = prefs.getString("userName", "")
         set(value) = prefs.edit().putString("userName", value).apply()
+
+
 }

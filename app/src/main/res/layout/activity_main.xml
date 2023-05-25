@@ -8,6 +8,7 @@
     tools:context="com.alt.letseatingtime_android.ui.activity.MainActivity">
 
 
+
     <ImageView
         android:id="@+id/iv_main1"
         android:layout_marginTop="37dp"

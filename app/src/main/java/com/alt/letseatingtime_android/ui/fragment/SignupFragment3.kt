@@ -47,7 +47,7 @@ class SignupFragment3 : Fragment() {
             if (pattern.matcher(name).find()) {
                 if (name != "") {
                     replaceFragment(signupFragment4)
-                    MyApplication.prefs.userPassword = binding.etName.text.toString()
+                    MyApplication.prefs.userName = binding.etName.text.toString()
                 } else {
                     Toast.makeText(activity, "이름을 입력해주세요", Toast.LENGTH_SHORT).show()
                 }

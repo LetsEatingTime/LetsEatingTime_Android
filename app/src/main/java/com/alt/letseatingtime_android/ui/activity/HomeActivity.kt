@@ -1,23 +1,15 @@
 package com.alt.letseatingtime_android.ui.activity
 
-import android.app.Activity
-import android.app.AlertDialog
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.ImageView
-import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.core.content.ContextCompat
+import com.alt.letseatingtime_android.MyApplication.Companion.prefs
 import com.alt.letseatingtime_android.network.retrofit.RetrofitClient
 import com.alt.letseatingtime_android.network.retrofit.response.meal.MealResponse
-import com.example.letseatingtime.R
 import com.example.letseatingtime.databinding.ActivityHomeBinding
-import com.example.letseatingtime.databinding.ActivityMainBinding
 import retrofit2.Call
 import retrofit2.Callback
 import java.time.LocalDateTime
@@ -29,6 +21,17 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+
+        val stname = binding.someId
+        val userName = prefs.userName // userName 값을 가져옵니다.
+        stname.text = userName // TextView에 userName 값을 설정합니다.
+
+        val textView = binding.trashId
+        val userClass = prefs.userGrade + "학년 " + prefs.userClassName + "반 " + prefs.userClassNo  + "번"
+
+        textView.text = userClass
+
 
         val current = LocalDateTime.now()
         val formatter = DateTimeFormatter.ofPattern("yyyyMMdd")
