@@ -118,7 +118,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginLeft="21dp"
                     android:layout_marginTop="436dp"
-                    android:background="@drawable/dgsw" />
+                    android:background="@drawable/dgsw"/>
 
                 <!-- 대구소프트웨어고등학교 -->
                 <TextView
@@ -139,14 +139,15 @@
 
 
             <View
-                android:id="@+id/rectangle_2"
+                android:id="@+id/meal_menu"
                 android:layout_width="330dp"
                 android:layout_height="65dp"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
-                android:elevation="20dp" />
+                android:background="@drawable/cardview"
+                android:elevation="20dp"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="330dp"
@@ -171,18 +172,6 @@
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/profile_edit"
-                android:layout_width="330dp"
-                android:layout_height="50dp"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/button1"
-                android:text="프로필 사진 수정"
-                android:textColor="@color/white" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/logout"

@@ -8,7 +8,10 @@ import com.alt.letseatingtime_android.network.retrofit.response.SignupResponse
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.POST
+import retrofit2.http.Part
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface API {
@@ -27,4 +30,16 @@ interface API {
     fun meal(
         @Query("date") date: String
     ): Call<MealResponse>
+
+    @POST("/api/user/image/{idx}")
+    suspend fun image(
+        @Path("idx") idx: String
+    ): String
+
+
+    @GET("/api/user/profile")
+    fun profile(
+        @Header("Authorization") Authorization: String
+    ): String
+
 }

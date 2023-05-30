@@ -8,10 +8,17 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.widget.ImageView
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.alt.letseatingtime_android.MyApplication.Companion.prefs
 import com.alt.letseatingtime_android.network.retrofit.RetrofitClient
 import com.alt.letseatingtime_android.network.retrofit.response.meal.MealResponse
+import com.bumptech.glide.Glide
 import com.example.letseatingtime.databinding.ActivityHomeBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import retrofit2.Call
 import retrofit2.Callback
 import java.time.LocalDateTime
@@ -20,26 +27,10 @@ import java.time.format.DateTimeFormatter
 class HomeActivity : AppCompatActivity() {
     private val binding: ActivityHomeBinding by lazy { ActivityHomeBinding.inflate(layoutInflater) }
 
-
-
-    private val REQUEST_CODE = 1
-    private lateinit var profileImageView: ImageView
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
-        profileImageView = binding.studentImage
-        val addPhotoButton = binding.profileEdit
-
-        addPhotoButton.setOnClickListener {
-            if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
-                val permissions = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE)
-                requestPermissions(permissions, REQUEST_CODE)
-            } else {
-                openGallery()
-            }
-        }
+        getImg("141")
 
         val stname = binding.someId
         val userName = prefs.userName // userName 값을 가져옵니다.
@@ -49,6 +40,9 @@ class HomeActivity : AppCompatActivity() {
         val userClass =
             prefs.userGrade + "학년 " + prefs.userClassName + "반 " + prefs.userClassNo + "번"
         textView.text = userClass
+
+//        val student_image = binding.studentImage
+//        Glide.with(this).load(getImg("141")).into(student_image)
 
 
         val current = LocalDateTime.now()
@@ -79,34 +73,14 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
-
-
-    private fun openGallery() {
-        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-        startActivityForResult(intent, REQUEST_CODE)
-    }
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == REQUEST_CODE) {
-            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                openGallery()
+    fun getImg(idx: String){
+        CoroutineScope(Dispatchers.IO).async {
+            val imgURL = async {
+                RetrofitClient.api.image(idx)
             }
+            Log.d("사진",imgURL.await())
         }
     }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == RESULT_OK && requestCode == REQUEST_CODE && data != null) {
-            val imageUri = data.data
-            profileImageView.setImageURI(imageUri)
-        }
-    }
-
 }
 
 

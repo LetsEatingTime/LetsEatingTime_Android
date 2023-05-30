@@ -41,8 +41,9 @@ android {
 
 dependencies {
 
-    // 학생 이미지 불러오기
-    implementation 'io.coil-kt:coil:2.3.0'
+    //local img
+    implementation 'com.github.bumptech.glide:glide:4.14.2'
+
 
     //retrofit2
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'

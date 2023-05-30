@@ -3,12 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <!--갤러리 권한-->
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
-        android:maxSdkVersion="32" />
-    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/>
-
-
 
     <uses-permission android:name="android.permission.NFC" /> <!-- NFC 하드웨어가 있는 기기에서만 애플리케이션이 Google Play에 표시되도록 하는 -->
     <uses-feature
