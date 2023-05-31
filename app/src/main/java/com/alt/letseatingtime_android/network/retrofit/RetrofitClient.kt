@@ -3,7 +3,7 @@ package com.alt.letseatingtime_android.network.retrofit
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 object RetrofitClient{
-    private const val URL = "http://10.80.163.81:8080"
+    private const val URL = "https://let.team-alt.com/"
 
     var server: Retrofit = Retrofit.Builder()
         .baseUrl(URL)
