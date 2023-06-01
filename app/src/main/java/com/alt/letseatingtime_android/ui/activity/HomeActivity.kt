@@ -1,6 +1,6 @@
 package com.alt.letseatingtime_android.ui.activity
 
-import android.Manifest
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
@@ -26,6 +26,18 @@ import java.time.format.DateTimeFormatter
 
 class HomeActivity : AppCompatActivity() {
     private val binding: ActivityHomeBinding by lazy { ActivityHomeBinding.inflate(layoutInflater) }
+    lateinit var img: Deferred<String>
+
+    companion object {
+        lateinit var instance: HomeActivity
+        fun ApplicationContext(): Context {
+            return instance.applicationContext
+        }
+    }
+
+    init {
+        instance = this
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
