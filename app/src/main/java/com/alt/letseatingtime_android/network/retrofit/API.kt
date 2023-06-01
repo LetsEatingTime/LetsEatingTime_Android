@@ -5,6 +5,7 @@ import com.alt.letseatingtime_android.network.retrofit.request.LoginRequest
 import com.alt.letseatingtime_android.network.retrofit.request.SignupRequest
 import com.alt.letseatingtime_android.network.retrofit.response.login.LoginResponse
 import com.alt.letseatingtime_android.network.retrofit.response.SignupResponse
+import com.alt.letseatingtime_android.network.retrofit.response.profile.ProfileResponse
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -31,15 +32,15 @@ interface API {
         @Query("date") date: String
     ): Call<MealResponse>
 
-    @POST("/api/user/image/{idx}")
-    suspend fun image(
+    @GET("/api/user/image/{idx}")
+    fun image(
         @Path("idx") idx: String
-    ): String
+    ): Call<String>
 
 
     @GET("/api/user/profile")
     fun profile(
         @Header("Authorization") Authorization: String
-    ): String
+    ): Call<ProfileResponse>
 
 }
