@@ -74,7 +74,7 @@
 
 
                 <TextView
-                    android:id="@+id/some_id"
+                    android:id="@+id/name_id"
                     android:layout_width="89dp"
                     android:layout_height="40dp"
                     android:layout_alignParentLeft="true"
@@ -138,16 +138,23 @@
             <!-- Rectangle 22 -->
 
 
-            <View
-                android:id="@+id/meal_menu"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="330dp"
                 android:layout_height="65dp"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/cardview"
-                android:elevation="20dp"/>
+                android:elevation="20dp">
+
+                <TextView
+                    android:id="@+id/meal_menu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="330dp"
