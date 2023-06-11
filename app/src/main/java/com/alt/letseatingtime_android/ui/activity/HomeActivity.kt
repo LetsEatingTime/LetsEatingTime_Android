@@ -14,6 +14,7 @@ import kotlinx.coroutines.Deferred
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
@@ -36,8 +37,9 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         getProfile()
-        getImg("141")
+        getImg(prefs.userIdx!!)
         getMeal()
+
 
         val stname = binding.nameId
         stname.text = prefs.userName // TextView에 userName 값을 설정합니다.
@@ -53,6 +55,12 @@ class HomeActivity : AppCompatActivity() {
 
         //나의 급식 현황
 
+        // 날짜
+        var now = LocalDate.now()
+        var Strnow = now.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"))
+        binding.today.text = Strnow
+
+
         //로그아웃
         binding.logout.setOnClickListener {
             val intent: Intent = Intent(this, LoginActivity::class.java)
@@ -62,11 +70,15 @@ class HomeActivity : AppCompatActivity() {
     }
 
     fun getImg(idx: String) {
-        RetrofitClient.api.image(idx).enqueue(object : Callback<String> {
+        RetrofitClient.api.image(prefs.accessToken.toString(),idx).enqueue(object : Callback<String> {
             override fun onResponse(call: Call<String>, response: Response<String>) {
                 if (response.code() == 200) {
                     prefs.userImg = response.body().toString()
+                    Log.d("사진", prefs.userImg.toString())
                 } else if (response.code() == 500) {
+                    Log.d("ERROR", response.code().toString())
+                    Log.d("ERROR", idx.toString())
+
 //                    TODO("사진이 없을때 어떻게 할지")
                 } else {
                     Log.d("ERROR", response.code().toString())
@@ -93,6 +105,7 @@ class HomeActivity : AppCompatActivity() {
                         prefs.userGrade = response.body()?.data?.user?.grade.toString()
                         prefs.userClassName = response.body()?.data?.user?.className.toString()
                         prefs.userClassNo = response.body()?.data?.user?.classNo.toString()
+                        prefs.userIdx = response.body()?.data?.user?.idx.toString()
                     } else {
                         Log.d("상태", response.code().toString())
                     }

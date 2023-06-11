@@ -34,7 +34,8 @@ interface API {
 
     @GET("/api/user/image/{idx}")
     fun image(
-        @Path("idx") idx: String
+        @Header("Authorization") Authorization: String,
+        @Path(value = "idx") idx: String
     ): Call<String>
 
 

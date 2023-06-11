@@ -18,11 +18,11 @@ class SharedPreferences(context: Context) {
         const val PREF_KEY_MEAL_Breakfast = "mealBreakfast"
         const val PREF_KEY_MEAL_Lunch = "mealLunch"
         const val PREF_KEY_MEAL_Dinner = "mealDinner"
+        const val PREF_KEY_USER_IDX = "userIdx"
     }
 
     private val prefs: SharedPreferences =
         context.getSharedPreferences(PREFS_FILENAME, 0)
-
 
 
     var accessToken: String?
@@ -59,6 +59,9 @@ class SharedPreferences(context: Context) {
     var userImg: String?
         get() = prefs.getString(PREF_KEY_USER_IMG, "")
         set(value) = prefs.edit().putString(PREF_KEY_USER_IMG, value).apply()
+    var userIdx: String?
+        get() = prefs.getString(PREF_KEY_USER_IDX, "")
+        set(value) = prefs.edit().putString(PREF_KEY_USER_IDX, value).apply()
 
     var breakfast: String?
         get() = prefs.getString(PREF_KEY_MEAL_Breakfast, "")
@@ -71,7 +74,6 @@ class SharedPreferences(context: Context) {
     var dinner: String?
         get() = prefs.getString(PREF_KEY_MEAL_Dinner, "")
         set(value) = prefs.edit().putString(PREF_KEY_MEAL_Dinner, value).apply()
-
 
 
 }
