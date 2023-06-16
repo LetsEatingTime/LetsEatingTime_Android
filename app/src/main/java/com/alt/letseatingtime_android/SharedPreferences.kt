@@ -18,7 +18,7 @@ class SharedPreferences(context: Context) {
         const val PREF_KEY_MEAL_Breakfast = "mealBreakfast"
         const val PREF_KEY_MEAL_Lunch = "mealLunch"
         const val PREF_KEY_MEAL_Dinner = "mealDinner"
-        const val PREF_KEY_USER_IDX = "userIdx"
+        const val PREF_KEY_USER_IMG_ID = "userImgID"
     }
 
     private val prefs: SharedPreferences =
@@ -56,9 +56,9 @@ class SharedPreferences(context: Context) {
         get() = prefs.getString(PREF_KEY_USER_NAME, "")
         set(value) = prefs.edit().putString(PREF_KEY_USER_NAME, value).apply()
 
-    var userImg: Int?
-        get() = prefs.getInt(PREF_KEY_USER_IMG, 0)
-        set(value) = prefs.edit().putInt(PREF_KEY_USER_IMG, value?:0).apply()
+    var userImg: String?
+        get() = prefs.getString(PREF_KEY_USER_IMG, "")
+        set(value) = prefs.edit().putString(PREF_KEY_USER_IMG, value).apply()
     var userIdx: String?
         get() = prefs.getString(PREF_KEY_USER_IDX, "")
         set(value) = prefs.edit().putString(PREF_KEY_USER_IDX, value).apply()
@@ -75,6 +75,5 @@ class SharedPreferences(context: Context) {
         get() = prefs.getString(PREF_KEY_MEAL_Dinner, "")
         set(value) = prefs.edit().putString(PREF_KEY_MEAL_Dinner, value).apply()
 
-    val editor : SharedPreferences.Editor = prefs.edit() // 데이터 기록을 위한 editor
 
 }
