@@ -29,34 +29,34 @@ class LoginActivity : AppCompatActivity() {
             val patternId = Pattern.compile(LoginPattern.id)
             val patternPw = Pattern.compile(LoginPattern.pw)
 
-            if (patternId.matcher(id).find() && patternPw.matcher(pw).find()) {
-                if (id != "" && pw != "") {
-                    login(id, pw)
-                } else {
-                    Toast.makeText(this, "아이디나 비밀번호를 입력해주세요", Toast.LENGTH_SHORT).show()
-                }
+            if (id != "" && pw != "") {
+                login(id, pw)
             } else {
-                Toast.makeText(this, "아이다나 비밀번호를 다시 입력해주세요", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "아이디나 비밀번호를 입력해주세요", Toast.LENGTH_SHORT).show()
             }
         }
 
-        binding.tvSignup.setOnClickListener {
-            val intent: Intent = Intent(this,SignupActivity::class.java)
+
+        binding.tvSignup.setOnClickListener()
+        {
+            val intent: Intent = Intent(this, SignupActivity::class.java)
             startActivity(intent)
         }
     }
 
     fun login(id: String, pw: String) {
-        RetrofitClient.api.login(LoginRequest(id, pw)).enqueue(object : Callback<LoginResponse>{
+        RetrofitClient.api.login(LoginRequest(id, pw)).enqueue(object : Callback<LoginResponse> {
             override fun onResponse(
                 call: Call<LoginResponse>,
                 response: Response<LoginResponse>
             ) {
+                Log.d("인터넷", response.code().toString())
                 val result = response.body()
                 if (response.code() == 200) {
                     val Intent = Intent(this@LoginActivity, HomeActivity::class.java)
                     MyApplication.prefs.accessToken = result?.data?.accessToken
                     MyApplication.prefs.refreshToken = result?.data?.refreshToken
+                    Log.d("인터넷",response.body().toString())
                     startActivity(Intent)
                     finish()
                 }
