@@ -20,14 +20,10 @@ import android.provider.Settings
 
 class MainActivity : AppCompatActivity() {
     private val binding: ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d("상태", "onCreate()")
         setContentView(binding.root)
-
-
-
 
         val loginIntent = Intent(this, LoginActivity::class.java)
         val signupIntent = Intent(this, SignupActivity::class.java)
@@ -38,6 +34,7 @@ class MainActivity : AppCompatActivity() {
             setIcon(R.drawable.btn_submit)
             setMessage("message")
             setPositiveButton("Yes") { dialog, which ->
+
             }
             setNegativeButton("No") { dialog, which ->
                 dialog.dismiss()

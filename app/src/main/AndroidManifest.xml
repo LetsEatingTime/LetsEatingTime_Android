@@ -13,6 +13,8 @@
         android:name="android.hardware.nfc"
         android:required="true" />
 
+
+
     <application
         android:name="com.alt.letseatingtime_android.MyApplication"
         android:allowBackup="true"

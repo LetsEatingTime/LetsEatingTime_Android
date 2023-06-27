@@ -36,7 +36,6 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
-
         binding.tvSignup.setOnClickListener()
         {
             val intent: Intent = Intent(this, SignupActivity::class.java)
@@ -44,7 +43,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    fun login(id: String, pw: String) {
+    private fun login(id: String, pw: String) {
         RetrofitClient.api.login(LoginRequest(id, pw)).enqueue(object : Callback<LoginResponse> {
             override fun onResponse(
                 call: Call<LoginResponse>,
@@ -53,11 +52,11 @@ class LoginActivity : AppCompatActivity() {
                 Log.d("인터넷", response.code().toString())
                 val result = response.body()
                 if (response.code() == 200) {
-                    val Intent = Intent(this@LoginActivity, HomeActivity::class.java)
+                    val intent = Intent(this@LoginActivity, HomeActivity::class.java)
                     MyApplication.prefs.accessToken = result?.data?.accessToken
                     MyApplication.prefs.refreshToken = result?.data?.refreshToken
                     Log.d("인터넷",response.body().toString())
-                    startActivity(Intent)
+                    startActivity(intent)
                     finish()
                 }
             }

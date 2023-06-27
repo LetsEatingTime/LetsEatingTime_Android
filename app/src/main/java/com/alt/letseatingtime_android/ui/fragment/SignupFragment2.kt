@@ -15,6 +15,7 @@ import java.util.regex.Pattern
 
 class SignupFragment2 : Fragment() {
     private lateinit var binding: Signup2Binding
+
     companion object {
         const val TAG: String = "로그"
         fun newInstance(): SignupFragment2 {
@@ -31,17 +32,13 @@ class SignupFragment2 : Fragment() {
         val signupFragment3 = SignupFragment3()
         val pattern = Pattern.compile(LoginPattern.pw)
         Log.d(TAG, "Sign2 - onCreateView() called")
-        binding.btnSubmit.setOnClickListener{
+        binding.btnSubmit.setOnClickListener {
             val pw = binding.etPw.text.toString()
-            if (pattern.matcher(pw).find()) {
-                if (pw != "") {
-                    replaceFragment(signupFragment3)
-                    MyApplication.prefs.userPassword = binding.etPw.text.toString()
-                } else {
-                    Toast.makeText(activity, "비밀번호를 입력해주세요", Toast.LENGTH_SHORT).show()
-                }
+            if (pw != "") {
+                replaceFragment(signupFragment3)
+                MyApplication.prefs.userPassword = binding.etPw.text.toString()
             } else {
-                Toast.makeText(activity, "숫자, 문자, 특수문자 포함 8~15자리 이내로", Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, "비밀번호를 입력해주세요", Toast.LENGTH_SHORT).show()
             }
         }
 
