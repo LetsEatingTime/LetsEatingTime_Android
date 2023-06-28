@@ -27,7 +27,7 @@ interface API {
     ): Call<SignupResponse>
 
     //바인트
-    @GET("openapi/meal")
+    @GET("api/openapi/meal")
     fun meal(
         @Query("date") date: String
     ): Call<MealResponse>
