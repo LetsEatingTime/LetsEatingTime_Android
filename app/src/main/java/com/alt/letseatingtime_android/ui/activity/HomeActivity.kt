@@ -50,7 +50,7 @@ class HomeActivity : AppCompatActivity() {
         textView.text = userClass
 
 
-        //급식 확인
+
 
 
         //나의 급식 현황
@@ -67,6 +67,27 @@ class HomeActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+    }
+
+    //급식 확인
+    fun getMeal(){
+        val current = LocalDateTime.now()
+        val formatter = DateTimeFormatter.ofPattern("yyyyMMdd")
+        RetrofitClient.api.meal(current.format(formatter)).enqueue(object : Callback<MealResponse> {
+            override fun onResponse(
+                call: Call<MealResponse>, response: retrofit2.Response<MealResponse>
+            ) {
+                if (response.code() == 200) {
+                    binding.mealMenu.text = response.body()?.data?.lunch?.menu.toString()
+                } else {
+
+                }
+            }
+
+            override fun onFailure(call: Call<MealResponse>, t: Throwable) {
+                Log.d("밥", t.message.toString())
+            }
+        })
     }
 
     fun getImg(idx: String) {
@@ -118,25 +139,7 @@ class HomeActivity : AppCompatActivity() {
             })
     }
 
-    fun getMeal(){
-        val current = LocalDateTime.now()
-        val formatter = DateTimeFormatter.ofPattern("yyyyMMdd")
-        RetrofitClient.api.meal(current.format(formatter)).enqueue(object : Callback<MealResponse> {
-            override fun onResponse(
-                call: Call<MealResponse>, response: retrofit2.Response<MealResponse>
-            ) {
-                if (response.code() == 200) {
-                    binding.mealMenu.text = response.body()?.data?.breakfast?.menu.toString()
-                } else {
 
-                }
-            }
-
-            override fun onFailure(call: Call<MealResponse>, t: Throwable) {
-                Log.d("밥", t.message.toString())
-            }
-        })
-    }
 }
 
 

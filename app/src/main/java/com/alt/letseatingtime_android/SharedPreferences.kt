@@ -75,5 +75,6 @@ class SharedPreferences(context: Context) {
         get() = prefs.getString(PREF_KEY_MEAL_Dinner, "")
         set(value) = prefs.edit().putString(PREF_KEY_MEAL_Dinner, value).apply()
 
+    val editor : SharedPreferences.Editor = prefs.edit() // 데이터 기록을 위한 editor
 
 }
