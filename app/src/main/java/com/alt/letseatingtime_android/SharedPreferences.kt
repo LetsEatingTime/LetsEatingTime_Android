@@ -56,9 +56,9 @@ class SharedPreferences(context: Context) {
         get() = prefs.getString(PREF_KEY_USER_NAME, "")
         set(value) = prefs.edit().putString(PREF_KEY_USER_NAME, value).apply()
 
-    var userImg: String?
-        get() = prefs.getString(PREF_KEY_USER_IMG, "")
-        set(value) = prefs.edit().putString(PREF_KEY_USER_IMG, value).apply()
+    var userImg: Int?
+        get() = prefs.getInt(PREF_KEY_USER_IMG, 0)
+        set(value) = prefs.edit().putInt(PREF_KEY_USER_IMG, value?:0).apply()
     var userIdx: String?
         get() = prefs.getString(PREF_KEY_USER_IDX, "")
         set(value) = prefs.edit().putString(PREF_KEY_USER_IDX, value).apply()

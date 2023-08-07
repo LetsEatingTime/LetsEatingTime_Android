@@ -6,6 +6,7 @@ import com.alt.letseatingtime_android.network.retrofit.request.SignupRequest
 import com.alt.letseatingtime_android.network.retrofit.response.login.LoginResponse
 import com.alt.letseatingtime_android.network.retrofit.response.SignupResponse
 import com.alt.letseatingtime_android.network.retrofit.response.profile.ProfileResponse
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -35,8 +36,8 @@ interface API {
     @GET("/api/user/image/{idx}")
     fun image(
         @Header("Authorization") Authorization: String,
-        @Path(value = "idx") idx: String
-    ): Call<String>
+        @Path(value = "idx") id: Int
+    ): Call<ResponseBody>
 
 
     @GET("/api/user/profile")

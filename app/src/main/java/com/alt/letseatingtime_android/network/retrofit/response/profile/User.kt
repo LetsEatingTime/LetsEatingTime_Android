@@ -8,7 +8,7 @@ data class User(
     val grade: Int,
     val id: String,
     val idx: Int,
-    val image: Any,
+    val image: Int,
     val name: String,
     val userType: String,
     val withdrawedTime: Any,

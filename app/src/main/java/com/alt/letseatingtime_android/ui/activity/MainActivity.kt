@@ -1,6 +1,7 @@
 package com.alt.letseatingtime_android.ui.activity
 
 import android.app.AlertDialog
+import android.content.Context
 import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +16,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import android.provider.Settings
 
 class MainActivity : AppCompatActivity() {
     private val binding: ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
@@ -45,6 +47,10 @@ class MainActivity : AppCompatActivity() {
 
         binding.btnLoginSubmit.setOnClickListener { startActivity(loginIntent) }
         binding.btnSignupSubmit.setOnClickListener { startActivity(signupIntent) }
+    }
+
+    fun getAndroidId(context: Context): String {
+        return Settings.Secure.getString(context.contentResolver, Settings.Secure.ANDROID_ID)
     }
 
     override fun onStart() {
