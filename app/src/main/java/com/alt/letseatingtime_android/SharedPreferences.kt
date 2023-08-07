@@ -60,8 +60,8 @@ class SharedPreferences(context: Context) {
         get() = prefs.getString(PREF_KEY_USER_IMG, "")
         set(value) = prefs.edit().putString(PREF_KEY_USER_IMG, value).apply()
     var userIdx: String?
-        get() = prefs.getString(PREF_KEY_USER_IDX, "")
-        set(value) = prefs.edit().putString(PREF_KEY_USER_IDX, value).apply()
+        get() = prefs.getString(PREF_KEY_USER_IMG_ID, "")
+        set(value) = prefs.edit().putString(PREF_KEY_USER_IMG_ID, value).apply()
 
     var breakfast: String?
         get() = prefs.getString(PREF_KEY_MEAL_Breakfast, "")

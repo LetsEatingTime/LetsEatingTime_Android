@@ -2,6 +2,8 @@ package com.alt.letseatingtime_android.ui.activity
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -9,8 +11,10 @@ import com.alt.letseatingtime_android.MyApplication.Companion.prefs
 import com.alt.letseatingtime_android.network.retrofit.RetrofitClient
 import com.alt.letseatingtime_android.network.retrofit.response.meal.MealResponse
 import com.alt.letseatingtime_android.network.retrofit.response.profile.ProfileResponse
+import com.bumptech.glide.Glide
 import com.example.letseatingtime.databinding.ActivityHomeBinding
 import kotlinx.coroutines.Deferred
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -37,7 +41,7 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         getProfile()
-        getImg(prefs.userIdx!!)
+        getImg(prefs.userImg?:"0")
         getMeal()
 
 
@@ -69,27 +73,37 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
-    fun getImg(idx: String) {
-        RetrofitClient.api.image(prefs.accessToken.toString(),idx).enqueue(object : Callback<String> {
-            override fun onResponse(call: Call<String>, response: Response<String>) {
-                if (response.code() == 200) {
-                    prefs.userImg = response.body().toString()
-                    Log.d("사진", prefs.userImg.toString())
-                } else if (response.code() == 500) {
-                    Log.d("ERROR", response.code().toString())
-                    Log.d("ERROR", idx.toString())
+    fun getImg(id: String) {
+        RetrofitClient.api.image(prefs.accessToken.toString(), id)
+            .enqueue(object : Callback<ResponseBody> {
+                override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                    if (response.code() == 200) {
+                        Log.d("사진", prefs.userImg.toString())
+                        val photoBytes = response.body()?.bytes()
+                        if (photoBytes != null) {
+                            val image = getBitmapFromBytes(photoBytes)
+                            Glide.with(instance)
+                                .load(image)
+                                .into(binding.studentImage)
+                        } else {
+                            Log.e("ApiError", "Photo data is null.")
+                        }
+                    } else if (response.code() == 500) {
+                        Log.d("애러", response.code().toString())
+                    } else {
+                        Log.d("애러", response.code().toString())
+                    }
 
-//                    TODO("사진이 없을때 어떻게 할지")
-                } else {
-                    Log.d("ERROR", response.code().toString())
                 }
 
-            }
+                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                    Log.d("애러", t.message.toString())
+                }
+            })
+    }
 
-            override fun onFailure(call: Call<String>, t: Throwable) {
-                Log.d("ERROR", t.message.toString())
-            }
-        })
+    fun getBitmapFromBytes(byteArray: ByteArray): Bitmap {
+        return BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
     }
 
     fun getProfile() {
@@ -101,11 +115,13 @@ class HomeActivity : AppCompatActivity() {
                     if (response.code() == 200) {
                         Log.d("상태", response.body().toString())
                         prefs.userName = response.body()?.data?.user?.name
-                        Log.d("이름",response.body()?.data?.user?.name.toString())
+                        Log.d("이름", response.body()?.data?.user?.name.toString())
                         prefs.userGrade = response.body()?.data?.user?.grade.toString()
                         prefs.userClassName = response.body()?.data?.user?.className.toString()
                         prefs.userClassNo = response.body()?.data?.user?.classNo.toString()
                         prefs.userIdx = response.body()?.data?.user?.idx.toString()
+                        prefs.userImg = response.body()?.data?.user?.image.toString()
+
                     } else {
                         Log.d("상태", response.code().toString())
                     }
@@ -118,7 +134,7 @@ class HomeActivity : AppCompatActivity() {
             })
     }
 
-    fun getMeal(){
+    fun getMeal() {
         val current = LocalDateTime.now()
         val formatter = DateTimeFormatter.ofPattern("yyyyMMdd")
         RetrofitClient.api.meal(current.format(formatter)).enqueue(object : Callback<MealResponse> {

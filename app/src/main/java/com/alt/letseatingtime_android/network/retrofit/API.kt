@@ -6,6 +6,7 @@ import com.alt.letseatingtime_android.network.retrofit.request.SignupRequest
 import com.alt.letseatingtime_android.network.retrofit.response.login.LoginResponse
 import com.alt.letseatingtime_android.network.retrofit.response.SignupResponse
 import com.alt.letseatingtime_android.network.retrofit.response.profile.ProfileResponse
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -26,7 +27,6 @@ interface API {
         @Body body: SignupRequest
     ): Call<SignupResponse>
 
-    //바인트
     @GET("api/openapi/meal")
     fun meal(
         @Query("date") date: String
@@ -36,7 +36,7 @@ interface API {
     fun image(
         @Header("Authorization") Authorization: String,
         @Path(value = "idx") idx: String
-    ): Call<String>
+    ): Call<ResponseBody>
 
 
     @GET("/api/user/profile")

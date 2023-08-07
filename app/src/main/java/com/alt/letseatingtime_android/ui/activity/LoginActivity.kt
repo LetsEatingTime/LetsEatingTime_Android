@@ -62,7 +62,7 @@ class LoginActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-
+                Log.d("ERROR",t.message.toString())
             }
         })
     }
