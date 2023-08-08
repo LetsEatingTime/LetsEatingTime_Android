@@ -42,21 +42,10 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         getProfile()
-        getImg(prefs.userImg?:"0")
         getMeal()
 
 
-        val stname = binding.nameId
-        stname.text = prefs.userName // TextView에 userName 값을 설정합니다.
 
-        val textView = binding.trashId
-        val userClass =
-            prefs.userGrade + "학년 " + prefs.userClassName + "반 " + prefs.userClassNo + "번"
-        textView.text = userClass
-
-        var now = LocalDate.now()
-        var strnow = now.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"))
-        binding.today.text = strnow
 
 
         //로그아웃
@@ -115,10 +104,26 @@ class HomeActivity : AppCompatActivity() {
                     call: Call<ProfileResponse>, response: Response<ProfileResponse>
                 ) {
                     if (response.code() == 200) {
-                        Log.d("상태", response.body().toString())
                         prefs.userName = response.body()?.data?.user?.name
-                        Log.d("이름", response.body()?.data?.user?.name.toString())
+                        prefs.userGrade = response.body()?.data?.user?.grade.toString()
+                        prefs.userClassName = response.body()?.data?.user?.className.toString()
+                        prefs.userClassNo = response.body()?.data?.user?.classNo.toString()
+                        prefs.userIdx = response.body()?.data?.user?.idx.toString()
+                        prefs.userImg = response.body()?.data?.user?.image.toString()
+                        prefs.userName = response.body()?.data?.user?.name
+                        getImg(prefs.userImg?:"0")
 
+                        val stname = binding.nameId
+                        stname.text = prefs.userName // TextView에 userName 값을 설정합니다.
+
+                        val textView = binding.trashId
+                        val userClass =
+                            prefs.userGrade + "학년 " + prefs.userClassName + "반 " + prefs.userClassNo + "번"
+                        textView.text = userClass
+
+                        var now = LocalDate.now()
+                        var strnow = now.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"))
+                        binding.today.text = strnow
                     } else {
                         Log.d("상태", response.code().toString())
                     }
