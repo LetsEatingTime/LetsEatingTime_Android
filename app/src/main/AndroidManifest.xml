@@ -31,19 +31,21 @@
         </activity>
         <activity
             android:name="com.alt.letseatingtime_android.ui.activity.MainActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name="com.alt.letseatingtime_android.ui.activity.HomeActivity"
+            android:screenOrientation="portrait"
             android:exported="false">
 
         </activity>
         <activity
             android:name="com.alt.letseatingtime_android.ui.activity.SignupActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name="com.alt.letseatingtime_android.ui.activity.LoginActivity"
             android:exported="false">
-
         </activity>
     </application>
 
