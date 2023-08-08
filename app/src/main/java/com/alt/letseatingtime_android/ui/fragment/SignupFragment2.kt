@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.FragmentManager
 import com.alt.letseatingtime_android.MyApplication
 import com.alt.letseatingtime_android.util.LoginPattern
 import com.example.letseatingtime.R

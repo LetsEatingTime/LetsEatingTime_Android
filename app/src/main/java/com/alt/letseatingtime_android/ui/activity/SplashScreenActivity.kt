@@ -38,7 +38,6 @@ class SplashScreenActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         val handler = Handler(Looper.getMainLooper())
-
         handler.postDelayed({
             if(prefs.refreshToken == "" || prefs.refreshToken == null){
                 logout()
