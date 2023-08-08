@@ -1,13 +1,13 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.LetsEatingTime" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.LetsEatingTime" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_200</item>
+        <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorOnPrimary">#484848</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
@@ -16,5 +16,51 @@
         <item name="windowNoTitle">true</item>
         <item name="android:windowFullscreen">true</item>
 
+
     </style>
+
+    <!-- styles.xml -->
+    <style name="trash_id">
+        <item name="android:textSize">25sp</item>
+        <item name="android:textColor">#000000</item>
+    </style>
+
+
+    <style name="some_id2">
+        <item name="android:textSize">36sp</item>
+        <item name="android:letterSpacing">0.04</item>
+        <item name="android:textColor">#000000</item>
+    </style>
+
+    <!-- styles.xml -->
+    <style name="some_id3">
+        <item name="android:textSize">12sp</item>
+        <item name="android:letterSpacing">0.17</item>
+        <item name="android:textColor">#000000</item>
+    </style>
+
+    <style name="some_id">
+        <item name="android:textSize">32sp</item>
+        <item name="android:textColor">#000000</item>
+    </style>
+
+
+    <!-- styles.xml -->
+    <style name="trash_id2">
+        <item name="android:textSize">11sp</item>
+        <item name="android:textColor">#575757</item>
+    </style>
+
+    <!-- styles.xml -->
+    <style name="trash_id3">
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">#000000</item>
+    </style>
+
+    <style name="mycafe_id">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">#000000</item>
+    </style>
+
+
 </resources>

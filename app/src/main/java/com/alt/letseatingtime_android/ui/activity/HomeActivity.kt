@@ -20,6 +20,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.time.LocalDate
 import java.time.LocalDateTime
+import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 
 class HomeActivity : AppCompatActivity() {
@@ -137,14 +138,39 @@ class HomeActivity : AppCompatActivity() {
     fun getMeal() {
         val current = LocalDateTime.now()
         val formatter = DateTimeFormatter.ofPattern("yyyyMMdd")
-        RetrofitClient.api.meal(current.format(formatter)).enqueue(object : Callback<MealResponse> {
+        val currentTime = current.format(formatter)
+
+        val breakfastStartTime = LocalTime.of(20, 0)
+        val lunchStartTime = LocalTime.of(9, 0)
+        val dinnerStartTime = LocalTime.of(14, 0)
+
+        val currentTimeOfDay = current.toLocalTime()
+        val mealType: String
+
+        mealType = when {
+            currentTimeOfDay.isBefore(lunchStartTime) -> "breakfast"
+            currentTimeOfDay.isBefore(dinnerStartTime) -> "lunch"
+            else -> "dinner"
+        }
+
+        RetrofitClient.api.meal(currentTime).enqueue(object : Callback<MealResponse> {
             override fun onResponse(
                 call: Call<MealResponse>, response: retrofit2.Response<MealResponse>
             ) {
                 if (response.code() == 200) {
-                    binding.mealMenu.text = response.body()?.data?.breakfast?.menu.toString()
-                } else {
+                    val menu: String? = when (mealType) {
+                        "breakfast" -> response.body()?.data?.breakfast?.menu?.toString()
+                        "lunch" -> response.body()?.data?.lunch?.menu?.toString()
+                        else -> response.body()?.data?.dinner?.menu?.toString()
+                    }
 
+                    binding.mealMenu.text = menu ?: when (mealType) {
+                        "breakfast" -> "아침이 없습니다."
+                        "lunch" -> "점심이 없습니다."
+                        else -> "저녁이 없습니다."
+                    }
+                } else {
+                    Log.d("급식을 불러오는데 실패하였습니다.", response.toString())
                 }
             }
 
@@ -153,6 +179,7 @@ class HomeActivity : AppCompatActivity() {
             }
         })
     }
+
 }
 
 
