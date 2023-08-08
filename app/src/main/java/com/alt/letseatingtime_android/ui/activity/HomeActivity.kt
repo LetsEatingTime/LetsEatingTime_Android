@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import com.alt.letseatingtime_android.MyApplication.Companion.prefs
 import com.alt.letseatingtime_android.network.retrofit.RetrofitClient
 import com.alt.letseatingtime_android.network.retrofit.response.meal.MealResponse
@@ -25,7 +26,6 @@ import java.time.format.DateTimeFormatter
 
 class HomeActivity : AppCompatActivity() {
     private val binding: ActivityHomeBinding by lazy { ActivityHomeBinding.inflate(layoutInflater) }
-    lateinit var img: Deferred<String>
 
     companion object {
         lateinit var instance: HomeActivity
@@ -44,10 +44,6 @@ class HomeActivity : AppCompatActivity() {
         getProfile()
         getMeal()
 
-
-
-
-
         //로그아웃
         binding.logout.setOnClickListener {
             prefs.refreshToken = null
@@ -58,6 +54,7 @@ class HomeActivity : AppCompatActivity() {
             prefs.userIdx = null
             prefs.userImg = null
             prefs.userName = null
+            Toast.makeText(this, "로그아웃", Toast.LENGTH_SHORT).show()
             val intent: Intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             finish()
