@@ -56,6 +56,7 @@ class LoginActivity : AppCompatActivity() {
                     MyApplication.prefs.accessToken = result?.data?.accessToken
                     if(binding.cbLogin.isChecked){
                         MyApplication.prefs.refreshToken = result?.data?.refreshToken
+                        MyApplication.prefs.accessToken = result?.data?.accessToken
                         Log.d("상태","로그인 상태 유지")
                     } else {
                         Log.d("상태","로그인 상태 유지X")
