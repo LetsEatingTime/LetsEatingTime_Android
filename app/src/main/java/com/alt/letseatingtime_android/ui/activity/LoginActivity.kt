@@ -54,7 +54,13 @@ class LoginActivity : AppCompatActivity() {
                 if (response.code() == 200) {
                     val intent = Intent(this@LoginActivity, HomeActivity::class.java)
                     MyApplication.prefs.accessToken = result?.data?.accessToken
-                    MyApplication.prefs.refreshToken = result?.data?.refreshToken
+                    if(binding.cbLogin.isChecked){
+                        MyApplication.prefs.refreshToken = result?.data?.refreshToken
+                        Log.d("상태","로그인 상태 유지")
+                    } else {
+                        Log.d("상태","로그인 상태 유지X")
+                    }
+
                     Log.d("인터넷",response.body().toString())
                     startActivity(intent)
                     finish()

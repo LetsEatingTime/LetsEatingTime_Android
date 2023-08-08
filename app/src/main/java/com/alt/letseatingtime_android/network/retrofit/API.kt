@@ -6,6 +6,7 @@ import com.alt.letseatingtime_android.network.retrofit.request.SignupRequest
 import com.alt.letseatingtime_android.network.retrofit.response.login.LoginResponse
 import com.alt.letseatingtime_android.network.retrofit.response.SignupResponse
 import com.alt.letseatingtime_android.network.retrofit.response.profile.ProfileResponse
+import com.bumptech.glide.annotation.GlideType
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.Body
@@ -43,5 +44,10 @@ interface API {
     fun profile(
         @Header("Authorization") Authorization: String
     ): Call<ProfileResponse>
+
+    @GET("api/account/refresh.do")
+    fun refresh(
+        @Header("Authorization") Authorization: String
+    ):Call<LoginResponse>
 
 }

@@ -5,15 +5,10 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-
-
-
     <uses-permission android:name="android.permission.NFC" /> <!-- NFC 하드웨어가 있는 기기에서만 애플리케이션이 Google Play에 표시되도록 하는 -->
     <uses-feature
         android:name="android.hardware.nfc"
         android:required="true" />
-
-
 
     <application
         android:name="com.alt.letseatingtime_android.MyApplication"
@@ -27,6 +22,14 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name="com.alt.letseatingtime_android.ui.activity.SplashScreenActivity"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name="com.alt.letseatingtime_android.ui.activity.MainActivity"
             android:exported="false" />
         <activity
@@ -39,12 +42,8 @@
             android:exported="false" />
         <activity
             android:name="com.alt.letseatingtime_android.ui.activity.LoginActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:exported="false">
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 
