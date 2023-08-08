@@ -59,6 +59,7 @@ class LoginActivity : AppCompatActivity() {
                         MyApplication.prefs.accessToken = result?.data?.accessToken
                         Log.d("상태","로그인 상태 유지")
                     } else {
+                        MyApplication.prefs.accessToken = result?.data?.accessToken
                         Log.d("상태","로그인 상태 유지X")
                     }
 

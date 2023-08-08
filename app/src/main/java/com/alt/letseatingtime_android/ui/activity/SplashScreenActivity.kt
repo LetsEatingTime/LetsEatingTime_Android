@@ -38,10 +38,14 @@ class SplashScreenActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         val handler = Handler(Looper.getMainLooper())
-        getProfile()
-//        handler.postDelayed({
-//
-//        }, splashTimeOut)
+
+        handler.postDelayed({
+            if(prefs.refreshToken == "" || prefs.refreshToken == null){
+                logout()
+            } else{
+                getProfile()
+            }
+        }, splashTimeOut)
     }
 
     private fun getProfile(){
