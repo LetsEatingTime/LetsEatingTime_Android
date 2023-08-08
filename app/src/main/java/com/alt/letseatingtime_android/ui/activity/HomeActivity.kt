@@ -163,7 +163,6 @@ class HomeActivity : AppCompatActivity() {
                         "lunch" -> response.body()?.data?.lunch?.menu?.toString()
                         else -> response.body()?.data?.dinner?.menu?.toString()
                     }
-
                     binding.mealMenu.text = menu ?: when (mealType) {
                         "breakfast" -> "아침이 없습니다."
                         "lunch" -> "점심이 없습니다."

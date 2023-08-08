@@ -70,11 +70,12 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginLeft="89dp"
                     android:layout_marginTop="76dp"
-                    android:background="@color/black" />
+                    android:background="#484848" />
 
 
                 <TextView
                     android:id="@+id/name_id"
+                    android:text="이름"
                     android:layout_width="89dp"
                     android:layout_height="40dp"
                     android:layout_alignParentLeft="true"
@@ -148,6 +149,7 @@
 
                 <TextView
                     android:id="@+id/meal_menu"
+                    android:text="급식"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:layout_constraintBottom_toBottomOf="parent"
