@@ -54,29 +54,28 @@ class HomeActivity : AppCompatActivity() {
             prefs.userGrade + "학년 " + prefs.userClassName + "반 " + prefs.userClassNo + "번"
         textView.text = userClass
 
-
-        //급식 확인
-
-
-        //나의 급식 현황
-
-        // 날짜
         var now = LocalDate.now()
-        var Strnow = now.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"))
-        binding.today.text = Strnow
+        var strnow = now.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"))
+        binding.today.text = strnow
 
 
         //로그아웃
         binding.logout.setOnClickListener {
             prefs.refreshToken = null
             prefs.accessToken = null
+            prefs.userGrade = null
+            prefs.userClassName = null
+            prefs.userClassNo = null
+            prefs.userIdx = null
+            prefs.userImg = null
+            prefs.userName = null
             val intent: Intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             finish()
         }
     }
 
-    fun getImg(id: String) {
+    private fun getImg(id: String) {
         RetrofitClient.api.image(prefs.accessToken.toString(), id)
             .enqueue(object : Callback<ResponseBody> {
                 override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
@@ -109,7 +108,7 @@ class HomeActivity : AppCompatActivity() {
         return BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
     }
 
-    fun getProfile() {
+    private fun getProfile() {
         RetrofitClient.api.profile("Bearer ${prefs.accessToken.toString()}")
             .enqueue(object : Callback<ProfileResponse> {
                 override fun onResponse(
@@ -119,11 +118,6 @@ class HomeActivity : AppCompatActivity() {
                         Log.d("상태", response.body().toString())
                         prefs.userName = response.body()?.data?.user?.name
                         Log.d("이름", response.body()?.data?.user?.name.toString())
-                        prefs.userGrade = response.body()?.data?.user?.grade.toString()
-                        prefs.userClassName = response.body()?.data?.user?.className.toString()
-                        prefs.userClassNo = response.body()?.data?.user?.classNo.toString()
-                        prefs.userIdx = response.body()?.data?.user?.idx.toString()
-                        prefs.userImg = response.body()?.data?.user?.image.toString()
 
                     } else {
                         Log.d("상태", response.code().toString())
@@ -137,7 +131,7 @@ class HomeActivity : AppCompatActivity() {
             })
     }
 
-    fun getMeal() {
+    private fun getMeal() {
         val current = LocalDateTime.now()
         val formatter = DateTimeFormatter.ofPattern("yyyyMMdd")
         val currentTime = current.format(formatter)

@@ -48,7 +48,7 @@ class SplashScreenActivity : AppCompatActivity() {
     }
 
     private fun getProfile(){
-        RetrofitClient.api.profile("Bearer " + prefs.accessToken?:"").enqueue(object : Callback<ProfileResponse>{
+        RetrofitClient.api.profile("Bearer " + prefs.accessToken).enqueue(object : Callback<ProfileResponse>{
             override fun onResponse(
                 call: Call<ProfileResponse>,
                 response: Response<ProfileResponse>
@@ -102,6 +102,14 @@ class SplashScreenActivity : AppCompatActivity() {
     private fun logout(){
         prefs.refreshToken = null
         prefs.accessToken = null
+        prefs.refreshToken = null
+        prefs.accessToken = null
+        prefs.userGrade = null
+        prefs.userClassName = null
+        prefs.userClassNo = null
+        prefs.userIdx = null
+        prefs.userImg = null
+        prefs.userName = null
         Toast.makeText(this, "로그아웃", Toast.LENGTH_SHORT).show()
         val intent = Intent(this, LoginActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
