@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.FragmentManager
 import com.alt.letseatingtime_android.MyApplication
 import com.alt.letseatingtime_android.util.LoginPattern
 import com.example.letseatingtime.R
@@ -36,7 +37,6 @@ class SignupFragment2 : Fragment() {
             val pw = binding.etPw.text.toString()
             if (pw != "") {
                 replaceFragment(signupFragment3)
-                MyApplication.prefs.userPassword = binding.etPw.text.toString()
             } else {
                 Toast.makeText(activity, "비밀번호를 입력해주세요", Toast.LENGTH_SHORT).show()
             }

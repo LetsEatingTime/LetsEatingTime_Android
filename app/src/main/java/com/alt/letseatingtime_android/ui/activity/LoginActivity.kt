@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
+import androidx.core.app.ActivityCompat
 import com.alt.letseatingtime_android.MyApplication
 import com.alt.letseatingtime_android.network.retrofit.RetrofitClient
 import com.alt.letseatingtime_android.network.retrofit.request.LoginRequest
@@ -18,10 +20,18 @@ import java.util.regex.Pattern
 
 class LoginActivity : AppCompatActivity() {
     private val binding: ActivityLoginBinding by lazy { ActivityLoginBinding.inflate(layoutInflater) }
+
+    private val callback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            // 뒤로 버튼 이벤트 처리
+            exit()
+            Log.e("뒤로가기", "뒤로가기 클릭")
+        }
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
+        this.onBackPressedDispatcher.addCallback(this, callback)
         binding.btnLoginSubmit.setOnClickListener {
             val id = binding.etId.text.toString()
             val pw = binding.etPw.text.toString()
@@ -41,6 +51,7 @@ class LoginActivity : AppCompatActivity() {
             val intent: Intent = Intent(this, SignupActivity::class.java)
             startActivity(intent)
         }
+
     }
 
     private fun login(id: String, pw: String) {
@@ -54,7 +65,15 @@ class LoginActivity : AppCompatActivity() {
                 if (response.code() == 200) {
                     val intent = Intent(this@LoginActivity, HomeActivity::class.java)
                     MyApplication.prefs.accessToken = result?.data?.accessToken
-                    MyApplication.prefs.refreshToken = result?.data?.refreshToken
+                    if(binding.cbLogin.isChecked){
+                        MyApplication.prefs.refreshToken = result?.data?.refreshToken
+                        MyApplication.prefs.accessToken = result?.data?.accessToken
+                        Log.d("상태","로그인 상태 유지")
+                    } else {
+                        MyApplication.prefs.accessToken = result?.data?.accessToken
+                        Log.d("상태","로그인 상태 유지X")
+                    }
+
                     Log.d("인터넷",response.body().toString())
                     startActivity(intent)
                     finish()
@@ -65,5 +84,9 @@ class LoginActivity : AppCompatActivity() {
                 Log.d("ERROR",t.message.toString())
             }
         })
+    }
+
+    fun exit(){
+        ActivityCompat.finishAffinity(this)
     }
 }

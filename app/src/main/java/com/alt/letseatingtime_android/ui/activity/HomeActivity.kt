@@ -68,6 +68,8 @@ class HomeActivity : AppCompatActivity() {
 
         //로그아웃
         binding.logout.setOnClickListener {
+            prefs.refreshToken = null
+            prefs.accessToken = null
             val intent: Intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             finish()

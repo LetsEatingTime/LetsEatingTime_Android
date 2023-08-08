@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.FragmentManager
 import com.alt.letseatingtime_android.MyApplication
 import com.alt.letseatingtime_android.util.LoginPattern
 import com.example.letseatingtime.R
@@ -49,6 +50,7 @@ class SignupFragment1 : Fragment() {
     }
 
     private fun replaceFragment(fragment: Fragment) {
+
         // 현 Activity 에 연결된 Fragment 관리하는 supportFragmentManager 를 통해 Fragment 전환
         activity?.supportFragmentManager?.beginTransaction()?.apply {
             replace(R.id.fragmentContainer, fragment)
