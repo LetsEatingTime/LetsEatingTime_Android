@@ -4,17 +4,20 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.alt.letseatingtime_android.MyApplication.Companion.prefs
 import com.alt.letseatingtime_android.network.retrofit.RetrofitClient
+import com.alt.letseatingtime_android.network.retrofit.response.WithdrawResponse
 import com.alt.letseatingtime_android.network.retrofit.response.meal.MealResponse
 import com.alt.letseatingtime_android.network.retrofit.response.profile.ProfileResponse
 import com.bumptech.glide.Glide
 import com.example.letseatingtime.databinding.ActivityHomeBinding
-import kotlinx.coroutines.Deferred
+import com.lakue.lakuepopupactivity.PopupActivity
+import com.lakue.lakuepopupactivity.PopupGravity
+import com.lakue.lakuepopupactivity.PopupType
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -23,6 +26,7 @@ import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
+
 
 class HomeActivity : AppCompatActivity() {
     private val binding: ActivityHomeBinding by lazy { ActivityHomeBinding.inflate(layoutInflater) }
@@ -59,6 +63,22 @@ class HomeActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+
+//        binding.withdrawal.setOnClickListener {
+//
+//            withdrawal()
+//        }
+
+        binding.withdrawal.setOnClickListener {
+            val intent = Intent(baseContext, PopupActivity::class.java)
+            intent.putExtra("type", PopupType.SELECT)
+            intent.putExtra("gravity", PopupGravity.LEFT)
+            intent.putExtra("title", "경고")
+            intent.putExtra("content", "정말로 계정을 삭제 하실건가요?")
+            intent.putExtra("buttonLeft", "확인")
+            intent.putExtra("buttonRight", "취소")
+            startActivityForResult(intent, 2)
+        };
     }
 
     private fun getImg(id: String) {
@@ -175,6 +195,34 @@ class HomeActivity : AppCompatActivity() {
                 Log.d("밥", t.message.toString())
             }
         })
+    }
+
+    private fun withdrawal(){
+        RetrofitClient.api.withdraw("Bearer ${prefs.accessToken.toString()}").enqueue(object :Callback<WithdrawResponse>{
+            override fun onResponse(
+                call: Call<WithdrawResponse>,
+                response: Response<WithdrawResponse>
+            ) {
+                if(response.isSuccessful){
+                    logout()
+                } else {
+                    Log.d("토큰로그인", prefs.accessToken.toString())
+                    Log.d("애러",response.code().toString())
+                }
+            }
+
+            override fun onFailure(call: Call<WithdrawResponse>, t: Throwable) {
+                Log.d("애러",t.message.toString())
+            }
+
+        })
+    }
+
+    fun logout(){
+        val intent = Intent(this, LoginActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+        startActivity(intent)
+        finish()
     }
 
 }

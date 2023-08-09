@@ -6,14 +6,13 @@ import com.alt.letseatingtime_android.network.retrofit.request.SignupRequest
 import com.alt.letseatingtime_android.network.retrofit.response.login.LoginResponse
 import com.alt.letseatingtime_android.network.retrofit.response.SignupResponse
 import com.alt.letseatingtime_android.network.retrofit.response.profile.ProfileResponse
-import com.bumptech.glide.annotation.GlideType
+import com.alt.letseatingtime_android.network.retrofit.response.WithdrawResponse
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
-import retrofit2.http.Part
 import retrofit2.http.Path
 import retrofit2.http.Query
 
@@ -49,5 +48,10 @@ interface API {
     fun refresh(
         @Header("Authorization") Authorization: String
     ):Call<LoginResponse>
+
+    @POST("/api/user/withdraw")
+    fun withdraw(
+        @Header("Authorization") Authorization: String
+    ): Call<WithdrawResponse>
 
 }

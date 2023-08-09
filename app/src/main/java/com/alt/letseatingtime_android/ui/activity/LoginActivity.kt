@@ -64,13 +64,15 @@ class LoginActivity : AppCompatActivity() {
                 val result = response.body()
                 if (response.code() == 200) {
                     val intent = Intent(this@LoginActivity, HomeActivity::class.java)
-                    MyApplication.prefs.accessToken = result?.data?.accessToken
                     if(binding.cbLogin.isChecked){
                         MyApplication.prefs.refreshToken = result?.data?.refreshToken
                         MyApplication.prefs.accessToken = result?.data?.accessToken
                         Log.d("상태","로그인 상태 유지")
                     } else {
+                        Log.d("토큰로그인",result?.data?.accessToken.toString())
                         MyApplication.prefs.accessToken = result?.data?.accessToken
+                        MyApplication.prefs.refreshToken = null
+                        Log.d("토큰로그인",MyApplication.prefs.accessToken.toString())
                         Log.d("상태","로그인 상태 유지X")
                     }
 
