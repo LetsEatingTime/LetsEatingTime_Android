@@ -37,8 +37,8 @@ class SignupFragment1 : Fragment() {
             val id = binding.etId.text.toString()
             if (pattern.matcher(id).find()) {
                 if (id != "") {
-                    replaceFragment(signupFragment2)
                     MyApplication.prefs.userID = id
+                    replaceFragment(signupFragment2)
                 } else {
                     Toast.makeText(activity, "아이디를 입력해주세요", Toast.LENGTH_SHORT).show()
                 }
@@ -50,7 +50,6 @@ class SignupFragment1 : Fragment() {
     }
 
     private fun replaceFragment(fragment: Fragment) {
-
         // 현 Activity 에 연결된 Fragment 관리하는 supportFragmentManager 를 통해 Fragment 전환
         activity?.supportFragmentManager?.beginTransaction()?.apply {
             replace(R.id.fragmentContainer, fragment)

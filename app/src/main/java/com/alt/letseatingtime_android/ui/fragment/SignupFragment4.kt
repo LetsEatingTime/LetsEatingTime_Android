@@ -49,10 +49,10 @@ class SignupFragment4 : Fragment() {
             val classno = binding.etNumber.text.toString()
             if (pattern.matcher(grade).find()) {
                 if (grade != "" && classname != "" && classno != "") {
-                    signup()
                     MyApplication.prefs.userGrade = binding.etGrade.text.toString()
                     MyApplication.prefs.userClassName = binding.etClass.text.toString()
                     MyApplication.prefs.userClassNo = binding.etNumber.text.toString()
+                    signup()
                 } else {
                     Toast.makeText(activity, "모두 입력해주세요", Toast.LENGTH_SHORT).show()
                 }
@@ -91,9 +91,22 @@ class SignupFragment4 : Fragment() {
             override fun onResponse(
                 call: Call<SignupResponse>,
                 response: Response<SignupResponse>
-
             ) {
-                Log.d("회원가입", response.code().toString())
+                if(response.isSuccessful){
+                    Log.d("회원가입",response.body().toString())
+                } else {
+                    Log.d("회원가입", response.code().toString())
+                    Log.d("회원가입", SignupRequest(
+                        MyApplication.prefs.userID!!,
+                        MyApplication.prefs.userName!!,
+                        MyApplication.prefs.userPassword!!,
+                        'S',
+                        MyApplication.prefs.userGrade!!,
+                        MyApplication.prefs.userClassName!!,
+                        MyApplication.prefs.userClassNo!!
+                    ).toString())
+                }
+
             }
 
             override fun onFailure(call: Call<SignupResponse>, t: Throwable) {

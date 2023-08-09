@@ -36,6 +36,7 @@ class SignupFragment2 : Fragment() {
         binding.btnSubmit.setOnClickListener {
             val pw = binding.etPw.text.toString()
             if (pw != "") {
+                MyApplication.prefs.userPassword = pw
                 replaceFragment(signupFragment3)
             } else {
                 Toast.makeText(activity, "비밀번호를 입력해주세요", Toast.LENGTH_SHORT).show()

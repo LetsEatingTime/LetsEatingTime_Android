@@ -47,6 +47,7 @@ class SignupFragment3 : Fragment() {
             val name = binding.etName.text.toString()
             if (pattern.matcher(name).find()) {
                 if (name != "") {
+                    MyApplication.prefs.userName = name
                     replaceFragment(signupFragment4)
                 } else {
                     Toast.makeText(activity, "이름을 입력해주세요", Toast.LENGTH_SHORT).show()
