@@ -110,7 +110,6 @@ class SplashScreenActivity : AppCompatActivity() {
         prefs.userIdx = null
         prefs.userImg = null
         prefs.userName = null
-        Toast.makeText(this, "로그아웃", Toast.LENGTH_SHORT).show()
         val intent = Intent(this, LoginActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
         startActivity(intent)
