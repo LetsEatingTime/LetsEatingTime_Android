@@ -12,6 +12,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:text="이름"
+        android:fontFamily="@font/pretendardmedium"
         style="@style/tv_signup_text"
         />
     <EditText
@@ -21,6 +22,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_name"
         android:hint="이름을 입력해주세요"
+        android:fontFamily="@font/pretendardmedium"
         style="@style/tv_signup_inp"/>
     <ImageView
         android:id="@+id/iv_eating_food"
@@ -38,6 +40,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/pb_signup"
         android:text="3/4"
+        android:fontFamily="@font/pretendardmedium"
         style="@style/tv_signup_pb_text"/>
     <ProgressBar
         android:id="@+id/pb_signup"
@@ -61,6 +64,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="48dp"
         style="@style/btn_signup_submit"
+        android:fontFamily="@font/pretendardmedium"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

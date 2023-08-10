@@ -13,6 +13,7 @@
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginLeft="10dp"
         android:text="아이디"
+        android:fontFamily="@font/pretendardmedium"
         style="@style/tv_signup_text"
         />
     <EditText
@@ -22,6 +23,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_id"
         android:hint="아이디를 입력해주세요"
+        android:fontFamily="@font/pretendardmedium"
         android:inputType="text"
         style="@style/tv_signup_inp"/>
 
@@ -41,6 +43,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/pb_signup"
         android:text="1/4"
+        android:fontFamily="@font/pretendardmedium"
         style="@style/tv_signup_pb_text"/>
     <ProgressBar
         android:id="@+id/pb_signup"
@@ -64,6 +67,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="48dp"
         style="@style/btn_signup_submit"
+        android:fontFamily="@font/pretendardmedium"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
