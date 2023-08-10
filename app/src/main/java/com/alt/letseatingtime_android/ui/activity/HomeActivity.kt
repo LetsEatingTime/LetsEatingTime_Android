@@ -197,6 +197,7 @@ class HomeActivity : AppCompatActivity() {
         })
     }
 
+
     private fun withdrawal(){
         RetrofitClient.api.withdraw("Bearer ${prefs.accessToken.toString()}").enqueue(object :Callback<WithdrawResponse>{
             override fun onResponse(
