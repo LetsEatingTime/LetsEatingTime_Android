@@ -189,6 +189,7 @@
                 android:elevation="2dp">
 
                 <TextView
+                    android:id="@+id/meal_menu"
                     android:fontFamily="@font/pretendardmedium"
                     android:textAppearance="@style/mycafe_id"
                     android:text="급식"
