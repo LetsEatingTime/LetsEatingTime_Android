@@ -36,6 +36,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/iv_main2"
         android:text="로그인"
+        android:fontFamily="@font/pretendardmedium"
         style="@style/btn_main_login_submit"/>
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_signup_submit"
@@ -45,6 +46,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btn_login_submit"
         android:text="회원가입"
+        android:fontFamily="@font/pretendardmedium"
         style="@style/btn_main_signup_submit"/>
 
 

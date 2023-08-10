@@ -7,6 +7,7 @@
 
     <TextView
         android:id="@+id/tv_pw"
+        android:fontFamily="@font/pretendardmedium"
         android:layout_width="80dp"
         android:layout_height="33dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -17,6 +18,7 @@
         />
     <EditText
         android:id="@+id/et_pw"
+        android:fontFamily="@font/pretendardmedium"
         android:layout_width="match_parent"
         android:layout_height="49dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -63,6 +65,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="48dp"
         style="@style/btn_signup_submit"
+        android:fontFamily="@font/pretendardmedium"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

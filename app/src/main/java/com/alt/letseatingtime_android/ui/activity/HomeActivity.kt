@@ -171,6 +171,8 @@ class HomeActivity : AppCompatActivity() {
             else -> "dinner"
         }
 
+
+
         RetrofitClient.api.meal(currentTime).enqueue(object : Callback<MealResponse> {
             override fun onResponse(
                 call: Call<MealResponse>, response: retrofit2.Response<MealResponse>
@@ -190,6 +192,7 @@ class HomeActivity : AppCompatActivity() {
                     Log.d("급식을 불러오는데 실패하였습니다.", response.toString())
                 }
             }
+
 
             override fun onFailure(call: Call<MealResponse>, t: Throwable) {
                 Log.d("밥", t.message.toString())

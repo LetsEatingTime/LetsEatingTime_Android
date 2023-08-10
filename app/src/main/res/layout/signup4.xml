@@ -12,6 +12,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:text="학년"
+        android:fontFamily="@font/pretendardmedium"
         style="@style/tv_signup_text"
         />
     <EditText
@@ -21,6 +22,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_grade"
         android:hint="학년을 입력해주세요. ex:2"
+        android:fontFamily="@font/pretendardmedium"
         style="@style/tv_signup_inp"/>
 
     <TextView
@@ -30,6 +32,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/et_grade"
         android:text="반"
+        android:fontFamily="@font/pretendardmedium"
         style="@style/tv_signup_text"
         />
 
@@ -40,6 +43,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_class"
         android:hint="본인의 반을 입력해주세요. ex:4"
+        android:fontFamily="@font/pretendardmedium"
         style="@style/tv_signup_inp"/>
 
     <TextView
@@ -49,6 +53,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/et_class"
         android:text="번호"
+        android:fontFamily="@font/pretendardmedium"
         style="@style/tv_signup_text"
         />
 
@@ -59,6 +64,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_number"
         android:hint="번호를 입력해주세요. ex:12"
+        android:fontFamily="@font/pretendardmedium"
         style="@style/tv_signup_inp"/>
 
 
@@ -78,6 +84,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/pb_signup"
         android:text="4/4"
+        android:fontFamily="@font/pretendardmedium"
         style="@style/tv_signup_pb_text"/>
     <ProgressBar
         android:id="@+id/pb_signup"
@@ -101,6 +108,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="48dp"
         style="@style/btn_signup_submit"
+        android:fontFamily="@font/pretendardmedium"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
