@@ -53,8 +53,8 @@ class HomeActivity : AppCompatActivity() {
         getProfile()
         getMeal()
 
-        binding.viewPagerIdol.adapter = ViewPagerAdapter(getIdolList()) // 어댑터 생성
-        binding.viewPagerIdol.orientation = ViewPager2.ORIENTATION_HORIZONTAL // 방향을 가로로
+//        binding.viewPagerIdol.adapter = ViewPagerAdapter(getIdolList()) // 어댑터 생성
+//        binding.viewPagerIdol.orientation = ViewPager2.ORIENTATION_HORIZONTAL // 방향을 가로로
 
 
 
@@ -90,10 +90,10 @@ class HomeActivity : AppCompatActivity() {
         };
     }
 
-    // 뷰 페이저에 들어갈 아이템
-    private fun getIdolList(): ArrayList<Int> {
-        return arrayListOf<Int>(R.drawable.dgsw, R.drawable.dgsw, R.drawable.dgsw)
-    }
+//    // 뷰 페이저에 들어갈 아이템
+//    private fun getIdolList(): ArrayList<Int> {
+//        return arrayListOf<Int>(R.drawable.test, R.drawable.test, R.drawable.dgsw)
+//    }
 
     private fun getImg(id: String) {
         RetrofitClient.api.image(prefs.accessToken.toString(), id)
