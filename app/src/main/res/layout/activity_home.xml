@@ -203,7 +203,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/cardview"
-                android:elevation="2dp"
+                android:elevation="1dp"
                 android:orientation="vertical">
 
 
