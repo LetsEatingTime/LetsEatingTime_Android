@@ -8,12 +8,14 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.viewpager2.widget.ViewPager2
 import com.alt.letseatingtime_android.MyApplication.Companion.prefs
 import com.alt.letseatingtime_android.network.retrofit.RetrofitClient
 import com.alt.letseatingtime_android.network.retrofit.response.WithdrawResponse
 import com.alt.letseatingtime_android.network.retrofit.response.meal.MealResponse
 import com.alt.letseatingtime_android.network.retrofit.response.profile.ProfileResponse
 import com.bumptech.glide.Glide
+import com.example.letseatingtime.R
 import com.example.letseatingtime.databinding.ActivityHomeBinding
 import com.lakue.lakuepopupactivity.PopupActivity
 import com.lakue.lakuepopupactivity.PopupGravity
@@ -42,11 +44,19 @@ class HomeActivity : AppCompatActivity() {
         instance = this
     }
 
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         getProfile()
         getMeal()
+
+        binding.viewPager_idol.adapter = ViewPagerAdapter(getIdolList()) // 어댑터 생성
+        binding.viewPager_idol.orientation = ViewPager2.ORIENTATION_HORIZONTAL // 방향을 가로로
+
+
 
         //로그아웃
         binding.logout.setOnClickListener {
@@ -68,7 +78,6 @@ class HomeActivity : AppCompatActivity() {
 //
 //            withdrawal()
 //        }
-
         binding.withdrawal.setOnClickListener {
             val intent = Intent(baseContext, PopupActivity::class.java)
             intent.putExtra("type", PopupType.SELECT)
@@ -81,10 +90,18 @@ class HomeActivity : AppCompatActivity() {
         };
     }
 
+    // 뷰 페이저에 들어갈 아이템
+    private fun getIdolList(): ArrayList<Int> {
+        return arrayListOf<Int>(R.drawable.idol1, R.drawable.idol2, R.drawable.idol3)
+    }
+
     private fun getImg(id: String) {
         RetrofitClient.api.image(prefs.accessToken.toString(), id)
             .enqueue(object : Callback<ResponseBody> {
-                override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                override fun onResponse(
+                    call: Call<ResponseBody>,
+                    response: Response<ResponseBody>
+                ) {
                     if (response.code() == 200) {
                         Log.d("사진", prefs.userImg.toString())
                         val photoBytes = response.body()?.bytes()
@@ -101,7 +118,6 @@ class HomeActivity : AppCompatActivity() {
                     } else {
                         Log.d("애러", response.code().toString())
                     }
-
                 }
 
                 override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
@@ -113,6 +129,7 @@ class HomeActivity : AppCompatActivity() {
     fun getBitmapFromBytes(byteArray: ByteArray): Bitmap {
         return BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
     }
+
 
     private fun getProfile() {
         RetrofitClient.api.profile("Bearer ${prefs.accessToken.toString()}")
@@ -128,7 +145,7 @@ class HomeActivity : AppCompatActivity() {
                         prefs.userIdx = response.body()?.data?.user?.idx.toString()
                         prefs.userImg = response.body()?.data?.user?.image.toString()
                         prefs.userName = response.body()?.data?.user?.name
-                        getImg(prefs.userImg?:"0")
+                        getImg(prefs.userImg ?: "0")
 
                         val stname = binding.nameId
                         stname.text = prefs.userName // TextView에 userName 값을 설정합니다.
@@ -200,34 +217,33 @@ class HomeActivity : AppCompatActivity() {
         })
     }
 
-    private fun withdrawal(){
-        RetrofitClient.api.withdraw("Bearer ${prefs.accessToken.toString()}").enqueue(object :Callback<WithdrawResponse>{
-            override fun onResponse(
-                call: Call<WithdrawResponse>,
-                response: Response<WithdrawResponse>
-            ) {
-                if(response.isSuccessful){
-                    logout()
-                } else {
-                    Log.d("토큰로그인", prefs.accessToken.toString())
-                    Log.d("애러",response.code().toString())
+    private fun withdrawal() {
+        RetrofitClient.api.withdraw("Bearer ${prefs.accessToken.toString()}")
+            .enqueue(object : Callback<WithdrawResponse> {
+                override fun onResponse(
+                    call: Call<WithdrawResponse>,
+                    response: Response<WithdrawResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        logout()
+                    } else {
+                        Log.d("토큰로그인", prefs.accessToken.toString())
+                        Log.d("애러", response.code().toString())
+                    }
                 }
-            }
 
-            override fun onFailure(call: Call<WithdrawResponse>, t: Throwable) {
-                Log.d("애러",t.message.toString())
-            }
+                override fun onFailure(call: Call<WithdrawResponse>, t: Throwable) {
+                    Log.d("애러", t.message.toString())
+                }
 
-        })
+            })
     }
 
-    fun logout(){
+
+    fun logout() {
         val intent = Intent(this, LoginActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
         startActivity(intent)
         finish()
     }
-
 }
-
-

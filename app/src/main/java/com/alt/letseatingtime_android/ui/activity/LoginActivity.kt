@@ -28,6 +28,7 @@ class LoginActivity : AppCompatActivity() {
             Log.e("뒤로가기", "뒤로가기 클릭")
         }
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
