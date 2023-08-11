@@ -210,22 +210,22 @@
                 <!-- 나의 급식 현황 -->
                 <TextView
                     android:id="@+id/my_cafeteria_id"
-                    android:fontFamily="@font/pretendardbold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/pretendardbold"
                     android:text="나의 급식 현황"
                     android:textAppearance="@style/mycafe_id"
-                    android:layout_marginTop="10dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/today"
-                    android:fontFamily="@font/pretendardmedium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    android:fontFamily="@font/pretendardmedium"
                     android:text="날짜"
                     android:textAppearance="@style/mycafe_id"
                     android:textSize="20sp"
@@ -233,12 +233,12 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/my_cafeteria_id" />
 
-<!--                <androidx.viewpager2.widget.ViewPager2-->
-<!--                    android:id="@+id/viewPager_idol"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:clipToPadding="false"-->
-<!--                    android:clipChildren="false" />-->
+                <!--                <androidx.viewpager2.widget.ViewPager2-->
+                <!--                    android:id="@+id/viewPager_idol"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="match_parent"-->
+                <!--                    android:clipToPadding="false"-->
+                <!--                    android:clipChildren="false" />-->
 
                 <TextView
                     android:id="@+id/breakfast"
@@ -256,8 +256,8 @@
                     android:id="@+id/lunch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     android:layout_marginLeft="40dp"
+                    android:layout_marginTop="10dp"
                     android:fontFamily="@font/pretendardlight"
                     android:text="점심🍔"
                     android:textAppearance="@style/mycafe_id"
@@ -269,8 +269,8 @@
                     android:id="@+id/dinner"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     android:layout_marginLeft="40dp"
+                    android:layout_marginTop="10dp"
                     android:fontFamily="@font/pretendardlight"
                     android:text="저녁🍝"
                     android:textAppearance="@style/mycafe_id"
@@ -279,40 +279,40 @@
                     app:layout_constraintTop_toBottomOf="@+id/lunch" />
 
                 <View
-                    android:id="@+id/rectangle_2"
+                    android:id="@+id/breakfast_cheak"
                     android:layout_width="40dp"
                     android:layout_height="20dp"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentTop="true"
                     android:layout_marginStart="144dp"
                     android:background="@drawable/cardview"
-                    android:backgroundTint="#ACEEB4"
+                    android:backgroundTint="#D9D9D9"
                     app:layout_constraintStart_toEndOf="@+id/breakfast"
                     app:layout_constraintTop_toBottomOf="@+id/today" />
 
                 <View
-                    android:id="@+id/rectangle_3"
-                    android:layout_marginTop="10dp"
+                    android:id="@+id/lunch_cheak"
                     android:layout_width="40dp"
                     android:layout_height="20dp"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentTop="true"
                     android:layout_marginStart="144dp"
-                    android:backgroundTint="#FF8383"
+                    android:layout_marginTop="10dp"
                     android:background="@drawable/cardview"
+                    android:backgroundTint="#D9D9D9"
                     app:layout_constraintStart_toEndOf="@+id/lunch"
                     app:layout_constraintTop_toBottomOf="@+id/breakfast" />
 
                 <View
-                    android:id="@+id/rectangle_4"
-                    android:layout_marginTop="10dp"
+                    android:id="@+id/dinner_cheak"
                     android:layout_width="40dp"
                     android:layout_height="20dp"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentTop="true"
                     android:layout_marginStart="144dp"
-                    android:backgroundTint="#D9D9D9"
+                    android:layout_marginTop="10dp"
                     android:background="@drawable/cardview"
+                    android:backgroundTint="#D9D9D9"
                     app:layout_constraintStart_toEndOf="@+id/dinner"
                     app:layout_constraintTop_toBottomOf="@+id/lunch" />
 
@@ -338,6 +338,7 @@
                 android:layout_gravity="center"
                 android:layout_marginBottom="30dp"
                 android:background="@drawable/button2"
+                android:backgroundTint="#FF8383"
                 android:text="회원탈퇴"
                 android:textColor="@color/white" />
         </LinearLayout>
