@@ -80,6 +80,8 @@ class LoginActivity : AppCompatActivity() {
                     Log.d("인터넷",response.body().toString())
                     startActivity(intent)
                     finish()
+                } else {
+                    Toast.makeText(this@LoginActivity,"아이디나 비밀번호가 틀렸습니다. 다시 입력해주세요.", Toast.LENGTH_SHORT).show()
                 }
             }
 
