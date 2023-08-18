@@ -44,7 +44,6 @@ class LoginActivity : AppCompatActivity() {
                 binding.loginErrorMessage.text = ""
                 login(id, pw)
                 Log.d("인터넷", "클릭")
-
             } else {
                 binding.loginErrorMessage.text = "비밀번호와 아이디를 입력해주세요"
             }
@@ -71,13 +70,9 @@ class LoginActivity : AppCompatActivity() {
                     if(binding.cbLogin.isChecked){
                         MyApplication.prefs.refreshToken = result?.data?.refreshToken
                         MyApplication.prefs.accessToken = result?.data?.accessToken
-                        Log.d("상태","로그인 상태 유지")
                     } else {
-                        Log.d("토큰로그인",result?.data?.accessToken.toString())
                         MyApplication.prefs.accessToken = result?.data?.accessToken
                         MyApplication.prefs.refreshToken = null
-                        Log.d("토큰로그인",MyApplication.prefs.accessToken.toString())
-                        Log.d("상태","로그인 상태 유지X")
                     }
 
                     Log.d("인터넷",response.body().toString())

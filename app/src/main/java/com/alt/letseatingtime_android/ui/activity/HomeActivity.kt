@@ -1,6 +1,7 @@
 package com.alt.letseatingtime_android.ui.activity
 
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Bitmap
@@ -10,6 +11,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.alt.letseatingtime_android.MyApplication.Companion.prefs
@@ -20,9 +22,6 @@ import com.alt.letseatingtime_android.network.retrofit.response.profile.ProfileR
 import com.bumptech.glide.Glide
 import com.example.letseatingtime.R
 import com.example.letseatingtime.databinding.ActivityHomeBinding
-import com.lakue.lakuepopupactivity.PopupActivity
-import com.lakue.lakuepopupactivity.PopupGravity
-import com.lakue.lakuepopupactivity.PopupType
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -86,14 +85,25 @@ class HomeActivity : AppCompatActivity() {
 //            withdrawal()
 //        }
         binding.withdrawal.setOnClickListener {
-            val intent = Intent(baseContext, PopupActivity::class.java)
-            intent.putExtra("type", PopupType.SELECT)
-            intent.putExtra("gravity", PopupGravity.LEFT)
-            intent.putExtra("title", "경고")
-            intent.putExtra("content", "정말로 계정을 삭제 하실건가요?")
-            intent.putExtra("buttonLeft", "확인")
-            intent.putExtra("buttonRight", "취소")
-            startActivityForResult(intent, 2)
+            val builder = AlertDialog.Builder(this)
+            val dialog = builder.create()
+            dialog.setOnShowListener {
+                dialog.getButton(AlertDialog.BUTTON_POSITIVE)
+                    .setTextColor(Color.RED)
+                dialog.getButton(AlertDialog.BUTTON_NEGATIVE)
+                    .setTextColor(Color.BLACK)
+            }
+
+            builder.setTitle("경고")
+                .setMessage("정말로 탈퇴하시겠습니까?")
+                .setPositiveButton("예",
+                    DialogInterface.OnClickListener { dialog, id ->
+                        withdrawal()
+                    })
+                .setNegativeButton("아니요",
+                    DialogInterface.OnClickListener { dialog, id ->
+                    })
+            builder.show()
         };
     }
 
