@@ -41,9 +41,12 @@ class LoginActivity : AppCompatActivity() {
             val patternPw = Pattern.compile(LoginPattern.pw)
 
             if (id != "" && pw != "") {
+                binding.loginErrorMessage.text = ""
                 login(id, pw)
+                Log.d("인터넷", "클릭")
+
             } else {
-                Toast.makeText(this, "아이디나 비밀번호를 입력해주세요", Toast.LENGTH_SHORT).show()
+                binding.loginErrorMessage.text = "비밀번호와 아이디를 입력해주세요"
             }
         }
 
@@ -81,12 +84,12 @@ class LoginActivity : AppCompatActivity() {
                     startActivity(intent)
                     finish()
                 } else {
-                    Toast.makeText(this@LoginActivity,"아이디나 비밀번호가 틀렸습니다. 다시 입력해주세요.", Toast.LENGTH_SHORT).show()
+                    binding.loginErrorMessage.text = "비밀번호나 아이디가 틀렸습니다"
                 }
             }
 
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                Log.d("ERROR",t.message.toString())
+                Log.d("버그",t.message.toString())
             }
         })
     }

@@ -88,11 +88,9 @@ class SplashScreenActivity : AppCompatActivity() {
                 logout()
             }
         })
-
     }
 
     private fun login(){
-        Toast.makeText(this, "로그인", Toast.LENGTH_SHORT).show()
         val intent = Intent(this, HomeActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
         startActivity(intent)

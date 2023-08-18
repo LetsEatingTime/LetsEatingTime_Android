@@ -45,43 +45,55 @@
             android:inputType="textPassword"
             style="@style/et_login" />
     </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/login_error_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textColor="#F00"
+        android:fontFamily="@font/pretendardlight"
+        android:layout_marginStart="5dp"
+        app:layout_constraintStart_toStartOf="@+id/login_inp"
+        app:layout_constraintTop_toBottomOf="@+id/login_inp" />
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_login_submit"
+        style="@style/btn_login_submit"
         android:layout_width="300dp"
         android:layout_height="48dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/login_inp"
-        android:text="로그인"
         android:fontFamily="@font/pretendardmedium"
-        style="@style/btn_login_submit"/>
+        android:text="로그인"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login_error_message" />
 
     <CheckBox
         android:id="@+id/cb_login"
         style="@style/cb_login"
         android:layout_width="140dp"
         android:layout_height="48dp"
-        android:text="로그인 상태 유지"
         android:fontFamily="@font/pretendardlight"
+        android:text="로그인 상태 유지"
         app:layout_constraintStart_toStartOf="@+id/btn_login_submit"
-        app:layout_constraintTop_toBottomOf="@id/btn_login_submit" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_login_submit" />
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal"
 
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/iv_eating_food"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cb_login">
+        app:layout_constraintStart_toStartOf="parent">
 
         <TextView
             android:id="@+id/tv_find_id"
-            android:fontFamily="@font/pretendardlight"
             style="@style/tv_selector"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/pretendardlight"
             android:text="아이디 찾기" />
 
         <View
@@ -91,10 +103,10 @@
 
         <TextView
             android:id="@+id/tv_find_pw"
-            android:fontFamily="@font/pretendardlight"
             style="@style/tv_selector"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/pretendardlight"
             android:text="비밀번호 찾기" />
 
         <View
@@ -104,10 +116,10 @@
 
         <TextView
             android:id="@+id/tv_signup"
-            android:fontFamily="@font/pretendardlight"
             style="@style/tv_selector"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/pretendardlight"
             android:text="회원가입" />
     </LinearLayout>
 
