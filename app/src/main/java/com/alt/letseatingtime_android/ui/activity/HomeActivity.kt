@@ -229,6 +229,7 @@ class HomeActivity : AppCompatActivity() {
                 ) {
                     if(response.isSuccessful){
                         val mealData = response.body()?.data?.mealTime
+                        Log.d("밥",mealData.toString())
                         if(mealData != null){
                             breakfast(mealData)
                             lunch(mealData)
