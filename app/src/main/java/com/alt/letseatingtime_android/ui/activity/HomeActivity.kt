@@ -1,27 +1,22 @@
 package com.alt.letseatingtime_android.ui.activity
 
-import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
-import android.content.res.ColorStateList
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.viewpager2.widget.ViewPager2
+import com.alt.letseatingtime.databinding.ActivityHomeBinding
 import com.alt.letseatingtime_android.MyApplication.Companion.prefs
 import com.alt.letseatingtime_android.network.retrofit.RetrofitClient
 import com.alt.letseatingtime_android.network.retrofit.response.WithdrawResponse
 import com.alt.letseatingtime_android.network.retrofit.response.meal.MealResponse
 import com.alt.letseatingtime_android.network.retrofit.response.profile.ProfileResponse
 import com.bumptech.glide.Glide
-import com.example.letseatingtime.R
-import com.example.letseatingtime.databinding.ActivityHomeBinding
+import com.alt.letseatingtime.R
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -35,17 +30,6 @@ import java.time.format.DateTimeFormatter
 class HomeActivity : AppCompatActivity() {
     private val binding: ActivityHomeBinding by lazy { ActivityHomeBinding.inflate(layoutInflater) }
 
-    companion object {
-        lateinit var instance: HomeActivity
-        fun ApplicationContext(): Context {
-            return instance.applicationContext
-        }
-    }
-    init {
-        instance = this
-    }
-
-    private val breakfastStartTime = LocalTime.of(20, 0)
     private val lunchStartTime = LocalTime.of(9, 0)
     private val dinnerStartTime = LocalTime.of(14, 0)
     private val breakfastEndTime = LocalTime.of(8, 20)
@@ -60,30 +44,15 @@ class HomeActivity : AppCompatActivity() {
         getMeal()
         cheakMeal()
 
-//        binding.viewPagerIdol.adapter = ViewPagerAdapter(getIdolList()) // 어댑터 생성
-//        binding.viewPagerIdol.orientation = ViewPager2.ORIENTATION_HORIZONTAL // 방향을 가로로
-
-
-        //로그아웃
         binding.logout.setOnClickListener {
-            prefs.refreshToken = null
-            prefs.accessToken = null
-            prefs.userGrade = null
-            prefs.userClassName = null
-            prefs.userClassNo = null
-            prefs.userIdx = null
-            prefs.userImg = null
-            prefs.userName = null
+            prefs.remove()
             Toast.makeText(this, "로그아웃", Toast.LENGTH_SHORT).show()
-            val intent: Intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
+            Intent(this, LoginActivity::class.java).also {
+                startActivity(it)
+            }
             finish()
         }
 
-//        binding.withdrawal.setOnClickListener {
-//
-//            withdrawal()
-//        }
         binding.withdrawal.setOnClickListener {
             val builder = AlertDialog.Builder(this)
             val dialog = builder.create()
@@ -97,34 +66,28 @@ class HomeActivity : AppCompatActivity() {
             builder.setTitle("경고")
                 .setMessage("정말로 탈퇴하시겠습니까?")
                 .setPositiveButton("예",
-                    DialogInterface.OnClickListener { dialog, id ->
+                    { dialog, id ->
                         withdrawal()
                     })
                 .setNegativeButton("아니요",
-                    DialogInterface.OnClickListener { dialog, id ->
+                    { dialog, id ->
                     })
             builder.show()
         };
     }
 
-//    // 뷰 페이저에 들어갈 아이템
-//    private fun getIdolList(): ArrayList<Int> {
-//        return arrayListOf<Int>(R.drawable.test, R.drawable.test, R.drawable.dgsw)
-//    }
-
     private fun getImg(id: String) {
-        RetrofitClient.api.image(prefs.accessToken.toString(), id)
+        RetrofitClient.api.image(prefs.accessToken, id)
             .enqueue(object : Callback<ResponseBody> {
                 override fun onResponse(
                     call: Call<ResponseBody>,
                     response: Response<ResponseBody>
                 ) {
                     if (response.code() == 200) {
-                        Log.d("사진", prefs.userImg.toString())
                         val photoBytes = response.body()?.bytes()
                         if (photoBytes != null) {
                             val image = getBitmapFromBytes(photoBytes)
-                            Glide.with(instance)
+                            Glide.with(this@HomeActivity)
                                 .load(image)
                                 .into(binding.studentImage)
                         } else {
@@ -149,39 +112,26 @@ class HomeActivity : AppCompatActivity() {
 
 
     private fun getProfile() {
-        RetrofitClient.api.profile("Bearer ${prefs.accessToken.toString()}")
+        RetrofitClient.api.profile("Bearer ${prefs.accessToken}")
             .enqueue(object : Callback<ProfileResponse> {
                 override fun onResponse(
                     call: Call<ProfileResponse>, response: Response<ProfileResponse>
                 ) {
                     if (response.code() == 200) {
-                        prefs.userName = response.body()?.data?.user?.name
-                        prefs.userGrade = response.body()?.data?.user?.grade.toString()
-                        prefs.userClassName = response.body()?.data?.user?.className.toString()
-                        prefs.userClassNo = response.body()?.data?.user?.classNo.toString()
-                        prefs.userIdx = response.body()?.data?.user?.idx.toString()
-                        prefs.userImg = response.body()?.data?.user?.image.toString()
-                        prefs.userName = response.body()?.data?.user?.name
-                        getImg(prefs.userImg ?: "0")
-
-                        val stname = binding.nameId
-                        stname.text = prefs.userName // TextView에 userName 값을 설정합니다.
-
-                        val textView = binding.trashId
-                        val userClass =
-                            prefs.userGrade + "학년 " + prefs.userClassName + "반 " + prefs.userClassNo + "번"
-                        textView.text = userClass
-
-                        var now = LocalDate.now()
-                        var strnow = now.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"))
-                        binding.today.text = strnow
-                    } else {
-                        Log.d("상태", response.code().toString())
+                        val user = response.body()?.data?.user
+                        val now = LocalDate.now()
+                        val strnow = now.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"))
+                        with(binding) {
+                            nameId.text = user?.name
+                            trashId.text = "${user?.grade}학년 ${user?.className}반 ${user?.classNo}번"
+                            today.text = strnow
+                        }
                     }
                 }
 
                 override fun onFailure(call: Call<ProfileResponse>, t: Throwable) {
-                    Log.d("상태", t.message.toString())
+                    Toast.makeText(this@HomeActivity, "인터넷에 연결 되어있는지 확인 해주세요", Toast.LENGTH_SHORT)
+                        .show()
                 }
 
             })
@@ -193,25 +143,24 @@ class HomeActivity : AppCompatActivity() {
         val currentTime = current.format(formatter)
 
         val currentTimeOfDay = current.toLocalTime()
-        val mealType: String
 
-        mealType = when {
+        val mealType: String = when {
             currentTimeOfDay.isBefore(lunchStartTime) -> "breakfast"
             currentTimeOfDay.isBefore(dinnerStartTime) -> "lunch"
             else -> "dinner"
         }
 
 
-
         RetrofitClient.api.meal(currentTime).enqueue(object : Callback<MealResponse> {
             override fun onResponse(
-                call: Call<MealResponse>, response: retrofit2.Response<MealResponse>
+                call: Call<MealResponse>, response: Response<MealResponse>
             ) {
                 if (response.code() == 200) {
+                    val data = response.body()?.data
                     val menu: String? = when (mealType) {
-                        "breakfast" -> response.body()?.data?.breakfast?.menu?.toString()
-                        "lunch" -> response.body()?.data?.lunch?.menu?.toString()
-                        else -> response.body()?.data?.dinner?.menu?.toString()
+                        "breakfast" -> data?.breakfast?.menu?.toString()
+                        "lunch" -> data?.lunch?.menu?.toString()
+                        else -> data?.dinner?.menu?.toString()
                     }
                     binding.mealMenu.text = menu ?: when (mealType) {
                         "breakfast" -> "아침이 없습니다."
@@ -219,28 +168,28 @@ class HomeActivity : AppCompatActivity() {
                         else -> "저녁이 없습니다."
                     }
                 } else {
-                    Log.d("급식을 불러오는데 실패하였습니다.", response.toString())
+                    Log.d("급식을 불러오는데 실패했습니다.", response.toString())
                 }
             }
 
 
             override fun onFailure(call: Call<MealResponse>, t: Throwable) {
-                Log.d("밥", t.message.toString())
+                Toast.makeText(this@HomeActivity, "인터넷에 연결 되어있는지 확인 해주세요", Toast.LENGTH_SHORT)
+                    .show()
             }
         })
     }
 
     private fun cheakMeal() {
-        RetrofitClient.api.profile("Bearer ${prefs.accessToken.toString()}")
+        RetrofitClient.api.profile("Bearer ${prefs.accessToken}")
             .enqueue(object : Callback<ProfileResponse> {
                 override fun onResponse(
                     call: Call<ProfileResponse>,
                     response: Response<ProfileResponse>
                 ) {
-                    if(response.isSuccessful){
+                    if (response.isSuccessful) {
                         val mealData = response.body()?.data?.mealTime
-                        Log.d("밥",mealData.toString())
-                        if(mealData != null){
+                        if (mealData != null) {
                             breakfast(mealData)
                             lunch(mealData)
                             dinner(mealData)
@@ -252,15 +201,14 @@ class HomeActivity : AppCompatActivity() {
                             binding.lunchCheak.setBackgroundResource(R.drawable.cardview)
                             binding.dinnerCheak.setBackgroundResource(R.drawable.cardview)
                         }
-
-
-                    } else{
-                        Toast.makeText(instance, "아무튼 서버잘못", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(this@HomeActivity, "애러", Toast.LENGTH_SHORT).show()
                     }
                 }
 
                 override fun onFailure(call: Call<ProfileResponse>, t: Throwable) {
-
+                    Toast.makeText(this@HomeActivity, "인터넷에 연결 되어있는지 확인 해주세요", Toast.LENGTH_SHORT)
+                        .show()
                 }
 
             })
@@ -268,7 +216,7 @@ class HomeActivity : AppCompatActivity() {
 
 
     private fun withdrawal() {
-        RetrofitClient.api.withdraw("Bearer ${prefs.accessToken.toString()}")
+        RetrofitClient.api.withdraw("Bearer ${prefs.accessToken}")
             .enqueue(object : Callback<WithdrawResponse> {
                 override fun onResponse(
                     call: Call<WithdrawResponse>,
@@ -276,14 +224,12 @@ class HomeActivity : AppCompatActivity() {
                 ) {
                     if (response.isSuccessful) {
                         logout()
-                    } else {
-                        Log.d("토큰로그인", prefs.accessToken.toString())
-                        Log.d("애러", response.code().toString())
                     }
                 }
 
                 override fun onFailure(call: Call<WithdrawResponse>, t: Throwable) {
-                    Log.d("애러", t.message.toString())
+                    Toast.makeText(this@HomeActivity, "인터넷에 연결 되어있는지 확인 해주세요", Toast.LENGTH_SHORT)
+                        .show()
                 }
 
             })
@@ -291,58 +237,65 @@ class HomeActivity : AppCompatActivity() {
 
 
     fun logout() {
-        val intent = Intent(this, LoginActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
-        startActivity(intent)
+        Intent(this, LoginActivity::class.java).also {
+            it.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+            startActivity(it)
+        }
         finish()
     }
 
-    fun breakfast(mealData: List<String>){
+    fun breakfast(mealData: List<String>) {
         val nowTime = LocalTime.now()
-        for(data in mealData){
-            if(data == "breakfast"){
-                binding.breakfastCheak.setBackgroundColor(Color.parseColor("#ACEEB4"))
-                binding.breakfastCheak.setBackgroundResource(R.drawable.cardview)
-            } else if(breakfastEndTime < nowTime){
-                binding.breakfastCheak.setBackgroundColor(Color.parseColor("#FF8383"))
-                binding.breakfastCheak.setBackgroundResource(R.drawable.cardview)
-            } else {
-                binding.breakfastCheak.setBackgroundColor(Color.parseColor("#D9D9D9"))
-                binding.breakfastCheak.setBackgroundResource(R.drawable.cardview)
-            }
-        }
-    }
-    fun lunch(mealData: List<String>){
-        val nowTime = LocalTime.now()
-        for(data in mealData){
-            if(data == "lunch"){
-                binding.lunchCheak.setBackgroundColor(Color.parseColor("#ACEEB4"))
-                binding.lunchCheak.setBackgroundResource(R.drawable.cardview)
-            } else if(lunchEndTime < nowTime){
-                binding.lunchCheak.setBackgroundColor(Color.parseColor("#FF8383"))
-                binding.lunchCheak.setBackgroundResource(R.drawable.cardview)
-            } else {
-                binding.lunchCheak.setBackgroundColor(Color.parseColor("#D9D9D9"))
-                binding.lunchCheak.setBackgroundResource(R.drawable.cardview)
-            }
-        }
-    }
-    fun dinner(mealData: List<String>){
-        val nowTime = LocalTime.now()
-        for(data in mealData){
-            if(data == "dinner"){
-                binding.dinnerCheak.setBackgroundColor(Color.parseColor("#ACEEB4"))
-                binding.dinnerCheak.setBackgroundResource(R.drawable.cardview)
-            } else if(dinnerEndTime < nowTime){
-                binding.dinnerCheak.setBackgroundColor(Color.parseColor("#FF8383"))
-                binding.dinnerCheak.setBackgroundResource(R.drawable.cardview)
-            } else {
-                binding.dinnerCheak.setBackgroundColor(Color.parseColor("#D9D9D9"))
-                binding.dinnerCheak.setBackgroundResource(R.drawable.cardview)
+        with(binding) {
+            for (data in mealData) {
+                if (data == "breakfast") {
+                    breakfastCheak.setBackgroundColor(Color.parseColor("#ACEEB4"))
+                    breakfastCheak.setBackgroundResource(R.drawable.cardview)
+                } else if (breakfastEndTime < nowTime) {
+                    breakfastCheak.setBackgroundColor(Color.parseColor("#FF8383"))
+                    breakfastCheak.setBackgroundResource(R.drawable.cardview)
+                } else {
+                    breakfastCheak.setBackgroundColor(Color.parseColor("#D9D9D9"))
+                    breakfastCheak.setBackgroundResource(R.drawable.cardview)
+                }
             }
         }
     }
 
+    fun lunch(mealData: List<String>) {
+        val nowTime = LocalTime.now()
+        with(binding) {
+            for (data in mealData) {
+                if (data == "lunch") {
+                    lunchCheak.setBackgroundColor(Color.parseColor("#ACEEB4"))
+                    lunchCheak.setBackgroundResource(R.drawable.cardview)
+                } else if (lunchEndTime < nowTime) {
+                    lunchCheak.setBackgroundColor(Color.parseColor("#FF8383"))
+                    lunchCheak.setBackgroundResource(R.drawable.cardview)
+                } else {
+                    lunchCheak.setBackgroundColor(Color.parseColor("#D9D9D9"))
+                    lunchCheak.setBackgroundResource(R.drawable.cardview)
+                }
+            }
+        }
+    }
 
+    fun dinner(mealData: List<String>) {
+        val nowTime = LocalTime.now()
+        with(binding) {
+            for (data in mealData) {
+                if (data == "dinner") {
+                    dinnerCheak.setBackgroundColor(Color.parseColor("#ACEEB4"))
+                    dinnerCheak.setBackgroundResource(R.drawable.cardview)
+                } else if (dinnerEndTime < nowTime) {
+                    dinnerCheak.setBackgroundColor(Color.parseColor("#FF8383"))
+                    dinnerCheak.setBackgroundResource(R.drawable.cardview)
+                } else {
+                    dinnerCheak.setBackgroundColor(Color.parseColor("#D9D9D9"))
+                    dinnerCheak.setBackgroundResource(R.drawable.cardview)
+                }
+            }
+        }
 
+    }
 }
