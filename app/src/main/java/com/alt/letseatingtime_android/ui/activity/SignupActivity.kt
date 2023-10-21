@@ -4,8 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import com.alt.letseatingtime_android.ui.fragment.SignupFragment1
-import com.example.letseatingtime.R
-import com.example.letseatingtime.databinding.ActivitySignupBinding
+import com.alt.letseatingtime.R
+import com.alt.letseatingtime.databinding.ActivitySignupBinding
 
 class SignupActivity : AppCompatActivity() {
     private lateinit var signupFragment1: SignupFragment1
