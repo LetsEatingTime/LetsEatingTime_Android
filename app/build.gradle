@@ -4,13 +4,13 @@ plugins {
 }
 
 android {
-    namespace 'com.example.letseatingtime'
+    namespace 'com.alt.letseatingtime'
     compileSdkPreview 'UpsideDownCake'
 
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.letseatingtime"
+        applicationId "com.alt.letseatingtime"
         minSdk 26
         targetSdk 33
         versionCode 1
