@@ -105,7 +105,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginLeft="89dp"
                     android:layout_marginTop="76dp"
-                    android:background="#484848" />
+                    android:background="@drawable/profile_image_background" />
 
 
                 <TextView
