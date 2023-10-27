@@ -15,6 +15,7 @@ class UserActivityViewModel: ViewModel() {
 
     private var _userData = MutableLiveData<ProfileResponse>()
     val userData: LiveData<ProfileResponse> = _userData
+
     private var _toastMessage = MutableLiveData<String>()
     val toastMessage: LiveData<String> = _toastMessage
 

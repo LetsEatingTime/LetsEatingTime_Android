@@ -5,8 +5,10 @@ import android.content.SharedPreferences
 
 class SharedPreferences(context: Context) {
     companion object {
-        const val PREF_KEY_AUTOLOGIN = "autoLogin"
         const val PREFS_FILENAME = "토큰"
+
+
+        const val PREF_KEY_AUTOLOGIN = "autoLogin"
         const val PREF_KEY_USER_ACCESSTOKEN = "accessToken"
         const val PREF_KEY_USER_REFRESHTOKEN = "refreshToken"
     }

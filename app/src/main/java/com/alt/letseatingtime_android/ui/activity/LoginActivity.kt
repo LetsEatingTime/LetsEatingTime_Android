@@ -6,11 +6,13 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.OnBackPressedCallback
 import androidx.core.app.ActivityCompat
-import com.alt.letseatingtime_android.MyApplication
+import androidx.lifecycle.ViewModelProvider
 import com.alt.letseatingtime_android.network.retrofit.RetrofitClient
 import com.alt.letseatingtime_android.network.retrofit.request.LoginRequest
 import com.alt.letseatingtime_android.network.retrofit.response.login.LoginResponse
 import com.alt.letseatingtime.databinding.ActivityLoginBinding
+import com.alt.letseatingtime_android.MyApplication.Companion.prefs
+import com.alt.letseatingtime_android.ui.viewmodel.UserActivityViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -62,9 +64,12 @@ class LoginActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     val intent = Intent(this@LoginActivity, HomeActivity::class.java)
                     if (binding.cbLogin.isChecked) {
-                        MyApplication.prefs.autoLogin = true
-                        MyApplication.prefs.refreshToken = result?.data?.refreshToken.toString()
-                        MyApplication.prefs.accessToken = result?.data?.accessToken.toString()
+                        prefs.autoLogin = true
+                        prefs.refreshToken = result?.data?.refreshToken.toString()
+                        prefs.accessToken = result?.data?.accessToken.toString()
+                    } else {
+                        prefs.autoLogin = false
+                        prefs.accessToken = result?.data?.accessToken.toString()
                     }
                     Log.d("인터넷", response.body().toString())
                     startActivity(intent)

@@ -9,6 +9,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.alt.letseatingtime.databinding.ActivityHomeBinding
 import com.alt.letseatingtime_android.MyApplication.Companion.prefs
 import com.alt.letseatingtime_android.network.retrofit.RetrofitClient
@@ -17,6 +18,7 @@ import com.alt.letseatingtime_android.network.retrofit.response.meal.MealRespons
 import com.alt.letseatingtime_android.network.retrofit.response.profile.ProfileResponse
 import com.bumptech.glide.Glide
 import com.alt.letseatingtime.R
+import com.alt.letseatingtime_android.ui.viewmodel.UserActivityViewModel
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -35,6 +37,10 @@ class HomeActivity : AppCompatActivity() {
     private val breakfastEndTime = LocalTime.of(8, 20)
     private val lunchEndTime = LocalTime.of(13, 20)
     private val dinnerEndTime = LocalTime.of(19, 10)
+
+    private val viewModel by lazy {
+        ViewModelProvider(this)[UserActivityViewModel::class.java]
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -73,7 +79,7 @@ class HomeActivity : AppCompatActivity() {
                     { dialog, id ->
                     })
             builder.show()
-        };
+        }
     }
 
     private fun getImg(id: String) {
@@ -202,7 +208,7 @@ class HomeActivity : AppCompatActivity() {
                             binding.dinnerCheak.setBackgroundResource(R.drawable.cardview)
                         }
                     } else {
-                        Toast.makeText(this@HomeActivity, "애러", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@HomeActivity, "애러: ${response.code()}", Toast.LENGTH_SHORT).show()
                     }
                 }
 
