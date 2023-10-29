@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="tv_toolbar">
-        <item name="android:text">밥먹자</item>
+        <item name="android:text">LetsEatingTime</item>
         <item name="android:textSize">26sp</item>
         <item name="android:color">@color/black</item>
     </style>
@@ -26,7 +26,7 @@
         <item name="android:text">다음</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">22sp</item>
-        <item name="android:background">@drawable/btn_submit</item>
+        <item name="android:background">@drawable/btn_submit2</item>
         <item name="android:layout_width">370dp</item>
         <item name="android:layout_height">48dp</item>
     </style>

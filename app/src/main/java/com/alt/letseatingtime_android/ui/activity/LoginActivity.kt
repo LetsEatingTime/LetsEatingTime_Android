@@ -1,24 +1,52 @@
 package com.alt.letseatingtime_android.ui.activity
 
+import android.animation.ArgbEvaluator
+import android.animation.ValueAnimator
+import android.annotation.SuppressLint
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.graphics.Color
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.util.Log
+import android.view.animation.AnimationUtils
 import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.lifecycle.ViewModelProvider
+import androidx.core.graphics.toColor
+import com.alt.letseatingtime.R
+import com.alt.letseatingtime.databinding.ActivityLoginBinding
+import com.alt.letseatingtime_android.MyApplication.Companion.prefs
 import com.alt.letseatingtime_android.network.retrofit.RetrofitClient
 import com.alt.letseatingtime_android.network.retrofit.request.LoginRequest
 import com.alt.letseatingtime_android.network.retrofit.response.login.LoginResponse
-import com.alt.letseatingtime.databinding.ActivityLoginBinding
-import com.alt.letseatingtime_android.MyApplication.Companion.prefs
-import com.alt.letseatingtime_android.ui.viewmodel.UserActivityViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+
 class LoginActivity : AppCompatActivity() {
     private val binding: ActivityLoginBinding by lazy { ActivityLoginBinding.inflate(layoutInflater) }
+
+    /**
+     * 버튼 누를때 모션
+     *
+     * @param boolean up/down
+     */
+    private fun loginBtnAnim(boolean: Boolean) {
+        val startColor = resources.getColor( if(boolean) R.color.button else R.color.button_push )
+        val endColor = resources.getColor( if(! boolean) R.color.button else R.color.button_push )
+
+        // ValueAnimator 생성
+        val animator = ValueAnimator.ofObject(ArgbEvaluator(), startColor, endColor)
+        animator.duration = 100 // 애니메이션 지속 시간 (밀리초)
+
+        animator.addUpdateListener { valueAnimator ->
+            val animatedValue = animator.animatedValue as Int
+            binding.btnLoginSubmit.background.setTint(animatedValue)
+        }
+
+        animator.start()
+    }
 
     private val callback = object : OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
@@ -31,14 +59,20 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
         this.onBackPressedDispatcher.addCallback(this, callback)
         binding.btnLoginSubmit.setOnClickListener {
+
+            //val animation = AnimationUtils.loadAnimation(this, R.anim.btn_animation)
+            //binding.btnLoginSubmit.startAnimation(animation)
+
             val id = binding.etId.text.toString()
             val pw = binding.etPw.text.toString()
 
 //            val patternId = Pattern.compile(LoginPattern.id)
 //            val patternPw = Pattern.compile(LoginPattern.pw)
             if (id != "" && pw != "") {
+                loginBtnAnim(true)
                 binding.loginErrorMessage.text = ""
                 login(id = id, pw = pw)
                 Log.d("인터넷", "id: $id, pw: $pw")
@@ -76,11 +110,13 @@ class LoginActivity : AppCompatActivity() {
                     finish()
                 } else {
                     binding.loginErrorMessage.text = "비밀번호나 아이디가 틀렸습니다"
+                    loginBtnAnim(false)
                 }
             }
 
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                 Log.d("버그", t.message.toString())
+                loginBtnAnim(false)
             }
         })
     }

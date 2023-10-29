@@ -7,7 +7,7 @@ android {
     namespace 'com.alt.letseatingtime'
     compileSdkPreview 'UpsideDownCake'
 
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.alt.letseatingtime"

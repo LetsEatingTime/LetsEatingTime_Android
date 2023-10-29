@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
     <style name="tv_login_title">
         <item name="android:textSize">25sp</item>
         <item name="android:textColor">@color/black</item>
@@ -15,6 +15,7 @@
     </style>
     <style name="btn_login_submit">
         <item name="android:background">@drawable/btn_submit</item>
+        <item name="android:colorBackground">@color/button</item>
         <item name="android:layout_marginTop">13dp</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">17sp</item>
