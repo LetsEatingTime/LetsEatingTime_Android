@@ -163,11 +163,18 @@ class HomeActivity : AppCompatActivity() {
             ) {
                 if (response.code() == 200) {
                     val data = response.body()?.data
-                    val menu: String? = when (mealType) {
-                        "breakfast" -> data?.breakfast?.menu?.toString()
-                        "lunch" -> data?.lunch?.menu?.toString()
-                        else -> data?.dinner?.menu?.toString()
+
+                    binding.mealType.text = when (mealType) {
+                        "breakfast" -> "조식"
+                        "lunch" -> "중식"
+                        else -> "석식"
                     }
+
+                    val menu: String? = arrayToString(when (mealType) {
+                        "breakfast" -> data?.breakfast?.menu
+                        "lunch" -> data?.lunch?.menu
+                        else -> data?.dinner?.menu
+                    })
                     binding.mealMenu.text = menu ?: when (mealType) {
                         "breakfast" -> "아침이 없습니다."
                         "lunch" -> "점심이 없습니다."
@@ -184,6 +191,29 @@ class HomeActivity : AppCompatActivity() {
                     .show()
             }
         })
+    }
+
+    /**
+     * 문자열 배열을 줄내림 넣어 문자열로 반환
+     *
+     * @param List<String>?
+     * @retrun String?
+     */
+    val arrayToString: (List<String>?) -> String? = { aStr ->
+        var newStr = "";
+
+        if (aStr != null) {
+            for(i in aStr.indices) {
+                newStr += aStr[i]
+
+                if(i < aStr.size - 1) newStr += "\n"
+            }
+        } else {
+            Log.d("error", "배열에 값이 없음");
+        }
+        Log.d("mealTest", newStr)
+
+        newStr
     }
 
     private fun cheakMeal() {

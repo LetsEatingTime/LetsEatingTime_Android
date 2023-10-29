@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
 
         AlertDialog.Builder(this).run {
             setTitle("title")
-            setIcon(R.drawable.btn_submit)
+            setIcon(R.drawable.btn_submit2)
             setMessage("message")
             setPositiveButton("Yes") { dialog, which ->
 
