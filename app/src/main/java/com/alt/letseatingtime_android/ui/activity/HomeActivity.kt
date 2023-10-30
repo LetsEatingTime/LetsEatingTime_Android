@@ -75,13 +75,15 @@ class HomeActivity : AppCompatActivity() {
 
             builder.setTitle("경고")
                 .setMessage("정말로 탈퇴하시겠습니까?")
-                .setPositiveButton("예",
-                    { dialog, id ->
-                        withdrawal()
-                    })
-                .setNegativeButton("아니요",
-                    { dialog, id ->
-                    })
+                .setPositiveButton(
+                    "예"
+                ) { dialog, id ->
+                    withdrawal()
+                }
+                .setNegativeButton(
+                    "아니요"
+                ) { dialog, id ->
+                }
             builder.show()
         }
     }
@@ -103,15 +105,13 @@ class HomeActivity : AppCompatActivity() {
                         } else {
                             Log.e("ApiError", "Photo data is null.")
                         }
-                    } else if (response.code() == 500) {
-                        Log.d("애러", response.code().toString())
                     } else {
-                        Log.d("애러", response.code().toString())
+                        Toast.makeText(this@HomeActivity, "이미지 애러", Toast.LENGTH_SHORT).show()
                     }
                 }
 
                 override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                    Log.d("애러", t.message.toString())
+                    Toast.makeText(this@HomeActivity, "서버 애러", Toast.LENGTH_SHORT).show()
                 }
             })
     }
@@ -136,6 +136,10 @@ class HomeActivity : AppCompatActivity() {
                             trashId.text = "${user?.grade}학년 ${user?.className}반 ${user?.classNo}번"
                             today.text = strnow
                         }
+                        getImg(user?.image.toString())
+                    } else {
+                        viewModel.refreshToken()
+                        getProfile()
                     }
                 }
 
@@ -187,7 +191,7 @@ class HomeActivity : AppCompatActivity() {
                         else -> "저녁이 없습니다."
                     }
                 } else {
-                    Log.d("급식을 불러오는데 실패했습니다.", response.toString())
+                    Toast.makeText(this@HomeActivity, "급식 불러오는데 실패하였습니다", Toast.LENGTH_SHORT).show()
                 }
             }
 
@@ -214,10 +218,7 @@ class HomeActivity : AppCompatActivity() {
 
                 if (i < aStr.size - 1) newStr += "\n"
             }
-        } else {
-            Log.d("error", "배열에 값이 없음");
         }
-        Log.d("mealTest", newStr)
 
         newStr
     }

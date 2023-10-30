@@ -2,7 +2,6 @@ package com.alt.letseatingtime_android.ui.fragment
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -91,7 +90,7 @@ class SignupFragment4 : Fragment() {
             }
 
             override fun onFailure(call: Call<SignupResponse>, t: Throwable) {
-                Log.d("상태", t.message.toString())
+                Toast.makeText(context, "서버 애러", Toast.LENGTH_SHORT).show()
             }
 
         })

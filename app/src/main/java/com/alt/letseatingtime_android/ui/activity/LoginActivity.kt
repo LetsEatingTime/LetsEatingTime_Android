@@ -2,18 +2,12 @@ package com.alt.letseatingtime_android.ui.activity
 
 import android.animation.ArgbEvaluator
 import android.animation.ValueAnimator
-import android.annotation.SuppressLint
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
-import android.util.Log
-import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.core.graphics.toColor
 import com.alt.letseatingtime.R
 import com.alt.letseatingtime.databinding.ActivityLoginBinding
 import com.alt.letseatingtime_android.MyApplication.Companion.prefs
@@ -35,8 +29,8 @@ class LoginActivity : AppCompatActivity() {
      * @param boolean up/down
      */
     private fun loginBtnAnim(boolean: Boolean) {
-        val startColor = resources.getColor( if(boolean) R.color.button else R.color.button_push )
-        val endColor = resources.getColor( if(! boolean) R.color.button else R.color.button_push )
+        val startColor = resources.getColor(if (boolean) R.color.button else R.color.button_push)
+        val endColor = resources.getColor(if (!boolean) R.color.button else R.color.button_push)
 
         // ValueAnimator 생성
         val animator = ValueAnimator.ofObject(ArgbEvaluator(), startColor, endColor)
@@ -54,7 +48,6 @@ class LoginActivity : AppCompatActivity() {
         override fun handleOnBackPressed() {
             // 뒤로 버튼 이벤트 처리
             exit()
-            Log.e("뒤로가기", "뒤로가기 클릭")
         }
     }
 
@@ -64,22 +57,16 @@ class LoginActivity : AppCompatActivity() {
 
         this.onBackPressedDispatcher.addCallback(this, callback)
         binding.btnLoginSubmit.setOnClickListener {
-            if (! isLoggingIn) {
+            if (!isLoggingIn) {
                 isLoggingIn = true
-                //val animation = AnimationUtils.loadAnimation(this, R.anim.btn_animation)
-                //binding.btnLoginSubmit.startAnimation(animation)
 
                 val id = binding.etId.text.toString()
                 val pw = binding.etPw.text.toString()
 
-//            val patternId = Pattern.compile(LoginPattern.id)
-//            val patternPw = Pattern.compile(LoginPattern.pw)
                 if (id != "" && pw != "") {
                     loginBtnAnim(true)
                     binding.loginErrorMessage.text = ""
                     login(id = id, pw = pw)
-
-                    Log.d("인터넷", "id: $id, pw: $pw")
                 } else {
                     binding.loginErrorMessage.text = "비밀번호와 아이디를 입력해주세요"
                 }
