@@ -21,6 +21,8 @@
         android:fontFamily="@font/pretendardmedium"
         android:layout_width="match_parent"
         android:layout_height="49dp"
+        android:maxLines="1"
+        android:maxLength="30"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_pw"
         android:hint="비밀번호를 입력해주세요"
