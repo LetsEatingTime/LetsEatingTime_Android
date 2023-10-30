@@ -34,6 +34,7 @@ class UserActivityViewModel: ViewModel() {
                 }
                 else {
                     refreshToken()
+                    getProfile()
                 }
             }
 
@@ -41,12 +42,11 @@ class UserActivityViewModel: ViewModel() {
                 _toastMessage.value = "인터넷에 연결 되어있는지 확인 해주세요"
                 _logout.value = true
             }
-
         })
 
     }
 
-    private fun refreshToken(){
+    fun refreshToken(){
         RetrofitClient.api.refresh("Bearer " + MyApplication.prefs.refreshToken).enqueue(object :
             Callback<LoginResponse> {
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {

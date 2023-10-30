@@ -87,39 +87,39 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun login(id: String, pw: String) {
-        RetrofitClient.api.login(LoginRequest(id = id, password = pw)).enqueue(object : Callback<LoginResponse> {
-            override fun onResponse(
-                call: Call<LoginResponse>,
-                response: Response<LoginResponse>
-            ) {
-                val result = response.body()
-                if (response.isSuccessful) {
-                    val intent = Intent(this@LoginActivity, HomeActivity::class.java)
-                    if (binding.cbLogin.isChecked) {
-                        prefs.autoLogin = true
-                        prefs.refreshToken = result?.data?.refreshToken.toString()
-                        prefs.accessToken = result?.data?.accessToken.toString()
+        RetrofitClient.api.login(LoginRequest(id = id, password = pw))
+            .enqueue(object : Callback<LoginResponse> {
+                override fun onResponse(
+                    call: Call<LoginResponse>,
+                    response: Response<LoginResponse>
+                ) {
+                    val result = response.body()
+                    if (response.isSuccessful) {
+                        val intent = Intent(this@LoginActivity, HomeActivity::class.java)
+                        if (binding.cbLogin.isChecked) {
+                            prefs.autoLogin = true
+                            prefs.refreshToken = result?.data?.refreshToken.toString()
+                            prefs.accessToken = result?.data?.accessToken.toString()
+                        } else {
+                            prefs.autoLogin = false
+                            prefs.accessToken = result?.data?.accessToken.toString()
+                        }
+                        startActivity(intent)
+                        finish()
                     } else {
-                        prefs.autoLogin = false
-                        prefs.accessToken = result?.data?.accessToken.toString()
+                        binding.loginErrorMessage.text = "비밀번호나 아이디가 틀렸습니다"
+                        loginBtnAnim(false)
                     }
-                    Log.d("인터넷", response.body().toString())
-                    startActivity(intent)
-                    finish()
-                } else {
-                    binding.loginErrorMessage.text = "비밀번호나 아이디가 틀렸습니다"
-                    loginBtnAnim(false)
+                    isLoggingIn = false
                 }
-                isLoggingIn = false
-            }
 
-            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                Log.d("버그", t.message.toString())
-                loginBtnAnim(false)
+                override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                    Toast.makeText(this@LoginActivity, "서버 애러",Toast.LENGTH_SHORT).show()
+                    loginBtnAnim(false)
 
-                isLoggingIn = false
-            }
-        })
+                    isLoggingIn = false
+                }
+            })
     }
 
     fun exit() {

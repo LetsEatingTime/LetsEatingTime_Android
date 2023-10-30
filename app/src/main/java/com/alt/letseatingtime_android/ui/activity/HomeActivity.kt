@@ -50,10 +50,6 @@ class HomeActivity : AppCompatActivity() {
         getMeal()
         cheakMeal()
 
-        viewModel.userData.observe(this){
-            getImg(it.data.user.image.toString())
-        }
-
         binding.logout.setOnClickListener {
             prefs.remove()
             Toast.makeText(this, "로그아웃", Toast.LENGTH_SHORT).show()
@@ -210,7 +206,7 @@ class HomeActivity : AppCompatActivity() {
      * @retrun String?
      */
     val arrayToString: (List<String>?) -> String? = { aStr ->
-        var newStr = "";
+        var newStr = ""
 
         if (aStr != null) {
             for (i in aStr.indices) {
