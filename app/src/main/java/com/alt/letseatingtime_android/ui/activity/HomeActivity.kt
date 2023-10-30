@@ -12,12 +12,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.alt.letseatingtime.databinding.ActivityHomeBinding
 import com.alt.letseatingtime_android.MyApplication.Companion.prefs
-import com.alt.letseatingtime_android.network.retrofit.RetrofitClient
 import com.alt.letseatingtime_android.network.retrofit.response.WithdrawResponse
 import com.alt.letseatingtime_android.network.retrofit.response.meal.MealResponse
 import com.alt.letseatingtime_android.network.retrofit.response.profile.ProfileResponse
 import com.bumptech.glide.Glide
 import com.alt.letseatingtime.R
+import com.alt.letseatingtime_android.network.retrofit.RetrofitClient.api
 import com.alt.letseatingtime_android.ui.viewmodel.UserActivityViewModel
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -49,6 +49,10 @@ class HomeActivity : AppCompatActivity() {
         getProfile()
         getMeal()
         cheakMeal()
+
+        viewModel.userData.observe(this){
+            getImg(it.data.user.image.toString())
+        }
 
         binding.logout.setOnClickListener {
             prefs.remove()
@@ -83,13 +87,13 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun getImg(id: String) {
-        RetrofitClient.api.image(prefs.accessToken, id)
+        api.image(prefs.accessToken, id)
             .enqueue(object : Callback<ResponseBody> {
                 override fun onResponse(
                     call: Call<ResponseBody>,
                     response: Response<ResponseBody>
                 ) {
-                    if (response.code() == 200) {
+                    if (response.isSuccessful) {
                         val photoBytes = response.body()?.bytes()
                         if (photoBytes != null) {
                             val image = getBitmapFromBytes(photoBytes)
@@ -118,7 +122,7 @@ class HomeActivity : AppCompatActivity() {
 
 
     private fun getProfile() {
-        RetrofitClient.api.profile("Bearer ${prefs.accessToken}")
+        api.profile("Bearer ${prefs.accessToken}")
             .enqueue(object : Callback<ProfileResponse> {
                 override fun onResponse(
                     call: Call<ProfileResponse>, response: Response<ProfileResponse>
@@ -157,7 +161,7 @@ class HomeActivity : AppCompatActivity() {
         }
 
 
-        RetrofitClient.api.meal(currentTime).enqueue(object : Callback<MealResponse> {
+        api.meal(currentTime).enqueue(object : Callback<MealResponse> {
             override fun onResponse(
                 call: Call<MealResponse>, response: Response<MealResponse>
             ) {
@@ -170,11 +174,13 @@ class HomeActivity : AppCompatActivity() {
                         else -> "석식"
                     }
 
-                    val menu: String? = arrayToString(when (mealType) {
-                        "breakfast" -> data?.breakfast?.menu
-                        "lunch" -> data?.lunch?.menu
-                        else -> data?.dinner?.menu
-                    })
+                    val menu: String? = arrayToString(
+                        when (mealType) {
+                            "breakfast" -> data?.breakfast?.menu
+                            "lunch" -> data?.lunch?.menu
+                            else -> data?.dinner?.menu
+                        }
+                    )
                     binding.mealMenu.text = menu ?: when (mealType) {
                         "breakfast" -> "아침이 없습니다."
                         "lunch" -> "점심이 없습니다."
@@ -203,10 +209,10 @@ class HomeActivity : AppCompatActivity() {
         var newStr = "";
 
         if (aStr != null) {
-            for(i in aStr.indices) {
+            for (i in aStr.indices) {
                 newStr += aStr[i]
 
-                if(i < aStr.size - 1) newStr += "\n"
+                if (i < aStr.size - 1) newStr += "\n"
             }
         } else {
             Log.d("error", "배열에 값이 없음");
@@ -217,7 +223,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun cheakMeal() {
-        RetrofitClient.api.profile("Bearer ${prefs.accessToken}")
+        api.profile("Bearer ${prefs.accessToken}")
             .enqueue(object : Callback<ProfileResponse> {
                 override fun onResponse(
                     call: Call<ProfileResponse>,
@@ -230,15 +236,22 @@ class HomeActivity : AppCompatActivity() {
                             lunch(mealData)
                             dinner(mealData)
                         } else {
-                            binding.breakfastCheak.setBackgroundColor(Color.parseColor("#D9D9D9"))
-                            binding.lunchCheak.setBackgroundColor(Color.parseColor("#D9D9D9"))
-                            binding.dinnerCheak.setBackgroundColor(Color.parseColor("#D9D9D9"))
-                            binding.breakfastCheak.setBackgroundResource(R.drawable.cardview)
-                            binding.lunchCheak.setBackgroundResource(R.drawable.cardview)
-                            binding.dinnerCheak.setBackgroundResource(R.drawable.cardview)
+                            with(binding) {
+                                breakfastCheak.setBackgroundColor(Color.parseColor("#D9D9D9"))
+                                lunchCheak.setBackgroundColor(Color.parseColor("#D9D9D9"))
+                                dinnerCheak.setBackgroundColor(Color.parseColor("#D9D9D9"))
+
+                                breakfastCheak.setBackgroundResource(R.drawable.cardview)
+                                lunchCheak.setBackgroundResource(R.drawable.cardview)
+                                dinnerCheak.setBackgroundResource(R.drawable.cardview)
+                            }
                         }
                     } else {
-                        Toast.makeText(this@HomeActivity, "애러: ${response.code()}", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            this@HomeActivity,
+                            "애러: ${response.code()}",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
 
@@ -252,7 +265,7 @@ class HomeActivity : AppCompatActivity() {
 
 
     private fun withdrawal() {
-        RetrofitClient.api.withdraw("Bearer ${prefs.accessToken}")
+        api.withdraw("Bearer ${prefs.accessToken}")
             .enqueue(object : Callback<WithdrawResponse> {
                 override fun onResponse(
                     call: Call<WithdrawResponse>,
@@ -271,8 +284,8 @@ class HomeActivity : AppCompatActivity() {
             })
     }
 
-
     fun logout() {
+        prefs.remove()
         Intent(this, LoginActivity::class.java).also {
             it.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
             startActivity(it)
