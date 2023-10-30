@@ -110,15 +110,13 @@
 
                 <TextView
                     android:id="@+id/name_id"
-                    android:fontFamily="@font/pretendardmedium"
-                    android:text="이름"
-                    android:layout_width="90dp"
+                    android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:layout_alignParentLeft="true"
                     android:layout_alignParentTop="true"
-                    android:layout_marginLeft="114dp"
-                    android:layout_marginTop="289dp"
-                    android:gravity="center_horizontal"
+                    android:layout_marginTop="293dp"
+                    android:fontFamily="@font/pretendardmedium"
+                    android:gravity="center"
+                    android:text="이름"
                     android:textAppearance="@style/some_id" />
 
                 <TextView
