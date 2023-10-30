@@ -9,6 +9,7 @@ import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.animation.AnimationUtils
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -26,6 +27,7 @@ import retrofit2.Response
 
 class LoginActivity : AppCompatActivity() {
     private val binding: ActivityLoginBinding by lazy { ActivityLoginBinding.inflate(layoutInflater) }
+    private var isLoggingIn = false
 
     /**
      * 버튼 누를때 모션
@@ -62,22 +64,25 @@ class LoginActivity : AppCompatActivity() {
 
         this.onBackPressedDispatcher.addCallback(this, callback)
         binding.btnLoginSubmit.setOnClickListener {
+            if (! isLoggingIn) {
+                isLoggingIn = true
+                //val animation = AnimationUtils.loadAnimation(this, R.anim.btn_animation)
+                //binding.btnLoginSubmit.startAnimation(animation)
 
-            //val animation = AnimationUtils.loadAnimation(this, R.anim.btn_animation)
-            //binding.btnLoginSubmit.startAnimation(animation)
-
-            val id = binding.etId.text.toString()
-            val pw = binding.etPw.text.toString()
+                val id = binding.etId.text.toString()
+                val pw = binding.etPw.text.toString()
 
 //            val patternId = Pattern.compile(LoginPattern.id)
 //            val patternPw = Pattern.compile(LoginPattern.pw)
-            if (id != "" && pw != "") {
-                loginBtnAnim(true)
-                binding.loginErrorMessage.text = ""
-                login(id = id, pw = pw)
-                Log.d("인터넷", "id: $id, pw: $pw")
-            } else {
-                binding.loginErrorMessage.text = "비밀번호와 아이디를 입력해주세요"
+                if (id != "" && pw != "") {
+                    loginBtnAnim(true)
+                    binding.loginErrorMessage.text = ""
+                    login(id = id, pw = pw)
+
+                    Log.d("인터넷", "id: $id, pw: $pw")
+                } else {
+                    binding.loginErrorMessage.text = "비밀번호와 아이디를 입력해주세요"
+                }
             }
         }
 
@@ -85,6 +90,12 @@ class LoginActivity : AppCompatActivity() {
             Intent(this, SignupActivity::class.java).also {
                 startActivity(it)
             }
+        }
+        binding.tvFindId.setOnClickListener() {
+            Toast.makeText(this, "아직 개발중인 기능입니다.", Toast.LENGTH_SHORT).show()
+        }
+        binding.tvFindPw.setOnClickListener() {
+            Toast.makeText(this, "아직 개발중인 기능입니다.", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -112,11 +123,14 @@ class LoginActivity : AppCompatActivity() {
                     binding.loginErrorMessage.text = "비밀번호나 아이디가 틀렸습니다"
                     loginBtnAnim(false)
                 }
+                isLoggingIn = false
             }
 
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                 Log.d("버그", t.message.toString())
                 loginBtnAnim(false)
+
+                isLoggingIn = false
             }
         })
     }
