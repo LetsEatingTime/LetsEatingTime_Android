@@ -1,73 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/signup_fragment_1"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/signup_fragment_1" >
+    android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/tv_id"
+        style="@style/tv_signup_text"
         android:layout_width="80dp"
         android:layout_height="33dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         android:layout_marginLeft="10dp"
-        android:text="아이디"
         android:fontFamily="@font/pretendardmedium"
-        style="@style/tv_signup_text"
-        />
+        android:text="아이디"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <EditText
         android:id="@+id/et_id"
+        style="@style/tv_signup_inp"
         android:layout_width="match_parent"
         android:layout_height="49dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_id"
-        android:hint="아이디를 입력해주세요"
+        android:maxLines="1"
+        android:maxLength="15"
         android:fontFamily="@font/pretendardmedium"
+        android:hint="아이디를 입력해주세요"
         android:inputType="text"
-        style="@style/tv_signup_inp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_id" />
 
     <ImageView
         android:id="@+id/iv_eating_food"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="35dp"
         android:paddingTop="30dp"
         android:src="@drawable/img_eating_food"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/btn_submit"
-        android:layout_marginBottom="35dp"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <TextView
+        style="@style/tv_signup_pb_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/pb_signup"
-        android:text="1/4"
         android:fontFamily="@font/pretendardmedium"
-        style="@style/tv_signup_pb_text"/>
+        android:text="1/4"
+        app:layout_constraintBottom_toTopOf="@id/pb_signup"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <ProgressBar
         android:id="@+id/pb_signup"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_width="370dp"
         android:layout_height="10.4dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/pb_signup_background"
+        android:max="100"
         android:paddingHorizontal="4.6dp"
         android:paddingVertical="3.4dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/btn_submit"
-        android:layout_marginBottom="10dp"
         android:progress="25"
-        android:max="100"
         android:progressDrawable="@drawable/pb_signup_progress_bar"
-        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-        android:background="@drawable/pb_signup_background"/>
+        app:layout_constraintBottom_toTopOf="@id/btn_submit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_submit"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="48dp"
         style="@style/btn_signup_submit"
+        android:layout_marginBottom="48dp"
         android:fontFamily="@font/pretendardmedium"
-        />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

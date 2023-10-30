@@ -8,6 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.FragmentManager
+import com.alt.letseatingtime.R
 import com.alt.letseatingtime_android.network.retrofit.RetrofitClient
 import com.alt.letseatingtime_android.network.retrofit.request.SignupRequest
 import com.alt.letseatingtime_android.network.retrofit.response.SignupResponse
@@ -33,31 +35,32 @@ class SignupFragment4 : Fragment() {
         val id = arguments?.getString("id").toString()
         val pw = arguments?.getString("pw").toString()
         val name = arguments?.getString("name").toString()
-        binding.btnSubmit.setOnClickListener {
-            val grade = binding.etGrade.text.toString()
-            val classname = binding.etClass.text.toString()
-            val classNo = binding.etNumber.text.toString()
-            if (pattern.matcher(grade).find()) {
-                if (grade != "" && classname != "" && classNo != "") {
-                    signup(
-                        SignupRequest(
-                            id = id,
-                            name = name,
-                            password = pw,
-                            grade = grade,
-                            className = classname,
-                            classNo = classNo,
-                            userType = 'S'
+        with(binding){
+            btnSubmit.setOnClickListener {
+                val grade = etGrade.text.toString()
+                val classname = etClass.text.toString()
+                val classNo = etNumber.text.toString()
+                if (pattern.matcher(grade).find()) {
+                    if (grade != "" && classname != "" && classNo != "") {
+                        signup(
+                            SignupRequest(
+                                id = id,
+                                name = name,
+                                password = pw,
+                                grade = grade,
+                                className = classname,
+                                classNo = classNo,
+                                userType = 'S'
+                            )
                         )
-                    )
+                    } else {
+                        Toast.makeText(activity, "모두 입력해주세요", Toast.LENGTH_SHORT).show()
+                    }
                 } else {
-                    Toast.makeText(activity, "모두 입력해주세요", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(activity, "숫자로 입력해주세요", Toast.LENGTH_SHORT).show()
                 }
-            } else {
-                Toast.makeText(activity, "숫자로 입력해주세요 ex)2", Toast.LENGTH_SHORT).show()
             }
         }
-
         return binding.root
     }
 
@@ -72,11 +75,18 @@ class SignupFragment4 : Fragment() {
             ) {
                 if (response.isSuccessful) {
                     requireActivity().let {
-                        Intent(context, LoginActivity::class.java).also {
-                            startActivity(it)
+                        Intent(context, LoginActivity::class.java).also { intent ->
+                            startActivity(intent)
                         }
                         it.finish()
                     }
+                    Toast.makeText(context, "회원가입 성공", Toast.LENGTH_SHORT).show()
+                } else {
+                    val fragment1 = SignupFragment1()
+                    Toast.makeText(context, "회원가입 실패", Toast.LENGTH_SHORT).show()
+                    clearBackStack()
+                    val bundle = Bundle()
+                    replaceFragment(fragment1, bundle)
                 }
             }
 
@@ -85,5 +95,21 @@ class SignupFragment4 : Fragment() {
             }
 
         })
+    }
+
+    private fun clearBackStack(){
+        val fragmentManager: FragmentManager = requireActivity().supportFragmentManager
+        fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+    }
+
+
+    private fun replaceFragment(fragment: Fragment, bundle: Bundle) {
+        fragment.arguments = bundle
+        // 현 Activity 에 연결된 Fragment 관리하는 supportFragmentManager 통해 Fragment 전환
+        requireActivity().supportFragmentManager.beginTransaction().apply {
+            replace(R.id.fragmentContainer, fragment)
+            addToBackStack(null)
+            commit()
+        }
     }
 }

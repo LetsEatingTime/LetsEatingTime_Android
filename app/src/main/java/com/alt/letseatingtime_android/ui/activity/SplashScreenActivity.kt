@@ -15,7 +15,7 @@ class SplashScreenActivity : AppCompatActivity() {
     private val binding: ActivitySplashScreenBinding by lazy {
         ActivitySplashScreenBinding.inflate(layoutInflater)
     }
-    private val splashTimeOut: Long = 1000
+    private val splashTimeOut: Long = 1500
 
     private val viewModel by lazy {
         ViewModelProvider(this)[UserActivityViewModel::class.java]
@@ -31,20 +31,19 @@ class SplashScreenActivity : AppCompatActivity() {
                 viewModel.getProfile()
             } else{
                 logout()
-                Toast.makeText(this, "로그아웃됨", Toast.LENGTH_SHORT).show()
+            }
+
+            viewModel.userData.observe(this){
+                login()
+            }
+
+            viewModel.toastMessage.observe(this){
+                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+            }
+            viewModel.logout.observe(this){
+                logout()
             }
         }, splashTimeOut)
-
-        viewModel.userData.observe(this){
-            login()
-        }
-
-        viewModel.toastMessage.observe(this){
-            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
-        }
-        viewModel.logout.observe(this){
-            logout()
-        }
     }
 
     private fun login(){
