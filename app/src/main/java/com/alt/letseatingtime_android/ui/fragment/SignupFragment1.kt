@@ -9,6 +9,7 @@ import android.widget.Toast
 import com.alt.letseatingtime_android.util.LoginPattern
 import com.alt.letseatingtime.R
 import com.alt.letseatingtime.databinding.Signup1Binding
+import com.alt.letseatingtime_android.util.OnSingleClickListener
 import java.util.regex.Pattern
 
 class SignupFragment1 : Fragment() {
@@ -27,7 +28,7 @@ class SignupFragment1 : Fragment() {
         val signupFragment2 = SignupFragment2()
         val pattern = Pattern.compile(LoginPattern.id)
 
-        binding.btnSubmit.setOnClickListener{
+        binding.btnSubmit.setOnClickListener(OnSingleClickListener{
             val id = binding.etId.text.toString()
             if (pattern.matcher(id).find()) {
                 if (id != "") {
@@ -38,9 +39,9 @@ class SignupFragment1 : Fragment() {
                     Toast.makeText(activity, "아이디를 입력해주세요", Toast.LENGTH_SHORT).show()
                 }
             } else {
-                Toast.makeText(activity, "영문으로 입력해주세요", Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, "아이디에는 영어와 숫자만 들어갈수 있습니다", Toast.LENGTH_SHORT).show()
             }
-        }
+        })
         return binding.root
     }
 

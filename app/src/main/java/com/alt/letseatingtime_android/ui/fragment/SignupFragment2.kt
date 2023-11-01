@@ -8,6 +8,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.alt.letseatingtime.R
 import com.alt.letseatingtime.databinding.Signup2Binding
+import com.alt.letseatingtime_android.util.LoginPattern
+import com.alt.letseatingtime_android.util.OnSingleClickListener
+import java.util.regex.Pattern
 
 class SignupFragment2 : Fragment() {
     private lateinit var binding: Signup2Binding
@@ -21,18 +24,22 @@ class SignupFragment2 : Fragment() {
     ): View {
         binding = Signup2Binding.inflate(inflater, container, false)
         val id = arguments?.getString("id").toString()
-//        val pattern = Pattern.compile(LoginPattern.pw)
-        binding.btnSubmit.setOnClickListener {
+        val pattern = Pattern.compile(LoginPattern.pw)
+        binding.btnSubmit.setOnClickListener(OnSingleClickListener {
             val pw = binding.etPw.text.toString()
-            if (pw != "") {
-                val bundle = Bundle()
-                bundle.putString("id", id)
-                bundle.putString("password", pw)
-                replaceFragment(signupFragment3, bundle)
+            if(pattern.matcher(pw).find()){
+                if (pw != "") {
+                    val bundle = Bundle()
+                    bundle.putString("id", id)
+                    bundle.putString("password", pw)
+                    replaceFragment(signupFragment3, bundle)
+                } else {
+                    Toast.makeText(activity, "비밀번호를 입력해주세요", Toast.LENGTH_SHORT).show()
+                }
             } else {
-                Toast.makeText(activity, "비밀번호를 입력해주세요", Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, "대소문자, 특수문자, 숫자만 들어갈수 있습니다", Toast.LENGTH_SHORT).show()
             }
-        }
+        })
 
         return binding.root
     }

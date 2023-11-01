@@ -9,6 +9,7 @@ import android.widget.Toast
 import com.alt.letseatingtime_android.util.LoginPattern
 import com.alt.letseatingtime.R
 import com.alt.letseatingtime.databinding.Signup3Binding
+import com.alt.letseatingtime_android.util.OnSingleClickListener
 import java.util.regex.Pattern
 
 class SignupFragment3 : Fragment() {
@@ -24,7 +25,7 @@ class SignupFragment3 : Fragment() {
         val pattern = Pattern.compile(LoginPattern.name)
         val id = arguments?.getString("id").toString()
         val pw = arguments?.getString("pw").toString()
-        binding.btnSubmit.setOnClickListener {
+        binding.btnSubmit.setOnClickListener( OnSingleClickListener{
             val name = binding.etName.text.toString()
             if (pattern.matcher(name).find()) {
                 if (name != "") {
@@ -39,18 +40,13 @@ class SignupFragment3 : Fragment() {
             } else {
                 Toast.makeText(activity, "한글로 입력해주세요", Toast.LENGTH_SHORT).show()
             }
-//            activity?.let{
-//                val home = Intent(context, HomeActivity::class.java)
-//                startActivity(home)
-//            }
-        }
+        })
 
         return binding.root
     }
 
     private fun replaceFragment(fragment: Fragment, bundle: Bundle) {
         fragment.arguments = bundle
-        // 현 Activity 에 연결된 Fragment 관리하는 supportFragmentManager 를 통해 Fragment 전환
         requireActivity().supportFragmentManager.beginTransaction().apply {
             replace(R.id.fragmentContainer, fragment)
             addToBackStack(null)
