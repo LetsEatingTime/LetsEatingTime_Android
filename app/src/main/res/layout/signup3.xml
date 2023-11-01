@@ -23,6 +23,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_name"
         android:hint="이름을 입력해주세요"
+        android:inputType="textPersonName"
         android:maxLines="1"
         android:maxLength="4"
         android:fontFamily="@font/pretendardmedium"

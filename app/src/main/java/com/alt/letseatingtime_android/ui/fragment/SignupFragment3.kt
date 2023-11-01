@@ -31,7 +31,7 @@ class SignupFragment3 : Fragment() {
                 if (name != "") {
                     val bundle = Bundle()
                     bundle.putString("id", id)
-                    bundle.putString("pw",pw)
+                    bundle.putString("pw", pw)
                     bundle.putString("name",name)
                     replaceFragment(signupFragment4, bundle)
                 } else {

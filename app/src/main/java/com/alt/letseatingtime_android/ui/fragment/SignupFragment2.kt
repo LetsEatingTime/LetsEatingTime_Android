@@ -31,7 +31,7 @@ class SignupFragment2 : Fragment() {
                 if (pw != "") {
                     val bundle = Bundle()
                     bundle.putString("id", id)
-                    bundle.putString("password", pw)
+                    bundle.putString("pw", pw)
                     replaceFragment(signupFragment3, bundle)
                 } else {
                     Toast.makeText(activity, "비밀번호를 입력해주세요", Toast.LENGTH_SHORT).show()
