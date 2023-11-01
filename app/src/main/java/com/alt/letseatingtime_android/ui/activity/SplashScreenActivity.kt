@@ -15,7 +15,7 @@ class SplashScreenActivity : AppCompatActivity() {
     private val binding: ActivitySplashScreenBinding by lazy {
         ActivitySplashScreenBinding.inflate(layoutInflater)
     }
-    private val splashTimeOut: Long = 1500
+    private val splashTimeOut: Long = 500
 
     private val viewModel by lazy {
         ViewModelProvider(this)[UserActivityViewModel::class.java]

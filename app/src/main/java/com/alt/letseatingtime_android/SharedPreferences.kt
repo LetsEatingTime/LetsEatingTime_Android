@@ -17,7 +17,7 @@ class SharedPreferences(context: Context) {
         context.getSharedPreferences(PREFS_FILENAME, 0)
 
     fun remove(){
-        prefs.edit().remove(PREF_KEY_AUTOLOGIN).apply()
+        autoLogin = false
         prefs.edit().remove(PREF_KEY_USER_ACCESSTOKEN).apply()
         prefs.edit().remove(PREF_KEY_USER_REFRESHTOKEN).apply()
     }
