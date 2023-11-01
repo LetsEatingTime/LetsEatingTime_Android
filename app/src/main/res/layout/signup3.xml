@@ -15,6 +15,7 @@
         android:fontFamily="@font/pretendardmedium"
         style="@style/tv_signup_text"
         />
+
     <EditText
         android:id="@+id/et_name"
         android:layout_width="match_parent"
@@ -26,6 +27,7 @@
         android:maxLength="4"
         android:fontFamily="@font/pretendardmedium"
         style="@style/tv_signup_inp"/>
+
     <ImageView
         android:id="@+id/iv_eating_food"
         android:layout_width="match_parent"
@@ -46,10 +48,12 @@
         style="@style/tv_signup_pb_text"/>
     <ProgressBar
         android:id="@+id/pb_signup"
-        android:layout_width="370dp"
+        android:layout_width="match_parent"
         android:layout_height="10.4dp"
         android:paddingHorizontal="4.6dp"
         android:paddingVertical="3.4dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/btn_submit"

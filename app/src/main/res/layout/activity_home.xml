@@ -12,6 +12,8 @@
         android:layout_height="wrap_content"
         android:background="#eeeeee"
         android:overScrollMode="never"
+        android:paddingStart="30dp"
+        android:paddingEnd="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,12 +28,13 @@
 
             <RelativeLayout
                 android:id="@+id/studentcard"
-                android:layout_width="330dp"
+                android:layout_width="match_parent"
                 android:layout_height="490dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="60dp"
                 android:background="@drawable/cardview"
-                android:elevation="2dp">
+                android:elevation="2dp"
+                android:gravity="center">
 
                 <!-- 학 생 증 -->
 
@@ -67,31 +70,23 @@
 
                 <TextView
                     android:id="@+id/stutent"
-                    android:layout_width="125dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
                     android:layout_alignParentTop="true"
-                    android:layout_marginLeft="102dp"
                     android:layout_marginTop="10dp"
+                    android:fontFamily="@font/pretendardbold"
                     android:gravity="center_horizontal"
                     android:text="학생증"
-                    android:fontFamily="@font/pretendardbold"
                     android:textAlignment="center"
                     android:textAppearance="@style/some_id2" />
-                <!--
-                Font family: Basic
-                Line height: 45sp
-                -->
 
                 <TextView
                     android:id="@+id/student2"
-                    android:fontFamily="@font/pretendardlight"
-                    android:layout_width="125dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginLeft="102dp"
-                    android:layout_marginTop="55dp"
+                    android:layout_below="@+id/stutent"
+                    android:layout_marginTop="-6dp"
+                    android:fontFamily="@font/pretendardlight"
                     android:gravity="center"
                     android:text="student id card"
                     android:textAlignment="center"
@@ -99,21 +94,19 @@
 
                 <ImageView
                     android:id="@+id/student_image"
-                    android:layout_width="150dp"
-                    android:layout_height="200dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginLeft="89dp"
-                    android:layout_marginTop="76dp"
-                    android:background="@drawable/profile_image_background" />
+                    android:layout_width="170dp"
+                    android:layout_height="240dp"
+                    android:layout_below="@+id/student2"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="4dp" />
 
 
                 <TextView
                     android:id="@+id/name_id"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginTop="293dp"
+                    android:layout_below="@+id/student_image"
+                    android:layout_marginTop="18dp"
                     android:fontFamily="@font/pretendardmedium"
                     android:gravity="center"
                     android:text="이름"
@@ -121,26 +114,24 @@
 
                 <TextView
                     android:id="@+id/trash_id"
-                    android:fontFamily="@font/pretendardmedium"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginTop="330dp"
+                    android:layout_below="@+id/student_image"
+                    android:layout_marginTop="55dp"
+                    android:fontFamily="@font/pretendardmedium"
                     android:gravity="center_horizontal"
-                    android:text="학년 반 번호"
+                    android:text="0학년 0반 0번"
                     android:textAppearance="@style/trash_id" />
 
 
                 <!-- 위 학생을 본교 학생으로 인정합니다 -->
                 <TextView
                     android:id="@+id/trash_id2"
-                    android:fontFamily="@font/pretendardlight"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_below="@+id/trash_id"
                     android:layout_alignParentLeft="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginTop="370dp"
+                    android:fontFamily="@font/pretendardlight"
                     android:gravity="center_horizontal"
                     android:text="위 학생을 본교 학생으로 인정합니다"
                     android:textAppearance="@style/trash_id2" />
@@ -159,13 +150,13 @@
                 <!-- 대구소프트웨어고등학교 -->
                 <TextView
                     android:id="@+id/trash_id3"
-                    android:fontFamily="@font/pretendardlight"
-                    android:layout_width="130dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentTop="true"
                     android:layout_marginLeft="170dp"
                     android:layout_marginTop="453dp"
+                    android:fontFamily="@font/pretendardbold"
                     android:gravity="top"
                     android:text="대구소프트웨어고등학교"
                     android:textAppearance="@style/trash_id3" />
@@ -175,10 +166,11 @@
             <!-- Rectangle 22 -->
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="330dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
+                android:paddingBottom="10dp"
                 android:background="@drawable/cardview"
                 android:elevation="2dp">
 
@@ -186,51 +178,49 @@
                     android:id="@+id/meal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="132dp"
                     android:layout_marginTop="10dp"
                     android:fontFamily="@font/pretendardbold"
                     android:text="급식 메뉴"
                     android:textAppearance="@style/meal_type"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.0" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/meal_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:fontFamily="@font/pretendardbold"
                     android:text="조식"
                     android:textAppearance="@style/meal_type"
-                    android:layout_marginRight="75dp"
-                    android:layout_marginTop="7dp"
-                    android:layout_marginBottom="7dp"
-                    android:layout_width="230dp"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/meal" />
+                    app:layout_constraintBottom_toBottomOf="@+id/meal_menu"
+                    app:layout_constraintEnd_toStartOf="@+id/meal_menu"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/meal_menu" />
+
                 <TextView
                     android:id="@+id/meal_menu"
-                    android:fontFamily="@font/pretendardmedium"
-                    android:text="급식\n급식\n급식\n급식\n급식"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginTop="7dp"
-                    android:layout_marginBottom="7dp"
                     android:layout_width="230dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="7dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="7dp"
+                    android:fontFamily="@font/pretendardmedium"
+                    android:text="급식\n급식\n급식\n급식\n급식"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/meal" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="330dp"
-                android:layout_height="200dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/cardview"
                 android:elevation="1dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:paddingBottom="40dp">
 
 
                 <!-- 나의 급식 현황 -->
@@ -254,7 +244,7 @@
                     android:fontFamily="@font/pretendardmedium"
                     android:text="날짜"
                     android:textAppearance="@style/mycafe_id"
-                    android:textSize="20sp"
+                    android:textSize="20dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/my_cafeteria_id" />
@@ -266,100 +256,140 @@
                 <!--                    android:clipToPadding="false"-->
                 <!--                    android:clipChildren="false" />-->
 
-                <TextView
-                    android:id="@+id/breakfast"
+                <LinearLayout
+                    android:id="@+id/linearLayout3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="40dp"
-                    android:fontFamily="@font/pretendardlight"
-                    android:text="아침☀️"
-                    android:textAppearance="@style/mycafe_id"
-                    android:textSize="20sp"
+                    android:gravity="center"
+                    android:layout_marginTop="30dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/today" />
+                    app:layout_constraintTop_toBottomOf="@+id/today">
 
-                <TextView
-                    android:id="@+id/lunch"
+                    <TextView
+                        android:id="@+id/breakfast"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/pretendardlight"
+                        android:text="아침☀️"
+                        android:textAppearance="@style/mycafe_id"
+                        android:textSize="20dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/today" />
+
+                    <View
+                        android:layout_width="40dp"
+                        android:layout_height="1dp"
+                        android:background="#30000000"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"/>
+
+                    <View
+                        android:id="@+id/breakfast_cheak"
+                        android:layout_width="40dp"
+                        android:layout_height="20dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:background="@drawable/cardview"
+                        android:backgroundTint="#D9D9D9"
+                        app:layout_constraintTop_toBottomOf="@+id/today" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearLayout4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="40dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
                     android:layout_marginTop="10dp"
-                    android:fontFamily="@font/pretendardlight"
-                    android:text="점심🍔"
-                    android:textAppearance="@style/mycafe_id"
-                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/breakfast" />
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
 
-                <TextView
-                    android:id="@+id/dinner"
+                    <TextView
+                        android:id="@+id/lunch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/pretendardlight"
+                        android:text="점심🍔"
+                        android:textAppearance="@style/mycafe_id"
+                        android:textSize="20dp"
+                        app:layout_constraintTop_toBottomOf="@+id/breakfast" />
+
+                    <View
+                        android:layout_width="40dp"
+                        android:layout_height="1dp"
+                        android:background="#30000000"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"/>
+
+                    <View
+                        android:id="@+id/lunch_cheak"
+                        android:layout_width="40dp"
+                        android:layout_height="20dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:background="@drawable/cardview"
+                        android:backgroundTint="#D9D9D9"
+                        app:layout_constraintTop_toBottomOf="@+id/breakfast" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearLayout2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="40dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
                     android:layout_marginTop="10dp"
-                    android:fontFamily="@font/pretendardlight"
-                    android:text="저녁🍝"
-                    android:textAppearance="@style/mycafe_id"
-                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/lunch" />
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
 
-                <View
-                    android:id="@+id/breakfast_cheak"
-                    android:layout_width="40dp"
-                    android:layout_height="20dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginStart="144dp"
-                    android:background="@drawable/cardview"
-                    android:backgroundTint="#D9D9D9"
-                    app:layout_constraintStart_toEndOf="@+id/breakfast"
-                    app:layout_constraintTop_toBottomOf="@+id/today" />
+                    <TextView
+                        android:id="@+id/dinner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/pretendardlight"
+                        android:text="저녁🍝"
+                        android:textAppearance="@style/mycafe_id"
+                        android:textSize="20dp"
+                        app:layout_constraintEnd_toStartOf="@+id/dinner_cheak"
+                        app:layout_constraintTop_toBottomOf="@+id/lunch" />
 
-                <View
-                    android:id="@+id/lunch_cheak"
-                    android:layout_width="40dp"
-                    android:layout_height="20dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginStart="144dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/cardview"
-                    android:backgroundTint="#D9D9D9"
-                    app:layout_constraintStart_toEndOf="@+id/lunch"
-                    app:layout_constraintTop_toBottomOf="@+id/breakfast" />
+                    <View
+                        android:layout_width="40dp"
+                        android:layout_height="1dp"
+                        android:background="#30000000"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"/>
 
-                <View
-                    android:id="@+id/dinner_cheak"
-                    android:layout_width="40dp"
-                    android:layout_height="20dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginStart="144dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/cardview"
-                    android:backgroundTint="#D9D9D9"
-                    app:layout_constraintStart_toEndOf="@+id/dinner"
-                    app:layout_constraintTop_toBottomOf="@+id/lunch" />
-
+                    <View
+                        android:id="@+id/dinner_cheak"
+                        android:layout_width="40dp"
+                        android:layout_height="20dp"
+                        android:background="@drawable/cardview"
+                        android:backgroundTint="#D9D9D9"
+                        app:layout_constraintTop_toBottomOf="@+id/lunch" />
+                </LinearLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/logout"
-                android:layout_width="330dp"
+                android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/button2"
-                android:text="로그아웃"
                 android:fontFamily="@font/pretendardmedium"
+                android:text="로그아웃"
                 android:textColor="@color/white" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/withdrawal"
-                android:layout_width="330dp"
+                android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:layout_marginBottom="30dp"

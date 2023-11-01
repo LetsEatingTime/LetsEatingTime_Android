@@ -9,59 +9,64 @@
     <TextView
         android:id="@+id/tv_title"
         style="@style/tv_login_title"
-        android:layout_width="145dp"
-        android:layout_height="45dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
         android:fontFamily="@font/pretendardbold"
-        android:text="밥먹자"
+        android:text="LetsEatingTime"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:id="@+id/login_inp"
-        android:layout_marginTop="30dp"
-        android:layout_width="300dp"
-        android:layout_height="120dp"
-        app:layout_constraintStart_toStartOf="parent"
+    <EditText
+        android:id="@+id/et_id"
+        style="@style/et_login"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="45dp"
+        android:fontFamily="@font/pretendardlight"
+        android:hint="아이디를 입력해주세요"
+        android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_title"
-        android:orientation="vertical">
-        <EditText
-            android:id="@+id/et_id"
-            android:fontFamily="@font/pretendardlight"
-            android:layout_width="300dp"
-            android:layout_height="48dp"
-            android:hint="아이디를 입력해주세요"
-            android:inputType="text"
-            style="@style/et_login"/>
-        <EditText
-            android:id="@+id/et_pw"
-            android:fontFamily="@font/pretendardlight"
-            android:layout_marginTop="19dp"
-            android:layout_width="300dp"
-            android:layout_height="48dp"
-            android:hint="비밀번호를 입력해주세요"
-            android:inputType="textPassword"
-            style="@style/et_login" />
-    </LinearLayout>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+
+    <EditText
+        android:id="@+id/et_pw"
+        style="@style/et_login"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="45dp"
+        android:fontFamily="@font/pretendardlight"
+        android:hint="비밀번호를 입력해주세요"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_id" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/login_error_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/pretendardlight"
         android:text=""
         android:textColor="#F00"
-        android:fontFamily="@font/pretendardlight"
-        android:layout_marginStart="5dp"
-        app:layout_constraintStart_toStartOf="@+id/login_inp"
-        app:layout_constraintTop_toBottomOf="@+id/login_inp" />
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@+id/et_pw"
+        app:layout_constraintTop_toBottomOf="@+id/et_pw" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_login_submit"
         style="@style/btn_login_submit"
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="48dp"
+        android:layout_marginStart="45dp"
+        android:layout_marginEnd="45dp"
         android:fontFamily="@font/pretendardmedium"
         android:text="로그인"
         app:layout_constraintEnd_toEndOf="parent"
@@ -82,23 +87,27 @@
         android:id="@+id/linearLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/iv_eating_food"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cb_login">
 
         <TextView
             android:id="@+id/tv_find_id"
             style="@style/tv_selector"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
             android:fontFamily="@font/pretendardlight"
             android:text="아이디 찾기" />
 
         <View
             android:layout_width="1dp"
-            android:layout_height="18dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
             android:background="#BFBFBF" />
 
         <TextView
@@ -106,12 +115,16 @@
             style="@style/tv_selector"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
             android:fontFamily="@font/pretendardlight"
             android:text="비밀번호 찾기" />
 
         <View
             android:layout_width="1dp"
-            android:layout_height="18dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
             android:background="#BFBFBF" />
 
         <TextView
@@ -119,6 +132,9 @@
             style="@style/tv_selector"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
             android:fontFamily="@font/pretendardlight"
             android:text="회원가입" />
     </LinearLayout>
@@ -127,10 +143,9 @@
         android:id="@+id/iv_eating_food"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="30dp"
         android:src="@drawable/img_eating_food"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
