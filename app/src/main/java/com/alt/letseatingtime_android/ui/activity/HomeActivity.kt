@@ -5,10 +5,10 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.lifecycle.ViewModelProvider
 import com.alt.letseatingtime.databinding.ActivityHomeBinding
 import com.alt.letseatingtime_android.MyApplication.Companion.prefs
@@ -19,6 +19,8 @@ import com.bumptech.glide.Glide
 import com.alt.letseatingtime.R
 import com.alt.letseatingtime_android.network.retrofit.RetrofitClient.api
 import com.alt.letseatingtime_android.ui.viewmodel.UserActivityViewModel
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.RequestOptions
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -63,47 +65,33 @@ class HomeActivity : AppCompatActivity() {
             val builder = AlertDialog.Builder(this)
             val dialog = builder.create()
             dialog.setOnShowListener {
-                dialog.getButton(AlertDialog.BUTTON_POSITIVE)
-                    .setTextColor(Color.RED)
-                dialog.getButton(AlertDialog.BUTTON_NEGATIVE)
-                    .setTextColor(Color.BLACK)
+                dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.RED)
+                dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.BLACK)
             }
 
-            builder.setTitle("경고")
-                .setMessage("정말로 탈퇴하시겠습니까?")
-                .setPositiveButton(
+            builder.setTitle("경고").setMessage("정말로 탈퇴하시겠습니까?").setPositiveButton(
                     "예"
-                ) { dialog, id ->
+                ) { _, _ ->
                     withdrawal()
-                }
-                .setNegativeButton(
+                }.setNegativeButton(
                     "아니요"
-                ) { dialog, id ->
+                ) { _, _ ->
                 }
             builder.show()
         }
     }
 
     private fun getImg(id: String) {
-        api.image(prefs.accessToken, id)
-            .enqueue(object : Callback<ResponseBody> {
+        api.image(prefs.accessToken, id).enqueue(object : Callback<ResponseBody> {
                 override fun onResponse(
-                    call: Call<ResponseBody>,
-                    response: Response<ResponseBody>
+                    call: Call<ResponseBody>, response: Response<ResponseBody>
                 ) {
-                    if (response.isSuccessful) {
-                        val photoBytes = response.body()?.bytes()
-                        if (photoBytes != null) {
-                            val image = getBitmapFromBytes(photoBytes)
-                            Glide.with(this@HomeActivity)
-                                .load(image)
-                                .into(binding.studentImage)
-                        } else {
-                            Log.e("ApiError", "Photo data is null.")
-                        }
-                    } else {
-                        Toast.makeText(this@HomeActivity, "이미지 애러", Toast.LENGTH_SHORT).show()
-                    }
+                    val photoBytes = response.body()?.bytes()
+                    val image = getBitmapFromBytes(photoBytes)
+                    Glide.with(this@HomeActivity).load(image)
+                        .error(AppCompatResources.getDrawable(this@HomeActivity, R.drawable.profile_image_background))
+                        .apply(RequestOptions.bitmapTransform(RoundedCorners(10)))
+                        .into(binding.studentImage)
                 }
 
                 override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
@@ -112,14 +100,17 @@ class HomeActivity : AppCompatActivity() {
             })
     }
 
-    fun getBitmapFromBytes(byteArray: ByteArray): Bitmap {
-        return BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
+    fun getBitmapFromBytes(byteArray: ByteArray?): Bitmap? {
+        return if (byteArray != null) {
+            BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
+        } else {
+            null
+        }
     }
 
 
     private fun getProfile() {
-        api.profile("Bearer ${prefs.accessToken}")
-            .enqueue(object : Callback<ProfileResponse> {
+        api.profile("Bearer ${prefs.accessToken}").enqueue(object : Callback<ProfileResponse> {
                 override fun onResponse(
                     call: Call<ProfileResponse>, response: Response<ProfileResponse>
                 ) {
@@ -129,7 +120,8 @@ class HomeActivity : AppCompatActivity() {
                         val strnow = now.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"))
                         with(binding) {
                             nameId.text = user?.name
-                            trashId.text = "${user?.grade}학년 ${user?.className}반 ${user?.classNo}번"
+//                            trashId.text = "${user?.grade}학년 ${user?.className}반 ${user?.classNo}번"
+                            trashId.text = getString(R.string.trash_id, user?.grade,user?.className,user?.classNo)
                             today.text = strnow
                         }
                         getImg(user?.image.toString())
@@ -209,22 +201,18 @@ class HomeActivity : AppCompatActivity() {
         var newStr = ""
 
         if (aStr != null) {
-            for (i in aStr.indices) {
-                newStr += aStr[i]
-
+            for (i: Int in aStr.indices) {
+                newStr += aStr[i].removePrefix("*")
                 if (i < aStr.size - 1) newStr += "\n"
             }
         }
-
         newStr
     }
 
     private fun cheakMeal() {
-        api.profile("Bearer ${prefs.accessToken}")
-            .enqueue(object : Callback<ProfileResponse> {
+        api.profile("Bearer ${prefs.accessToken}").enqueue(object : Callback<ProfileResponse> {
                 override fun onResponse(
-                    call: Call<ProfileResponse>,
-                    response: Response<ProfileResponse>
+                    call: Call<ProfileResponse>, response: Response<ProfileResponse>
                 ) {
                     if (response.isSuccessful) {
                         val mealData = response.body()?.data?.mealTime
@@ -245,9 +233,7 @@ class HomeActivity : AppCompatActivity() {
                         }
                     } else {
                         Toast.makeText(
-                            this@HomeActivity,
-                            "애러: ${response.code()}",
-                            Toast.LENGTH_SHORT
+                            this@HomeActivity, "애러: ${response.code()}", Toast.LENGTH_SHORT
                         ).show()
                     }
                 }
@@ -262,11 +248,9 @@ class HomeActivity : AppCompatActivity() {
 
 
     private fun withdrawal() {
-        api.withdraw("Bearer ${prefs.accessToken}")
-            .enqueue(object : Callback<WithdrawResponse> {
+        api.withdraw("Bearer ${prefs.accessToken}").enqueue(object : Callback<WithdrawResponse> {
                 override fun onResponse(
-                    call: Call<WithdrawResponse>,
-                    response: Response<WithdrawResponse>
+                    call: Call<WithdrawResponse>, response: Response<WithdrawResponse>
                 ) {
                     if (response.isSuccessful) {
                         logout()
