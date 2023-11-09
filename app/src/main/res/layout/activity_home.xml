@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:background="#eeeeee"
         android:overScrollMode="never"
+        android:scrollbars="none"
         android:paddingStart="30dp"
         android:paddingEnd="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
