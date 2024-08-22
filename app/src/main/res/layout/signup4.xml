@@ -8,42 +8,54 @@
     <TextView
         android:id="@+id/tv_grade"
         style="@style/tv_signup_text"
-        android:layout_width="80dp"
-        android:layout_height="33dp"
-        android:fontFamily="@font/pretendardmedium"
-        android:text="학년"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/pretendardsemibold"
+        android:text="학번"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="3dp"
+        app:layout_constraintStart_toStartOf="@id/et_grade"
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
     <EditText
         android:id="@+id/et_grade"
-        style="@style/tv_signup_inp"
+        style="@style/et_login"
         android:layout_width="match_parent"
         android:layout_height="49dp"
-        android:fontFamily="@font/pretendardmedium"
         android:hint="학년을 입력해주세요. ex:2"
         android:inputType="number"
         android:maxLength="1"
         android:maxLines="1"
+        android:layout_marginTop="7dp"
+        android:fontFamily="@font/pretendardregular"
+        android:layout_marginEnd="27dp"
+        android:layout_marginStart="27dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_grade" />
+
 
     <TextView
         android:id="@+id/tv_class"
         style="@style/tv_signup_text"
-        android:layout_width="80dp"
-        android:layout_height="33dp"
-        android:fontFamily="@font/pretendardmedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/pretendardsemibold"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="3dp"
         android:text="반"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@id/et_class"
         app:layout_constraintTop_toBottomOf="@id/et_grade" />
 
     <EditText
         android:id="@+id/et_class"
-        style="@style/tv_signup_inp"
+        style="@style/et_login"
         android:layout_width="match_parent"
         android:layout_height="49dp"
-        android:fontFamily="@font/pretendardmedium"
+        android:layout_marginTop="7dp"
+        android:fontFamily="@font/pretendardregular"
+        android:layout_marginEnd="27dp"
+        android:layout_marginStart="27dp"
         android:hint="본인의 반을 입력해주세요. ex:4"
         android:inputType="number"
         android:maxLength="1"
@@ -54,25 +66,32 @@
     <TextView
         android:id="@+id/tv_number"
         style="@style/tv_signup_text"
-        android:layout_width="80dp"
-        android:layout_height="33dp"
-        android:fontFamily="@font/pretendardmedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/pretendardsemibold"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="3dp"
         android:text="번호"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@id/et_class"
         app:layout_constraintTop_toBottomOf="@id/et_class" />
 
     <EditText
         android:id="@+id/et_number"
-        style="@style/tv_signup_inp"
+        style="@style/et_login"
         android:layout_width="match_parent"
         android:layout_height="49dp"
-        android:fontFamily="@font/pretendardmedium"
+        android:layout_marginTop="7dp"
+        android:fontFamily="@font/pretendardregular"
+        android:layout_marginEnd="27dp"
+        android:layout_marginStart="27dp"
         android:hint="번호를 입력해주세요. ex:12"
         android:inputType="number"
         android:maxLength="2"
         android:maxLines="1"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@id/et_number"
         app:layout_constraintTop_toBottomOf="@id/tv_number" />
+
+
 
 
     <ImageView
