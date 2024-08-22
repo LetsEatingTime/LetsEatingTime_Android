@@ -12,7 +12,7 @@
         <item name="android:paddingStart">14dp</item>
         <item name="android:textSize">15dp</item>
         <item name="android:textColor">@color/black</item>
-        <item name="android:textColorHint">@color/black</item>
+        <item name="android:textColorHint">@color/edit_text_hit</item>
     </style>
 
     <style name="btn_login_submit">
