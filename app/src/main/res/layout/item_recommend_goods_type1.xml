@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/iv_goodsImage"
-        android:text="상품이름을 입력하세요"
+        android:text="이벤트 이름"
         android:fontFamily="@font/pretendardsemibold"
         android:textSize="12sp"
         android:maxLines="1"
@@ -32,6 +32,7 @@
         android:text="1212"
         android:textSize="12sp"
         android:textColor="@color/black"
+        android:fontFamily="sans-serif-condensed-medium"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/tv_unit"
         app:layout_constraintTop_toBottomOf="@id/tv_goods_name"
@@ -43,9 +44,11 @@
         android:layout_height="wrap_content"
         android:text="P"
         android:textSize="12sp"
-        android:textColor="@color/black"
+        android:fontFamily="@font/pretendardsemibold"
+        android:textColor="@color/main1"
         app:layout_constraintStart_toEndOf="@id/tv_prize"
-        app:layout_constraintTop_toBottomOf="@id/tv_goods_name"
+        app:layout_constraintTop_toTopOf="@id/tv_prize"
+        app:layout_constraintBottom_toBottomOf="@id/tv_prize"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
