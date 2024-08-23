@@ -11,4 +11,14 @@
     <color name="button_push">#636363</color>
     <color name="edit_text_hit">#A5A5A5</color>
 
+    <color name="main1">#FE3939</color>
+    <color name="main2">#FE6B4B</color>
+    <color name="main3">#FE8856</color>
+    <color name="line1">#A0A0A0</color>
+    <color name="line2">#D8D8D8</color>
+    <color name="warning">#FF6161</color>
+    <color name="info">#6461FF</color>
+    <color name="good">#86EA83</color>
+    <color name="cautionary">#FFED4C</color>
+    <color name="background">#FAFAFA</color>
 </resources>
