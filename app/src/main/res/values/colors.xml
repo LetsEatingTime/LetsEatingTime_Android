@@ -9,4 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="button">#FF5252</color>
     <color name="button_push">#636363</color>
+    <color name="edit_text_hit">#A5A5A5</color>
+
 </resources>

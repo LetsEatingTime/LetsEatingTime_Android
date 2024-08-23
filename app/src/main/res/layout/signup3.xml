@@ -7,12 +7,14 @@
 
     <TextView
         android:id="@+id/tv_name"
-        android:layout_width="80dp"
-        android:layout_height="33dp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/et_name"
+        android:fontFamily="@font/pretendardsemibold"
         app:layout_constraintTop_toTopOf="parent"
         android:text="이름"
-        android:fontFamily="@font/pretendardmedium"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="3dp"
         style="@style/tv_signup_text"
         />
 
@@ -26,8 +28,13 @@
         android:inputType="textPersonName"
         android:maxLines="1"
         android:maxLength="4"
-        android:fontFamily="@font/pretendardmedium"
-        style="@style/tv_signup_inp"/>
+        android:layout_marginTop="7dp"
+        android:fontFamily="@font/pretendardregular"
+        android:layout_marginEnd="27dp"
+        android:layout_marginStart="27dp"
+        style="@style/et_login"/>
+
+
 
     <ImageView
         android:id="@+id/iv_eating_food"

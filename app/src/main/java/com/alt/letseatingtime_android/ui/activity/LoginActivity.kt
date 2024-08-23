@@ -79,9 +79,6 @@ class LoginActivity : AppCompatActivity() {
                 startActivity(it)
             }
         })
-        binding.tvFindId.setOnClickListener(OnSingleClickListener {
-            Toast.makeText(this, "아직 개발중인 기능입니다.", Toast.LENGTH_SHORT).show()
-        })
         binding.tvFindPw.setOnClickListener(OnSingleClickListener {
             Toast.makeText(this, "아직 개발중인 기능입니다.", Toast.LENGTH_SHORT).show()
         })

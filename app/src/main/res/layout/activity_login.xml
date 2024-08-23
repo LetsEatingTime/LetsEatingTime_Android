@@ -26,7 +26,8 @@
         android:layout_marginStart="45dp"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="45dp"
-        android:fontFamily="@font/pretendardlight"
+        android:fontFamily="@font/pretendardregular"
+        android:textColorHint="#A0A0A0"
         android:hint="아이디를 입력해주세요"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
@@ -41,7 +42,8 @@
         android:layout_marginStart="45dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="45dp"
-        android:fontFamily="@font/pretendardlight"
+        android:fontFamily="@font/pretendardregular"
+        android:textColorHint="#A0A0A0"
         android:hint="비밀번호를 입력해주세요"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
@@ -93,22 +95,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cb_login">
 
-        <TextView
-            android:id="@+id/tv_find_id"
-            style="@style/tv_selector"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:paddingBottom="10dp"
-            android:paddingTop="10dp"
-            android:fontFamily="@font/pretendardlight"
-            android:text="아이디 찾기" />
-
-        <View
-            android:layout_width="1dp"
-            android:layout_height="20dp"
-            android:layout_gravity="center"
-            android:background="#BFBFBF" />
 
         <TextView
             android:id="@+id/tv_find_pw"

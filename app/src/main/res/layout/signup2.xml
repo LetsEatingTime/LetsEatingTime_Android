@@ -8,17 +8,17 @@
     <TextView
         android:id="@+id/tv_pw"
         android:fontFamily="@font/pretendardmedium"
-        android:layout_width="80dp"
-        android:layout_height="33dp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/et_pw"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginLeft="16dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="3dp"
         android:text="비밀번호"
         style="@style/tv_signup_text"
         />
     <EditText
         android:id="@+id/et_pw"
-        android:fontFamily="@font/pretendardmedium"
         android:layout_width="match_parent"
         android:layout_height="49dp"
         android:maxLines="1"
@@ -26,8 +26,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_pw"
         android:hint="비밀번호를 입력해주세요"
+        android:layout_marginTop="7dp"
+        android:fontFamily="@font/pretendardregular"
+        android:layout_marginEnd="27dp"
+        android:layout_marginStart="27dp"
         android:inputType="textPassword"
-        style="@style/tv_signup_inp"/>
+        style="@style/et_login"/>
+    <TextView
+        android:id="@+id/tv_hint"
+        style="@style/tv_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/pretendardsemibold"
+        android:text="대소문자, 특수문자, 숫자를 조합하여 7자 이상입력 해 주세요."
+        app:layout_constraintEnd_toEndOf="@id/et_pw"
+        app:layout_constraintTop_toBottomOf="@id/et_pw"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="3dp"
+        />
     <ImageView
         android:id="@+id/iv_eating_food"
         android:layout_width="match_parent"
