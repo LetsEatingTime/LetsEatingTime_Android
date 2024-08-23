@@ -28,7 +28,7 @@
         android:textColor="#A0A0A0"
         />
     <TextView
-        android:id="@+id/tv_prize"
+        android:id="@+id/tv_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="1212"
@@ -48,9 +48,9 @@
         android:textSize="12sp"
         android:fontFamily="@font/pretendardsemibold"
         android:textColor="@color/main1"
-        app:layout_constraintStart_toEndOf="@id/tv_prize"
-        app:layout_constraintTop_toTopOf="@id/tv_prize"
-        app:layout_constraintBottom_toBottomOf="@id/tv_prize"
+        app:layout_constraintStart_toEndOf="@id/tv_price"
+        app:layout_constraintTop_toTopOf="@id/tv_price"
+        app:layout_constraintBottom_toBottomOf="@id/tv_price"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
