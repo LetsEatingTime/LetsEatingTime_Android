@@ -5,7 +5,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_gravity="center"
     android:paddingVertical="14dp"
-    android:paddingHorizontal="17dp">
+    android:paddingHorizontal="17dp"
+    android:background="@drawable/item_goods">
     <ImageView
         android:id="@+id/iv_goodsImage"
         android:layout_width="100dp"
@@ -18,6 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/iv_goodsImage"
+        android:layout_marginTop="3dp"
         android:text="이벤트 이름"
         android:fontFamily="@font/pretendardsemibold"
         android:textSize="12sp"
