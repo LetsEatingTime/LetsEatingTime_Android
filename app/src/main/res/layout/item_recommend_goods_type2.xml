@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="96dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingHorizontal="32dp"
+    android:paddingVertical="5dp"
+    >
+
+
+    <ImageView
+        android:id="@+id/iv_goodsImage"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+    <TextView
+        android:id="@+id/tv_goods_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:fontFamily="@font/pretendardsemibold"
+        android:maxLines="1"
+        android:text="상품이름을 입력하세요"
+        android:textColor="#A0A0A0"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/iv_goodsImage"
+        app:layout_constraintTop_toTopOf="@id/iv_goodsImage"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="9dp"
+        />
+    <TextView
+        android:id="@+id/tv_prize"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:text="1212"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toStartOf="@id/tv_unit"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="@+id/tv_goods_name"
+        app:layout_constraintTop_toBottomOf="@id/tv_goods_name"
+        android:layout_marginTop="6dp"/>
+    <TextView
+        android:id="@+id/tv_unit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="P"
+        android:textSize="12sp"
+        android:fontFamily="@font/pretendardsemibold"
+        android:textColor="@color/main1"
+        app:layout_constraintStart_toEndOf="@id/tv_prize"
+        app:layout_constraintTop_toTopOf="@id/tv_prize"
+        app:layout_constraintBottom_toBottomOf="@id/tv_prize"
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
