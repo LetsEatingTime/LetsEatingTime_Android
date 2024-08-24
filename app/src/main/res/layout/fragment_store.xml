@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.alt.letseatingtime_android.ui.fragment.store.StoreFragment"
-    android:paddingTop="32dp">
+    android:paddingTop="32dp"
+    android:background="@color/white">
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -29,6 +30,8 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/tv_for_user"
                 android:layout_marginTop="13dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
 
                 />
 
@@ -50,6 +53,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/tv_items"
                 android:layout_marginTop="13dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
 
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
