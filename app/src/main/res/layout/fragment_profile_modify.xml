@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context="com.alt.letseatingtime_android.ui.fragment.profile.ProfileModifyFragment">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tb_modify_profile"
+        style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:subtitle="title"
+        android:title="test"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/ib_back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:background="@null"
+            android:src="@drawable/ic_back" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clv_modify_profile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="32dp"
+                android:paddingStart="23dp"
+                app:layout_constraintTop_toBottomOf="@id/tb_modify_profile">
+
+                <TextView
+                    android:id="@+id/tv_title_profile_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/pretendardsemibold"
+                    android:text="프로필 이미지"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/iv_profile_img"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toBottomOf="@id/tv_title_profile_img" />
+
+                <TextView
+                    android:id="@+id/tv_modify_profile_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="27dp"
+                    android:fontFamily="@font/pretendardsemibold"
+                    android:text="프로필 이미지 변경하기"
+                    android:textColor="@color/main3"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="@id/iv_profile_img"
+                    app:layout_constraintStart_toEndOf="@id/iv_profile_img"
+                    app:layout_constraintTop_toTopOf="@id/iv_profile_img" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clv_modify_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16sp"
+                android:paddingVertical="13dp"
+                android:paddingStart="23dp"
+                app:layout_constraintTop_toBottomOf="@id/clv_modify_profile">
+
+                <TextView
+                    android:id="@+id/tv_title_profile_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/pretendardsemibold"
+                    android:text="프로필 이미지"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/et_modify_name"
+                    style="@style/et_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="49dp"
+                    android:layout_marginStart="27dp"
+                    android:layout_marginTop="13dp"
+                    android:layout_marginEnd="27dp"
+                    android:fontFamily="@font/pretendardregular"
+                    android:hint="이름을 입력해주세요"
+                    android:inputType="text"
+                    android:maxLength="15"
+                    android:maxLines="1"
+                    android:textColorHint="#A0A0A0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_title_profile_img" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clv_modify_grade"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16sp"
+                android:paddingVertical="13dp"
+                android:paddingStart="23dp"
+                app:layout_constraintTop_toBottomOf="@id/clv_modify_name">
+
+                <TextView
+                    android:id="@+id/tv_title_grade"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/pretendardsemibold"
+                    android:text="학생 학년"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/et_modify_grade"
+                    style="@style/et_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="49dp"
+                    android:layout_marginStart="27dp"
+                    android:layout_marginTop="13dp"
+                    android:layout_marginEnd="27dp"
+                    android:fontFamily="@font/pretendardregular"
+                    android:hint="학년을 입력해주세요"
+                    android:inputType="text"
+                    android:maxLength="15"
+                    android:maxLines="1"
+                    android:textColorHint="#A0A0A0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_title_grade" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clv_modify_class"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16sp"
+                android:paddingVertical="13dp"
+                android:paddingStart="23dp"
+                app:layout_constraintTop_toBottomOf="@id/clv_modify_grade">
+
+                <TextView
+                    android:id="@+id/tv_title_class"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/pretendardsemibold"
+                    android:text="학생 반"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/et_modify_class"
+                    style="@style/et_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="49dp"
+                    android:layout_marginStart="27dp"
+                    android:layout_marginTop="13dp"
+                    android:layout_marginEnd="27dp"
+                    android:fontFamily="@font/pretendardregular"
+                    android:hint="이름을 입력해주세요"
+                    android:inputType="text"
+                    android:maxLength="15"
+                    android:maxLines="1"
+                    android:textColorHint="#A0A0A0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_title_class" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clv_modify_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16sp"
+                android:paddingVertical="13dp"
+                android:paddingStart="23dp"
+                app:layout_constraintTop_toBottomOf="@id/clv_modify_class">
+
+                <TextView
+                    android:id="@+id/tv_title_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/pretendardsemibold"
+                    android:text="학생 번호"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/et_modify_number"
+                    style="@style/et_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="49dp"
+                    android:layout_marginStart="27dp"
+                    android:layout_marginTop="13dp"
+                    android:layout_marginEnd="27dp"
+                    android:fontFamily="@font/pretendardregular"
+                    android:hint="이름을 입력해주세요"
+                    android:inputType="text"
+                    android:maxLength="15"
+                    android:maxLines="1"
+                    android:textColorHint="#A0A0A0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_title_number" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_profile_cancel"
+        style="@style/btn_profile_cancel"
+        android:layout_marginBottom="48dp"
+        android:fontFamily="@font/pretendardsemibold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btn_submit"
+
+        />
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_submit"
+        style="@style/btn_profile_submit"
+        android:layout_marginBottom="48dp"
+        android:fontFamily="@font/pretendardmedium"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btn_profile_cancel"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
