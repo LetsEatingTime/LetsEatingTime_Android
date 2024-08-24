@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.alt.letseatingtime_android.ui.fragment.store.StoreFragment"
+    android:paddingTop="32dp"
+    android:background="@color/white">
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/tv_for_user"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:text="000님을 위한 추천"
+                android:fontFamily="@font/pretendardsemibold"
+                android:textSize="24dp"
+                android:layout_marginStart="32dp"
+                />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_for_user_items"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/tv_for_user"
+                android:layout_marginTop="13dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+
+                />
+
+            <TextView
+                android:id="@+id/tv_items"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/rv_for_user_items"
+                app:layout_constraintStart_toStartOf="parent"
+                android:text="포인트로 구매가능한 상품"
+                android:fontFamily="@font/pretendardsemibold"
+                android:textSize="24dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="24dp"
+                />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_user_items"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/tv_items"
+                android:layout_marginTop="13dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
