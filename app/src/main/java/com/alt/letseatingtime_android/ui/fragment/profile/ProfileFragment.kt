@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.alt.letseatingtime.R
 import com.alt.letseatingtime.databinding.FragmentProfileBinding
 
@@ -19,6 +20,9 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
+        binding.clvModify.setOnClickListener {
+            findNavController().navigate(R.id.action_profileFragment_to_profileModifyFragment)
+        }
         return binding.root
     }
 }
