@@ -39,8 +39,8 @@
                 <ImageView
                     android:id="@+id/iv_student_profile"
                     android:layout_width="168dp"
-                    android:layout_height="224dp"
-                    android:layout_marginTop="45dp"
+                    android:layout_height="214dp"
+                    android:layout_marginTop="25dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
