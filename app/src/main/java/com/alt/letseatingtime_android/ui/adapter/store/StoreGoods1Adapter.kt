@@ -4,11 +4,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.alt.letseatingtime.databinding.ItemRecommendGoodsType1Binding
 import com.alt.letseatingtime.databinding.ItemRecommendGoodsType2Binding
 import com.alt.letseatingtime_android.ui.adapter.store.storedata.GoodsItem
 
-class StoreGoodsAdapter(private val itemList : List<GoodsItem>, private val onClick :  (position : Int)->Unit) : RecyclerView.Adapter<StoreGoodsAdapter.StoreType2ViewHolder>() {
-    inner class StoreType2ViewHolder(private val binding: ItemRecommendGoodsType2Binding) :
+class StoreGoods1Adapter(private val itemList : List<GoodsItem>, private val onClick :  (position : Int)->Unit) : RecyclerView.Adapter<StoreGoods1Adapter.StoreType1ViewHolder>() {
+    inner class StoreType1ViewHolder(private val binding: ItemRecommendGoodsType1Binding) :
         RecyclerView.ViewHolder(binding.root) {
             fun bindDate(itemData : GoodsItem, position: Int){
                 with(binding){
@@ -20,17 +21,17 @@ class StoreGoodsAdapter(private val itemList : List<GoodsItem>, private val onCl
                     onClick(position)
                 }
             }
-    }
+        }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StoreType2ViewHolder {
-        val binding = ItemRecommendGoodsType2Binding.inflate(LayoutInflater.from(parent.context),parent,false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StoreType1ViewHolder {
+        val binding = ItemRecommendGoodsType1Binding.inflate(LayoutInflater.from(parent.context),parent,false)
 
-        return StoreType2ViewHolder(binding)
+        return StoreType1ViewHolder(binding)
     }
 
     override fun getItemCount(): Int = itemList.size
 
-    override fun onBindViewHolder(holder: StoreType2ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: StoreType1ViewHolder, position: Int) {
         holder.bindDate(itemList[position], position)
     }
 }
