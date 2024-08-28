@@ -7,33 +7,12 @@
     android:background="@color/background"
     tools:context="com.alt.letseatingtime_android.ui.fragment.profile.ProfileModifyFragment">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/tb_modify_profile"
-        style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:subtitle="title"
-        android:title="test"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
 
-        <ImageButton
-            android:id="@+id/ib_back_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:background="@null"
-            android:src="@drawable/ic_back"
-            android:paddingVertical="5dp"/>
-
-    </androidx.appcompat.widget.Toolbar>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/tb_modify_profile"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         >
 
