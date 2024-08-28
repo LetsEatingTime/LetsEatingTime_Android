@@ -8,26 +8,38 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.alt.letseatingtime.R
 import com.alt.letseatingtime.databinding.FragmentProfileModifyBinding
-
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 class ProfileModifyFragment : Fragment() {
-    var _binding : FragmentProfileModifyBinding? = null
-    val binding get()=_binding!!
+    var _binding: FragmentProfileModifyBinding? = null
+    val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
-        _binding =FragmentProfileModifyBinding.inflate(inflater, container, false)
-        binding.ibBackButton.setOnClickListener {
-            findNavController().navigate(R.id.action_profileModifyFragment_to_profileFragment)
+        _binding = FragmentProfileModifyBinding.inflate(inflater, container, false)
+        binding.btnSubmit.setOnClickListener {
+            binding.btnSubmit.setOnClickListener {
+                with(binding) {
+                    if (etModifyName.text.isNotBlank() && etModifyNumber.text.isNotBlank() && etModifyClass.text.isNotBlank() && etModifyGrade.text.isNotEmpty()) {
+                        // TODO : 서버 보내기.
+                        findNavController().navigate(R.id.action_profileModifyFragment_to_profileFragment)
+                    }
+                }
+            }
         }
-        binding.btnSubmit.setOnClickListener{
-            findNavController().navigate(R.id.action_profileModifyFragment_to_profileFragment)
-        }
-        binding.btnProfileCancel.setOnClickListener{
+        binding.btnProfileCancel.setOnClickListener {
             //TODO : 진짜로 돌아가시겠습니까? dialog 추가하기.
-            findNavController().navigate(R.id.action_profileModifyFragment_to_profileFragment)
+            MaterialAlertDialogBuilder(requireContext())
+                .setMessage("정말로 돌아가시겠습니까?\n진행상황은 저장되지 않습니다.")
+                .setNegativeButton("취소"){ dialog, which ->
+                }
+                .setPositiveButton("계속"){ dialog, which ->
+                    findNavController().navigate(R.id.action_profileModifyFragment_to_profileFragment)
+                }
+                .show()
+//            findNavController().navigate(R.id.action_profileModifyFragment_to_profileFragment)
         }
         return binding.root
     }
