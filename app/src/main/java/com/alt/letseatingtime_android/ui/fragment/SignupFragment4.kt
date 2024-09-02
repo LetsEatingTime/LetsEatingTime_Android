@@ -93,6 +93,7 @@ class SignupFragment4 : Fragment() {
             }
 
             override fun onFailure(call: Call<SignupResponse>, t: Throwable) {
+                Log.e("server error", t.stackTraceToString())
                 Toast.makeText(context, "서버 애러", Toast.LENGTH_SHORT).show()
             }
 
