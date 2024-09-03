@@ -6,132 +6,13 @@
     android:layout_height="match_parent"
     tools:context="com.alt.letseatingtime_android.ui.activity.LoginActivity">
 
-    <TextView
-        android:id="@+id/tv_title"
-        style="@style/tv_login_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:fontFamily="@font/pretendardbold"
-        android:text="LetsEatingTime"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/et_id"
-        style="@style/et_login"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/nav_host_fragment_activity_login"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginStart="45dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="45dp"
-        android:fontFamily="@font/pretendardregular"
-        android:textColorHint="#A0A0A0"
-        android:hint="아이디를 입력해주세요"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_title" />
-
-    <EditText
-        android:id="@+id/et_pw"
-        style="@style/et_login"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginStart="45dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="45dp"
-        android:fontFamily="@font/pretendardregular"
-        android:textColorHint="#A0A0A0"
-        android:hint="비밀번호를 입력해주세요"
-        android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_id" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/login_error_message"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:fontFamily="@font/pretendardlight"
-        android:text=""
-        android:textColor="#F00"
-        android:visibility="gone"
-        app:layout_constraintStart_toStartOf="@+id/et_pw"
-        app:layout_constraintTop_toBottomOf="@+id/et_pw" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_login_submit"
-        style="@style/btn_login_submit"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginStart="45dp"
-        android:layout_marginEnd="45dp"
-        android:fontFamily="@font/pretendardmedium"
-        android:text="로그인"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_error_message" />
-
-    <CheckBox
-        android:id="@+id/cb_login"
-        style="@style/cb_login"
-        android:layout_width="140dp"
-        android:layout_height="48dp"
-        android:fontFamily="@font/pretendardlight"
-        android:text="로그인 상태 유지"
-        app:layout_constraintStart_toStartOf="@+id/btn_login_submit"
-        app:layout_constraintTop_toBottomOf="@+id/btn_login_submit" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/iv_eating_food"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cb_login">
-
-
-        <TextView
-            android:id="@+id/tv_find_pw"
-            style="@style/tv_selector"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:fontFamily="@font/pretendardlight"
-            android:text="비밀번호 찾기" />
-
-        <View
-            android:layout_width="1dp"
-            android:layout_height="20dp"
-            android:layout_gravity="center"
-            android:background="#BFBFBF" />
-
-        <TextView
-            android:id="@+id/tv_signup"
-            style="@style/tv_selector"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:paddingBottom="10dp"
-            android:paddingTop="10dp"
-            android:fontFamily="@font/pretendardlight"
-            android:text="회원가입" />
-    </LinearLayout>
-
-    <ImageView
-        android:id="@+id/iv_eating_food"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/img_eating_food"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_height="match_parent"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/nav_login"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
