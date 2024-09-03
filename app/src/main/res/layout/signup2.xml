@@ -84,7 +84,6 @@
         android:layout_marginBottom="48dp"
         style="@style/btn_signup_submit"
         android:fontFamily="@font/pretendardmedium"
-        android:enabled="false"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

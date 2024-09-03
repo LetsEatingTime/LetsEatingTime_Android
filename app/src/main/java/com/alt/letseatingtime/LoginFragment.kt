@@ -4,21 +4,20 @@ import android.animation.ArgbEvaluator
 import android.animation.ValueAnimator
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import androidx.fragment.app.Fragment
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.alt.letseatingtime.databinding.ActivityLoginBinding
+import androidx.navigation.fragment.findNavController
+import com.alt.letseatingtime.databinding.FragmentLoginBinding
 import com.alt.letseatingtime_android.MyApplication.Companion.prefs
 import com.alt.letseatingtime_android.network.retrofit.RetrofitClient
 import com.alt.letseatingtime_android.network.retrofit.request.LoginRequest
 import com.alt.letseatingtime_android.network.retrofit.response.login.LoginResponse
 import com.alt.letseatingtime_android.ui.activity.HomeActivity
-import com.alt.letseatingtime_android.ui.activity.LoginActivity
 import com.alt.letseatingtime_android.ui.activity.SignupActivity
 import com.alt.letseatingtime_android.util.OnSingleClickListener
 import com.alt.letseatingtime_android.util.shortToast
@@ -27,8 +26,8 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class LoginFragment : Fragment() {
-    private var _binding: ActivityLoginBinding? = null
-    private  val binding get() = _binding!!
+    private var _binding: FragmentLoginBinding? = null
+    private val binding get() = _binding!!
 
     /**
      * 버튼 누를때 모션
@@ -37,7 +36,10 @@ class LoginFragment : Fragment() {
      */
     private fun loginBtnAnim(boolean: Boolean) {
         val startColor =
-            ContextCompat.getColor(requireContext(), if (!boolean) R.color.button else R.color.button_push)
+            ContextCompat.getColor(
+                requireContext(),
+                if (!boolean) R.color.button else R.color.button_push
+            )
         val endColor = ContextCompat.getColor(
             requireContext(), if (!boolean) R.color.button else R.color.button_push
         )
@@ -60,13 +62,18 @@ class LoginFragment : Fragment() {
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentLoginBinding.inflate(inflater, container, false)
+        val id = binding.etId.text.toString()
+        val pw = binding.etPw.text.toString()
 
-        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
+
+        requireActivity().onBackPressedDispatcher.addCallback(requireActivity(), callback)
         binding.btnLoginSubmit.setOnClickListener(OnSingleClickListener {
-            val id = binding.etId.text.toString()
-            val pw = binding.etPw.text.toString()
             if (id != "" && pw != "") {
                 loginBtnAnim(true)
                 binding.loginErrorMessage.text = ""
@@ -84,9 +91,11 @@ class LoginFragment : Fragment() {
             }
         })
         binding.tvFindPw.setOnClickListener(OnSingleClickListener {
-            context?.shortToast("아직 개발중인 기능입니다.")
+            findNavController().navigate(R.id.action_loginFragment_to_changePasswordFragment)
         })
+        return binding.root
     }
+
 
     private fun login(id: String, pw: String) {
         RetrofitClient.api.login(LoginRequest(id = id, password = pw))
