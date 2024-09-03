@@ -4,6 +4,7 @@ import android.animation.ArgbEvaluator
 import android.animation.ValueAnimator
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
 import android.view.View
@@ -68,15 +69,17 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
-        val id = binding.etId.text.toString()
-        val pw = binding.etPw.text.toString()
 
 
         requireActivity().onBackPressedDispatcher.addCallback(requireActivity(), callback)
         binding.btnLoginSubmit.setOnClickListener(OnSingleClickListener {
+            val id = binding.etId.text.toString()
+            val pw = binding.etPw.text.toString()
+            Log.d("test", "id : $id \n pw : $pw")
             if (id != "" && pw != "") {
                 loginBtnAnim(true)
                 binding.loginErrorMessage.text = ""
+                Log.d("test", "id : $id \n pw : $pw")
                 login(id = id, pw = pw)
                 binding.loginErrorMessage.visibility = View.GONE
             } else {
