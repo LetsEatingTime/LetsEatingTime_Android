@@ -7,7 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
 
 object RetrofitClient{
-    private const val URL = "https://let.team-alt.com/"
+    private const val URL = "http://www.dgsw-team-alt.xyz/"
 
     private val loggingInterceptor = LoggingInterceptor()
 
@@ -26,5 +26,3 @@ object RetrofitClient{
 
     val api: API = retrofit.create(API::class.java)
 }
-
-

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment2">
+
+    <fragment
+        android:id="@+id/signupFragment1"
+        android:name="com.alt.letseatingtime_android.ui.fragment.SignupFragment1"
+        android:label="SignupFragment1" />
+    <fragment
+        android:id="@+id/signupFragment2"
+        android:name="com.alt.letseatingtime_android.ui.fragment.SignupFragment2"
+        android:label="SignupFragment2" />
+    <fragment
+        android:id="@+id/signupFragment3"
+        android:name="com.alt.letseatingtime_android.ui.fragment.SignupFragment3"
+        android:label="SignupFragment3" />
+    <fragment
+        android:id="@+id/signupFragment4"
+        android:name="com.alt.letseatingtime_android.ui.fragment.SignupFragment4"
+        android:label="SignupFragment4" />
+    <fragment
+        android:id="@+id/goodsBuyFragment2"
+        android:name="com.alt.letseatingtime_android.ui.fragment.store.GoodsBuyFragment"
+        android:label="fragment_goods_buy"
+        tools:layout="@layout/fragment_goods_buy" />
+    <fragment
+        android:id="@+id/homeFragment2"
+        android:name="com.alt.letseatingtime_android.ui.fragment.home.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/profileFragment2"
+        android:name="com.alt.letseatingtime_android.ui.fragment.profile.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/profileModifyFragment2"
+        android:name="com.alt.letseatingtime_android.ui.fragment.profile.ProfileModifyFragment"
+        android:label="fragment_profile_modify"
+        tools:layout="@layout/fragment_profile_modify" />
+    <fragment
+        android:id="@+id/storeFragment2"
+        android:name="com.alt.letseatingtime_android.ui.fragment.store.StoreFragment"
+        android:label="fragment_store"
+        tools:layout="@layout/fragment_store" />
+    <include app:graph="@navigation/nav_store_test" />
+    <activity
+        android:id="@+id/loginActivity"
+        android:name="com.alt.letseatingtime_android.ui.activity.LoginActivity"
+        android:label="activity_login"
+        tools:layout="@layout/activity_login" />
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="com.alt.letseatingtime_android.ui.activity.MainActivity"
+        android:label="activity_main"
+        tools:layout="@layout/activity_main" />
+    <activity
+        android:id="@+id/signupActivity"
+        android:name="com.alt.letseatingtime_android.ui.activity.SignupActivity"
+        android:label="activity_signup"
+        tools:layout="@layout/activity_signup" />
+</navigation>
