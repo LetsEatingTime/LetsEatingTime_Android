@@ -30,9 +30,8 @@ class ChangePasswordFragment : Fragment() {
             val newPassword = binding.etNewPw.text.toString()
 
 
-            if (id.isNotBlank() && currentPassword.isNotBlank() && newPassword.isNotBlank()) {
-                if (idPattern.matches(id) && pwPattern.matches(currentPassword) && pwPattern.matches(newPassword)
-                ) {
+            if ((id.isNotBlank() && currentPassword.isNotBlank()) && newPassword.isNotBlank()) {
+                if ((idPattern.matches(id) && pwPattern.matches(currentPassword)) && pwPattern.matches(newPassword)) {
                     findNavController().navigate(R.id.action_changePasswordFragment_to_loginFragment)
                 } else {
                     context?.shortToast("확실하게 입력한지 확인 해 주세요.")
