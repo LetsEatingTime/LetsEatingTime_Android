@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/signupFragment1"
-        android:name="com.alt.letseatingtime_android.ui.fragment.SignupFragment1"
+        android:name="com.alt.letseatingtime_android.ui.fragment.signup.SignupFragment1"
         android:label="SignupFragment1" />
     <fragment
         android:id="@+id/signupFragment2"
-        android:name="com.alt.letseatingtime_android.ui.fragment.SignupFragment2"
+        android:name="com.alt.letseatingtime_android.ui.fragment.signup.SignupFragment2"
         android:label="SignupFragment2" />
     <fragment
         android:id="@+id/signupFragment3"
-        android:name="com.alt.letseatingtime_android.ui.fragment.SignupFragment3"
+        android:name="com.alt.letseatingtime_android.ui.fragment.signup.SignupFragment3"
         android:label="SignupFragment3" />
     <fragment
         android:id="@+id/signupFragment4"
-        android:name="com.alt.letseatingtime_android.ui.fragment.SignupFragment4"
+        android:name="com.alt.letseatingtime_android.ui.fragment.signup.SignupFragment4"
         android:label="SignupFragment4" />
     <fragment
         android:id="@+id/goodsBuyFragment2"

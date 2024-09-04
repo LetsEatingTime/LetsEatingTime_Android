@@ -1,4 +1,4 @@
-package com.alt.letseatingtime
+package com.alt.letseatingtime_android.ui.fragment.login
 
 import android.animation.ArgbEvaluator
 import android.animation.ValueAnimator
@@ -13,6 +13,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
+import com.alt.letseatingtime.R
 import com.alt.letseatingtime.databinding.FragmentLoginBinding
 import com.alt.letseatingtime_android.MyApplication.Companion.prefs
 import com.alt.letseatingtime_android.network.retrofit.RetrofitClient
