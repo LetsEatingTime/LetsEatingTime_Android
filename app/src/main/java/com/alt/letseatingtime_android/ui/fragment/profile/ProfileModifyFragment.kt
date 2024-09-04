@@ -24,7 +24,7 @@ class ProfileModifyFragment : Fragment() {
                 with(binding) {
                     if (etModifyName.text.isNotBlank() && etModifyNumber.text.isNotBlank() && etModifyClass.text.isNotBlank() && etModifyGrade.text.isNotEmpty()) {
                         // TODO : 서버 보내기.
-                        findNavController().navigate(R.id.action_profileModifyFragment_to_profileFragment)
+                        moveProfile()
                     }
                 }
             }
@@ -36,11 +36,15 @@ class ProfileModifyFragment : Fragment() {
                 .setNegativeButton("취소"){ dialog, which ->
                 }
                 .setPositiveButton("계속"){ dialog, which ->
-                    findNavController().navigate(R.id.action_profileModifyFragment_to_profileFragment)
+                    moveProfile()
                 }
                 .show()
 //            findNavController().navigate(R.id.action_profileModifyFragment_to_profileFragment)
         }
         return binding.root
+    }
+
+    fun moveProfile(){
+        findNavController().navigate(R.id.action_profileModifyFragment2_to_profileFragment2)
     }
 }

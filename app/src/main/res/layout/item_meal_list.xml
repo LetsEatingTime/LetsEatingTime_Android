@@ -13,7 +13,8 @@
         android:padding="15dp"
         android:layout_marginHorizontal="15dp"
         android:layout_marginTop="15dp"
-        android:background="@drawable/bac_meal_list">
+        android:background="@drawable/bac_meal_list"
+        android:clickable="true">
         <TextView
             android:id="@+id/tv_date"
             android:layout_width="wrap_content"

@@ -1,4 +1,4 @@
-package com.alt.letseatingtime_android.ui.fragment
+package com.alt.letseatingtime_android.ui.fragment.meal
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

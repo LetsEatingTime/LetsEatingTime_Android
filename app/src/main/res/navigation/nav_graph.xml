@@ -6,47 +6,50 @@
     app:startDestination="@id/homeFragment2">
 
     <fragment
-        android:id="@+id/signupFragment1"
-        android:name="com.alt.letseatingtime_android.ui.fragment.signup.SignupFragment1"
-        android:label="SignupFragment1" />
-    <fragment
-        android:id="@+id/signupFragment2"
-        android:name="com.alt.letseatingtime_android.ui.fragment.signup.SignupFragment2"
-        android:label="SignupFragment2" />
-    <fragment
-        android:id="@+id/signupFragment3"
-        android:name="com.alt.letseatingtime_android.ui.fragment.signup.SignupFragment3"
-        android:label="SignupFragment3" />
-    <fragment
-        android:id="@+id/signupFragment4"
-        android:name="com.alt.letseatingtime_android.ui.fragment.signup.SignupFragment4"
-        android:label="SignupFragment4" />
-    <fragment
         android:id="@+id/goodsBuyFragment2"
         android:name="com.alt.letseatingtime_android.ui.fragment.store.GoodsBuyFragment"
         android:label="fragment_goods_buy"
-        tools:layout="@layout/fragment_goods_buy" />
+        tools:layout="@layout/fragment_goods_buy" >
+        <action
+            android:id="@+id/action_goodsBuyFragment2_to_storeFragment2"
+            app:destination="@id/storeFragment2" />
+    </fragment>
     <fragment
         android:id="@+id/homeFragment2"
         android:name="com.alt.letseatingtime_android.ui.fragment.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment2_to_mealListFragment"
+            app:destination="@id/mealListFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment2"
         android:name="com.alt.letseatingtime_android.ui.fragment.profile.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment2_to_profileModifyFragment2"
+            app:destination="@id/profileModifyFragment2" />
+    </fragment>
     <fragment
         android:id="@+id/profileModifyFragment2"
         android:name="com.alt.letseatingtime_android.ui.fragment.profile.ProfileModifyFragment"
         android:label="fragment_profile_modify"
-        tools:layout="@layout/fragment_profile_modify" />
+        tools:layout="@layout/fragment_profile_modify" >
+        <action
+            android:id="@+id/action_profileModifyFragment2_to_profileFragment2"
+            app:destination="@id/profileFragment2" />
+    </fragment>
     <fragment
         android:id="@+id/storeFragment2"
         android:name="com.alt.letseatingtime_android.ui.fragment.store.StoreFragment"
         android:label="fragment_store"
-        tools:layout="@layout/fragment_store" />
-    <include app:graph="@navigation/nav_store_test" />
+        tools:layout="@layout/fragment_store" >
+        <action
+            android:id="@+id/action_storeFragment2_to_goodsBuyFragment2"
+            app:destination="@id/goodsBuyFragment2" />
+    </fragment>
     <activity
         android:id="@+id/loginActivity"
         android:name="com.alt.letseatingtime_android.ui.activity.LoginActivity"
@@ -62,4 +65,12 @@
         android:name="com.alt.letseatingtime_android.ui.activity.SignupActivity"
         android:label="activity_signup"
         tools:layout="@layout/activity_signup" />
+    <fragment
+        android:id="@+id/mealListFragment"
+        android:name="com.alt.letseatingtime_android.ui.fragment.meal.MealListFragment"
+        android:label="MealListFragment" >
+        <action
+            android:id="@+id/action_mealListFragment_to_homeFragment2"
+            app:destination="@id/homeFragment2" />
+    </fragment>
 </navigation>

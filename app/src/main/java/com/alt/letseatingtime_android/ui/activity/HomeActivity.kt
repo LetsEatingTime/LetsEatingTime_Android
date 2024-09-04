@@ -10,6 +10,8 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
 import com.alt.letseatingtime.databinding.ActivityHomeBinding
 import com.alt.letseatingtime_android.MyApplication.Companion.prefs
 import com.alt.letseatingtime_android.network.retrofit.response.WithdrawResponse
@@ -39,6 +41,8 @@ class HomeActivity : AppCompatActivity() {
     private val binding: ActivityHomeBinding by lazy { ActivityHomeBinding.inflate(layoutInflater) }
     private lateinit var bottomNavigationView: BottomNavigationView
 
+
+
     private val bottomNavFragments = listOf(
         StoreFragment(),
         HomeFragment(),
@@ -58,55 +62,60 @@ class HomeActivity : AppCompatActivity() {
     private fun bottomTabBar() {
         bottomNavigationView = binding.bottomNav
 
-        supportFragmentManager.beginTransaction()
-            .replace(binding.homeFrameContainer.id, bottomNavFragments[1])
-            .commit()
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.home_frame_container) as NavHostFragment
+        val navView: BottomNavigationView = binding.bottomNav
+        navView.setupWithNavController(navHostFragment.navController)
 
-        bottomNavigationView.selectedItemId = R.id.homeFragment
 
-        bottomNavigationView.setOnItemSelectedListener {
-            val transaction = supportFragmentManager.beginTransaction()
-            when (it.itemId) {
-                R.id.storeFragment -> {
-                    transaction.setCustomAnimations(
-                        R.anim.anim_slide_in_from_left_fade_in,
-                        R.anim.anim_fade_out_200
-                    )
-                    transaction.replace(binding.homeFrameContainer.id, bottomNavFragments[0])
-                    transaction.commit()
-                    recentPosition = 0
-                    return@setOnItemSelectedListener true
-                }
-                R.id.homeFragment -> {
-                    if (recentPosition < 1) {
-                        transaction.setCustomAnimations(
-                            R.anim.anim_slide_in_from_right_fade_in,
-                            R.anim.anim_fade_out_200
-                        )
-                    } else {
-                        transaction.setCustomAnimations(
-                            R.anim.anim_slide_in_from_left_fade_in,
-                            R.anim.anim_fade_out_200
-                        )
-                    }
-                    transaction.replace(binding.homeFrameContainer.id, bottomNavFragments[1])
-                    transaction.commit()
-                    recentPosition = 1
-                    return@setOnItemSelectedListener true
-                }
-                R.id.profileFragment -> {
-                    transaction.setCustomAnimations(
-                        R.anim.anim_slide_in_from_right_fade_in,
-                        R.anim.anim_fade_out_200
-                    )
-                    transaction.replace(binding.homeFrameContainer.id, bottomNavFragments[2])
-                    transaction.commit()
-                    recentPosition = 4
-                    return@setOnItemSelectedListener true
-                }
-            }
-            return@setOnItemSelectedListener false
-        }
+//        supportFragmentManager.beginTransaction()
+//            .replace(binding.homeFrameContainer.id, bottomNavFragments[1])
+//            .commit()
+//
+//        bottomNavigationView.selectedItemId = R.id.homeFragment2
+//
+//        bottomNavigationView.setOnItemSelectedListener {
+//            val transaction = supportFragmentManager.beginTransaction()
+//            when (it.itemId) {
+//                R.id.storeFragment2 -> {
+//                    transaction.setCustomAnimations(
+//                        R.anim.anim_slide_in_from_left_fade_in,
+//                        R.anim.anim_fade_out_200
+//                    )
+//                    transaction.replace(binding.homeFrameContainer.id, bottomNavFragments[0])
+//                    transaction.commit()
+//                    recentPosition = 0
+//                    return@setOnItemSelectedListener true
+//                }
+//                R.id.homeFragment2 -> {
+//                    if (recentPosition < 1) {
+//                        transaction.setCustomAnimations(
+//                            R.anim.anim_slide_in_from_right_fade_in,
+//                            R.anim.anim_fade_out_200
+//                        )
+//                    } else {
+//                        transaction.setCustomAnimations(
+//                            R.anim.anim_slide_in_from_left_fade_in,
+//                            R.anim.anim_fade_out_200
+//                        )
+//                    }
+//                    transaction.replace(binding.homeFrameContainer.id, bottomNavFragments[1])
+//                    transaction.commit()
+//                    recentPosition = 1
+//                    return@setOnItemSelectedListener true
+//                }
+//                R.id.profileFragment2 -> {
+//                    transaction.setCustomAnimations(
+//                        R.anim.anim_slide_in_from_right_fade_in,
+//                        R.anim.anim_fade_out_200
+//                    )
+//                    transaction.replace(binding.homeFrameContainer.id, bottomNavFragments[2])
+//                    transaction.commit()
+//                    recentPosition = 4
+//                    return@setOnItemSelectedListener true
+//                }
+//            }
+//            return@setOnItemSelectedListener false
+//        }
     }
 
 }
