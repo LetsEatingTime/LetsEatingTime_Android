@@ -9,11 +9,14 @@
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:paddingBottom="100dp"
+            >
 
 
             <androidx.appcompat.widget.Toolbar
@@ -34,7 +37,8 @@
                 android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:paddingBottom="45dp"
-                app:layout_constraintTop_toBottomOf="@+id/tb_profile">
+                app:layout_constraintTop_toBottomOf="@+id/tb_profile"
+                >
 
                 <ImageView
                     android:id="@+id/iv_student_profile"
@@ -82,7 +86,10 @@
                 android:background="@color/white"
                 android:paddingHorizontal="23dp"
                 android:paddingVertical="16dp"
-                app:layout_constraintTop_toBottomOf="@id/clv_profile">
+                android:clickable="true"
+                app:layout_constraintTop_toBottomOf="@id/clv_profile"
+                >
+
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -113,6 +120,7 @@
                 android:background="@color/white"
                 android:paddingHorizontal="23dp"
                 android:paddingVertical="16dp"
+                android:clickable="true"
                 app:layout_constraintTop_toBottomOf="@id/clv_modify">
 
                 <TextView
@@ -177,6 +185,7 @@
                 android:background="@color/white"
                 android:paddingHorizontal="23dp"
                 android:paddingVertical="16dp"
+                android:clickable="true"
                 app:layout_constraintTop_toBottomOf="@id/clv_version">
 
                 <TextView
@@ -207,6 +216,7 @@
                 android:background="@color/white"
                 android:paddingHorizontal="23dp"
                 android:paddingVertical="16dp"
+                android:clickable="true"
                 app:layout_constraintTop_toBottomOf="@id/clv_logout">
 
                 <TextView

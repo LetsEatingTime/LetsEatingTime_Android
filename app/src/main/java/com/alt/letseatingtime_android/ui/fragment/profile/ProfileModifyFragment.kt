@@ -30,7 +30,6 @@ class ProfileModifyFragment : Fragment() {
             }
         }
         binding.btnProfileCancel.setOnClickListener {
-            //TODO : 진짜로 돌아가시겠습니까? dialog 추가하기.
             MaterialAlertDialogBuilder(requireContext())
                 .setMessage("정말로 돌아가시겠습니까?\n진행상황은 저장되지 않습니다.")
                 .setNegativeButton("취소"){ dialog, which ->
