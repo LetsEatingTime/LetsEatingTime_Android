@@ -1,63 +1,75 @@
 package com.alt.letseatingtime_android.ui.fragment.home
 
-import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.Color
+import android.icu.util.Calendar
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.content.res.AppCompatResources
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.alt.letseatingtime.R
-import com.alt.letseatingtime.databinding.ActivityHomeBinding
 import com.alt.letseatingtime.databinding.FragmentHomeBinding
-import com.alt.letseatingtime_android.MyApplication.Companion.prefs
 import com.alt.letseatingtime_android.network.retrofit.RetrofitClient
-import com.alt.letseatingtime_android.network.retrofit.RetrofitClient.api
-import com.alt.letseatingtime_android.network.retrofit.response.WithdrawResponse
 import com.alt.letseatingtime_android.network.retrofit.response.meal.MealResponse
-import com.alt.letseatingtime_android.network.retrofit.response.profile.ProfileResponse
-import com.alt.letseatingtime_android.ui.activity.LoginActivity
-import com.alt.letseatingtime_android.ui.adapter.meal.MealRecyclerViewAdapter
 import com.alt.letseatingtime_android.ui.adapter.meal.MealViewPagerAdapter
-import com.alt.letseatingtime_android.ui.fragment.profile.ProfileFragment
-import com.alt.letseatingtime_android.ui.fragment.store.StoreFragment
-import com.alt.letseatingtime_android.ui.viewmodel.UserActivityViewModel
 import com.alt.letseatingtime_android.util.OnSingleClickListener
 import com.alt.letseatingtime_android.util.shortToast
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.bumptech.glide.request.RequestOptions
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.time.LocalDate
 import java.time.LocalDateTime
-import java.time.LocalTime
 import java.time.format.DateTimeFormatter
+import java.util.GregorianCalendar
 
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
     private lateinit var mealAdapter: MealViewPagerAdapter
-    private val today: String = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"))
-
+    private val gregorianCalendar = GregorianCalendar()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
-        initRecyclerview(today)
+
+
+        //오늘 아침 00:00 ~ 8:29  |  내일 아침 19:10 ~ 23:59
+        //점심 8:30 ~ 13:29
+        //저녁 13:30 ~ 19:09
+
+
+        val time = (LocalDateTime.now().hour * 60) + LocalDateTime.now().minute
+
+        Log.d(
+            "test",
+            "h : ${LocalDateTime.now().hour},\nm : ${LocalDateTime.now().minute},\ns : ${LocalDateTime.now().second},\ntime : $time"
+        )
+        var day: String = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"))
+        var position = 0
+        when (time) {
+            in 510..809 -> { // 점심
+                Log.d("test", "today l")
+                position = 1
+            }
+            in 810..1149 -> { // 저녁
+                Log.d("test", "today d")
+                position = 2
+            }
+            in 1150..1439 -> {// 내일 아침
+                Log.d("test", "next day b")
+                val year = gregorianCalendar.get(Calendar.YEAR)
+                val today = gregorianCalendar.get(Calendar.DATE)
+                val month = gregorianCalendar.get(Calendar.MONTH)
+                day = String.format("%4d%02d%02d", year, month + 1, today + 1)
+            }
+            else -> {// 오늘 아침
+                Log.d("test", "today b")
+                position = 0
+            }
+        }
+        initRecyclerview(day, position)
         binding.clvMealMore.setOnClickListener(OnSingleClickListener {
             findNavController().navigate(R.id.action_homeFragment2_to_mealListFragment)
         })
@@ -68,14 +80,16 @@ class HomeFragment : Fragment() {
     }
 
     // TODO : 시간받고, position에 값 넣기
-    fun setMeal(data: MealResponse) {
+    fun setMeal(data: MealResponse, position : Int) {
+
 
         mealAdapter = MealViewPagerAdapter(
             todayMealDateList = listOf(
                 data.data.breakfast.menu.joinToString(", ", "", ""),
                 data.data.lunch.menu.joinToString(", ", "", ""),
                 data.data.dinner.menu.joinToString(", ", "", "")
-            )
+            ),
+            position = position
         )
         mealAdapter.notifyItemRemoved(0)
         with(binding) {
@@ -86,7 +100,7 @@ class HomeFragment : Fragment() {
 
     }
 
-    private fun initRecyclerview(date: String) {
+    private fun initRecyclerview(date: String, position : Int) {
         RetrofitClient.api.meal(date = date)
             .enqueue(object : Callback<MealResponse> {
                 override fun onResponse(
@@ -96,7 +110,7 @@ class HomeFragment : Fragment() {
                     val result = response.body()
                     if (response.isSuccessful) {
                         Log.d(requireActivity().packageName, "내용 : ${result}")
-                        setMeal(result!!)
+                        setMeal(result!!, position)
                     } else {
                         context?.shortToast("데이터를 불러오지 못했습니다.")
                     }
