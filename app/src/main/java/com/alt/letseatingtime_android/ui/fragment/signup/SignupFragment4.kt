@@ -1,4 +1,4 @@
-package com.alt.letseatingtime_android.ui.fragment
+package com.alt.letseatingtime_android.ui.fragment.signup
 
 import android.content.Intent
 import android.os.Bundle

@@ -3,7 +3,7 @@ package com.alt.letseatingtime_android.ui.activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import com.alt.letseatingtime_android.ui.fragment.SignupFragment1
+import com.alt.letseatingtime_android.ui.fragment.signup.SignupFragment1
 import com.alt.letseatingtime.R
 import com.alt.letseatingtime.databinding.ActivitySignupBinding
 
