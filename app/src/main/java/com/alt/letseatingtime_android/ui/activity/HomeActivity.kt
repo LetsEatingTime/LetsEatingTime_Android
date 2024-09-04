@@ -5,6 +5,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -22,6 +23,7 @@ import com.alt.letseatingtime_android.ui.fragment.home.HomeFragment
 import com.alt.letseatingtime_android.ui.fragment.profile.ProfileFragment
 import com.alt.letseatingtime_android.ui.fragment.store.StoreFragment
 import com.alt.letseatingtime_android.ui.viewmodel.UserActivityViewModel
+import com.alt.letseatingtime_android.util.BottomControllable
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -35,7 +37,7 @@ import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity(), BottomControllable {
     private val binding: ActivityHomeBinding by lazy { ActivityHomeBinding.inflate(layoutInflater) }
     private lateinit var bottomNavigationView: BottomNavigationView
 
@@ -106,6 +108,17 @@ class HomeActivity : AppCompatActivity() {
                 }
             }
             return@setOnItemSelectedListener false
+        }
+    }
+
+    override fun setBottomNavVisibility(visibility: Boolean) {
+        if (visibility){
+            binding.bottomNav.visibility = View.VISIBLE
+            binding.bottomLine.visibility = View.VISIBLE
+        }
+        else{
+            binding.bottomNav.visibility = View.GONE
+            binding.bottomLine.visibility = View.GONE
         }
     }
 
