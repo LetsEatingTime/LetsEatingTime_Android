@@ -40,6 +40,11 @@ class HomeFragment : Fragment() {
         //저녁 13:30 ~ 19:09
 
 
+        binding.cbtnScan.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment2_to_scanFragment)
+        }
+
+
         val time = (LocalDateTime.now().hour * 60) + LocalDateTime.now().minute
 
         Log.d(
