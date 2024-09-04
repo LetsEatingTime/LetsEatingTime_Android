@@ -17,8 +17,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:background="@color/white">
             <ImageView
+                android:id="@+id/iv_back_button"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
+                android:clickable="true"
                 android:src="@drawable/ic_back"
                 android:layout_marginStart="15dp"
                 android:layout_gravity="center"/>
@@ -35,6 +37,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/meal_recyclerview"
                 android:layout_width="match_parent"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 android:layout_height="match_parent"/>
         </LinearLayout>
     </LinearLayout>

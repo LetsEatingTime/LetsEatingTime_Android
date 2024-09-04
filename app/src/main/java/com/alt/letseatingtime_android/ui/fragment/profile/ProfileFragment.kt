@@ -1,23 +1,18 @@
 package com.alt.letseatingtime_android.ui.fragment.profile
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.alt.letseatingtime.R
 import com.alt.letseatingtime.databinding.FragmentProfileBinding
 import com.alt.letseatingtime_android.MyApplication
 import com.alt.letseatingtime_android.network.retrofit.RetrofitClient
-import com.alt.letseatingtime_android.network.retrofit.request.SignupRequest
-import com.alt.letseatingtime_android.network.retrofit.response.SignupResponse
 import com.alt.letseatingtime_android.network.retrofit.response.WithdrawResponse
-import com.alt.letseatingtime_android.ui.activity.LoginActivity
+import com.alt.letseatingtime_android.network.retrofit.response.profile.ProfileResponse
 import com.alt.letseatingtime_android.util.OnSingleClickListener
 import com.alt.letseatingtime_android.util.shortToast
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -36,10 +31,13 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
+
+
+
         binding.clvModify.setOnClickListener {
             findNavController().navigate(R.id.action_profileFragment2_to_profileModifyFragment2)
         }
-
+        initProfile()
 
         binding.clvLogout.setOnClickListener (OnSingleClickListener{
             MaterialAlertDialogBuilder(requireContext())
@@ -75,6 +73,38 @@ class ProfileFragment : Fragment() {
         })
 
         return binding.root
+    }
+
+    fun initProfile(){
+        RetrofitClient.api.profile("Bearer " + MyApplication.prefs.accessToken).enqueue(object  : Callback<ProfileResponse>{
+            override fun onResponse(
+                call: Call<ProfileResponse>,
+                response: Response<ProfileResponse>
+            ) {
+                val result = response.body()
+                if (response.isSuccessful) {
+                    binding.tvStudentName.text = "안녕하세요, ${result?.data?.user?.name}님"
+                    when(result?.data?.user?.userType){
+                        "T" -> {
+                            binding.tvStudentNumber.text = "선생님 계정입니다."
+                        }
+                        "S"->{
+                            binding.tvStudentNumber.text = "${result.data.user.grade}학년 ${result.data.user.className}반 ${result.data.user.classNo}번"
+                        }
+                    }
+                }
+                else{
+                    context?.shortToast("프로필 정보를 가져오지 못했습니다.")
+                }
+            }
+
+            override fun onFailure(call: Call<ProfileResponse>, t: Throwable) {
+                Log.e("server error", t.stackTraceToString())
+                context?.shortToast("서버 에러")
+            }
+        })
+
+
     }
 
 
