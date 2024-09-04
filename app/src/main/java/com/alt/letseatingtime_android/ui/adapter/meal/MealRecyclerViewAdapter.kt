@@ -1,4 +1,4 @@
-package com.alt.letseatingtime_android.ui.adapter
+package com.alt.letseatingtime_android.ui.adapter.meal
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.alt.letseatingtime.databinding.ItemMealListBinding
 import com.alt.letseatingtime_android.network.retrofit.response.meal.MealResponse
-import com.alt.letseatingtime_android.util.OnSingleClickListener
 
 class MealRecyclerViewAdapter(private val mealList: List<MealResponse>, val mealDate: String) :
     RecyclerView.Adapter<MealRecyclerViewAdapter.ViewHolder>() {

@@ -19,8 +19,10 @@ class SignupActivity : AppCompatActivity() {
         signupFragment1 = SignupFragment1.newInstance()
         supportFragmentManager.beginTransaction().replace(R.id.fragmentContainer, signupFragment1).commit()
 
+
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = ""
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -28,6 +30,7 @@ class SignupActivity : AppCompatActivity() {
             android.R.id.home -> {
                 finish()
                 return true
+
             }
         }
         return super.onOptionsItemSelected(item)

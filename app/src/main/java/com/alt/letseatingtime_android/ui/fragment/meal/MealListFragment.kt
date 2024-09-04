@@ -1,6 +1,5 @@
 package com.alt.letseatingtime_android.ui.fragment.meal
 
-import android.icu.util.Calendar
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -12,7 +11,7 @@ import com.alt.letseatingtime.R
 import com.alt.letseatingtime.databinding.FragmentMealListBinding
 import com.alt.letseatingtime_android.network.retrofit.RetrofitClient
 import com.alt.letseatingtime_android.network.retrofit.response.meal.MealResponse
-import com.alt.letseatingtime_android.ui.adapter.MealRecyclerViewAdapter
+import com.alt.letseatingtime_android.ui.adapter.meal.MealRecyclerViewAdapter
 import com.alt.letseatingtime_android.util.shortToast
 import retrofit2.Call
 import retrofit2.Callback
@@ -20,7 +19,6 @@ import retrofit2.Response
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.GregorianCalendar
-import java.util.Locale
 
 class MealListFragment : Fragment() {
 
