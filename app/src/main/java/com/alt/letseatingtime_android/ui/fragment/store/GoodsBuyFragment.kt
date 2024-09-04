@@ -12,6 +12,7 @@ import com.alt.letseatingtime.R
 import com.alt.letseatingtime.databinding.FragmentGoodsBuyBinding
 import com.alt.letseatingtime_android.ui.adapter.store.storedata.GoodsItem
 import com.alt.letseatingtime_android.ui.viewmodel.StoreViewModel
+import com.alt.letseatingtime_android.util.BottomControllable
 
 class GoodsBuyFragment : Fragment() {
     private var _binding: FragmentGoodsBuyBinding? = null
@@ -24,6 +25,7 @@ class GoodsBuyFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentGoodsBuyBinding.inflate(inflater, container, false)
+        (requireActivity() as BottomControllable).setBottomNavVisibility(false)
         with(binding) {
             tvGoodsName.text = viewModel.goodsData.value?.name
             tvPrice.text = viewModel.goodsData.value?.price.toString()
@@ -35,5 +37,9 @@ class GoodsBuyFragment : Fragment() {
             }
         }
         return binding.root
+    }
+    override fun onPause() {
+        super.onPause()
+        (requireActivity() as BottomControllable).setBottomNavVisibility(false)
     }
 }

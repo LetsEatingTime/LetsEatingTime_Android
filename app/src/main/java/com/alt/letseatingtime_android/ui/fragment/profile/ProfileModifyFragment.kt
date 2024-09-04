@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.alt.letseatingtime.R
 import com.alt.letseatingtime.databinding.FragmentProfileModifyBinding
+import com.alt.letseatingtime_android.util.BottomControllable
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 class ProfileModifyFragment : Fragment() {
     var _binding: FragmentProfileModifyBinding? = null
@@ -19,6 +20,7 @@ class ProfileModifyFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         _binding = FragmentProfileModifyBinding.inflate(inflater, container, false)
+        (requireActivity() as BottomControllable).setBottomNavVisibility(true)
         binding.btnSubmit.setOnClickListener {
             binding.btnSubmit.setOnClickListener {
                 with(binding) {
@@ -41,5 +43,9 @@ class ProfileModifyFragment : Fragment() {
 //            findNavController().navigate(R.id.action_profileModifyFragment_to_profileFragment)
         }
         return binding.root
+    }
+    override fun onPause() {
+        super.onPause()
+        (requireActivity() as BottomControllable).setBottomNavVisibility(false)
     }
 }
