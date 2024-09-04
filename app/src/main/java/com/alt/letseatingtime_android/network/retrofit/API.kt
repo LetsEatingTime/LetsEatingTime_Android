@@ -7,6 +7,7 @@ import com.alt.letseatingtime_android.network.retrofit.response.login.LoginRespo
 import com.alt.letseatingtime_android.network.retrofit.response.SignupResponse
 import com.alt.letseatingtime_android.network.retrofit.response.profile.ProfileResponse
 import com.alt.letseatingtime_android.network.retrofit.response.WithdrawResponse
+import com.alt.letseatingtime_android.network.retrofit.response.pwchange.PwChangeRequest
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.Body
@@ -26,6 +27,11 @@ interface API {
     fun signup(
         @Body body: SignupRequest
     ): Call<SignupResponse>
+
+    @POST("/api/account/pw-change")
+    fun pwChange(
+        @Body body: PwChangeRequest
+    ): Call<Unit>
 
     @GET("api/openapi/meal")
     fun meal(
