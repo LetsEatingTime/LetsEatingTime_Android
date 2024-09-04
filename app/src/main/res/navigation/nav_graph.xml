@@ -78,7 +78,7 @@
     </fragment>
     <fragment
         android:id="@+id/scanFragment"
-        android:name="com.alt.letseatingtime.ScanFragment"
+        android:name="com.alt.letseatingtime_android.ui.fragment.scan.ScanFragment"
         android:label="fragment_scan"
         tools:layout="@layout/fragment_scan" >
         <action
