@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
 
     <LinearLayout
-        android:id="@+id/ll_breakfast"
+        android:id="@+id/ll_background"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="73dp"
         android:orientation="horizontal"
         android:background="@drawable/bac_meal_list"
         android:padding="15dp"
@@ -18,19 +18,21 @@
         app:layout_constraintTop_toTopOf="parent"
         >
         <ImageView
-            android:id="@+id/iv_breakfast"
+            android:id="@+id/iv_time"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:src="@drawable/breakfast"/>
         <TextView
-            android:id="@+id/tv_breakfast"
+            android:id="@+id/tv_menu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="발아현미밥, 쇠고기낙지전골, 잡채, #LA쪽쪽갈비, 배추김치, 초코파운드케이크"
+            android:text="발아현미밥, 쇠고기낙지전골, 잡채, #LA쪽쪽갈비, 배추김치, 초코파운드케이크, 초코파운드케이크"
             android:textSize="14sp"
             android:textColor="@color/black"
             android:fontFamily="@font/pretendardregular"
-            android:layout_marginStart="10dp"/>
+            android:layout_marginStart="10dp"
+            android:maxLines="2"
+            android:ellipsize="end"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
