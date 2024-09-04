@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_homeFragment2_to_mealListFragment"
             app:destination="@id/mealListFragment" />
+        <action
+            android:id="@+id/action_homeFragment2_to_scanFragment"
+            app:destination="@id/scanFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment2"
@@ -71,6 +74,15 @@
         android:label="MealListFragment" >
         <action
             android:id="@+id/action_mealListFragment_to_homeFragment2"
+            app:destination="@id/homeFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/scanFragment"
+        android:name="com.alt.letseatingtime.ScanFragment"
+        android:label="fragment_scan"
+        tools:layout="@layout/fragment_scan" >
+        <action
+            android:id="@+id/action_scanFragment_to_homeFragment2"
             app:destination="@id/homeFragment2" />
     </fragment>
 </navigation>
