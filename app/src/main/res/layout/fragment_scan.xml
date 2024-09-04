@@ -72,10 +72,10 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_submit"
-        style="@style/btn_signup_submit"
+        android:id="@+id/btn_scan"
+        style="@style/btn_scan"
         android:layout_marginBottom="48dp"
-        android:fontFamily="@font/pretendardmedium"
+        android:fontFamily="@font/pretendardsemibold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
