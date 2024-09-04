@@ -31,13 +31,42 @@
     </androidx.appcompat.widget.Toolbar>
 
     <View
-        android:id="@+id/line"
+        android:id="@+id/v_line"
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tb_goods_buy"
+        app:layout_constraintTop_toBottomOf="@id/tb_scan"
         android:background="@drawable/bottom_line"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/v_line"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="135dp"
+        >
+
+        <ImageView
+            android:id="@+id/iv_scan_image"
+            android:layout_width="300dp"
+            android:layout_height="252dp"
+            android:src="@drawable/img_eating_food"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/iv_scan_image"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="잔반을 스캔하기 위해\n사진을 찍어 주세요."
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:fontFamily="@font/pretendardbold"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_submit"
