@@ -1,5 +1,6 @@
 package com.alt.letseatingtime_android.ui.fragment.meal
 
+import android.icu.util.Calendar
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -24,7 +25,6 @@ class MealListFragment : Fragment() {
 
     private lateinit var binding: FragmentMealListBinding
 
-    private val gregorianCalendar = GregorianCalendar()
     private val today : String = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"))
 
     override fun onCreateView(
