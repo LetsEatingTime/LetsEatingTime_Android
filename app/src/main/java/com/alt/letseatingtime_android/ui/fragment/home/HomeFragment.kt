@@ -5,6 +5,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,19 +15,24 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.viewpager2.widget.ViewPager2
 import com.alt.letseatingtime.R
 import com.alt.letseatingtime.databinding.ActivityHomeBinding
 import com.alt.letseatingtime.databinding.FragmentHomeBinding
 import com.alt.letseatingtime_android.MyApplication.Companion.prefs
+import com.alt.letseatingtime_android.network.retrofit.RetrofitClient
 import com.alt.letseatingtime_android.network.retrofit.RetrofitClient.api
 import com.alt.letseatingtime_android.network.retrofit.response.WithdrawResponse
 import com.alt.letseatingtime_android.network.retrofit.response.meal.MealResponse
 import com.alt.letseatingtime_android.network.retrofit.response.profile.ProfileResponse
 import com.alt.letseatingtime_android.ui.activity.LoginActivity
+import com.alt.letseatingtime_android.ui.adapter.meal.MealRecyclerViewAdapter
+import com.alt.letseatingtime_android.ui.adapter.meal.MealViewPagerAdapter
 import com.alt.letseatingtime_android.ui.fragment.profile.ProfileFragment
 import com.alt.letseatingtime_android.ui.fragment.store.StoreFragment
 import com.alt.letseatingtime_android.ui.viewmodel.UserActivityViewModel
 import com.alt.letseatingtime_android.util.OnSingleClickListener
+import com.alt.letseatingtime_android.util.shortToast
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
@@ -43,20 +49,66 @@ import java.time.format.DateTimeFormatter
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
+    private lateinit var mealAdapter: MealViewPagerAdapter
+    private val today: String = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"))
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
-
-        binding.clvMealMore.setOnClickListener(OnSingleClickListener{
+        initRecyclerview(today)
+        binding.clvMealMore.setOnClickListener(OnSingleClickListener {
             findNavController().navigate(R.id.action_homeFragment2_to_mealListFragment)
         })
+
+
 
         return binding.root
     }
 
+    // TODO : 시간받고, position에 값 넣기
+    fun setMeal(data: MealResponse) {
+
+        mealAdapter = MealViewPagerAdapter(
+            todayMealDateList = listOf(
+                data.data.breakfast.menu.joinToString(", ", "", ""),
+                data.data.lunch.menu.joinToString(", ", "", ""),
+                data.data.dinner.menu.joinToString(", ", "", "")
+            )
+        )
+        mealAdapter.notifyItemRemoved(0)
+        with(binding) {
+            vp2TodayMeal.adapter = mealAdapter
+            vp2TodayMeal.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+        }
+
+
+    }
+
+    private fun initRecyclerview(date: String) {
+        RetrofitClient.api.meal(date = date)
+            .enqueue(object : Callback<MealResponse> {
+                override fun onResponse(
+                    call: Call<MealResponse>,
+                    response: Response<MealResponse>
+                ) {
+                    val result = response.body()
+                    if (response.isSuccessful) {
+                        Log.d(requireActivity().packageName, "내용 : ${result}")
+                        setMeal(result!!)
+                    } else {
+                        context?.shortToast("데이터를 불러오지 못했습니다.")
+                    }
+                }
+
+                override fun onFailure(call: Call<MealResponse>, t: Throwable) {
+                    context?.shortToast("서버 애러")
+                    t.printStackTrace()
+                }
+            })
+    }
+}
 
 //    private val binding: ActivityHomeBinding by lazy { ActivityHomeBinding.inflate(layoutInflater) }
 //    private lateinit var bottomNavigationView: BottomNavigationView
@@ -418,4 +470,4 @@ class HomeFragment : Fragment() {
 //        }
 //
 //    }
-}
+//}
