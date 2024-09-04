@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.alt.letseatingtime.R
 import com.alt.letseatingtime.databinding.ActivityHomeBinding
 import com.alt.letseatingtime.databinding.FragmentHomeBinding
@@ -25,6 +26,7 @@ import com.alt.letseatingtime_android.ui.activity.LoginActivity
 import com.alt.letseatingtime_android.ui.fragment.profile.ProfileFragment
 import com.alt.letseatingtime_android.ui.fragment.store.StoreFragment
 import com.alt.letseatingtime_android.ui.viewmodel.UserActivityViewModel
+import com.alt.letseatingtime_android.util.OnSingleClickListener
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
@@ -47,6 +49,10 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
+
+        binding.clvMealMore.setOnClickListener(OnSingleClickListener{
+            findNavController().navigate(R.id.action_homeFragment2_to_mealListFragment)
+        })
 
         return binding.root
     }

@@ -70,7 +70,8 @@
                 android:padding="6dp"
                 app:layout_constraintBottom_toBottomOf="@id/tv_today_meal"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/tv_today_meal">
+                app:layout_constraintTop_toTopOf="@id/tv_today_meal"
+                >
 
                 <TextView
                     android:id="@+id/tv_meal_more"

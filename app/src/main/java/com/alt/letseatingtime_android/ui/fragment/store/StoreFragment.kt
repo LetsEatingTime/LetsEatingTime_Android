@@ -45,7 +45,7 @@ class StoreFragment : Fragment() {
 
     private fun moveScreen(deliver: GoodsItem) {
         viewModel.setGoodsData(deliver)
-        findNavController().navigate(R.id.action_storeFragment_to_goodsBuyFragment)
+        findNavController().navigate(R.id.action_storeFragment2_to_goodsBuyFragment2)
     }
 
 }

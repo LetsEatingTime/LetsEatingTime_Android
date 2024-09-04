@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/storeFragment"
+        android:id="@+id/storeFragment2"
         android:enabled="true"
         android:title="상점"
         android:icon="@drawable/ic_shopping_basket"/>
     <item
-        android:id="@+id/homeFragment"
+        android:id="@+id/homeFragment2"
         android:enabled="true"
         android:title="홈"
         android:icon="@drawable/ic_home"/>
     <item
-        android:id="@+id/profileFragment"
+        android:id="@+id/profileFragment2"
         android:enabled="true"
         android:title="프로필"
         android:icon="@drawable/ic_person"/>

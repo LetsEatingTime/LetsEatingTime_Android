@@ -30,7 +30,7 @@ class GoodsBuyFragment : Fragment() {
             ivGoodsImage.load(viewModel.goodsData.value?.imageUrl)
 
             ibBackButton.setOnClickListener {
-                findNavController().navigate(R.id.action_goodsBuyFragment_to_storeFragment)
+                findNavController().navigate(R.id.action_goodsBuyFragment2_to_storeFragment2)
 
             }
         }

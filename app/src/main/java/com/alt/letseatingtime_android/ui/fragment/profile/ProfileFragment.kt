@@ -37,7 +37,7 @@ class ProfileFragment : Fragment() {
     ): View {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
         binding.clvModify.setOnClickListener {
-            findNavController().navigate(R.id.action_profileFragment_to_profileModifyFragment)
+            findNavController().navigate(R.id.action_profileFragment2_to_profileModifyFragment2)
         }
 
 
