@@ -27,8 +27,7 @@ class MealViewPagerAdapter(val todayMealDateList : List<String>, position: Int =
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MealViewHolder {
-        val binding =
-            ItemMealBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemMealBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
         return MealViewHolder(binding)
     }
