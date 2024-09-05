@@ -97,9 +97,11 @@ class HomeFragment : Fragment() {
             position = position
         )
         mealAdapter.notifyItemRemoved(0)
+
         with(binding) {
             vp2TodayMeal.adapter = mealAdapter
             vp2TodayMeal.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+            vp2TodayMeal.setCurrentItem(1, false)
         }
 
 
