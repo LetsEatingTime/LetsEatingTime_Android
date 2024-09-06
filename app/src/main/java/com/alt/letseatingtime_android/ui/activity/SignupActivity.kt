@@ -1,5 +1,6 @@
 package com.alt.letseatingtime_android.ui.activity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
@@ -15,6 +16,21 @@ class SignupActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        binding.ibBackButton.setOnClickListener {
+            //백스택을 확인 후 0이면 로그인 화면으로 그 외라면 백스택 1개를 지운다.
+            if(supportFragmentManager.backStackEntryCount == 0){
+
+                    Intent(this, LoginActivity::class.java).also { intent ->
+                        startActivity(intent)
+                    }
+                    this.finish()
+            }
+            else{
+                supportFragmentManager.popBackStack()
+            }
+        }
+
+
         // 처음에 프레그먼트1로 이동
         signupFragment1 = SignupFragment1.newInstance()
         supportFragmentManager.beginTransaction().replace(R.id.fragmentContainer, signupFragment1).commit()
@@ -24,6 +40,7 @@ class SignupActivity : AppCompatActivity() {
         supportActionBar?.title = ""
 
     }
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
