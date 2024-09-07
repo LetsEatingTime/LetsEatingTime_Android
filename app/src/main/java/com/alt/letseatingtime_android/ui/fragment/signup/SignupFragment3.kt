@@ -1,5 +1,6 @@
 package com.alt.letseatingtime_android.ui.fragment.signup
 
+import android.content.Intent
 import androidx.fragment.app.Fragment
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import android.widget.Toast
 import com.alt.letseatingtime_android.util.LoginPattern
 import com.alt.letseatingtime.R
 import com.alt.letseatingtime.databinding.Signup3Binding
+import com.alt.letseatingtime_android.ui.activity.LoginActivity
 import com.alt.letseatingtime_android.util.OnSingleClickListener
 import java.util.regex.Pattern
 
@@ -41,6 +43,14 @@ class SignupFragment3 : Fragment() {
                 Toast.makeText(activity, "한글로 입력해주세요", Toast.LENGTH_SHORT).show()
             }
         })
+        binding.tvToLogin.setOnClickListener {
+            requireActivity().let {
+                Intent(context, LoginActivity::class.java).also { intent ->
+                    startActivity(intent)
+                }
+                it.finish()
+            }
+        }
 
         return binding.root
     }

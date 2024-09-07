@@ -35,6 +35,8 @@ class SignupFragment4 : Fragment() {
         val id = arguments?.getString("id").toString()
         val pw = arguments?.getString("pw").toString()
         val name = arguments?.getString("name").toString()
+
+
         with(binding) {
             btnSubmit.setOnClickListener(OnSingleClickListener {
                 val grade = etGrade.text.toString()
@@ -61,6 +63,14 @@ class SignupFragment4 : Fragment() {
                     Toast.makeText(activity, "모두 입력해주세요", Toast.LENGTH_SHORT).show()
                 }
             })
+            tvToLogin.setOnClickListener {
+                requireActivity().let {
+                    Intent(context, LoginActivity::class.java).also { intent ->
+                        startActivity(intent)
+                    }
+                    it.finish()
+                }
+            }
         }
         return binding.root
     }

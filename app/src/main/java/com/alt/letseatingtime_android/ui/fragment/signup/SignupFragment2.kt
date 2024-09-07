@@ -1,5 +1,6 @@
 package com.alt.letseatingtime_android.ui.fragment.signup
 
+import android.content.Intent
 import androidx.fragment.app.Fragment
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.alt.letseatingtime.R
 import com.alt.letseatingtime.databinding.Signup2Binding
+import com.alt.letseatingtime_android.ui.activity.LoginActivity
 import com.alt.letseatingtime_android.util.LoginPattern
 import com.alt.letseatingtime_android.util.OnSingleClickListener
 import java.util.regex.Pattern
@@ -25,6 +27,8 @@ class SignupFragment2 : Fragment() {
         binding = Signup2Binding.inflate(inflater, container, false)
         val id = arguments?.getString("id").toString()
         val pattern = Pattern.compile(LoginPattern.pw)
+
+
         binding.btnSubmit.setOnClickListener(OnSingleClickListener {
             val pw = binding.etPw.text.toString()
             if(pattern.matcher(pw).find()){
@@ -40,6 +44,15 @@ class SignupFragment2 : Fragment() {
                 Toast.makeText(activity, "대소문자, 특수문자, 숫자만 들어갈수 있습니다", Toast.LENGTH_SHORT).show()
             }
         })
+
+        binding.tvToLogin.setOnClickListener {
+            requireActivity().let {
+                Intent(context, LoginActivity::class.java).also { intent ->
+                    startActivity(intent)
+                }
+                it.finish()
+            }
+        }
 
         return binding.root
     }
