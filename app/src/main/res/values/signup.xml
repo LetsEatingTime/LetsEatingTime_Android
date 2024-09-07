@@ -43,4 +43,13 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">48dp</item>
     </style>
+
+    <style name="tv_to_login">
+        <item name="android:text">로그인으로</item>
+        <item name="android:textSize">14dp</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:textColor">@color/line1</item>
+        <item name="android:clickable">true</item>
+
+    </style>
 </resources>

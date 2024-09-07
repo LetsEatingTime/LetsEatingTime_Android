@@ -1,5 +1,6 @@
 package com.alt.letseatingtime_android.ui.fragment.signup
 
+import android.content.Intent
 import androidx.fragment.app.Fragment
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import android.widget.Toast
 import com.alt.letseatingtime_android.util.LoginPattern
 import com.alt.letseatingtime.R
 import com.alt.letseatingtime.databinding.Signup1Binding
+import com.alt.letseatingtime_android.ui.activity.LoginActivity
 import com.alt.letseatingtime_android.util.OnSingleClickListener
 import java.util.regex.Pattern
 
@@ -27,6 +29,16 @@ class SignupFragment1 : Fragment() {
         val binding = Signup1Binding.inflate(inflater, container, false)
         val signupFragment2 = SignupFragment2()
         val pattern = Pattern.compile(LoginPattern.id)
+
+
+        binding.tvToLogin.setOnClickListener {
+            requireActivity().let {
+                Intent(context, LoginActivity::class.java).also { intent ->
+                    startActivity(intent)
+                }
+                it.finish()
+            }
+        }
 
         binding.btnSubmit.setOnClickListener(OnSingleClickListener{
             val id = binding.etId.text.toString()
