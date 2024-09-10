@@ -8,6 +8,9 @@
         android:name="android.hardware.nfc"
         android:required="true" />
 
+    <!-- intent로 불러올 기본 camera feature 설정 -->
+    <uses-feature android:name="android.hardware.camera2" />
+
     <application
         android:name="com.alt.letseatingtime_android.MyApplication"
         android:allowBackup="true"
