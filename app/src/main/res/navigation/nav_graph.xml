@@ -84,5 +84,32 @@
         <action
             android:id="@+id/action_scanFragment_to_homeFragment2"
             app:destination="@id/homeFragment2" />
+        <action
+            android:id="@+id/action_scanFragment_to_cameraFragment"
+            app:destination="@id/cameraFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/cameraFragment"
+        android:name="com.alt.letseatingtime_android.ui.fragment.scan.CameraFragment"
+        android:label="fragment_camera"
+        tools:layout="@layout/fragment_camera" >
+        <action
+            android:id="@+id/action_cameraFragment_to_scanFragment"
+            app:destination="@id/scanFragment" />
+        <action
+            android:id="@+id/action_cameraFragment_to_imageResultFragment"
+            app:destination="@id/imageResultFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/imageResultFragment"
+        android:name="com.alt.letseatingtime.ImageResultFragment"
+        android:label="fragment_image_result"
+        tools:layout="@layout/fragment_image_result" >
+        <action
+            android:id="@+id/action_imageResultFragment_to_homeFragment2"
+            app:destination="@id/homeFragment2" />
+        <action
+            android:id="@+id/action_imageResultFragment_to_cameraFragment"
+            app:destination="@id/cameraFragment" />
     </fragment>
 </navigation>
