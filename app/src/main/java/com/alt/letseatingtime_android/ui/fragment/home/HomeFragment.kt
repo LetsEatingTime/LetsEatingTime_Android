@@ -14,6 +14,7 @@ import com.alt.letseatingtime.databinding.FragmentHomeBinding
 import com.alt.letseatingtime_android.network.retrofit.RetrofitClient
 import com.alt.letseatingtime_android.network.retrofit.response.meal.MealResponse
 import com.alt.letseatingtime_android.ui.adapter.meal.MealViewPagerAdapter
+import com.alt.letseatingtime_android.util.BottomController
 import com.alt.letseatingtime_android.util.OnSingleClickListener
 import com.alt.letseatingtime_android.util.shortToast
 import retrofit2.Call
@@ -33,7 +34,7 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
-
+        (requireActivity() as BottomController).setBottomNavVisibility(true)
 
         //오늘 아침 00:00 ~ 8:29  |  내일 아침 19:10 ~ 23:59
         //점심 8:30 ~ 13:29
