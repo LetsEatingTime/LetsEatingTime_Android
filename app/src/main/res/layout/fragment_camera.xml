@@ -6,43 +6,111 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.alt.letseatingtime_android.ui.fragment.scan.CameraFragment">
 
-    <Button
-        android:id="@+id/camera_capture_button"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginBottom="50dp"
-        android:scaleType="fitCenter"
-        android:text="Take Photo"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:elevation="2dp" />
-
-    <Button
-        android:id="@+id/camera_back_button"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginBottom="50dp"
-        android:scaleType="fitCenter"
-        android:text="bakc"
-        app:layout_constraintStart_toEndOf="@id/camera_capture_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:elevation="2dp" />
-    <Button
-        android:id="@+id/camera_gallery_button"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginBottom="50dp"
-        android:scaleType="fitCenter"
-        android:text="gallery"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/camera_capture_button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:elevation="2dp" />
-
     <androidx.camera.view.PreviewView
         android:id="@+id/viewFinder"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:paddingHorizontal="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="#202020"
+        >
+
+        <ImageButton
+            android:id="@+id/camera_capture_button"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:scaleType="fitCenter"
+            android:background="@color/invisible"
+            android:src="@drawable/img_camera_btn"
+            app:layout_constraintTop_toBottomOf="@id/clv_back"
+            app:layout_constraintBottom_toTopOf="@id/clv_gallery"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:elevation="2dp" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/camera_capture_button"
+            >
+
+        <ImageButton
+            android:id="@+id/camera_back_button"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:scaleType="fitCenter"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:src="@drawable/ic_delete"
+            android:background="@color/invisible"
+            app:layout_constraintStart_toStartOf="parent"
+            android:elevation="2dp" />
+
+        <TextView
+            android:id="@+id/tv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="돌아가기"
+            app:layout_constraintTop_toBottomOf="@id/camera_back_button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textSize="11sp"
+            android:layout_marginTop="3dp"
+            android:fontFamily="@font/pretendardsemibold"
+            android:textColor="@color/white"
+            />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clv_gallery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/camera_capture_button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            >
+
+            <ImageButton
+                android:id="@+id/camera_gallery_button"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:scaleType="fitCenter"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/tv_gallery"
+                app:layout_constraintVertical_chainStyle="packed"
+                android:elevation="2dp"
+                android:src="@drawable/ic_gallery"
+                android:background="@color/invisible"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                />
+            <TextView
+                android:id="@+id/tv_gallery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="불러오기"
+                app:layout_constraintTop_toBottomOf="@id/camera_gallery_button"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:textSize="11sp"
+                android:layout_marginTop="3dp"
+                android:fontFamily="@font/pretendardsemibold"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

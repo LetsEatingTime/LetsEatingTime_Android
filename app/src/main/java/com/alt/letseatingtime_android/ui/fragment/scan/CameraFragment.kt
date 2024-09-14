@@ -134,7 +134,7 @@ class CameraFragment : Fragment() {
 
         startCamera()
 
-        binding.cameraBackButton.setOnClickListener {
+        binding.clvBack.setOnClickListener {
             findNavController().navigate(R.id.action_cameraFragment_to_scanFragment)
         }
 
@@ -142,7 +142,7 @@ class CameraFragment : Fragment() {
             takePhoto()  // 사진 촬영 기능 추가
         }
 
-        binding.cameraGalleryButton.setOnSingleClickListener {
+        binding.clvGallery.setOnSingleClickListener {
             // 갤러리 열기 기능 추가 가능
         }
         return binding.root

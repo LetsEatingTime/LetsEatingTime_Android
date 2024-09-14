@@ -21,5 +21,6 @@
     <color name="good">#86EA83</color>
     <color name="cautionary">#FFED4C</color>
     <color name="background">#FAFAFA</color>
+    <color name="invisible">#00525252</color>
     <color name="button_submit">#525252</color>
 </resources>
