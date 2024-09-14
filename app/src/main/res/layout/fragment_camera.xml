@@ -10,8 +10,18 @@
         android:id="@+id/viewFinder"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+    <View
+        android:layout_width="365dp"
+        android:layout_height="270dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/clv_tool"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/scan_line"
+        />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clv_tool"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:paddingHorizontal="20dp"
