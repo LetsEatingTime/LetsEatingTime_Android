@@ -3,10 +3,11 @@ package com.alt.letseatingtime_android.ui.fragment.home
 import android.icu.util.Calendar
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.alt.letseatingtime.R
@@ -14,6 +15,8 @@ import com.alt.letseatingtime.databinding.FragmentHomeBinding
 import com.alt.letseatingtime_android.network.retrofit.RetrofitClient
 import com.alt.letseatingtime_android.network.retrofit.response.meal.MealResponse
 import com.alt.letseatingtime_android.ui.adapter.meal.MealViewPagerAdapter
+import com.alt.letseatingtime_android.ui.adapter.store.StoreGoods1Adapter
+import com.alt.letseatingtime_android.ui.viewmodel.StoreViewModel
 import com.alt.letseatingtime_android.util.BottomController
 import com.alt.letseatingtime_android.util.OnSingleClickListener
 import com.alt.letseatingtime_android.util.shortToast
@@ -29,6 +32,7 @@ class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var mealAdapter: MealViewPagerAdapter
     private val gregorianCalendar = GregorianCalendar()
+    private val goodsViewModel  by activityViewModels<StoreViewModel>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -39,6 +43,17 @@ class HomeFragment : Fragment() {
         //오늘 아침 00:00 ~ 8:29  |  내일 아침 19:10 ~ 23:59
         //점심 8:30 ~ 13:29
         //저녁 13:30 ~ 19:09
+
+        goodsViewModel.getGoods()
+
+        goodsViewModel.goodsDataList.observe(viewLifecycleOwner){
+            with(binding) {
+                rvForUserItems.adapter = StoreGoods1Adapter(it) { position ->
+                    goodsViewModel.setGoodsData(it[position])
+                    findNavController().navigate(R.id.action_homeFragment2_to_goodsBuyFragment2)
+                }
+            }
+        }
 
 
         binding.cbtnScan.setOnClickListener {

@@ -9,6 +9,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.alt.letseatingtime.R
 import com.alt.letseatingtime.databinding.FragmentStoreBinding
+import com.alt.letseatingtime_android.network.retrofit.response.goods.StoreResponse
 import com.alt.letseatingtime_android.ui.adapter.store.StoreGoods1Adapter
 import com.alt.letseatingtime_android.ui.adapter.store.StoreGoods2Adapter
 import com.alt.letseatingtime_android.ui.adapter.store.storedata.GoodsItem
@@ -26,24 +27,25 @@ class StoreFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentStoreBinding.inflate(inflater, container, false)
-        val testList = mutableListOf<GoodsItem>()
-        for (i in 0..10) {
-            testList.add(GoodsItem(i))
-        }
-        with(binding) {
-            rvForUserItems.adapter = StoreGoods1Adapter(testList) { position ->
-                moveScreen(testList[position])
-            }
+        viewModel.getGoods()
 
-            rvUserItems.adapter = StoreGoods2Adapter(testList) { position ->
-                moveScreen(testList[position])
+        viewModel.goodsDataList.observe(viewLifecycleOwner){
+            with(binding) {
+                rvForUserItems.adapter = StoreGoods1Adapter(it) { position ->
+                    moveScreen(it[position])
+                }
+
+                rvUserItems.adapter = StoreGoods2Adapter(it) { position ->
+                    moveScreen(it[position])
+                }
             }
         }
+
 
         return binding.root
     }
 
-    private fun moveScreen(deliver: GoodsItem) {
+    private fun moveScreen(deliver:StoreResponse) {
         viewModel.setGoodsData(deliver)
         findNavController().navigate(R.id.action_storeFragment2_to_goodsBuyFragment2)
     }

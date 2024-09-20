@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.alt.letseatingtime_android.ui.fragment.store.StoreFragment"
     android:paddingTop="32dp"
-    android:background="@color/white">
+    android:background="@color/background">
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
