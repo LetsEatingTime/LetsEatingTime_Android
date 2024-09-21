@@ -9,6 +9,9 @@ import android.view.LayoutInflater
 import android.view.Surface
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.ActivityResultCallback
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.camera.core.Camera
 import androidx.camera.core.CameraControl
 import androidx.camera.core.CameraSelector
@@ -25,6 +28,8 @@ import com.alt.letseatingtime.databinding.FragmentCameraBinding
 import com.alt.letseatingtime_android.ui.viewmodel.ScanViewModel
 import com.alt.letseatingtime_android.util.BottomController
 import com.alt.letseatingtime_android.util.setOnSingleClickListener
+import com.alt.letseatingtime_android.util.shortToast
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -39,7 +44,7 @@ class CameraFragment : Fragment() {
     private var imageCapture: ImageCapture? = null
     private lateinit var cameraExecutor: ExecutorService
     private val viewModel by activityViewModels<ScanViewModel>()
-
+    private lateinit var getImage: ActivityResultLauncher<String>
 
 
     private fun getOutputMediaFile(): File? {
@@ -120,7 +125,19 @@ class CameraFragment : Fragment() {
         super.onCreate(savedInstanceState)
         requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
         (requireActivity() as BottomController).setBottomNavVisibility(false)
-
+        getImage = registerForActivityResult(
+            ActivityResultContracts.GetContent(),
+            ActivityResultCallback{
+                    uri ->
+                if (uri == null){
+                    requireContext().shortToast("이미지가 선택되지 않았습니다")
+                }
+                else{
+                    viewModel.setUri(uri)
+                    findNavController().navigate(R.id.action_cameraFragment_to_imageResultFragment)
+                }
+            }
+        )
         cameraExecutor = Executors.newSingleThreadExecutor()
     }
 
@@ -143,7 +160,7 @@ class CameraFragment : Fragment() {
         }
 
         binding.clvGallery.setOnSingleClickListener {
-            // 갤러리 열기 기능 추가 가능
+            getImage.launch("image/*")
         }
         return binding.root
     }
