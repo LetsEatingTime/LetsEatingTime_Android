@@ -94,6 +94,7 @@ class ProfileFragment : Fragment() {
                     }
                 }
                 else{
+                    Log.e("ProfileFragment", "${response.errorBody().toString()}, ${response.code()}, ${response.body()}, ${response.message()}")
                     context?.shortToast("프로필 정보를 가져오지 못했습니다.")
                 }
             }
@@ -121,6 +122,7 @@ class ProfileFragment : Fragment() {
                     requireActivity().finish()
                 }
                 else{
+                    Log.e("ProfileFragment", "${response.errorBody().toString()}, ${response.code()}, ${response.body()}, ${response.message()}")
                     context?.shortToast("회원탈퇴 실패 다시 시도해 주세요.")
                 }
             }
