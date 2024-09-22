@@ -7,7 +7,9 @@ import com.alt.letseatingtime_android.network.retrofit.response.login.LoginRespo
 import com.alt.letseatingtime_android.network.retrofit.response.SignupResponse
 import com.alt.letseatingtime_android.network.retrofit.response.profile.ProfileResponse
 import com.alt.letseatingtime_android.network.retrofit.response.WithdrawResponse
+import com.alt.letseatingtime_android.network.retrofit.response.goods.StoreResponse
 import com.alt.letseatingtime_android.network.retrofit.response.pwchange.PwChangeRequest
+import com.alt.letseatingtime_android.network.retrofit.response.util.BaseResponse
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.Body
@@ -59,5 +61,9 @@ interface API {
     fun withdraw(
         @Header("Authorization") Authorization: String
     ): Call<WithdrawResponse>
+
+    @GET("/api/product/all")
+    fun getStoreList(
+    ): Call<BaseResponse<List<StoreResponse>>>
 
 }

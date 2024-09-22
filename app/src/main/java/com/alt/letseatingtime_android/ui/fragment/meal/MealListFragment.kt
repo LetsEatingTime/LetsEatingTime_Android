@@ -13,6 +13,7 @@ import com.alt.letseatingtime.databinding.FragmentMealListBinding
 import com.alt.letseatingtime_android.network.retrofit.RetrofitClient
 import com.alt.letseatingtime_android.network.retrofit.response.meal.MealResponse
 import com.alt.letseatingtime_android.ui.adapter.meal.MealRecyclerViewAdapter
+import com.alt.letseatingtime_android.util.BottomController
 import com.alt.letseatingtime_android.util.shortToast
 import retrofit2.Call
 import retrofit2.Callback
@@ -32,6 +33,7 @@ class MealListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentMealListBinding.inflate(inflater, container, false)
+        (requireActivity() as BottomController).setBottomNavVisibility(false)
 
         initRecyclerview(today)
 
@@ -64,5 +66,10 @@ class MealListFragment : Fragment() {
                     t.printStackTrace()
                 }
             })
+    }
+
+    override fun onPause() {
+        super.onPause()
+        (requireActivity() as BottomController).setBottomNavVisibility(true)
     }
 }
