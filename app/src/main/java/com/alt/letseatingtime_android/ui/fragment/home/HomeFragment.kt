@@ -49,7 +49,6 @@ class HomeFragment : Fragment() {
 
         initProfile()
 
-
         val time = (LocalDateTime.now().hour * 60) + LocalDateTime.now().minute
 
         Log.d(
@@ -98,6 +97,7 @@ class HomeFragment : Fragment() {
                 val result = response.body()
                 if (response.isSuccessful) {
                     binding.tvRecommendTitle.text = "${result?.data?.user?.name}님을 위한 추천"
+                    binding.tvPointInfo.text = "현재 ${result?.data?.user?.name}님의 \n소지 포인트"
                 }
                 else{
                     Log.e("HomeFragment", "${response.errorBody().toString()}, ${response.code()}, ${response.body()}, ${response.message()}")
