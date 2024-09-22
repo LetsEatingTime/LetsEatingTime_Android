@@ -11,8 +11,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.alt.letseatingtime.R
 import com.alt.letseatingtime.databinding.FragmentHomeBinding
+import com.alt.letseatingtime_android.MyApplication
 import com.alt.letseatingtime_android.network.retrofit.RetrofitClient
 import com.alt.letseatingtime_android.network.retrofit.response.meal.MealResponse
+import com.alt.letseatingtime_android.network.retrofit.response.profile.ProfileResponse
 import com.alt.letseatingtime_android.ui.adapter.meal.MealViewPagerAdapter
 import com.alt.letseatingtime_android.util.BottomController
 import com.alt.letseatingtime_android.util.OnSingleClickListener
@@ -44,6 +46,8 @@ class HomeFragment : Fragment() {
         binding.cbtnScan.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment2_to_scanFragment)
         }
+
+        initProfile()
 
 
         val time = (LocalDateTime.now().hour * 60) + LocalDateTime.now().minute
@@ -83,6 +87,29 @@ class HomeFragment : Fragment() {
 
 
         return binding.root
+    }
+
+    fun initProfile(){
+        RetrofitClient.api.profile("Bearer " + MyApplication.prefs.accessToken).enqueue(object  : Callback<ProfileResponse>{
+            override fun onResponse(
+                call: Call<ProfileResponse>,
+                response: Response<ProfileResponse>
+            ) {
+                val result = response.body()
+                if (response.isSuccessful) {
+                    binding.tvRecommendTitle.text = "${result?.data?.user?.name}님을 위한 추천"
+                }
+                else{
+                    Log.e("HomeFragment", "${response.errorBody().toString()}, ${response.code()}, ${response.body()}, ${response.message()}")
+                    context?.shortToast("프로필 정보를 가져오지 못했습니다.")
+                }
+            }
+
+            override fun onFailure(call: Call<ProfileResponse>, t: Throwable) {
+                Log.e("server error", t.stackTraceToString())
+                context?.shortToast("서버 에러")
+            }
+        })
     }
 
     // TODO : 시간받고, position에 값 넣기
