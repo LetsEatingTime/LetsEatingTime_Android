@@ -12,6 +12,8 @@ import com.alt.letseatingtime_android.network.retrofit.response.pwchange.PwChang
 import com.alt.letseatingtime_android.network.retrofit.response.scan.ScanResponse
 import okhttp3.MultipartBody
 import com.alt.letseatingtime_android.network.retrofit.response.util.BaseResponse
+import com.alt.letseatingtime_android.ui.adapter.store.storedata.OrderRequest
+import com.alt.letseatingtime_android.ui.adapter.store.storedata.OrderResponse
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.Body
@@ -77,4 +79,9 @@ interface API {
     fun getStoreList(
     ): Call<BaseResponse<List<StoreResponse>>>
 
+    @POST("/api/order/create")
+    fun createOrder(
+        @Header("Authorization") token: String,
+        @Body requestBody: OrderRequest
+    ): Call<OrderResponse>
 }

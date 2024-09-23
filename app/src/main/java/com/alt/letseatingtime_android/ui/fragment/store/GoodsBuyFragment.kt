@@ -18,6 +18,7 @@ class GoodsBuyFragment : Fragment() {
     private val viewModel by activityViewModels<StoreViewModel>()
 
     private var quantity = 1  // 기본 수량
+    private var pricePerUnit = 0  // 단위당 가격
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,10 +26,12 @@ class GoodsBuyFragment : Fragment() {
     ): View {
         _binding = FragmentGoodsBuyBinding.inflate(inflater, container, false)
         (requireActivity() as BottomController).setBottomNavVisibility(false)
+
+        pricePerUnit = viewModel.goodsData.value?.price ?: 0
+
         with(binding) {
             tvGoodsName.text = viewModel.goodsData.value?.productName
-            tvPrice.text = viewModel.goodsData.value?.price.toString()
-//            ivGoodsImage.load(viewModel.goodsData.value?.imageUrl)
+            updatePrice()
 
             ibBackButton.setOnClickListener {
                 requireActivity().supportFragmentManager.popBackStack()
@@ -37,16 +40,28 @@ class GoodsBuyFragment : Fragment() {
             btnIncrement.setOnClickListener {
                 quantity++
                 tvQuantity.text = quantity.toString()
+                updatePrice()
             }
 
             btnDecrement.setOnClickListener {
                 if (quantity > 1) {
                     quantity--
                     tvQuantity.text = quantity.toString()
+                    updatePrice()
                 }
             }
+
+            btnSubmit.setOnClickListener {
+                // 주문 제출 로직
+            }
         }
+
         return binding.root
+    }
+
+    private fun updatePrice() {
+        val totalPrice = pricePerUnit * quantity
+        binding.tvPrice.text = totalPrice.toString()  // 총 가격 설정
     }
 
     override fun onPause() {

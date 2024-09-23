@@ -17,7 +17,6 @@ import com.alt.letseatingtime_android.network.retrofit.response.goods.StoreRespo
 import com.alt.letseatingtime_android.network.retrofit.response.profile.ProfileResponse
 import com.alt.letseatingtime_android.ui.adapter.store.StoreGoods1Adapter
 import com.alt.letseatingtime_android.ui.adapter.store.StoreGoods2Adapter
-import com.alt.letseatingtime_android.ui.adapter.store.storedata.GoodsItem
 import com.alt.letseatingtime_android.ui.viewmodel.StoreViewModel
 import com.alt.letseatingtime_android.util.shortToast
 import retrofit2.Call
