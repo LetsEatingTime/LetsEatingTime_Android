@@ -3,14 +3,15 @@ package com.alt.letseatingtime_android.network.retrofit
 import com.alt.letseatingtime_android.network.retrofit.response.meal.MealResponse
 import com.alt.letseatingtime_android.network.retrofit.request.LoginRequest
 import com.alt.letseatingtime_android.network.retrofit.request.SignupRequest
-import com.alt.letseatingtime_android.network.retrofit.response.BaseResponse
 import com.alt.letseatingtime_android.network.retrofit.response.login.LoginResponse
 import com.alt.letseatingtime_android.network.retrofit.response.SignupResponse
 import com.alt.letseatingtime_android.network.retrofit.response.profile.ProfileResponse
 import com.alt.letseatingtime_android.network.retrofit.response.WithdrawResponse
+import com.alt.letseatingtime_android.network.retrofit.response.goods.StoreResponse
 import com.alt.letseatingtime_android.network.retrofit.response.pwchange.PwChangeRequest
 import com.alt.letseatingtime_android.network.retrofit.response.scan.ScanResponse
 import okhttp3.MultipartBody
+import com.alt.letseatingtime_android.network.retrofit.response.util.BaseResponse
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.Body
@@ -72,5 +73,8 @@ interface API {
         @Part file: MultipartBody.Part
     ): Call<ScanResponse>
 
+    @GET("/api/product/all")
+    fun getStoreList(
+    ): Call<BaseResponse<List<StoreResponse>>>
 
 }

@@ -12,6 +12,7 @@ import com.alt.letseatingtime.R
 import com.alt.letseatingtime.databinding.FragmentGoodsBuyBinding
 import com.alt.letseatingtime_android.ui.adapter.store.storedata.GoodsItem
 import com.alt.letseatingtime_android.ui.viewmodel.StoreViewModel
+import com.alt.letseatingtime_android.util.BottomController
 
 class GoodsBuyFragment : Fragment() {
     private var _binding: FragmentGoodsBuyBinding? = null
@@ -24,16 +25,21 @@ class GoodsBuyFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentGoodsBuyBinding.inflate(inflater, container, false)
+        (requireActivity() as BottomController).setBottomNavVisibility(false)
         with(binding) {
-            tvGoodsName.text = viewModel.goodsData.value?.name
+            tvGoodsName.text = viewModel.goodsData.value?.productName
             tvPrice.text = viewModel.goodsData.value?.price.toString()
-            ivGoodsImage.load(viewModel.goodsData.value?.imageUrl)
+//            ivGoodsImage.load(viewModel.goodsData.value?)
 
             ibBackButton.setOnClickListener {
-                findNavController().navigate(R.id.action_goodsBuyFragment2_to_storeFragment2)
+                requireActivity().supportFragmentManager.popBackStack()
 
             }
         }
         return binding.root
+    }
+    override fun onPause() {
+        super.onPause()
+        (requireActivity() as BottomController).setBottomNavVisibility(true)
     }
 }
