@@ -131,6 +131,7 @@ class LoginFragment : Fragment() {
 
                 override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                     context?.shortToast("서버 애러")
+                    Log.e("LoginFragment log", t.stackTraceToString())
 //                    Toast.makeText(requireActivity(), "서버 애러", Toast.LENGTH_SHORT).show()
                     loginBtnAnim(false)
                 }

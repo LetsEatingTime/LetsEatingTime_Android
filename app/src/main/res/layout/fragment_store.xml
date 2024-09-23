@@ -21,8 +21,9 @@
                 app:layout_constraintStart_toStartOf="parent"
                 tools:text="000님을 위한 추천"
                 android:fontFamily="@font/pretendardsemibold"
-                android:textSize="24dp"
-                android:layout_marginStart="32dp"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:layout_marginStart="20dp"
                 />
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_for_user_items"
@@ -32,7 +33,7 @@
                 android:layout_marginTop="13dp"
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-
+                android:layout_marginHorizontal="20dp"
                 />
 
             <TextView
@@ -43,9 +44,10 @@
                 app:layout_constraintStart_toStartOf="parent"
                 android:text="포인트로 구매가능한 상품"
                 android:fontFamily="@font/pretendardsemibold"
-                android:textSize="24dp"
-                android:layout_marginStart="32dp"
+                android:textSize="18sp"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="24dp"
+                android:textColor="@color/black"
                 />
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_user_items"
@@ -54,7 +56,7 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_items"
                 android:layout_marginTop="13dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-
+                android:layout_marginHorizontal="20dp"
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
