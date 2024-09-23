@@ -112,7 +112,7 @@ class HomeFragment : Fragment() {
             ) {
                 val result = response.body()
                 if (response.isSuccessful) {
-                    binding.tvRecommendTitle.text = "${result?.data?.user?.name}님을 위한 추천"
+                    binding.tvRecommendTitle.text = "${result?.data?.user?.name}님을 위한 추천상품"
                     binding.tvPointInfo.text = "현재 ${result?.data?.user?.name}님의 \n소지 포인트"
                     binding.tvMealTransition.text = "${result?.data?.user?.name}님의 급식 추이"
                 }
