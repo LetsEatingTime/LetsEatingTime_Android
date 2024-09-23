@@ -7,20 +7,16 @@
     android:background="@color/background"
     tools:context="com.alt.letseatingtime_android.ui.fragment.profile.ProfileModifyFragment">
 
-
-
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        >
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingBottom="136dp">
-
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/clv_modify_profile"
@@ -28,15 +24,14 @@
                 android:layout_height="wrap_content"
                 android:paddingVertical="32dp"
                 android:paddingStart="23dp"
-                app:layout_constraintTop_toTopOf="parent"
-                >
+                app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
                     android:id="@+id/tv_title_profile_img"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/pretendardsemibold"
-                    android:text="프로필 이미지"
+                    android:text="프로필 변경"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -63,16 +58,14 @@
                     app:layout_constraintStart_toEndOf="@id/iv_profile_img"
                     app:layout_constraintTop_toTopOf="@id/iv_profile_img" />
 
-
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/clv_modify_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16sp"
                 android:paddingVertical="13dp"
-                android:paddingStart="23dp"
+                android:paddingHorizontal="20dp"
                 app:layout_constraintTop_toBottomOf="@id/clv_modify_profile">
 
                 <TextView
@@ -91,9 +84,7 @@
                     style="@style/et_login"
                     android:layout_width="match_parent"
                     android:layout_height="49dp"
-                    android:layout_marginStart="27dp"
-                    android:layout_marginTop="13dp"
-                    android:layout_marginEnd="27dp"
+                    android:layout_marginTop="10dp"
                     android:fontFamily="@font/pretendardregular"
                     android:hint="이름을 입력해주세요"
                     android:inputType="text"
@@ -109,9 +100,8 @@
                 android:id="@+id/clv_modify_grade"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16sp"
                 android:paddingVertical="13dp"
-                android:paddingStart="23dp"
+                android:paddingHorizontal="20dp"
                 app:layout_constraintTop_toBottomOf="@id/clv_modify_name">
 
                 <TextView
@@ -130,9 +120,7 @@
                     style="@style/et_login"
                     android:layout_width="match_parent"
                     android:layout_height="49dp"
-                    android:layout_marginStart="27dp"
-                    android:layout_marginTop="13dp"
-                    android:layout_marginEnd="27dp"
+                    android:layout_marginTop="10dp"
                     android:fontFamily="@font/pretendardregular"
                     android:hint="학년을 입력해주세요"
                     android:inputType="number"
@@ -148,9 +136,8 @@
                 android:id="@+id/clv_modify_class"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16sp"
                 android:paddingVertical="13dp"
-                android:paddingStart="23dp"
+                android:paddingHorizontal="20dp"
                 app:layout_constraintTop_toBottomOf="@id/clv_modify_grade">
 
                 <TextView
@@ -171,9 +158,7 @@
                     style="@style/et_login"
                     android:layout_width="match_parent"
                     android:layout_height="49dp"
-                    android:layout_marginStart="27dp"
-                    android:layout_marginTop="13dp"
-                    android:layout_marginEnd="27dp"
+                    android:layout_marginTop="10dp"
                     android:fontFamily="@font/pretendardregular"
                     android:hint="이름을 입력해주세요"
                     android:inputType="text"
@@ -189,9 +174,8 @@
                 android:id="@+id/clv_modify_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16sp"
                 android:paddingVertical="13dp"
-                android:paddingStart="23dp"
+                android:paddingHorizontal="20dp"
                 app:layout_constraintTop_toBottomOf="@id/clv_modify_class">
 
                 <TextView
@@ -210,9 +194,7 @@
                     style="@style/et_login"
                     android:layout_width="match_parent"
                     android:layout_height="49dp"
-                    android:layout_marginStart="27dp"
-                    android:layout_marginTop="13dp"
-                    android:layout_marginEnd="27dp"
+                    android:layout_marginTop="10dp"
                     android:fontFamily="@font/pretendardregular"
                     android:hint="이름을 입력해주세요"
                     android:inputType="number"
@@ -234,9 +216,8 @@
         android:fontFamily="@font/pretendardsemibold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/btn_submit"
+        app:layout_constraintEnd_toStartOf="@id/btn_submit" />
 
-        />
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_submit"
         style="@style/btn_profile_submit"
