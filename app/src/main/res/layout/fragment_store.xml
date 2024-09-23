@@ -19,7 +19,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:text="000님을 위한 추천"
+                tools:text="000님을 위한 추천"
                 android:fontFamily="@font/pretendardsemibold"
                 android:textSize="24dp"
                 android:layout_marginStart="32dp"
