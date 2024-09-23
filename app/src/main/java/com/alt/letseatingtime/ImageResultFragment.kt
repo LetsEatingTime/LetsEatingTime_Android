@@ -10,6 +10,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import coil.load
 import com.alt.letseatingtime.databinding.FragmentImageResultBinding
+import com.alt.letseatingtime_android.ui.fragment.loading.LoadingFragment
 import com.alt.letseatingtime_android.ui.viewmodel.ScanViewModel
 import com.alt.letseatingtime_android.util.BottomController
 
@@ -37,7 +38,10 @@ class ImageResultFragment : Fragment() {
 
         binding.tvUse.setOnClickListener {
             viewModel.scanningMeal()
-            findNavController().navigate(R.id.action_imageResultFragment_to_homeFragment2)
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.home_frame_container, LoadingFragment())
+                .addToBackStack(null)
+                .commitAllowingStateLoss()
         }
 
         return binding.root
