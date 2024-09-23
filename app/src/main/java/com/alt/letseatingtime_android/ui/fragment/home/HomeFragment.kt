@@ -1,5 +1,6 @@
 package com.alt.letseatingtime_android.ui.fragment.home
 
+import android.annotation.SuppressLint
 import android.icu.util.Calendar
 import android.os.Bundle
 import android.util.Log
@@ -35,6 +36,7 @@ class HomeFragment : Fragment() {
     private lateinit var mealAdapter: MealViewPagerAdapter
     private val gregorianCalendar = GregorianCalendar()
     private val goodsViewModel  by activityViewModels<StoreViewModel>()
+    @SuppressLint("DefaultLocale")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -98,13 +100,12 @@ class HomeFragment : Fragment() {
             findNavController().navigate(R.id.action_homeFragment2_to_mealListFragment)
         })
 
-
-
         return binding.root
     }
 
     fun initProfile(){
         RetrofitClient.api.profile("Bearer " + MyApplication.prefs.accessToken).enqueue(object  : Callback<ProfileResponse>{
+            @SuppressLint("SetTextI18n")
             override fun onResponse(
                 call: Call<ProfileResponse>,
                 response: Response<ProfileResponse>
@@ -113,6 +114,7 @@ class HomeFragment : Fragment() {
                 if (response.isSuccessful) {
                     binding.tvRecommendTitle.text = "${result?.data?.user?.name}님을 위한 추천"
                     binding.tvPointInfo.text = "현재 ${result?.data?.user?.name}님의 \n소지 포인트"
+                    binding.tvMealTransition.text = "${result?.data?.user?.name}님의 급식 추이"
                 }
                 else{
                     Log.e("HomeFragment", "${response.errorBody().toString()}, ${response.code()}, ${response.body()}, ${response.message()}")
