@@ -1,5 +1,6 @@
 package com.alt.letseatingtime_android.ui.fragment.scan
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,7 +12,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.alt.letseatingtime.R
 import com.alt.letseatingtime.databinding.FragmentLoadingBinding
-import com.alt.letseatingtime_android.ui.fragment.home.HomeFragment
+import com.alt.letseatingtime_android.ui.activity.HomeActivity
 import com.alt.letseatingtime_android.ui.viewmodel.ScanViewModel
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.DrawableImageViewTarget
@@ -42,10 +43,10 @@ class LoadingFragment : Fragment() {
             runBlocking {
                 val scan = async {
                     viewModel.scanningMeal(){
-                        requireActivity().supportFragmentManager.beginTransaction()
-                            .replace(R.id.home_frame_container, HomeFragment())
-                            .addToBackStack(null)
-                            .commitAllowingStateLoss()
+                        val intent = Intent(requireActivity(), HomeActivity::class.java)
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+                        startActivity(intent)
+                        requireActivity().finish()
                     }
                 }
                 scan.await()
