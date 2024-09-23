@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import coil.load
+import com.alt.letseatingtime.R
 import com.alt.letseatingtime.databinding.FragmentImageResultBinding
 import com.alt.letseatingtime_android.ui.fragment.loading.LoadingFragment
 import com.alt.letseatingtime_android.ui.viewmodel.ScanViewModel

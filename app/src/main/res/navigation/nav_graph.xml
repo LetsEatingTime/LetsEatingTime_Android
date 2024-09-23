@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_homeFragment2_to_scanFragment"
             app:destination="@id/scanFragment" />
+        <action
+            android:id="@+id/action_homeFragment2_to_goodsBuyFragment2"
+            app:destination="@id/goodsBuyFragment2" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment2"
@@ -102,7 +105,7 @@
     </fragment>
     <fragment
         android:id="@+id/imageResultFragment"
-        android:name="com.alt.letseatingtime.ImageResultFragment"
+        android:name="com.alt.letseatingtime_android.ui.fragment.scan.ImageResultFragment"
         android:label="fragment_image_result"
         tools:layout="@layout/fragment_image_result" >
         <action
