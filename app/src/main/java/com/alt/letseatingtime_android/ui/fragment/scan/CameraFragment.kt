@@ -29,7 +29,6 @@ import com.alt.letseatingtime_android.ui.viewmodel.ScanViewModel
 import com.alt.letseatingtime_android.util.BottomController
 import com.alt.letseatingtime_android.util.setOnSingleClickListener
 import com.alt.letseatingtime_android.util.shortToast
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.Date

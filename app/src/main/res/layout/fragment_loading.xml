@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.alt.letseatingtime_android.ui.fragment.loading.LoadingFragment">
+    tools:context="com.alt.letseatingtime_android.ui.fragment.scan.LoadingFragment">
 
     <ImageView
         android:id="@+id/loading_animation"

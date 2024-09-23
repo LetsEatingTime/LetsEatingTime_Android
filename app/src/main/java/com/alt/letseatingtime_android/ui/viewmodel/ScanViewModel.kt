@@ -43,7 +43,7 @@ class ScanViewModel(application: Application) : AndroidViewModel(application) {
         _imageData.value = uri
     }
 
-    fun scanningMeal(){
+    fun scanningMeal(onAction : ()->Unit){
         val body = prepareFilePart(_imageData.value!!)
         RetrofitClient.api.scanMenu(
             userId = _userData.value!!.data.user.idx,
@@ -55,6 +55,7 @@ class ScanViewModel(application: Application) : AndroidViewModel(application) {
                     response: Response<ScanResponse>
                 ) {
                     Log.d("ScanResult", "result : ${response.body()}")
+                    onAction()
                 }
 
                 override fun onFailure(call: Call<ScanResponse>, t: Throwable) {

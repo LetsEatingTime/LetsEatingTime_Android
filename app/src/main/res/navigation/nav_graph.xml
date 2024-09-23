@@ -105,7 +105,7 @@
     </fragment>
     <fragment
         android:id="@+id/imageResultFragment"
-        android:name="com.alt.letseatingtime_android.ui.fragment.scan.ImageResultFragment"
+        android:name="com.alt.letseatingtime.ImageResultFragment"
         android:label="fragment_image_result"
         tools:layout="@layout/fragment_image_result" >
         <action
