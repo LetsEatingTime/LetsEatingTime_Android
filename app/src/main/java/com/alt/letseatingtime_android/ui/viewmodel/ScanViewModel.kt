@@ -14,6 +14,8 @@ import com.alt.letseatingtime_android.network.retrofit.RetrofitClient
 import com.alt.letseatingtime_android.network.retrofit.response.BaseResponse
 import com.alt.letseatingtime_android.network.retrofit.response.profile.ProfileResponse
 import com.alt.letseatingtime_android.network.retrofit.response.scan.ScanResponse
+import com.alt.letseatingtime_android.util.longToast
+import com.alt.letseatingtime_android.util.shortToast
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -56,6 +58,7 @@ class ScanViewModel(application: Application) : AndroidViewModel(application) {
                 ) {
                     Log.d("ScanResult", "result : ${response.body()}")
                     onAction()
+                    context?.shortToast("스캔 성공")
                 }
 
                 override fun onFailure(call: Call<ScanResponse>, t: Throwable) {
@@ -63,7 +66,7 @@ class ScanViewModel(application: Application) : AndroidViewModel(application) {
                     if(t is HttpException){
                         Log.e("ScanResult", "e : ${t.response.body}")
                     }
-                    _toastMessage.value = "인터넷에 연결 되어있는지 확인 해주세요"
+                    context?.shortToast("스캔 실패")
                 }
 
             }

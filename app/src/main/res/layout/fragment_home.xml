@@ -214,7 +214,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="13dp"
                         android:fontFamily="@font/pretendardmedium"
-                        android:text="300"
+                        android:text="2"
                         android:textColor="@color/black"
                         android:textSize="20sp"
                         app:layout_constraintBottom_toBottomOf="@id/tv_point_unit"
