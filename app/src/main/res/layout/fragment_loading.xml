@@ -1,0 +1,23 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.alt.letseatingtime_android.ui.fragment.scan.LoadingFragment">
+
+    <ImageView
+        android:id="@+id/loading_animation"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="50dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="이미지가 서버에 올라가는 중입니다. \n 화면을 나가도 상관은 없습니다 ^^7"
+        android:layout_marginTop="100dp"
+        android:layout_gravity="center"
+        android:textColor="@color/black"
+        android:fontFamily="@font/pretendardsemibold"/>
+</FrameLayout>
