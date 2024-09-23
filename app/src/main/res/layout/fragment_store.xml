@@ -22,8 +22,8 @@
                 tools:text="000님을 위한 추천"
                 android:fontFamily="@font/pretendardsemibold"
                 android:textColor="@color/black"
-                android:textSize="18sp"
-                android:layout_marginStart="20dp"
+                android:textSize="20sp"
+                android:layout_marginStart="15dp"
                 />
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_for_user_items"
@@ -46,7 +46,7 @@
                 android:fontFamily="@font/pretendardsemibold"
                 android:textSize="18sp"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="25dp"
                 android:textColor="@color/black"
                 />
             <androidx.recyclerview.widget.RecyclerView
@@ -54,7 +54,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/tv_items"
-                android:layout_marginTop="13dp"
+                android:layout_marginTop="15dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 android:layout_marginHorizontal="20dp"
                 />
