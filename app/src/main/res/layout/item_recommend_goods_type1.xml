@@ -6,6 +6,7 @@
     android:layout_gravity="center"
     android:paddingVertical="14dp"
     android:paddingHorizontal="17dp"
+    android:layout_marginEnd="10dp"
     android:background="@drawable/item_goods">
     <ImageView
         android:id="@+id/iv_goodsImage"
