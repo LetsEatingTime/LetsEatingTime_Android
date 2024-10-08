@@ -14,11 +14,12 @@ import com.alt.letseatingtime_android.ui.adapter.store.StoreGoods1Adapter
 import com.alt.letseatingtime_android.ui.adapter.store.StoreGoods2Adapter
 import com.alt.letseatingtime_android.ui.adapter.store.storedata.GoodsItem
 import com.alt.letseatingtime_android.ui.viewmodel.StoreViewModel
+import com.alt.letseatingtime_android.util.shortToast
 
 
 class StoreFragment : Fragment() {
     var _binding: FragmentStoreBinding? = null
-    private val viewModel by activityViewModels<StoreViewModel>()
+    private val goodsViewModel by activityViewModels<StoreViewModel>()
 
     private val binding get() = _binding!!
 
@@ -27,9 +28,9 @@ class StoreFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentStoreBinding.inflate(inflater, container, false)
-        viewModel.getGoods()
+        goodsViewModel.getGoods()
 
-        viewModel.goodsDataList.observe(viewLifecycleOwner){
+        goodsViewModel.goodsDataList.observe(viewLifecycleOwner){
             with(binding) {
                 rvForUserItems.adapter = StoreGoods1Adapter(it) { position ->
                     moveScreen(it[position])
@@ -41,12 +42,16 @@ class StoreFragment : Fragment() {
             }
         }
 
+        goodsViewModel.toastMessage.observe(viewLifecycleOwner){
+            requireContext().shortToast(it)
+        }
+
 
         return binding.root
     }
 
     private fun moveScreen(deliver:StoreResponse) {
-        viewModel.setGoodsData(deliver)
+        goodsViewModel.setGoodsData(deliver)
         findNavController().navigate(R.id.action_storeFragment2_to_goodsBuyFragment2)
     }
 

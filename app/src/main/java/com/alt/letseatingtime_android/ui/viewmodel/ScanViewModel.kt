@@ -46,7 +46,7 @@ class ScanViewModel(application: Application) : AndroidViewModel(application) {
     fun scanningMeal(onAction : ()->Unit){
         val body = prepareFilePart(_imageData.value!!)
         RetrofitClient.api.scanMenu(
-            userId = _userData.value!!.data.user.idx,
+            userId = _userData.value?.data?.user?.idx?.toInt() ?: -1,
             file = body!!
         ).enqueue(
             object  : Callback<ScanResponse>{

@@ -57,6 +57,9 @@ class HomeFragment : Fragment() {
             }
         }
 
+        goodsViewModel.toastMessage.observe(viewLifecycleOwner){
+            requireContext().shortToast(it)
+        }
 
         binding.cbtnScan.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment2_to_scanFragment)
@@ -93,7 +96,7 @@ class HomeFragment : Fragment() {
                 position = 0
             }
         }
-        initRecyclerview(day, position)
+        initMealRecyclerview(day, position)
         binding.clvMealMore.setOnClickListener(OnSingleClickListener {
             findNavController().navigate(R.id.action_homeFragment2_to_mealListFragment)
         })
@@ -111,8 +114,12 @@ class HomeFragment : Fragment() {
             ) {
                 val result = response.body()
                 if (response.isSuccessful) {
-                    binding.tvRecommendTitle.text = "${result?.data?.user?.name}님을 위한 추천"
-                    binding.tvPointInfo.text = "현재 ${result?.data?.user?.name}님의 \n소지 포인트"
+                    val userName = result?.data?.user?.name
+                    binding.tvRecommendTitle.text = "${userName}님을 위한 추천"
+                    binding.tvPointInfo.text = "현재 ${userName}님의 \n소지 포인트"
+                    binding.tvMealTransition.text = "${userName}씨의 급식 추이"
+                    binding.tvPoint.text = result?.data?.user?.point.toString() ?: "0"
+                    Log.d("HomeFragment", "user : ${result?.data}")
                 }
                 else{
                     Log.e("HomeFragment", "${response.errorBody().toString()}, ${response.code()}, ${response.body()}, ${response.message()}")
@@ -150,7 +157,7 @@ class HomeFragment : Fragment() {
 
     }
 
-    private fun initRecyclerview(date: String, position : Int) {
+    private fun initMealRecyclerview(date: String, position : Int) {
         RetrofitClient.api.meal(date = date)
             .enqueue(object : Callback<MealResponse> {
                 override fun onResponse(

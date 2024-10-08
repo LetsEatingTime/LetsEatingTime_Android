@@ -6,18 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.fragment.findNavController
-import coil.load
-import com.alt.letseatingtime.R
 import com.alt.letseatingtime.databinding.FragmentGoodsBuyBinding
-import com.alt.letseatingtime_android.ui.adapter.store.storedata.GoodsItem
 import com.alt.letseatingtime_android.ui.viewmodel.StoreViewModel
 import com.alt.letseatingtime_android.util.BottomController
+import com.alt.letseatingtime_android.util.shortToast
 
 class GoodsBuyFragment : Fragment() {
     private var _binding: FragmentGoodsBuyBinding? = null
     private val binding get() = _binding!!
-    private val viewModel by activityViewModels<StoreViewModel>()
+    private val goodsViewModel by activityViewModels<StoreViewModel>()
 
 
     override fun onCreateView(
@@ -27,8 +24,8 @@ class GoodsBuyFragment : Fragment() {
         _binding = FragmentGoodsBuyBinding.inflate(inflater, container, false)
         (requireActivity() as BottomController).setBottomNavVisibility(false)
         with(binding) {
-            tvGoodsName.text = viewModel.goodsData.value?.productName
-            tvPrice.text = viewModel.goodsData.value?.price.toString()
+            tvGoodsName.text = goodsViewModel.goodsData.value?.productName
+            tvPrice.text = goodsViewModel.goodsData.value?.price.toString()
 //            ivGoodsImage.load(viewModel.goodsData.value?)
 
             ibBackButton.setOnClickListener {
@@ -36,6 +33,11 @@ class GoodsBuyFragment : Fragment() {
 
             }
         }
+
+        goodsViewModel.toastMessage.observe(viewLifecycleOwner){
+            requireContext().shortToast(it)
+        }
+
         return binding.root
     }
     override fun onPause() {
