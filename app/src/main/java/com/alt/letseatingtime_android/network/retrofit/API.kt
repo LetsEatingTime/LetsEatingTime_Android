@@ -3,6 +3,7 @@ package com.alt.letseatingtime_android.network.retrofit
 import com.alt.letseatingtime_android.network.retrofit.response.meal.MealResponse
 import com.alt.letseatingtime_android.network.retrofit.request.LoginRequest
 import com.alt.letseatingtime_android.network.retrofit.request.SignupRequest
+import com.alt.letseatingtime_android.network.retrofit.response.ImageResponse
 import com.alt.letseatingtime_android.network.retrofit.response.login.LoginResponse
 import com.alt.letseatingtime_android.network.retrofit.response.SignupResponse
 import com.alt.letseatingtime_android.network.retrofit.response.profile.ProfileResponse
@@ -17,6 +18,7 @@ import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
+import retrofit2.http.Headers
 import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.Part
@@ -45,10 +47,15 @@ interface API {
     ): Call<MealResponse>
 
     @GET("/api/user/image/{idx}")
-    fun image(
-        @Header("Authorization") Authorization: String,
+    fun getUserImage(
+        @Header("Authorization") authorization: String,
         @Path(value = "idx") idx: String
-    ): Call<ResponseBody>
+    ): Call<ImageResponse>
+
+    @GET("/api/file/get/{idx}")
+    fun getProductImage(
+        @Path("idx") idx: Int
+    ): BaseResponse<ImageResponse>
 
 
     @GET("/api/user/profile")
@@ -59,7 +66,7 @@ interface API {
     @GET("api/account/refresh.do")
     fun refresh(
         @Header("Authorization") Authorization: String
-    ):Call<LoginResponse>
+    ): Call<LoginResponse>
 
     @POST("/api/user/withdraw")
     fun withdraw(

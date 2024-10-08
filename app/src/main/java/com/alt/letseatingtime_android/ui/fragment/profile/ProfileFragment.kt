@@ -2,20 +2,18 @@ package com.alt.letseatingtime_android.ui.fragment.profile
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import coil.load
 import com.alt.letseatingtime.R
 import com.alt.letseatingtime.databinding.FragmentProfileBinding
 import com.alt.letseatingtime_android.MyApplication
 import com.alt.letseatingtime_android.network.retrofit.RetrofitClient
-import com.alt.letseatingtime_android.network.retrofit.response.WithdrawResponse
 import com.alt.letseatingtime_android.network.retrofit.response.profile.ProfileResponse
-import com.alt.letseatingtime_android.ui.viewmodel.ScanViewModel
 import com.alt.letseatingtime_android.ui.viewmodel.UserActivityViewModel
 import com.alt.letseatingtime_android.util.OnSingleClickListener
 import com.alt.letseatingtime_android.util.shortToast
@@ -40,6 +38,10 @@ class ProfileFragment : Fragment() {
 
         userViewModel.getProfile()
 
+        userViewModel.userImageUrl.observe(viewLifecycleOwner){
+            binding.ivStudentProfile.load(it.fileName)
+        }
+
         userViewModel.userData.observe(viewLifecycleOwner) {
             binding.tvStudentName.text = "안녕하세요, ${it.data?.user?.name}님"
             when (it.data.user.userType) {
@@ -51,6 +53,12 @@ class ProfileFragment : Fragment() {
                     binding.tvStudentNumber.text =
                         "${it.data.user.grade}학년 ${it.data.user.className}반 ${it.data.user.classNo}번"
                 }
+            }
+        }
+
+        userViewModel.toastMessage.observe(viewLifecycleOwner){
+            if (it != ""){
+                requireContext().shortToast(it)
             }
         }
 

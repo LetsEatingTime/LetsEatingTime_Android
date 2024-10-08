@@ -5,14 +5,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import coil.load
 import com.alt.letseatingtime.R
 import com.alt.letseatingtime.databinding.FragmentProfileModifyBinding
+import com.alt.letseatingtime_android.ui.viewmodel.UserActivityViewModel
 import com.alt.letseatingtime_android.util.BottomController
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 class ProfileModifyFragment : Fragment() {
     var _binding: FragmentProfileModifyBinding? = null
     val binding get() = _binding!!
+    private val userViewModel by activityViewModels<UserActivityViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -21,6 +25,11 @@ class ProfileModifyFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentProfileModifyBinding.inflate(inflater, container, false)
         (requireActivity() as BottomController).setBottomNavVisibility(false)
+
+        userViewModel.userImageUrl.observe(viewLifecycleOwner){
+            binding.ivProfileImg.load(it.fileName)
+        }
+
         binding.btnSubmit.setOnClickListener {
             binding.btnSubmit.setOnClickListener {
                 with(binding) {

@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.alt.letseatingtime_android.MyApplication
 import com.alt.letseatingtime_android.network.retrofit.RetrofitClient
+import com.alt.letseatingtime_android.network.retrofit.response.ImageResponse
 import com.alt.letseatingtime_android.network.retrofit.response.WithdrawResponse
 import com.alt.letseatingtime_android.network.retrofit.response.login.LoginResponse
 import com.alt.letseatingtime_android.network.retrofit.response.profile.ProfileResponse
@@ -26,6 +27,9 @@ class UserActivityViewModel: ViewModel() {
     private var _logout = MutableLiveData<Boolean>()
     val logout: LiveData<Boolean> = _logout
 
+    private var _userImageUrl = MutableLiveData<ImageResponse>()
+    val userImageUrl : LiveData<ImageResponse> = _userImageUrl
+
     fun getProfile(){
         RetrofitClient.api.profile("Bearer " + MyApplication.prefs.accessToken).enqueue(object :
             Callback<ProfileResponse> {
@@ -35,6 +39,7 @@ class UserActivityViewModel: ViewModel() {
             ) {
                 if(response.isSuccessful) {
                     _userData.value = response.body()
+                    getUserImage(response.body()?.data?.user?.idx?.toInt() ?: -1)
                 }
                 else {
                     refreshToken()
@@ -48,6 +53,31 @@ class UserActivityViewModel: ViewModel() {
             }
         })
 
+    }
+
+    fun getUserImage(userIdx : Int){
+        RetrofitClient.api.getUserImage(
+            authorization = "Bearer " + MyApplication.prefs.accessToken,
+            idx = userIdx.toString()
+        ).enqueue(object : Callback<ImageResponse> {
+            override fun onResponse(call: Call<ImageResponse>, response: Response<ImageResponse>) {
+                if (response.isSuccessful){
+                    if(response.code() == 200){
+                        val result = response.body()
+                        _userImageUrl.value = result ?: ImageResponse()
+                    }
+                }
+                else{
+                    refreshToken()
+                    getUserImage(userIdx)
+                }
+            }
+
+            override fun onFailure(call: Call<ImageResponse>, t: Throwable) {
+                _toastMessage.value = "인터넷에 연결 되어있는지 확인 해주세요"
+                _logout.value = true
+            }
+        })
     }
 
     fun refreshToken(){
