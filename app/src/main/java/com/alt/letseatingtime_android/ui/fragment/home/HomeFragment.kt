@@ -48,10 +48,26 @@ class HomeFragment : Fragment() {
 
         goodsViewModel.getGoods()
 
-        goodsViewModel.goodsDataList.observe(viewLifecycleOwner){
+
+
+//        goodsViewModel.goodsDataList.observe(viewLifecycleOwner){
+//            with(binding) {
+//                rvForUserItems.adapter = StoreGoods1Adapter(it) { position ->
+//                    goodsViewModel.setGoodsData(it[position])
+//                    findNavController().navigate(R.id.action_homeFragment2_to_goodsBuyFragment2)
+//                }
+//            }
+//        }
+
+        goodsViewModel.productImageList.observe(viewLifecycleOwner) {
             with(binding) {
-                rvForUserItems.adapter = StoreGoods1Adapter(it) { position ->
-                    goodsViewModel.setGoodsData(it[position])
+                rvForUserItems.adapter = StoreGoods1Adapter(
+                    goodsViewModel.goodsDataList.value ?: listOf(),
+                    it
+                ) { position ->
+                    goodsViewModel.goodsDataList.value?.get(position)?.let {
+                        it1 ->goodsViewModel.setGoodsData(it1)
+                    }
                     findNavController().navigate(R.id.action_homeFragment2_to_goodsBuyFragment2)
                 }
             }
@@ -136,13 +152,22 @@ class HomeFragment : Fragment() {
 
     // TODO : 시간받고, position에 값 넣기
     fun setMeal(data: MealResponse, position : Int) {
-
-
+        val mealList = mutableListOf<String>()
+        Log.d("Meal", "data : $data")
+        if(data.data.exists){
+            mealList.add(data.data.breakfast.menu.joinToString(", ", "", "") ?: "",)
+            mealList.add(data.data.lunch.menu.joinToString(", ", "", "") ?: "")
+            mealList.add(data.data.dinner.menu.joinToString(", ", "", "") ?: "")
+        }
+        else {
+            for (i in 0..3) {
+                mealList.add("급식이 없습니다.")
+            }
+        }
         mealAdapter = MealViewPagerAdapter(
+
             todayMealDateList = listOf(
-                data.data.breakfast.menu.joinToString(", ", "", ""),
-                data.data.lunch.menu.joinToString(", ", "", ""),
-                data.data.dinner.menu.joinToString(", ", "", "")
+
             ),
             position = position
         )
@@ -167,7 +192,9 @@ class HomeFragment : Fragment() {
                     val result = response.body()
                     if (response.isSuccessful) {
                         Log.d(requireActivity().packageName, "내용 : ${result}")
-                        setMeal(result!!, position)
+                        if (result != null) {
+                            setMeal(result, position)
+                        }
                     } else {
                         context?.shortToast("데이터를 불러오지 못했습니다.")
                     }

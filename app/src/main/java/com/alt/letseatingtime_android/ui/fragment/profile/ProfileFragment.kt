@@ -39,7 +39,7 @@ class ProfileFragment : Fragment() {
         userViewModel.getProfile()
 
         userViewModel.userImageUrl.observe(viewLifecycleOwner){
-            binding.ivStudentProfile.load(it.fileName)
+            binding.ivStudentProfile.load(it)
         }
 
         userViewModel.userData.observe(viewLifecycleOwner) {

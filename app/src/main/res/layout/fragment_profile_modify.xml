@@ -59,6 +59,7 @@
                     android:text="프로필 이미지 변경하기"
                     android:textColor="@color/main3"
                     android:textSize="16sp"
+                    android:clickable="true"
                     app:layout_constraintBottom_toBottomOf="@id/iv_profile_img"
                     app:layout_constraintStart_toEndOf="@id/iv_profile_img"
                     app:layout_constraintTop_toTopOf="@id/iv_profile_img" />

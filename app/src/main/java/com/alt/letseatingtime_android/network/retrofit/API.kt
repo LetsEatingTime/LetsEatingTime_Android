@@ -55,7 +55,7 @@ interface API {
     @GET("/api/file/get/{idx}")
     fun getProductImage(
         @Path("idx") idx: Int
-    ): BaseResponse<ImageResponse>
+    ): Call<BaseResponse<ImageResponse>>
 
 
     @GET("/api/user/profile")

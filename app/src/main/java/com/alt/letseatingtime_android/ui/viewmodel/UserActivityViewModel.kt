@@ -1,6 +1,7 @@
 package com.alt.letseatingtime_android.ui.viewmodel
 
 import android.content.Context
+import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -27,8 +28,9 @@ class UserActivityViewModel: ViewModel() {
     private var _logout = MutableLiveData<Boolean>()
     val logout: LiveData<Boolean> = _logout
 
-    private var _userImageUrl = MutableLiveData<ImageResponse>()
-    val userImageUrl : LiveData<ImageResponse> = _userImageUrl
+    private var _userImageUrl = MutableLiveData<String>()
+    val userImageUrl : LiveData<String> = _userImageUrl
+
 
     fun getProfile(){
         RetrofitClient.api.profile("Bearer " + MyApplication.prefs.accessToken).enqueue(object :
@@ -64,7 +66,9 @@ class UserActivityViewModel: ViewModel() {
                 if (response.isSuccessful){
                     if(response.code() == 200){
                         val result = response.body()
-                        _userImageUrl.value = result ?: ImageResponse()
+                        if (result != null) {
+                            _userImageUrl.value = result.fileName
+                        }
                     }
                 }
                 else{
@@ -124,5 +128,9 @@ class UserActivityViewModel: ViewModel() {
             }
 
         })
+    }
+
+    fun setImageUri(uri: Uri) {
+        _userImageUrl.value = uri.toString()
     }
 }

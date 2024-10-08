@@ -10,7 +10,7 @@ data class ImageResponse(
     @SerializedName("fileIdx")
     val fileIdx: Int = -1,
     @SerializedName("fileName")
-    val fileName: String = "",
+    var fileName: String = "",
     @SerializedName("originalFileName")
     val originalFileName: String = "",
     @SerializedName("path")

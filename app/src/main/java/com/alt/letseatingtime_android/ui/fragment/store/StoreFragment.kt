@@ -9,6 +9,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.alt.letseatingtime.R
 import com.alt.letseatingtime.databinding.FragmentStoreBinding
+import com.alt.letseatingtime_android.network.retrofit.response.ImageResponse
 import com.alt.letseatingtime_android.network.retrofit.response.goods.StoreResponse
 import com.alt.letseatingtime_android.ui.adapter.store.StoreGoods1Adapter
 import com.alt.letseatingtime_android.ui.adapter.store.StoreGoods2Adapter
@@ -30,19 +31,39 @@ class StoreFragment : Fragment() {
         _binding = FragmentStoreBinding.inflate(inflater, container, false)
         goodsViewModel.getGoods()
 
-        goodsViewModel.goodsDataList.observe(viewLifecycleOwner){
+//        goodsViewModel.goodsDataList.observe(viewLifecycleOwner){
+//            with(binding) {
+//                rvForUserItems.adapter = StoreGoods1Adapter(it, goodsViewModel.productImageList.value ?: mapOf()) { position ->
+//                    moveScreen(it[position])
+//                }
+//
+//                rvUserItems.adapter = StoreGoods2Adapter(it) { position ->
+//                    moveScreen(it[position])
+//                }
+//            }
+//        }
+
+        goodsViewModel.productImageList.observe(viewLifecycleOwner) {
             with(binding) {
-                rvForUserItems.adapter = StoreGoods1Adapter(it) { position ->
-                    moveScreen(it[position])
+                rvForUserItems.adapter = StoreGoods1Adapter(
+                    goodsViewModel.goodsDataList.value ?: listOf(),
+                    it
+                ) { position ->
+                    goodsViewModel.goodsDataList.value?.get(position)
+                        ?.let { it1 -> moveScreen(it1) }
                 }
 
-                rvUserItems.adapter = StoreGoods2Adapter(it) { position ->
-                    moveScreen(it[position])
+                rvUserItems.adapter = StoreGoods2Adapter(
+                    itemList = goodsViewModel.goodsDataList.value ?: listOf(),
+                    imageList = it
+                ) { position ->
+                    goodsViewModel.goodsDataList.value?.get(position)
+                        ?.let { it1 -> moveScreen(it1) }
                 }
             }
         }
 
-        goodsViewModel.toastMessage.observe(viewLifecycleOwner){
+        goodsViewModel.toastMessage.observe(viewLifecycleOwner) {
             requireContext().shortToast(it)
         }
 
@@ -50,7 +71,7 @@ class StoreFragment : Fragment() {
         return binding.root
     }
 
-    private fun moveScreen(deliver:StoreResponse) {
+    private fun moveScreen(deliver: StoreResponse) {
         goodsViewModel.setGoodsData(deliver)
         findNavController().navigate(R.id.action_storeFragment2_to_goodsBuyFragment2)
     }

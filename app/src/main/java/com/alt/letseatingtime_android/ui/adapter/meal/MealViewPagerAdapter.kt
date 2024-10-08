@@ -32,7 +32,7 @@ class MealViewPagerAdapter(val todayMealDateList : List<String>, position: Int =
         return MealViewHolder(binding)
     }
 
-    override fun getItemCount(): Int  = 3
+    override fun getItemCount(): Int  = todayMealDateList.size
 
     override fun onBindViewHolder(holder: MealViewHolder, position: Int) {
         holder.bindMeal(date = todayMealDateList[position], position)
