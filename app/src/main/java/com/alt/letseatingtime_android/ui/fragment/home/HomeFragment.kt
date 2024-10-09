@@ -17,6 +17,7 @@ import com.alt.letseatingtime_android.network.retrofit.RetrofitClient
 import com.alt.letseatingtime_android.network.retrofit.response.meal.MealResponse
 import com.alt.letseatingtime_android.network.retrofit.response.profile.ProfileResponse
 import com.alt.letseatingtime_android.ui.adapter.meal.MealViewPagerAdapter
+import com.alt.letseatingtime_android.ui.adapter.store.StoreDecoration1
 import com.alt.letseatingtime_android.ui.adapter.store.StoreGoods1Adapter
 import com.alt.letseatingtime_android.ui.viewmodel.StoreViewModel
 import com.alt.letseatingtime_android.util.BottomController
@@ -69,6 +70,11 @@ class HomeFragment : Fragment() {
                         it1 ->goodsViewModel.setGoodsData(it1)
                     }
                     findNavController().navigate(R.id.action_homeFragment2_to_goodsBuyFragment2)
+                }
+
+                if (rvForUserItems.itemDecorationCount == 0){
+                    Log.d("test", "asdf")
+                    rvForUserItems.addItemDecoration(StoreDecoration1(lastIndex = goodsViewModel.goodsDataList.value?.size ?: 0, startPadding = 9, endPadding = 9))
                 }
             }
         }
@@ -166,9 +172,7 @@ class HomeFragment : Fragment() {
         }
         mealAdapter = MealViewPagerAdapter(
 
-            todayMealDateList = listOf(
-
-            ),
+            todayMealDateList = listOf(),
             position = position
         )
         mealAdapter.notifyItemRemoved(0)

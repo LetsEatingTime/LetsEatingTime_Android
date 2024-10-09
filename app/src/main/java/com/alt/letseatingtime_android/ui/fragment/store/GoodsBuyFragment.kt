@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import coil.load
 import com.alt.letseatingtime.databinding.FragmentGoodsBuyBinding
 import com.alt.letseatingtime_android.ui.viewmodel.StoreViewModel
 import com.alt.letseatingtime_android.util.BottomController
@@ -26,8 +27,6 @@ class GoodsBuyFragment : Fragment() {
         with(binding) {
             tvGoodsName.text = goodsViewModel.goodsData.value?.productName
             tvPrice.text = goodsViewModel.goodsData.value?.price.toString()
-//            ivGoodsImage.load(viewModel.goodsData.value?)
-
             ibBackButton.setOnClickListener {
                 requireActivity().supportFragmentManager.popBackStack()
 
@@ -38,6 +37,9 @@ class GoodsBuyFragment : Fragment() {
             requireContext().shortToast(it)
         }
 
+        goodsViewModel.productImageList.observe(viewLifecycleOwner) {
+            binding.ivGoodsImage.load(it[goodsViewModel.goodsData.value?.idx]?.fileName ?: "")
+        }
         return binding.root
     }
     override fun onPause() {
