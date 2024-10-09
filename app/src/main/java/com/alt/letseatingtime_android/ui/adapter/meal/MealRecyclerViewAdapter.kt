@@ -14,10 +14,17 @@ class MealRecyclerViewAdapter(private val mealList: List<MealResponse>, val meal
         private var isVisible = false
         fun inputData(data: MealResponse, position: Int) {
             with(binding){
-                tvDate.text = mealDate
-                tvBreakfast.text = data.data.breakfast.menu.joinToString(", ","","")
-                tvLunch.text = data.data.lunch.menu.joinToString(", ","","")
-                tvDinner.text = data.data.dinner.menu.joinToString(", ","","")
+                tvDate.text = "${mealDate.substring(4,6)}월 ${mealDate.substring(6)}일"
+                if (data.data.exists){
+                    tvBreakfast.text = data.data.breakfast.menu.joinToString(", ","","")
+                    tvLunch.text = data.data.lunch.menu.joinToString(", ","","")
+                    tvDinner.text = data.data.dinner.menu.joinToString(", ","","")
+                }
+                else{
+                    tvBreakfast.text = "정보가 없습니다."
+                    tvLunch.text = "정보가 없습니다."
+                    tvDinner.text = "정보가 없습니다."
+                }
             }
             binding.llDate.setOnClickListener{
                 if(isVisible){

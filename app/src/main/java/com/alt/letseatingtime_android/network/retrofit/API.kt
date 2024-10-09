@@ -9,6 +9,7 @@ import com.alt.letseatingtime_android.network.retrofit.response.SignupResponse
 import com.alt.letseatingtime_android.network.retrofit.response.profile.ProfileResponse
 import com.alt.letseatingtime_android.network.retrofit.response.WithdrawResponse
 import com.alt.letseatingtime_android.network.retrofit.response.goods.StoreResponse
+import com.alt.letseatingtime_android.network.retrofit.response.profile.User
 import com.alt.letseatingtime_android.network.retrofit.response.pwchange.PwChangeRequest
 import com.alt.letseatingtime_android.network.retrofit.response.scan.ScanResponse
 import okhttp3.MultipartBody
@@ -57,6 +58,11 @@ interface API {
         @Path("idx") idx: Int
     ): Call<BaseResponse<ImageResponse>>
 
+    @POST("teacher/edit/student")
+    fun editStudent(
+        @Header("Authorization") Authorization: String,
+        @Body body: User
+    ): Call<BaseResponse<String>>
 
     @GET("/api/user/profile")
     fun profile(

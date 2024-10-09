@@ -73,7 +73,6 @@ class HomeFragment : Fragment() {
                 }
 
                 if (rvForUserItems.itemDecorationCount == 0){
-                    Log.d("test", "asdf")
                     rvForUserItems.addItemDecoration(StoreDecoration1(lastIndex = goodsViewModel.goodsDataList.value?.size ?: 0, startPadding = 9, endPadding = 9))
                 }
             }
@@ -99,22 +98,18 @@ class HomeFragment : Fragment() {
         var position = 0
         when (time) {
             in 510..809 -> { // 점심
-                Log.d("test", "today l")
                 position = 1
             }
             in 810..1149 -> { // 저녁
-                Log.d("test", "today d")
                 position = 2
             }
             in 1150..1439 -> {// 내일 아침
-                Log.d("test", "next day b")
                 val year = gregorianCalendar.get(Calendar.YEAR)
                 val today = gregorianCalendar.get(Calendar.DATE)
                 val month = gregorianCalendar.get(Calendar.MONTH)
                 day = String.format("%4d%02d%02d", year, month + 1, today + 1)
             }
             else -> {// 오늘 아침
-                Log.d("test", "today b")
                 position = 0
             }
         }
@@ -172,7 +167,7 @@ class HomeFragment : Fragment() {
         }
         mealAdapter = MealViewPagerAdapter(
 
-            todayMealDateList = listOf(),
+            todayMealDateList = mealList,
             position = position
         )
         mealAdapter.notifyItemRemoved(0)

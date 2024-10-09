@@ -20,7 +20,6 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
-import java.util.GregorianCalendar
 
 class MealListFragment : Fragment() {
 
