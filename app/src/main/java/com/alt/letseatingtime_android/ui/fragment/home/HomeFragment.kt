@@ -156,9 +156,9 @@ class HomeFragment : Fragment() {
         val mealList = mutableListOf<String>()
         Log.d("Meal", "data : $data")
         if(data.data.exists){
-            mealList.add(data.data.breakfast.menu.joinToString(", ", "", "") ?: "",)
-            mealList.add(data.data.lunch.menu.joinToString(", ", "", "") ?: "")
-            mealList.add(data.data.dinner.menu.joinToString(", ", "", "") ?: "")
+            mealList.add(data.data.breakfast?.menu?.joinToString(", ", "", "") ?: "",)
+            mealList.add(data.data.lunch?.menu?.joinToString(", ", "", "") ?: "")
+            mealList.add(data.data.dinner?.menu?.joinToString(", ", "", "") ?: "")
         }
         else {
             for (i in 0..3) {
