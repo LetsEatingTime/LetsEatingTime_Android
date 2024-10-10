@@ -17,12 +17,14 @@ import com.alt.letseatingtime_android.ui.adapter.store.StoreGoods1Adapter
 import com.alt.letseatingtime_android.ui.adapter.store.StoreGoods2Adapter
 import com.alt.letseatingtime_android.ui.adapter.store.storedata.GoodsItem
 import com.alt.letseatingtime_android.ui.viewmodel.StoreViewModel
+import com.alt.letseatingtime_android.ui.viewmodel.UserActivityViewModel
 import com.alt.letseatingtime_android.util.shortToast
 
 
 class StoreFragment : Fragment() {
     var _binding: FragmentStoreBinding? = null
     private val goodsViewModel by activityViewModels<StoreViewModel>()
+    private val profileViewModel by activityViewModels<UserActivityViewModel>()
 
     private val binding get() = _binding!!
 
@@ -32,6 +34,12 @@ class StoreFragment : Fragment() {
     ): View {
         _binding = FragmentStoreBinding.inflate(inflater, container, false)
         goodsViewModel.getGoods()
+
+        binding.tvItems.text = "포인트로 구매가능한 상품"
+
+        profileViewModel.userData.observe(viewLifecycleOwner){
+            binding.tvForUser.text = "${it.data.user.name}님을 위한 추천"
+        }
 
 //        goodsViewModel.goodsDataList.observe(viewLifecycleOwner){
 //            with(binding) {

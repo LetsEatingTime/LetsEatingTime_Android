@@ -12,14 +12,13 @@ import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.alt.letseatingtime.R
 import com.alt.letseatingtime.databinding.FragmentHomeBinding
-import com.alt.letseatingtime_android.MyApplication
 import com.alt.letseatingtime_android.network.retrofit.RetrofitClient
 import com.alt.letseatingtime_android.network.retrofit.response.meal.MealResponse
-import com.alt.letseatingtime_android.network.retrofit.response.profile.ProfileResponse
 import com.alt.letseatingtime_android.ui.adapter.meal.MealViewPagerAdapter
 import com.alt.letseatingtime_android.ui.adapter.store.StoreDecoration1
 import com.alt.letseatingtime_android.ui.adapter.store.StoreGoods1Adapter
 import com.alt.letseatingtime_android.ui.viewmodel.StoreViewModel
+import com.alt.letseatingtime_android.ui.viewmodel.UserActivityViewModel
 import com.alt.letseatingtime_android.util.BottomController
 import com.alt.letseatingtime_android.util.OnSingleClickListener
 import com.alt.letseatingtime_android.util.shortToast
@@ -35,6 +34,7 @@ class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var mealAdapter: MealViewPagerAdapter
     private val gregorianCalendar = GregorianCalendar()
+    private val profileViewModel by activityViewModels<UserActivityViewModel>()
     private val goodsViewModel  by activityViewModels<StoreViewModel>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,6 +48,7 @@ class HomeFragment : Fragment() {
         //저녁 13:30 ~ 19:09
 
         goodsViewModel.getGoods()
+        profileViewModel.getProfile()
 
 
 
@@ -86,7 +87,14 @@ class HomeFragment : Fragment() {
             findNavController().navigate(R.id.action_homeFragment2_to_scanFragment)
         }
 
-        initProfile()
+        profileViewModel.userData.observe(viewLifecycleOwner){
+            val userName = it.data.user.name
+            binding.tvRecommendTitle.text = "${userName}님을 위한 추천"
+            binding.tvPointInfo.text = "현재 ${userName}님의 \n소지 포인트"
+            binding.tvMealTransition.text = "${userName}씨의 급식 추이"
+            binding.tvPoint.text = it?.data?.user?.point.toString()
+        }
+
 
         val time = (LocalDateTime.now().hour * 60) + LocalDateTime.now().minute
 
@@ -121,34 +129,6 @@ class HomeFragment : Fragment() {
 
 
         return binding.root
-    }
-
-    fun initProfile(){
-        RetrofitClient.api.profile("Bearer " + MyApplication.prefs.accessToken).enqueue(object  : Callback<ProfileResponse>{
-            override fun onResponse(
-                call: Call<ProfileResponse>,
-                response: Response<ProfileResponse>
-            ) {
-                val result = response.body()
-                if (response.isSuccessful) {
-                    val userName = result?.data?.user?.name
-                    binding.tvRecommendTitle.text = "${userName}님을 위한 추천"
-                    binding.tvPointInfo.text = "현재 ${userName}님의 \n소지 포인트"
-                    binding.tvMealTransition.text = "${userName}씨의 급식 추이"
-                    binding.tvPoint.text = result?.data?.user?.point.toString() ?: "0"
-                    Log.d("HomeFragment", "user : ${result?.data}")
-                }
-                else{
-                    Log.e("HomeFragment", "${response.errorBody().toString()}, ${response.code()}, ${response.body()}, ${response.message()}")
-                    context?.shortToast("프로필 정보를 가져오지 못했습니다.")
-                }
-            }
-
-            override fun onFailure(call: Call<ProfileResponse>, t: Throwable) {
-                Log.e("server error", t.stackTraceToString())
-                context?.shortToast("서버 에러")
-            }
-        })
     }
 
     // TODO : 시간받고, position에 값 넣기
