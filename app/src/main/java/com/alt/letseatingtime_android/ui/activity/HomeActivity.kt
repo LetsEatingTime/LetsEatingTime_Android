@@ -1,26 +1,13 @@
 package com.alt.letseatingtime_android.ui.activity
 
-import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.Color
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
-import com.alt.letseatingtime.databinding.ActivityHomeBinding
-import com.alt.letseatingtime_android.MyApplication.Companion.prefs
-import com.alt.letseatingtime_android.network.retrofit.response.WithdrawResponse
-import com.alt.letseatingtime_android.network.retrofit.response.meal.MealResponse
-import com.alt.letseatingtime_android.network.retrofit.response.profile.ProfileResponse
-import com.bumptech.glide.Glide
 import com.alt.letseatingtime.R
-import com.alt.letseatingtime_android.network.retrofit.RetrofitClient.api
+import com.alt.letseatingtime.databinding.ActivityHomeBinding
 import com.alt.letseatingtime_android.ui.fragment.home.HomeFragment
 import com.alt.letseatingtime_android.ui.fragment.profile.ProfileFragment
 import com.alt.letseatingtime_android.ui.fragment.store.StoreFragment
@@ -29,17 +16,7 @@ import com.alt.letseatingtime_android.ui.viewmodel.StoreViewModel
 import com.alt.letseatingtime_android.ui.viewmodel.UserActivityViewModel
 import com.alt.letseatingtime_android.util.BottomController
 import com.alt.letseatingtime_android.util.shortToast
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import okhttp3.ResponseBody
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import java.time.LocalDate
-import java.time.LocalDateTime
-import java.time.LocalTime
-import java.time.format.DateTimeFormatter
 
 
 class HomeActivity : AppCompatActivity(), BottomController {
@@ -59,7 +36,6 @@ class HomeActivity : AppCompatActivity(), BottomController {
     private var recentPosition = 1
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -69,26 +45,27 @@ class HomeActivity : AppCompatActivity(), BottomController {
     private fun bottomTabBar() {
         bottomNavigationView = binding.bottomNav
 
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.home_frame_container) as NavHostFragment
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.home_frame_container) as NavHostFragment
         val navView: BottomNavigationView = binding.bottomNav
         navView.setupWithNavController(navHostFragment.navController)
 
         userViewModel = ViewModelProvider(this).get(UserActivityViewModel::class.java)
 
-        userViewModel.toastMessage.observe(this){
-            if(it != ""){
+        userViewModel.toastMessage.observe(this) {
+            if (it != "") {
                 this.shortToast(it)
             }
         }
 
-        storeViewModel.toastMessage.observe(this){
-            if(it != ""){
+        storeViewModel.toastMessage.observe(this) {
+            if (it != "") {
                 this.shortToast(it)
             }
         }
 
-        scanViewModel.toastMessage.observe(this){
-            if(it != ""){
+        scanViewModel.toastMessage.observe(this) {
+            if (it != "") {
                 this.shortToast(it)
             }
         }
@@ -146,11 +123,10 @@ class HomeActivity : AppCompatActivity(), BottomController {
     }
 
     override fun setBottomNavVisibility(visibility: Boolean) {
-        if(visibility){
+        if (visibility) {
             binding.bottomNav.visibility = View.VISIBLE
             binding.bottomLine.visibility = View.VISIBLE
-        }
-        else{
+        } else {
             binding.bottomNav.visibility = View.GONE
             binding.bottomLine.visibility = View.GONE
         }
