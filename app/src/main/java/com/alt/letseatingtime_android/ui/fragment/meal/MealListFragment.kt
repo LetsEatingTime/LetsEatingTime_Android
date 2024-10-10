@@ -1,6 +1,7 @@
 package com.alt.letseatingtime_android.ui.fragment.meal
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,7 +26,7 @@ class MealListFragment : Fragment() {
 
     private lateinit var mealRecyclerAdapter: MealRecyclerViewAdapter
 
-    val mealList = mutableListOf<MealResponse>()
+    val mealList = mutableMapOf<String, MealResponse>()
     val mealDateList = mutableListOf<String>()
 
     override fun onCreateView(
@@ -47,8 +48,9 @@ class MealListFragment : Fragment() {
     private fun initRecyclerview() {
         val now = LocalDateTime.now()
         for (i in 1..8) {
+            val date = now.plusDays(i.toLong()).format(DateTimeFormatter.ofPattern("yyyyMMdd"))
             RetrofitClient.api.meal(
-                date = now.plusDays(i.toLong()).format(DateTimeFormatter.ofPattern("yyyyMMdd"))
+                date = date
             )
                 .enqueue(object : Callback<MealResponse> {
                     override fun onResponse(
@@ -58,11 +60,10 @@ class MealListFragment : Fragment() {
                         val result = response.body()
                         if (response.isSuccessful) {
                             if (result != null) {
-                                saveMeal(result)
-                                mealDateList.add(now.plusDays(i.toLong()).format(DateTimeFormatter.ofPattern("yyyyMMdd")))
+                                mealList[date] = result
+                                Log.d("initRecyclerview", "in fun if $mealList")
                                 mealRecyclerAdapter = MealRecyclerViewAdapter(
-                                    mealList = mealList,
-                                    mealDateList = mealDateList
+                                    mealList = mealList.toSortedMap()
                                 )
                                 mealRecyclerAdapter.notifyItemRemoved(0)
                                 binding.mealRecyclerview.adapter = mealRecyclerAdapter
@@ -77,8 +78,7 @@ class MealListFragment : Fragment() {
                         t.printStackTrace()
                         if (i == 7) {
                             mealRecyclerAdapter = MealRecyclerViewAdapter(
-                                mealList = mealList,
-                                mealDateList = mealDateList
+                                mealList = mealList.toSortedMap()
                             )
                             binding.mealRecyclerview.adapter = mealRecyclerAdapter
                         }
@@ -108,10 +108,6 @@ class MealListFragment : Fragment() {
 //                    t.printStackTrace()
 //                }
 //            })
-    }
-
-    private fun saveMeal(result: MealResponse) {
-        mealList.add(result)
     }
 
     override fun onPause() {
