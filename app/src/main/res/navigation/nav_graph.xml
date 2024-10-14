@@ -66,11 +66,6 @@
         android:name="com.alt.letseatingtime_android.ui.activity.MainActivity"
         android:label="activity_main"
         tools:layout="@layout/activity_main" />
-    <activity
-        android:id="@+id/signupActivity"
-        android:name="com.alt.letseatingtime_android.ui.activity.SignupActivity"
-        android:label="activity_signup"
-        tools:layout="@layout/activity_signup" />
     <fragment
         android:id="@+id/mealListFragment"
         android:name="com.alt.letseatingtime_android.ui.fragment.meal.MealListFragment"

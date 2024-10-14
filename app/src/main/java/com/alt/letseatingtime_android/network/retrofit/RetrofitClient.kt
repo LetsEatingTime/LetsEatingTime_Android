@@ -2,6 +2,7 @@ package com.alt.letseatingtime_android.network.retrofit
 
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
@@ -9,15 +10,23 @@ import java.util.concurrent.TimeUnit
 
 object RetrofitClient{
     private const val URL = "http://www.dgsw-team-alt.xyz/"
+//    private const val URL = "http://192.0.0.2:8080"
 
     private val loggingInterceptor = LoggingInterceptor()
+    val interceptor = HttpLoggingInterceptor().apply {
+        level = HttpLoggingInterceptor.Level.BODY
+    }
+
 
     private val client: OkHttpClient = OkHttpClient.Builder()
         .addInterceptor(loggingInterceptor)
+        .addInterceptor(interceptor)
         .connectTimeout(60, TimeUnit.SECONDS) // 30초간 서버와의 통신(연결상태 확인)을 시도, 30초 초과 시 통신 실패로 간주
         .readTimeout(20, TimeUnit.SECONDS)
         .writeTimeout(25, TimeUnit.SECONDS)
         .build()
+
+
 
     var gson = GsonBuilder().setLenient().create()
 

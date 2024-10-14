@@ -50,7 +50,9 @@ class HomeActivity : AppCompatActivity(), BottomController {
         val navView: BottomNavigationView = binding.bottomNav
         navView.setupWithNavController(navHostFragment.navController)
 
-        userViewModel = ViewModelProvider(this).get(UserActivityViewModel::class.java)
+        userViewModel = ViewModelProvider(this)[UserActivityViewModel::class.java]
+        storeViewModel = ViewModelProvider(this)[StoreViewModel::class.java]
+        scanViewModel = ViewModelProvider(this)[ScanViewModel::class.java]
 
         userViewModel.toastMessage.observe(this) {
             if (it != "") {
@@ -69,57 +71,6 @@ class HomeActivity : AppCompatActivity(), BottomController {
                 this.shortToast(it)
             }
         }
-
-
-//        supportFragmentManager.beginTransaction()
-//            .replace(binding.homeFrameContainer.id, bottomNavFragments[1])
-//            .commit()
-//
-//        bottomNavigationView.selectedItemId = R.id.homeFragment2
-//
-//        bottomNavigationView.setOnItemSelectedListener {
-//            val transaction = supportFragmentManager.beginTransaction()
-//            when (it.itemId) {
-//                R.id.storeFragment2 -> {
-//                    transaction.setCustomAnimations(
-//                        R.anim.anim_slide_in_from_left_fade_in,
-//                        R.anim.anim_fade_out_200
-//                    )
-//                    transaction.replace(binding.homeFrameContainer.id, bottomNavFragments[0])
-//                    transaction.commit()
-//                    recentPosition = 0
-//                    return@setOnItemSelectedListener true
-//                }
-//                R.id.homeFragment2 -> {
-//                    if (recentPosition < 1) {
-//                        transaction.setCustomAnimations(
-//                            R.anim.anim_slide_in_from_right_fade_in,
-//                            R.anim.anim_fade_out_200
-//                        )
-//                    } else {
-//                        transaction.setCustomAnimations(
-//                            R.anim.anim_slide_in_from_left_fade_in,
-//                            R.anim.anim_fade_out_200
-//                        )
-//                    }
-//                    transaction.replace(binding.homeFrameContainer.id, bottomNavFragments[1])
-//                    transaction.commit()
-//                    recentPosition = 1
-//                    return@setOnItemSelectedListener true
-//                }
-//                R.id.profileFragment2 -> {
-//                    transaction.setCustomAnimations(
-//                        R.anim.anim_slide_in_from_right_fade_in,
-//                        R.anim.anim_fade_out_200
-//                    )
-//                    transaction.replace(binding.homeFrameContainer.id, bottomNavFragments[2])
-//                    transaction.commit()
-//                    recentPosition = 4
-//                    return@setOnItemSelectedListener true
-//                }
-//            }
-//            return@setOnItemSelectedListener false
-//        }
     }
 
     override fun setBottomNavVisibility(visibility: Boolean) {
