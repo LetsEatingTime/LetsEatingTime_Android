@@ -37,6 +37,12 @@ interface API {
         @Body body: SignupRequest
     ): Call<SignupResponse>
 
+    @POST("/api/account/{userId}")
+    fun idDuplicateCheck(
+        @Path("userId") userId: String
+    ): Call<BaseResponse<String>>
+
+
     @POST("/api/account/pw-change")
     fun pwChange(
         @Body body: PwChangeRequest
