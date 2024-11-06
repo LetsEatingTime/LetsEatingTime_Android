@@ -9,6 +9,7 @@ import com.alt.letseatingtime_android.network.retrofit.response.SignupResponse
 import com.alt.letseatingtime_android.network.retrofit.response.profile.ProfileResponse
 import com.alt.letseatingtime_android.network.retrofit.response.WithdrawResponse
 import com.alt.letseatingtime_android.network.retrofit.response.goods.StoreResponse
+import com.alt.letseatingtime_android.network.retrofit.response.order.OrderListResponse
 import com.alt.letseatingtime_android.network.retrofit.response.profile.User
 import com.alt.letseatingtime_android.network.retrofit.response.pwchange.PwChangeRequest
 import com.alt.letseatingtime_android.network.retrofit.response.scan.ScanResponse
@@ -101,5 +102,10 @@ interface API {
     @GET("/api/product/all")
     fun getStoreList(
     ): Call<BaseResponse<List<StoreResponse>>>
+
+    @GET("/api/order/my")
+    fun getMyOrder(
+        @Header("Authorization") Authorization: String
+    ): Call<BaseResponse<List<OrderListResponse>>>
 
 }

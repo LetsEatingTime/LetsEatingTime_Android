@@ -49,6 +49,7 @@ class HomeFragment : Fragment() {
 
         goodsViewModel.getGoods()
         profileViewModel.getProfile()
+        goodsViewModel.getMyOrderList()
 
 
 
@@ -64,7 +65,7 @@ class HomeFragment : Fragment() {
         goodsViewModel.productImageList.observe(viewLifecycleOwner) {
             with(binding) {
                 rvForUserItems.adapter = StoreGoods1Adapter(
-                    goodsViewModel.goodsDataList.value ?: listOf(),
+                    goodsViewModel.myOrderList.value ?: listOf(),
                     it
                 ) { position ->
                     goodsViewModel.goodsDataList.value?.get(position)?.let {

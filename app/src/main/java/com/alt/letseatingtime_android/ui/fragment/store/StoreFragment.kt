@@ -34,6 +34,7 @@ class StoreFragment : Fragment() {
     ): View {
         _binding = FragmentStoreBinding.inflate(inflater, container, false)
         goodsViewModel.getGoods()
+        goodsViewModel.getMyOrderList()
 
         binding.tvItems.text = "포인트로 구매가능한 상품"
 
@@ -56,14 +57,20 @@ class StoreFragment : Fragment() {
         goodsViewModel.productImageList.observe(viewLifecycleOwner) {
             with(binding) {
                 rvForUserItems.adapter = StoreGoods1Adapter(
-                    goodsViewModel.goodsDataList.value ?: listOf(),
-                    it
+                    goodsViewModel.myOrderList.value ?: listOf(),
+                    imageList =  it
                 ) { position ->
                     goodsViewModel.goodsDataList.value?.get(position)
                         ?.let { it1 -> moveScreen(it1) }
                 }
-                if (rvForUserItems.itemDecorationCount == 0){
-                    rvForUserItems.addItemDecoration(StoreDecoration1(lastIndex = goodsViewModel.goodsDataList.value?.size ?: 0, startPadding = 9, endPadding = 9))
+                if (rvForUserItems.itemDecorationCount == 0) {
+                    rvForUserItems.addItemDecoration(
+                        StoreDecoration1(
+                            lastIndex = goodsViewModel.goodsDataList.value?.size ?: 0,
+                            startPadding = 9,
+                            endPadding = 9
+                        )
+                    )
                 }
 
                 rvUserItems.adapter = StoreGoods2Adapter(

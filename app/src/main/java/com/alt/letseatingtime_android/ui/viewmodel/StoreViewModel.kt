@@ -9,6 +9,7 @@ import com.alt.letseatingtime_android.network.retrofit.RetrofitClient
 import com.alt.letseatingtime_android.network.retrofit.response.ImageResponse
 import com.alt.letseatingtime_android.network.retrofit.response.goods.StoreResponse
 import com.alt.letseatingtime_android.network.retrofit.response.login.LoginResponse
+import com.alt.letseatingtime_android.network.retrofit.response.order.OrderListResponse
 import com.alt.letseatingtime_android.network.retrofit.response.util.BaseResponse
 import retrofit2.Call
 import retrofit2.Callback
@@ -27,6 +28,9 @@ class StoreViewModel : ViewModel() {
 
     private var _productImageList = MutableLiveData<Map<Int, ImageResponse>>()
     val productImageList: LiveData<Map<Int, ImageResponse>> = _productImageList
+
+    private var _myOrderList = MutableLiveData<List<OrderListResponse>>()
+    val myOrderList: LiveData<List<OrderListResponse>> = _myOrderList
 
     fun setGoodsData(data: StoreResponse) {
         _goodsData.value = data
@@ -88,6 +92,38 @@ class StoreViewModel : ViewModel() {
                 }
             })
         }
+    }
+
+    fun getMyOrderList(){
+        RetrofitClient.api.getMyOrder(
+            "Bearer " + MyApplication.prefs.accessToken
+        ).enqueue(object :
+            Callback<BaseResponse<List<OrderListResponse>>>{
+            override fun onResponse(
+                call: Call<BaseResponse<List<OrderListResponse>>>,
+                response: Response<BaseResponse<List<OrderListResponse>>>
+            ) {
+                if (response.isSuccessful) {
+                    if(response.code() == 200){
+                        val result = response.body()
+                        _myOrderList.value = result?.data
+                    }
+                } else {
+                    _toastMessage.value = "상품정보를 불러 올 수 없습니다."
+                }
+            }
+
+            override fun onFailure(
+                call: Call<BaseResponse<List<OrderListResponse>>>,
+                t: Throwable
+            ) {
+                refreshToken() {
+                    getMyOrderList()
+                }
+            }
+
+        }
+        )
     }
 
     fun refreshToken(action: () -> Unit) {
