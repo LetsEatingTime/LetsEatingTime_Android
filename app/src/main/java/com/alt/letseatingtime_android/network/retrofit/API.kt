@@ -75,6 +75,12 @@ interface API {
         @Header("Authorization") Authorization: String
     ): Call<ProfileResponse>
 
+    @GET("api/meal/analysis/student/{userId}")
+    fun getStudentMealAnalysis(
+        @Header("Authorization") Authorization: String,
+        @Path("userId") idx: Int
+    ): Call<String> // TODO : 타입에 맞게 반환값 변경하기
+
     @GET("api/account/refresh.do")
     fun refresh(
         @Header("Authorization") Authorization: String
