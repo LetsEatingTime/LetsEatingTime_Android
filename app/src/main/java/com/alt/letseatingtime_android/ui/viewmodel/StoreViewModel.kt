@@ -22,7 +22,6 @@ class StoreViewModel : ViewModel() {
     val goodsData: LiveData<StoreResponse> = _goodsData
     val goodsDataList: LiveData<List<StoreResponse>> = _goodsDataList
 
-
     private var _toastMessage = MutableLiveData<String>()
     val toastMessage: LiveData<String> = _toastMessage
 

@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.alt.letseatingtime.R
 import com.alt.letseatingtime_android.MyApplication
 import com.alt.letseatingtime_android.network.retrofit.RetrofitClient
 import com.alt.letseatingtime_android.network.retrofit.response.ImageResponse
@@ -30,7 +31,7 @@ class UserActivityViewModel : ViewModel() {
     private var _logout = MutableLiveData<Boolean>()
     val logout: LiveData<Boolean> = _logout
 
-    private var _userImageUrl = MutableLiveData<String>()
+    private var _userImageUrl = MutableLiveData<String>().apply { value = "" }
     val userImageUrl: LiveData<String> = _userImageUrl
 
     private var _isSuccessChange =  MutableLiveData<Boolean>().apply { value = false }
@@ -45,7 +46,12 @@ class UserActivityViewModel : ViewModel() {
             ) {
                 if (response.isSuccessful) {
                     _userData.value = response.body()
-                    getUserImage(response.body()?.data?.user?.idx?.toInt() ?: -1)
+                    if (response.body()?.data?.user?.image != null) {
+                        getUserImage(response.body()?.data?.user?.image!!.toInt())
+                    }
+                    else{
+                        _userImageUrl.value =" "
+                    }
                 } else {
                     refreshToken()
                     getProfile()

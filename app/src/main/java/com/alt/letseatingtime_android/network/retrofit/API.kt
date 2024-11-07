@@ -1,8 +1,9 @@
 package com.alt.letseatingtime_android.network.retrofit
 
 import com.alt.letseatingtime_android.network.retrofit.response.meal.MealResponse
-import com.alt.letseatingtime_android.network.retrofit.request.LoginRequest
-import com.alt.letseatingtime_android.network.retrofit.request.SignupRequest
+import com.alt.letseatingtime_android.network.retrofit.request.auth.LoginRequest
+import com.alt.letseatingtime_android.network.retrofit.request.auth.SignupRequest
+import com.alt.letseatingtime_android.network.retrofit.request.order.UniteOrder
 import com.alt.letseatingtime_android.network.retrofit.response.ImageResponse
 import com.alt.letseatingtime_android.network.retrofit.response.login.LoginResponse
 import com.alt.letseatingtime_android.network.retrofit.response.SignupResponse
@@ -15,12 +16,10 @@ import com.alt.letseatingtime_android.network.retrofit.response.pwchange.PwChang
 import com.alt.letseatingtime_android.network.retrofit.response.scan.ScanResponse
 import okhttp3.MultipartBody
 import com.alt.letseatingtime_android.network.retrofit.response.util.BaseResponse
-import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
-import retrofit2.http.Headers
 import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.Part
@@ -107,5 +106,12 @@ interface API {
     fun getMyOrder(
         @Header("Authorization") Authorization: String
     ): Call<BaseResponse<List<OrderListResponse>>>
+
+
+    @POST("/api/order/create")
+    fun createOrder(
+        @Header("Authorization") Authorization: String,
+        @Body uniteOrder : UniteOrder
+    ): Call<String>
 
 }

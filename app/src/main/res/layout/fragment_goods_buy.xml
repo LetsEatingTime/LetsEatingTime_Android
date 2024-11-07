@@ -74,7 +74,7 @@
         app:layout_constraintTop_toBottomOf="@id/tv_goods_name"
         app:layout_constraintHorizontal_chainStyle="packed"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="8dp"
         />
     <TextView
         android:id="@+id/tv_unit"
@@ -88,6 +88,74 @@
         app:layout_constraintTop_toTopOf="@id/tv_price"
         app:layout_constraintBottom_toBottomOf="@id/tv_price"
         />
+    <View
+        android:id="@+id/Vw_horizon_line"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_price"
+        android:layout_marginTop="8dp"
+        android:layout_marginHorizontal="32dp"
+        android:background="@color/line2"
+        />
+
+    <TextView
+        android:id="@+id/tv_stock_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:fontFamily="@font/pretendardmedium"
+        android:textColor="@color/line1"
+        app:layout_constraintTop_toBottomOf="@id/Vw_horizon_line"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="재고"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="32dp"
+        />
+
+    <TextView
+        android:id="@+id/tv_stock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:fontFamily="@font/pretendardmedium"
+        android:textColor="@color/line1"
+        app:layout_constraintTop_toBottomOf="@id/Vw_horizon_line"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text=""
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="32dp"
+        />
+
+
+    <TextView
+        android:id="@+id/tv_grant_time_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:fontFamily="@font/pretendardmedium"
+        android:textColor="@color/line1"
+        app:layout_constraintTop_toBottomOf="@id/tv_stock"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="등록일"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="32dp"
+        />
+
+    <TextView
+        android:id="@+id/tv_grant_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:fontFamily="@font/pretendardmedium"
+        android:textColor="@color/line1"
+        app:layout_constraintTop_toBottomOf="@id/tv_stock"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text=""
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="32dp"
+        />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_submit"
@@ -97,6 +165,4 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
