@@ -60,7 +60,13 @@ class ProfileModifyFragment : Fragment() {
         }
 
         userViewModel.userImageUrl.observe(viewLifecycleOwner) {
-            binding.ivProfileImg.load(it)
+            binding.ivProfileImg.load(
+                if (!(it.isNullOrEmpty() || it != "")) {
+                    it
+                } else {
+                    R.drawable.img_sample_profile
+                }
+            )
         }
 
         binding.btnSubmit.setOnClickListener {

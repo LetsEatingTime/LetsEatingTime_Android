@@ -38,8 +38,14 @@ class ProfileFragment : Fragment() {
 
         userViewModel.getProfile()
 
-        userViewModel.userImageUrl.observe(viewLifecycleOwner){
-            binding.ivStudentProfile.load(it)
+        userViewModel.userImageUrl.observe(viewLifecycleOwner) {
+            binding.ivStudentProfile.load(
+                if (!(it.isNullOrEmpty() || it != "")) {
+                    it
+                } else {
+                    R.drawable.img_sample_profile
+                }
+            )
         }
 
         userViewModel.userData.observe(viewLifecycleOwner) {
@@ -56,8 +62,8 @@ class ProfileFragment : Fragment() {
             }
         }
 
-        userViewModel.toastMessage.observe(viewLifecycleOwner){
-            if (it != ""){
+        userViewModel.toastMessage.observe(viewLifecycleOwner) {
+            if (it != "") {
                 requireContext().shortToast(it)
             }
         }
@@ -99,43 +105,43 @@ class ProfileFragment : Fragment() {
         return binding.root
     }
 
-    private fun initProfile() {
-        RetrofitClient.api.profile("Bearer " + MyApplication.prefs.accessToken)
-            .enqueue(object : Callback<ProfileResponse> {
-                override fun onResponse(
-                    call: Call<ProfileResponse>,
-                    response: Response<ProfileResponse>
-                ) {
-                    val result = response.body()
-                    if (response.isSuccessful) {
-                        binding.tvStudentName.text = "안녕하세요, ${result?.data?.user?.name}님"
-                        when (result?.data?.user?.userType) {
-                            "T" -> {
-                                binding.tvStudentNumber.text = "선생님 계정입니다."
-                            }
-
-                            "S" -> {
-                                binding.tvStudentNumber.text =
-                                    "${result.data.user.grade}학년 ${result.data.user.className}반 ${result.data.user.classNo}번"
-                            }
-                        }
-                    } else {
-                        Log.e(
-                            "ProfileFragment",
-                            "${
-                                response.errorBody().toString()
-                            }, ${response.code()}, ${response.body()}, ${response.message()}"
-                        )
-                        context?.shortToast("프로필 정보를 가져오지 못했습니다.")
-                    }
-                }
-
-                override fun onFailure(call: Call<ProfileResponse>, t: Throwable) {
-                    Log.e("server error", t.stackTraceToString())
-                    context?.shortToast("서버 에러")
-                }
-            })
-
-
-    }
+//    private fun initProfile() {
+//        RetrofitClient.api.profile("Bearer " + MyApplication.prefs.accessToken)
+//            .enqueue(object : Callback<ProfileResponse> {
+//                override fun onResponse(
+//                    call: Call<ProfileResponse>,
+//                    response: Response<ProfileResponse>
+//                ) {
+//                    val result = response.body()
+//                    if (response.isSuccessful) {
+//                        binding.tvStudentName.text = "안녕하세요, ${result?.data?.user?.name}님"
+//                        when (result?.data?.user?.userType) {
+//                            "T" -> {
+//                                binding.tvStudentNumber.text = "선생님 계정입니다."
+//                            }
+//
+//                            "S" -> {
+//                                binding.tvStudentNumber.text =
+//                                    "${result.data.user.grade}학년 ${result.data.user.className}반 ${result.data.user.classNo}번"
+//                            }
+//                        }
+//                    } else {
+//                        Log.e(
+//                            "ProfileFragment",
+//                            "${
+//                                response.errorBody().toString()
+//                            }, ${response.code()}, ${response.body()}, ${response.message()}"
+//                        )
+//                        context?.shortToast("프로필 정보를 가져오지 못했습니다.")
+//                    }
+//                }
+//
+//                override fun onFailure(call: Call<ProfileResponse>, t: Throwable) {
+//                    Log.e("server error", t.stackTraceToString())
+//                    context?.shortToast("서버 에러")
+//                }
+//            })
+//
+//
+//    }
 }
