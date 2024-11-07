@@ -1,25 +1,8 @@
 package com.alt.letseatingtime_android.ui.activity
 
-import android.animation.ArgbEvaluator
-import android.animation.ValueAnimator
-import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import com.alt.letseatingtime.R
 import com.alt.letseatingtime.databinding.ActivityLoginBinding
-import com.alt.letseatingtime_android.MyApplication.Companion.prefs
-import com.alt.letseatingtime_android.network.retrofit.RetrofitClient
-import com.alt.letseatingtime_android.network.retrofit.request.LoginRequest
-import com.alt.letseatingtime_android.network.retrofit.response.login.LoginResponse
-import com.alt.letseatingtime_android.util.OnSingleClickListener
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 
 class LoginActivity : AppCompatActivity() {

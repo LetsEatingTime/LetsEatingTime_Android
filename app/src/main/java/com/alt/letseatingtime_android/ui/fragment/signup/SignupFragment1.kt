@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.alt.letseatingtime.R
@@ -51,17 +52,24 @@ class SignupFragment1 : Fragment() {
             signupViewModel.idDuplicateCheck(binding.etId.text.toString())
         }
 
+        binding.run {
+            binding.etId.doAfterTextChanged { text ->
+                val emailText = text.toString()
+                binding.btnDuplicateCheck.isEnabled = emailText.isNotEmpty()
+            }
+        }
+
         signupViewModel.message.observe(viewLifecycleOwner) {
             if (it != "") {
                 val color = ContextCompat.getColor(
                     requireContext(), if (it == "중복되지 않은 아이디입니다.") {
                         R.color.good
-
                     } else {
                         R.color.warning
                     }
                 )
                 binding.tvResult.setTextColor(color)
+                binding.btnSubmit.isEnabled = it == "중복되지 않은 아이디입니다."
             }
             binding.tvResult.text = it
         }

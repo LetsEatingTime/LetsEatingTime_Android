@@ -17,7 +17,7 @@ import com.alt.letseatingtime.R
 import com.alt.letseatingtime.databinding.FragmentLoginBinding
 import com.alt.letseatingtime_android.MyApplication.Companion.prefs
 import com.alt.letseatingtime_android.network.retrofit.RetrofitClient
-import com.alt.letseatingtime_android.network.retrofit.request.LoginRequest
+import com.alt.letseatingtime_android.network.retrofit.request.auth.LoginRequest
 import com.alt.letseatingtime_android.network.retrofit.response.login.LoginResponse
 import com.alt.letseatingtime_android.ui.activity.HomeActivity
 import com.alt.letseatingtime_android.ui.activity.SignupActivity
