@@ -12,13 +12,13 @@ import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.alt.letseatingtime.R
 import com.alt.letseatingtime.databinding.FragmentHomeBinding
-import com.alt.letseatingtime_android.MyApplication
 import com.alt.letseatingtime_android.network.retrofit.RetrofitClient
 import com.alt.letseatingtime_android.network.retrofit.response.meal.MealResponse
-import com.alt.letseatingtime_android.network.retrofit.response.profile.ProfileResponse
 import com.alt.letseatingtime_android.ui.adapter.meal.MealViewPagerAdapter
+import com.alt.letseatingtime_android.ui.adapter.store.StoreDecoration1
 import com.alt.letseatingtime_android.ui.adapter.store.StoreGoods1Adapter
 import com.alt.letseatingtime_android.ui.viewmodel.StoreViewModel
+import com.alt.letseatingtime_android.ui.viewmodel.UserActivityViewModel
 import com.alt.letseatingtime_android.util.BottomController
 import com.alt.letseatingtime_android.util.OnSingleClickListener
 import com.alt.letseatingtime_android.util.shortToast
@@ -34,6 +34,7 @@ class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var mealAdapter: MealViewPagerAdapter
     private val gregorianCalendar = GregorianCalendar()
+    private val profileViewModel by activityViewModels<UserActivityViewModel>()
     private val goodsViewModel  by activityViewModels<StoreViewModel>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,22 +48,54 @@ class HomeFragment : Fragment() {
         //저녁 13:30 ~ 19:09
 
         goodsViewModel.getGoods()
+        profileViewModel.getProfile()
+        goodsViewModel.getMyOrderList()
 
-        goodsViewModel.goodsDataList.observe(viewLifecycleOwner){
+
+
+//        goodsViewModel.goodsDataList.observe(viewLifecycleOwner){
+//            with(binding) {
+//                rvForUserItems.adapter = StoreGoods1Adapter(it) { position ->
+//                    goodsViewModel.setGoodsData(it[position])
+//                    findNavController().navigate(R.id.action_homeFragment2_to_goodsBuyFragment2)
+//                }
+//            }
+//        }
+
+        goodsViewModel.productImageList.observe(viewLifecycleOwner) {
             with(binding) {
-                rvForUserItems.adapter = StoreGoods1Adapter(it) { position ->
-                    goodsViewModel.setGoodsData(it[position])
+                rvForUserItems.adapter = StoreGoods1Adapter(
+                    goodsViewModel.myOrderList.value ?: listOf(),
+                    it
+                ) { position ->
+                    goodsViewModel.goodsDataList.value?.get(position)?.let {
+                        it1 ->goodsViewModel.setGoodsData(it1)
+                    }
                     findNavController().navigate(R.id.action_homeFragment2_to_goodsBuyFragment2)
+                }
+
+                if (rvForUserItems.itemDecorationCount == 0){
+                    rvForUserItems.addItemDecoration(StoreDecoration1(lastIndex = goodsViewModel.goodsDataList.value?.size ?: 0, startPadding = 9, endPadding = 9))
                 }
             }
         }
 
+        goodsViewModel.toastMessage.observe(viewLifecycleOwner){
+            requireContext().shortToast(it)
+        }
 
         binding.cbtnScan.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment2_to_scanFragment)
         }
 
-        initProfile()
+        profileViewModel.userData.observe(viewLifecycleOwner){
+            val userName = it.data.user.name
+            binding.tvRecommendTitle.text = "${userName}님을 위한 추천"
+            binding.tvPointInfo.text = "현재 ${userName}님의 \n소지 포인트"
+            binding.tvMealTransition.text = "${userName}씨의 급식 추이"
+            binding.tvPoint.text = it?.data?.user?.point.toString()
+        }
+
 
         val time = (LocalDateTime.now().hour * 60) + LocalDateTime.now().minute
 
@@ -74,26 +107,22 @@ class HomeFragment : Fragment() {
         var position = 0
         when (time) {
             in 510..809 -> { // 점심
-                Log.d("test", "today l")
                 position = 1
             }
             in 810..1149 -> { // 저녁
-                Log.d("test", "today d")
                 position = 2
             }
             in 1150..1439 -> {// 내일 아침
-                Log.d("test", "next day b")
                 val year = gregorianCalendar.get(Calendar.YEAR)
                 val today = gregorianCalendar.get(Calendar.DATE)
                 val month = gregorianCalendar.get(Calendar.MONTH)
                 day = String.format("%4d%02d%02d", year, month + 1, today + 1)
             }
             else -> {// 오늘 아침
-                Log.d("test", "today b")
                 position = 0
             }
         }
-        initRecyclerview(day, position)
+        initMealRecyclerview(day, position)
         binding.clvMealMore.setOnClickListener(OnSingleClickListener {
             findNavController().navigate(R.id.action_homeFragment2_to_mealListFragment)
         })
@@ -103,40 +132,23 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
-    fun initProfile(){
-        RetrofitClient.api.profile("Bearer " + MyApplication.prefs.accessToken).enqueue(object  : Callback<ProfileResponse>{
-            override fun onResponse(
-                call: Call<ProfileResponse>,
-                response: Response<ProfileResponse>
-            ) {
-                val result = response.body()
-                if (response.isSuccessful) {
-                    binding.tvRecommendTitle.text = "${result?.data?.user?.name}님을 위한 추천"
-                    binding.tvPointInfo.text = "현재 ${result?.data?.user?.name}님의 \n소지 포인트"
-                }
-                else{
-                    Log.e("HomeFragment", "${response.errorBody().toString()}, ${response.code()}, ${response.body()}, ${response.message()}")
-                    context?.shortToast("프로필 정보를 가져오지 못했습니다.")
-                }
-            }
-
-            override fun onFailure(call: Call<ProfileResponse>, t: Throwable) {
-                Log.e("server error", t.stackTraceToString())
-                context?.shortToast("서버 에러")
-            }
-        })
-    }
-
     // TODO : 시간받고, position에 값 넣기
     fun setMeal(data: MealResponse, position : Int) {
-
-
+        val mealList = mutableListOf<String>()
+        Log.d("Meal", "data : $data")
+        if(data.data.exists){
+            mealList.add(data.data.breakfast?.menu?.joinToString(", ", "", "") ?: "",)
+            mealList.add(data.data.lunch?.menu?.joinToString(", ", "", "") ?: "")
+            mealList.add(data.data.dinner?.menu?.joinToString(", ", "", "") ?: "")
+        }
+        else {
+            for (i in 0..3) {
+                mealList.add("급식이 없습니다.")
+            }
+        }
         mealAdapter = MealViewPagerAdapter(
-            todayMealDateList = listOf(
-                data.data.breakfast.menu.joinToString(", ", "", ""),
-                data.data.lunch.menu.joinToString(", ", "", ""),
-                data.data.dinner.menu.joinToString(", ", "", "")
-            ),
+
+            todayMealDateList = mealList,
             position = position
         )
         mealAdapter.notifyItemRemoved(0)
@@ -150,7 +162,7 @@ class HomeFragment : Fragment() {
 
     }
 
-    private fun initRecyclerview(date: String, position : Int) {
+    private fun initMealRecyclerview(date: String, position : Int) {
         RetrofitClient.api.meal(date = date)
             .enqueue(object : Callback<MealResponse> {
                 override fun onResponse(
@@ -160,7 +172,9 @@ class HomeFragment : Fragment() {
                     val result = response.body()
                     if (response.isSuccessful) {
                         Log.d(requireActivity().packageName, "내용 : ${result}")
-                        setMeal(result!!, position)
+                        if (result != null) {
+                            setMeal(result, position)
+                        }
                     } else {
                         context?.shortToast("데이터를 불러오지 못했습니다.")
                     }

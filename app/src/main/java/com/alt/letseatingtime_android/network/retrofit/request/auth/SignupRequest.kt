@@ -1,4 +1,4 @@
-package com.alt.letseatingtime_android.network.retrofit.request
+package com.alt.letseatingtime_android.network.retrofit.request.auth
 
 import com.google.gson.annotations.SerializedName
 

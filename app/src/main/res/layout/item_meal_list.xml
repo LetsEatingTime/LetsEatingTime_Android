@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/meal_linear_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     android:background="#FAFAFA">
     <LinearLayout
@@ -19,7 +19,7 @@
             android:id="@+id/tv_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="12월 31일"
+            android:text=""
             android:textColor="@color/black"
             android:textSize="20sp"
             android:fontFamily="@font/pretendardmedium"/>
@@ -42,7 +42,7 @@
         android:padding="15dp"
         android:layout_marginHorizontal="15dp"
         android:layout_marginTop="5dp"
-        android:gravity="center"
+        android:gravity="start"
         android:visibility="gone">
         <ImageView
             android:id="@+id/iv_breakfast"
@@ -53,7 +53,8 @@
             android:id="@+id/tv_breakfast"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="발아현미밥, 쇠고기낙지전골, 잡채, #LA쪽쪽갈비, 배추김치, 초코파운드케이크"
+            android:text=""
+            android:layout_gravity="center"
             android:textSize="14sp"
             android:textColor="@color/black"
             android:fontFamily="@font/pretendardregular"
@@ -68,7 +69,7 @@
         android:padding="15dp"
         android:layout_marginHorizontal="15dp"
         android:layout_marginTop="10dp"
-        android:gravity="center"
+        android:gravity="start"
         android:visibility="gone">
         <ImageView
             android:id="@+id/iv_lunch"
@@ -79,7 +80,8 @@
             android:id="@+id/tv_lunch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="발아현미밥, 쇠고기낙지전골, 잡채, #LA쪽쪽갈비, 배추김치, 초코파운드케이크"
+            android:text=""
+            android:layout_gravity="center"
             android:textSize="14sp"
             android:textColor="@color/black"
             android:fontFamily="@font/pretendardregular"
@@ -94,7 +96,7 @@
         android:padding="15dp"
         android:layout_marginHorizontal="15dp"
         android:layout_marginTop="10dp"
-        android:gravity="center"
+        android:gravity="start"
         android:visibility="gone">
         <ImageView
             android:id="@+id/iv_dinner"
@@ -105,7 +107,8 @@
             android:id="@+id/tv_dinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="발아현미밥, 쇠고기낙지전골, 잡채, #LA쪽쪽갈비, 배추김치, 초코파운드케이크"
+            android:text=""
+            android:layout_gravity="center"
             android:textSize="14sp"
             android:textColor="@color/black"
             android:fontFamily="@font/pretendardregular"

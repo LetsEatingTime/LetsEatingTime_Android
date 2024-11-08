@@ -9,7 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.alt.letseatingtime_android.network.retrofit.RetrofitClient
-import com.alt.letseatingtime_android.network.retrofit.request.SignupRequest
+import com.alt.letseatingtime_android.network.retrofit.request.auth.SignupRequest
 import com.alt.letseatingtime_android.network.retrofit.response.SignupResponse
 import com.alt.letseatingtime_android.ui.activity.LoginActivity
 import com.alt.letseatingtime_android.util.LoginPattern

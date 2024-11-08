@@ -1,12 +1,11 @@
 package com.alt.letseatingtime_android.ui.fragment.meal
 
-import android.icu.util.Calendar
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.alt.letseatingtime.R
 import com.alt.letseatingtime.databinding.FragmentMealListBinding
@@ -20,13 +19,15 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
-import java.util.GregorianCalendar
 
 class MealListFragment : Fragment() {
 
     private lateinit var binding: FragmentMealListBinding
 
-    private val today : String = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"))
+    private lateinit var mealRecyclerAdapter: MealRecyclerViewAdapter
+
+    val mealList = mutableMapOf<String, MealResponse>()
+    val mealDateList = mutableListOf<String>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,37 +36,78 @@ class MealListFragment : Fragment() {
         binding = FragmentMealListBinding.inflate(inflater, container, false)
         (requireActivity() as BottomController).setBottomNavVisibility(false)
 
-        initRecyclerview(today)
+        initRecyclerview()
 
-        binding.ivBackButton.setOnClickListener{
+        binding.ivBackButton.setOnClickListener {
             findNavController().navigate(R.id.action_mealListFragment_to_homeFragment2)
         }
 
         return binding.root
     }
 
-    private fun initRecyclerview(date : String) {
-        RetrofitClient.api.meal(date = date)
-            .enqueue(object : Callback<MealResponse> {
-                override fun onResponse(
-                    call: Call<MealResponse>,
-                    response: Response<MealResponse>
-                ) {
-                    val result = response.body()
-                    if (response.isSuccessful) {
-                        Log.d(requireActivity().packageName, "내용 : ${result}")
-                        val adapter =  MealRecyclerViewAdapter(mealList = listOf(result!!), mealDate = date)
-                        binding.mealRecyclerview.adapter = adapter
-                    } else {
-                        context?.shortToast("데이터를 불러오지 못했습니다.")
+    private fun initRecyclerview() {
+        val now = LocalDateTime.now()
+        for (i in 1..8) {
+            val date = now.plusDays(i.toLong()).format(DateTimeFormatter.ofPattern("yyyyMMdd"))
+            RetrofitClient.api.meal(
+                date = date
+            )
+                .enqueue(object : Callback<MealResponse> {
+                    override fun onResponse(
+                        call: Call<MealResponse>,
+                        response: Response<MealResponse>
+                    ) {
+                        val result = response.body()
+                        if (response.isSuccessful) {
+                            if (result != null) {
+                                mealList[date] = result
+                                Log.d("initRecyclerview", "in fun if $mealList")
+                                mealRecyclerAdapter = MealRecyclerViewAdapter(
+                                    mealList = mealList.toSortedMap()
+                                )
+                                mealRecyclerAdapter.notifyItemRemoved(0)
+                                binding.mealRecyclerview.adapter = mealRecyclerAdapter
+                            }
+                        } else {
+                            context?.shortToast("데이터를 불러오지 못했습니다.")
+                        }
                     }
-                }
 
-                override fun onFailure(call: Call<MealResponse>, t: Throwable) {
-                    context?.shortToast("서버 애러")
-                    t.printStackTrace()
-                }
-            })
+                    override fun onFailure(call: Call<MealResponse>, t: Throwable) {
+                        context?.shortToast("서버 애러")
+                        t.printStackTrace()
+                        if (i == 7) {
+                            mealRecyclerAdapter = MealRecyclerViewAdapter(
+                                mealList = mealList.toSortedMap()
+                            )
+                            binding.mealRecyclerview.adapter = mealRecyclerAdapter
+                        }
+                    }
+                })
+        }
+
+//        RetrofitClient.api.meal(date = date)
+//            .enqueue(object : Callback<MealResponse> {
+//                override fun onResponse(
+//                    call: Call<MealResponse>,
+//                    response: Response<MealResponse>
+//                ) {
+//                    val result = response.body()
+//                    if (response.isSuccessful) {
+//                        Log.d(requireActivity().packageName, "내용 : ${result}")
+//                        mealRecyclerAdapter =
+//                            MealRecyclerViewAdapter(mealList = listOf(result!!), mealDate = date)
+//                        binding.mealRecyclerview.adapter = mealRecyclerAdapter
+//                    } else {
+//                        context?.shortToast("데이터를 불러오지 못했습니다.")
+//                    }
+//                }
+//
+//                override fun onFailure(call: Call<MealResponse>, t: Throwable) {
+//                    context?.shortToast("서버 애러")
+//                    t.printStackTrace()
+//                }
+//            })
     }
 
     override fun onPause() {

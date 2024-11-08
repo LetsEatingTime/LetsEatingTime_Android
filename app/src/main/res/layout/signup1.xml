@@ -21,19 +21,54 @@
     <EditText
         android:id="@+id/et_id"
         style="@style/et_login"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="49dp"
         android:maxLines="1"
         android:maxLength="15"
         android:layout_marginTop="7dp"
         android:fontFamily="@font/pretendardregular"
-        android:layout_marginEnd="27dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="27dp"
         android:textColorHint="#A0A0A0"
         android:hint="아이디를 입력해주세요"
         android:inputType="text"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_id" />
+        app:layout_constraintTop_toBottomOf="@id/tv_id"
+        app:layout_constraintEnd_toStartOf="@id/btn_duplicate_check"
+        />
+
+    <TextView
+        android:id="@+id/tv_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/et_id"
+        app:layout_constraintStart_toStartOf="@id/et_id"
+        android:layout_marginTop="4dp"
+        android:layout_marginStart="8dp"
+        android:fontFamily="@font/pretendardsemibold"
+        android:textSize="12sp"
+
+        />
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_duplicate_check"
+        android:layout_width="70dp"
+        android:layout_height="49dp"
+        app:layout_constraintTop_toTopOf="@+id/et_id"
+        app:layout_constraintBottom_toBottomOf="@+id/et_id"
+        android:background="@drawable/btn_background_duplicate_check"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:enabled="false"
+        android:layout_marginEnd="27dp"
+        app:layout_constraintStart_toEndOf="@+id/et_id"
+        android:text="중복확인"
+        android:textSize="14sp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/pretendardbold"
+
+        />
+
 
     <ImageView
         android:id="@+id/iv_eating_food"
@@ -78,7 +113,8 @@
         android:fontFamily="@font/pretendardmedium"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:enabled="false"/>
     <TextView
         android:id="@+id/tv_to_login"
         style="@style/tv_to_login"
