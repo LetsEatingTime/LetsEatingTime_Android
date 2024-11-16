@@ -33,7 +33,7 @@
                 android:layout_marginStart="29dp"
                 android:layout_marginTop="29dp"
                 android:fontFamily="@font/pretendardsemibold"
-                tools:text="당신을 위한 추천"
+                tools:text=""
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"

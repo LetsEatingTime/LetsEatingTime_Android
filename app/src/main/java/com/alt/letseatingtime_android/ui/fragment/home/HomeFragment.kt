@@ -35,7 +35,7 @@ class HomeFragment : Fragment() {
     private lateinit var mealAdapter: MealViewPagerAdapter
     private val gregorianCalendar = GregorianCalendar()
     private val profileViewModel by activityViewModels<UserActivityViewModel>()
-    private val goodsViewModel  by activityViewModels<StoreViewModel>()
+    private val goodsViewModel by activityViewModels<StoreViewModel>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -52,7 +52,6 @@ class HomeFragment : Fragment() {
         goodsViewModel.getMyOrderList()
 
 
-
 //        goodsViewModel.goodsDataList.observe(viewLifecycleOwner){
 //            with(binding) {
 //                rvForUserItems.adapter = StoreGoods1Adapter(it) { position ->
@@ -62,25 +61,41 @@ class HomeFragment : Fragment() {
 //            }
 //        }
 
+        goodsViewModel.myOrderList.observe(viewLifecycleOwner){
+            if(it.isNotEmpty()){
+                binding.rvForUserItems.visibility = View.VISIBLE
+                binding.tvRecommendTitle.visibility = View.VISIBLE
+            }else{
+                binding.rvForUserItems.visibility = View.GONE
+                binding.tvRecommendTitle.visibility = View.GONE
+            }
+        }
+
         goodsViewModel.productImageList.observe(viewLifecycleOwner) {
             with(binding) {
                 rvForUserItems.adapter = StoreGoods1Adapter(
                     goodsViewModel.myOrderList.value ?: listOf(),
                     it
                 ) { position ->
-                    goodsViewModel.goodsDataList.value?.get(position)?.let {
-                        it1 ->goodsViewModel.setGoodsData(it1)
+                    goodsViewModel.goodsDataList.value?.get(position)?.let { it1 ->
+                        goodsViewModel.setGoodsData(it1)
                     }
                     findNavController().navigate(R.id.action_homeFragment2_to_goodsBuyFragment2)
                 }
 
-                if (rvForUserItems.itemDecorationCount == 0){
-                    rvForUserItems.addItemDecoration(StoreDecoration1(lastIndex = goodsViewModel.goodsDataList.value?.size ?: 0, startPadding = 9, endPadding = 9))
+                if (rvForUserItems.itemDecorationCount == 0) {
+                    rvForUserItems.addItemDecoration(
+                        StoreDecoration1(
+                            lastIndex = goodsViewModel.goodsDataList.value?.size ?: 0,
+                            startPadding = 9,
+                            endPadding = 9
+                        )
+                    )
                 }
             }
         }
 
-        goodsViewModel.toastMessage.observe(viewLifecycleOwner){
+        goodsViewModel.toastMessage.observe(viewLifecycleOwner) {
             requireContext().shortToast(it)
         }
 
@@ -88,7 +103,7 @@ class HomeFragment : Fragment() {
             findNavController().navigate(R.id.action_homeFragment2_to_scanFragment)
         }
 
-        profileViewModel.userData.observe(viewLifecycleOwner){
+        profileViewModel.userData.observe(viewLifecycleOwner) {
             val userName = it.data.user.name
             binding.tvRecommendTitle.text = "${userName}님을 위한 추천"
             binding.tvPointInfo.text = "현재 ${userName}님의 \n소지 포인트"
@@ -109,15 +124,18 @@ class HomeFragment : Fragment() {
             in 510..809 -> { // 점심
                 position = 1
             }
+
             in 810..1149 -> { // 저녁
                 position = 2
             }
+
             in 1150..1439 -> {// 내일 아침
                 val year = gregorianCalendar.get(Calendar.YEAR)
                 val today = gregorianCalendar.get(Calendar.DATE)
                 val month = gregorianCalendar.get(Calendar.MONTH)
                 day = String.format("%4d%02d%02d", year, month + 1, today + 1)
             }
+
             else -> {// 오늘 아침
                 position = 0
             }
@@ -133,15 +151,14 @@ class HomeFragment : Fragment() {
     }
 
     // TODO : 시간받고, position에 값 넣기
-    fun setMeal(data: MealResponse, position : Int) {
+    fun setMeal(data: MealResponse, position: Int) {
         val mealList = mutableListOf<String>()
         Log.d("Meal", "data : $data")
-        if(data.data.exists){
-            mealList.add(data.data.breakfast?.menu?.joinToString(", ", "", "") ?: "",)
+        if (data.data.exists) {
+            mealList.add(data.data.breakfast?.menu?.joinToString(", ", "", "") ?: "")
             mealList.add(data.data.lunch?.menu?.joinToString(", ", "", "") ?: "")
             mealList.add(data.data.dinner?.menu?.joinToString(", ", "", "") ?: "")
-        }
-        else {
+        } else {
             for (i in 0..3) {
                 mealList.add("급식이 없습니다.")
             }
@@ -162,7 +179,7 @@ class HomeFragment : Fragment() {
 
     }
 
-    private fun initMealRecyclerview(date: String, position : Int) {
+    private fun initMealRecyclerview(date: String, position: Int) {
         RetrofitClient.api.meal(date = date)
             .enqueue(object : Callback<MealResponse> {
                 override fun onResponse(
