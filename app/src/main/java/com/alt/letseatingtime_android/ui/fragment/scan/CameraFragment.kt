@@ -64,6 +64,8 @@ class CameraFragment : Fragment() {
         return mediaFile
     }
 
+
+
     private fun startCamera() {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(requireContext())
 
@@ -118,6 +120,12 @@ class CameraFragment : Fragment() {
                 }
             }
         )
+    }
+
+    override fun onResume() {
+        super.onResume()
+        requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+        (requireActivity() as BottomController).setBottomNavVisibility(false)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
