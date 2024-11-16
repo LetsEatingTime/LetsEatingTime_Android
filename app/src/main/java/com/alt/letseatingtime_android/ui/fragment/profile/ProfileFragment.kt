@@ -1,7 +1,8 @@
 package com.alt.letseatingtime_android.ui.fragment.profile
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,15 +13,10 @@ import coil.load
 import com.alt.letseatingtime.R
 import com.alt.letseatingtime.databinding.FragmentProfileBinding
 import com.alt.letseatingtime_android.MyApplication
-import com.alt.letseatingtime_android.network.retrofit.RetrofitClient
-import com.alt.letseatingtime_android.network.retrofit.response.profile.ProfileResponse
 import com.alt.letseatingtime_android.ui.viewmodel.UserActivityViewModel
 import com.alt.letseatingtime_android.util.OnSingleClickListener
 import com.alt.letseatingtime_android.util.shortToast
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class ProfileFragment : Fragment() {
 
@@ -98,8 +94,11 @@ class ProfileFragment : Fragment() {
         })
 
         binding.clvPolicy.setOnClickListener(OnSingleClickListener {
-            //TODO : 정책화면으로 이동
-            context?.shortToast("정책화면으로 이동")
+            val intent = Intent(
+                Intent.ACTION_VIEW,
+                Uri.parse("https://encouraging-wok-aa3.notion.site/140b28899b6c804d9afcc5de19c288f0?pvs=4")
+            )
+            startActivity(intent)
         })
 
         return binding.root
