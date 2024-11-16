@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-        android:maxSdkVersion="32"
+        android:maxSdkVersion="27"
         tools:ignore="ScopedStorage" />
     <uses-permission android:name="android.permission.NFC" /> <!-- NFC 하드웨어가 있는 기기에서만 애플리케이션이 Google Play에 표시되도록 하는 -->
     <uses-feature
@@ -30,7 +30,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LetsEatingTime"
         android:usesCleartextTraffic="true"
-        tools:targetApi="35">
+        tools:targetApi="34">
         <activity
             android:name="com.alt.letseatingtime_android.ui.activity.SplashScreenActivity"
             android:exported="true" >
