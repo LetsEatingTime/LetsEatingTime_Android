@@ -12,10 +12,10 @@ android {
 
     defaultConfig {
         applicationId "com.alt.letseatingtime"
-        minSdk 27
-        targetSdk 34
-        versionCode 7
-        versionName "0.0.7"
+        minSdk = 27
+        targetSdk = 34
+        versionCode = 11
+        versionName = "1.0.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
