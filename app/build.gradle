@@ -6,16 +6,16 @@ plugins {
 
 android {
     namespace 'com.alt.letseatingtime'
-    compileSdkPreview 'UpsideDownCake'
 
     compileSdk 34
 
     defaultConfig {
         applicationId "com.alt.letseatingtime"
         minSdk = 27
+        maxSdk = 34
         targetSdk = 34
-        versionCode = 11
-        versionName = "1.0.2"
+        versionCode = 15
+        versionName = "1.0.6"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -37,8 +37,7 @@ android {
     viewBinding {
         enabled = true
     }
-    buildToolsVersion '33.0.2'
-    ndkVersion '25.1.8937393'
+//    buildToolsVersion '33.0.2'
 
 }
 
